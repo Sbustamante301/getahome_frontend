@@ -80,3 +80,12 @@ select {
   }
 }
 `;
+
+export const global = css`
+  body {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-family: ${fonts.primary};
+    color: ${colors.gray[900]};
+  }
+`;
