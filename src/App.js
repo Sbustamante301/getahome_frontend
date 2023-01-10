@@ -48,8 +48,7 @@ function App() {
        
     {/* </Section3> */}
     </Wrapper>
-    
-      
+
   );
 }
 
