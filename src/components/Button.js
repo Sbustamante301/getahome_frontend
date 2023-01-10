@@ -30,7 +30,8 @@ color:${colors.white}
 
 `
 const Text = styled.div`
-${typography.head.xxl};
+margin-bottom:4px;
+${typography.text.button};
 color:${colors.white};
 
 
