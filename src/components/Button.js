@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { colors } from "../styles";
+import { colors, typography } from "../styles";
 import { Icons } from "../utils";
 export const Button = styled.button`
 
@@ -30,7 +30,12 @@ color:${colors.white}
 
 `
 const Text = styled.div`
-color:${colors.white}`
+${typography.head.xxl};
+color:${colors.white};
+
+
+`
+
 
 export  function CreateAccButton({children}){
     return(
