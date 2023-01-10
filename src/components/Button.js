@@ -19,6 +19,23 @@ border-radius: 16px;
 padding:16px;
 `;
 
+export const Button2 = styled.button`
+
+display:flex;
+flex-direction:row;
+justify-content: center;
+align-items: center;
+gap: 8px;
+border:none;
+width: 264px;
+height: 56px;
+left: 279.5px;
+top: 128px;
+background: ${colors.pink.medium};
+border-radius: 16px;
+padding:16px, 24px, 16px, 24px;
+
+`;
 
 const LeftIcon = styled.div`
 color:${colors.white};
@@ -33,12 +50,15 @@ const Text = styled.div`
 margin-bottom:4px;
 ${typography.text.button};
 color:${colors.white};
+text-align: center;
+letter-spacing: 1.25px;
+text-transform: uppercase;
 
 
 `
 
 
-export  function CreateAccButton({children}){
+export  function PrimaryButton({children}){
     return(
         <Button>
         <LeftIcon>
@@ -47,6 +67,17 @@ export  function CreateAccButton({children}){
         <Text>{children}</Text>
         <RightIcon>{Icons.arrowDown}</RightIcon>
         </Button>
+
+    )
+
+}
+
+
+export  function CreateAccountButton({children}){
+    return(
+        <Button2>
+        <Text>{children}</Text>
+        </Button2>
 
     )
 
