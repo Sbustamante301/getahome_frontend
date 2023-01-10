@@ -9,8 +9,8 @@ import { global, reset } from "./styles";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <Global styles={reset} />
-    <Global styles={global} />
+    {/* <Global styles={reset} />
+    <Global styles={global} /> */}
     <App />
   </BrowserRouter>
 );
