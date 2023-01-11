@@ -6,6 +6,7 @@ import buildings from "./assets/picture.svg"
 
 import { colors, typography } from "./styles";
 import { CreateAccountButton } from "./components/Button";
+import { PropertyCard } from "./components/propertyCard"
 import { PrimaryButton } from "./components/Button";
 
 
@@ -161,6 +162,7 @@ function App() {
           <div></div>
         </FiltersContainer>
       </Section1>
+      <PropertyCard propertyPic={'https://www.musicmundial.com/wp-content/uploads/2023/01/Lee-know-de-Stray-Kids-sorprende-a-sus-fans-estadounidenses-por-su-extrema-belleza.jpg'} />
       <Section3>
         <Section3Title>Getting someone to rent your apartment has never been this easy
       <CreateAccountButton>Create An Account Now</CreateAccountButton>
@@ -169,6 +171,11 @@ function App() {
 
 
       </Section3>
+
+      <Section4>
+        <Section4Title>Meet the Team</Section4Title>
+        <TeamCard />
+      </Section4>
     </Wrapper>
 
   );
