@@ -5,12 +5,21 @@ import styled from "@emotion/styled";
 import buildings from "./assets/picture.svg"
 
 import { colors, typography } from "./styles";
-import { CreateAccountButton } from "./components/Button";
-import { PropertyCard } from "./components/propertyCard"
+import { CreateAccountButton, SearchButton } from "./components/Button";
 import { PrimaryButton } from "./components/Button";
 import { TeamCard } from "./components/teamCard";
+
 import teamMember from "./assets/team.svg"
 import { getProperties } from "./services/properties-service";
+
+
+import teamMember from "./assets/team.svg";
+import { PropertyCard } from "./components/propertyCard"
+import { NavbarUnAuthenticated, NavbarSeeker, NavbarLandLord } from "./components/navbar";
+import Jesus from "./assets/members/MiLord.jpeg";
+import olenka from "./assets/members/olenka.jpeg";
+import Sebastian from "./assets/members/Sebastian.jpeg";
+import Tita from "./assets/members/Tita.jpeg";
 
 
 // padding: 64px 192px;
@@ -27,6 +36,18 @@ const Section1 = styled.div`
   left: 0px;
   top: 1588px;
 `
+
+const Section2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  height: 600px;
+  left: 0px;
+  top: 1588px;
+`
+
 const TitleContainer = styled.div`
   margin-top: 60px;
   display: flex;
@@ -41,6 +62,7 @@ const FiltersContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   padding: 8px 16px;
   gap: 8px;
   margin-top:64px;
@@ -68,9 +90,20 @@ const InputContainer = styled.div`
   height: 56px;
 `;
 
+const InputContainer2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 304px;
+  height: 56px;
+`;
 const InputLabel = styled.label`
   ${typography.text.xxs};
   color: ${colors.gray.medium}
+  margin-left:8px;
 `;
 
 const Select = styled.select`
@@ -91,31 +124,25 @@ align-items: center;
 padding:64px, 10px, 64px, 10px;
 gap: 10px;
 
-position: absolute;
 height: 312px;
-width:1511px;
+width:100%;
 
-top: 1276px;
 background: ${colors.pink.shallow}
 
 
 `;
 const Section4 = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 64px 192px;
-gap: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  width: 100%;
+  height: 486px;
+  left: 0px;
+  top: 1588px;
 
-position: absolute;
-width: 1100px;
-height: 486px;
-left: 0px;
-top: 1588px;
-
-
-
-background: ${colors.white}`
+  background: ${colors.white}
+`;
 
 const Wrapper = styled.div``;
 
@@ -156,9 +183,52 @@ text-align:center;
 display:flex;
 justify-content:center;
 align-items:center;
+`
+
+
+const Miembros=[{
+  name:'Jesus Barboza',
+  img:`${Jesus}`,
+  
+},
+{
+  name:'Sebas Bustamante',
+  img:`${Sebastian}`,
+  
+},
+{
+  name:'Olenka Sánchez',
+  img:`${olenka}`,
+  
+},
+{
+  name:'Tita Ruiz',
+  img:`${Tita}`,
+  
+
+}];
+
+const Div = styled.div`
+width:1056px;
+display:flex;
+flex-direction:row;
+justify-content: space-between;
+align-items:center;
 
 
 `
+const Footer = styled.div`
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  width: 100%;
+  height: 73px;
+  left: 0px;
+  top: 2074px;
+
+  background: ${colors.background}
+`;
 
 
 function App() {
@@ -167,6 +237,9 @@ function App() {
   })
   return (
     <Wrapper>
+      {/* <NavbarUnAuthenticated /> */}
+      <NavbarSeeker />
+      {/* <NavbarLandLord /> */}
       <Section1 style={{ backgroundImage: `url(${buildings})`, backgroundPosition: 'center' }}>
         <TitleContainer>
           <Section1Title> Meet your new home</Section1Title>
@@ -181,12 +254,29 @@ function App() {
               <option value="house">A House</option>
             </Select>
           </InputContainer>
-          <div></div>
-          <div></div>
-          <div></div>
+          <InputContainer>
+            <InputLabel for="wantType">I WANT TO</InputLabel>
+
+            <Select name="types2" id="wantType">
+              <option value="rent">Rent</option>
+              <option value="sale">Sale</option>
+            </Select>
+          </InputContainer>
+          <InputContainer2>
+            <InputLabel for="where">I WANT TO</InputLabel>
+
+            <Select name="place" id="where">
+              <option value="mount-sinai">Mount Sinai</option>
+              <option value="mount-beautiful-valley">Mount Beautiful Valley</option>
+              <option value="mount-okinawa">Okinawa</option>
+            </Select>
+          </InputContainer2>
+          <SearchButton>SEARCH</SearchButton>
         </FiltersContainer>
       </Section1>
-      <PropertyCard propertyPic={'https://www.musicmundial.com/wp-content/uploads/2023/01/Lee-know-de-Stray-Kids-sorprende-a-sus-fans-estadounidenses-por-su-extrema-belleza.jpg'} />
+      <Section2>
+        <PropertyCard propertyPic={'https://www.musicmundial.com/wp-content/uploads/2023/01/Lee-know-de-Stray-Kids-sorprende-a-sus-fans-estadounidenses-por-su-extrema-belleza.jpg'} />
+      </Section2>
       <Section3>
         <Section3Title>Getting someone to rent your apartment has never been this easy
       <CreateAccountButton>Create An Account Now</CreateAccountButton>
@@ -194,8 +284,19 @@ function App() {
       </Section3>
       <Section4>
         <Section4Title>Meet the Team</Section4Title>
-        <TeamCard/>
+        <Div>
+
+          {Miembros.map((miembro) => {
+
+            return (
+              <TeamCard miembro={miembro} />)
+          })}
+        </Div>
+
       </Section4>
+      <Footer>
+
+      </Footer>
     </Wrapper>
 
   );

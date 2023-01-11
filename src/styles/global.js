@@ -83,6 +83,7 @@ select {
 
 export const global = css`
   body {
+    margin:0;
     font-size: 1rem;
     line-height: 1.5rem;
     font-family: ${fonts.primary};

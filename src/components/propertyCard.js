@@ -2,6 +2,51 @@ import styled from "@emotion/styled";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils"
 
+const Wrapp = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:space-between;
+
+  padding: 64px 132px;
+  gap: 10px;
+
+  height: 604px;
+  left: calc(50% - 1440px/2);
+  top: 672px;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+  align-items: center;
+  padding: 0px;
+  gap: 32px;
+
+  
+  height: 476px;
+`;
+const TextContainer = styled.div`
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+`;
+
+const PrepTitle = styled.p`
+  ${typography.text.button};
+  color: ${colors.gray.dark};
+  letter-spacing: 0.1px;
+  margin:0;
+`;
+
+const Title = styled.h1`
+  ${typography.head.md};
+  color: ${colors.pink.dark};
+  margin: 0;
+`;
 const CardContainer = styled.div`
   position:relative;
   width: 300px;
@@ -11,6 +56,7 @@ const CardContainer = styled.div`
 
   display: flex;
   flex-direction: column;
+  justify-content:space-between;
   
 
   background: ${colors.white}
@@ -42,6 +88,10 @@ const Tag = styled.div`
   width: 110px;
   height: 28px;
   right: 0px;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  color:${colors.white};
   background-color:${colors.pink.medium};
   border-top-right-radius:8px;
 `;
@@ -50,38 +100,39 @@ const InformationContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color:${colors.gray.medium}
 `;
 
 const Category = styled.div`
   display: flex;
-  jsutify-content:space-between;
+  justify-content:space-between;
   align-items: center;
   padding: 0px;
-  gap: 10px;
+  gap: 12px;
 
-  width: 284px;
+  width: 300px;
   height: 32px;
 `;
 
 const Price = styled.div`
-  ${typography.head.sm}
-  color: ${colors.gray.dark}
   display: flex;
   align-items: center;
   padding: 0px;
-  gap: 8px;
+  gap: 12px;
+  ${typography.head.sm}
+  color: ${colors.gray.dark}
 
   width: 161px;
   height: 32px;
 `;
 
 const HomeType = styled.div`
-  ${typography.text.md}
-  color: ${colors.gray.medium}
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding: 0px;
   gap: 4px;
+  ${typography.text.md}
+  color: ${colors.gray.medium}
 
   width: 113px;
   height: 24px;
@@ -106,6 +157,7 @@ const Features = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 16px;
+  margin-top: 26px;
 
   width: 235px;
   height: 24px;
@@ -134,35 +186,46 @@ const Pet = styled.div`
 
 export function PropertyCard({ propertyPic }) {
   return (
-    <CardContainer>
-      <ImgContainer>
-        <Property src={propertyPic} />
-        <Tag>For Rent</Tag>
-      </ImgContainer>
-      <InformationContainer>
-        <Category>
-          <Price>
-            {Icons.dollarCircle}
-            3000
-            </Price>
-          <HomeType>
-            {Icons.building}
-            Apartment
-          </HomeType>
-        </Category>
-        <Address>
-          La Crucet III etapa block 15 dpto 504
-        </Address>
-        <Features>
-          <Bed>{Icons.bed} 4</Bed>
-          <Bath>{Icons.bath} 2</Bath>
-          <Area>{Icons.area} 180 m2</Area>
-          <Pet>{Icons.paw}</Pet>
-        </Features>
+    <Wrapp>
+      <Container>
+        <TextContainer>
+          <PrepTitle>Find an Appartment you Love</PrepTitle>
+          <Title>Homes for rent at the best prices</Title>
+        </TextContainer>
+        <CardContainer>
+          <ImgContainer>
+            <Property src={propertyPic} />
+            <Tag>
+              {Icons.coins}
+              For Rental
+            </Tag>
+          </ImgContainer>
+          <InformationContainer>
+            <Category>
+              <Price>
+                {Icons.dollarCircle}
+                3000
+              </Price>
+              <HomeType>
+                {Icons.building}
+                Apartment
+              </HomeType>
+            </Category>
+            <Address>
+              La Crucet III etapa block 15 dpto 504
+            </Address>
+            <Features>
+              <Bed>{Icons.bed} 4</Bed>
+              <Bath>{Icons.bath} 2</Bath>
+              <Area>{Icons.area} 180 m2</Area>
+              <Pet>{Icons.paw}</Pet>
+            </Features>
 
-      </InformationContainer>
+          </InformationContainer>
 
-    </CardContainer>
+        </CardContainer>
+      </Container>
+    </Wrapp>
 
   )
 }

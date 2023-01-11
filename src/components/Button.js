@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils";
-export const Button = styled.button`
 
+export const Button = styled.button`
 display:flex;
 flex-direction:row;
 justify-content: center;
@@ -26,6 +26,7 @@ flex-direction:row;
 justify-content: center;
 align-items: center;
 gap: 8px;
+
 border:none;
 width: 264px;
 height: 56px;
@@ -35,6 +36,135 @@ background: ${colors.pink.medium};
 border-radius: 16px;
 padding:16px, 24px, 16px, 24px;
 
+`;
+
+export const Button3 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    padding:8px 16px;
+    gap: 8px;
+
+    color ${colors.gray.medium};
+    border: 1px solid ${colors.pink.medium};
+    width: 100px;
+    height: 40px;
+    background: ${colors.white};
+    border-radius: 16px;
+`;
+
+export const Button4 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    padding:8px 16px;
+    gap: 8px;
+
+    color ${colors.white};
+    background: ${colors.pink.medium};
+    width: 101px;
+    height: 40px;
+    border: none;
+    border-radius: 16px;
+`;
+
+export const Button5 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    padding:8px 16px;
+    gap: 8px;
+
+    color ${colors.gray.medium};
+    background: ${colors.white};
+    width: 170px;
+    height: 40px;
+    border: none;
+    border-radius: 16px;
+`;
+
+export const Button6 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    padding:8px 16px;
+    gap: 8px;
+
+    color ${colors.white};
+    background: ${colors.pink.medium};
+    width: 96px;
+    height: 40px;
+    border: none;
+    border-radius: 16px;
+    margin:16px;
+`;
+
+export const Button7 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    padding:8px 16px;
+    gap: 8px;
+
+    color ${colors.gray.medium};
+    border: 1px solid ${colors.pink.medium};
+    width: 130px;
+    height: 40px;
+    background: ${colors.white};
+    border-radius: 16px;
+`;
+
+export const Button8 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    padding:8px 16px;
+    gap: 8px;
+
+    color ${colors.white};
+    background: ${colors.pink.medium};
+    width: 218px;
+    height: 40px;
+    border: none;
+    border-radius: 16px;
+`;
+
+export const Button9 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    padding:8px 16px;
+    gap: 8px;
+
+    color ${colors.white};
+    background: ${colors.pink.medium};
+    width: 130px;
+    height: 40px;
+    border: none;
+    border-radius: 16px;
+`;
+
+export const Button10 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    padding:8px 16px;
+    gap: 8px;
+
+    color ${colors.white};
+    background: ${colors.pink.medium};
+    width: 192px;
+    height: 40px;
+    border: none;
+    border-radius: 16px;
 `;
 
 const LeftIcon = styled.div`
@@ -47,37 +177,133 @@ color:${colors.white}
 
 `
 const Text = styled.div`
-margin-bottom:4px;
-color:${colors.white};
-text-align: center;
-letter-spacing: 1.25px;
-text-transform: uppercase;
+    margin-bottom:4px;
+    color:${colors.white};
+    text-align: center;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+`;
+
+const Text2 = styled.div`
+    margin-bottom:4px;
+    color:${colors.gray.medium};
+    ${typography.text.button}
+    text-align: center;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+`;
+
+const Text3 = styled.div`
+    margin-bottom:4px;
+    color:${colors.white};
+    ${typography.text.button}
+    text-align: center;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+`;
 
 
-`
-
-
-export  function PrimaryButton({children,Icon}){
-    return(
+export function PrimaryButton({ children, Icon }) {
+    return (
         <Button>
-        <LeftIcon>
-        {Icon}
-        </LeftIcon>
-        <Text>{children}</Text>
-        <RightIcon>{Icons.arrowDown}</RightIcon>
+            <LeftIcon>
+                {Icon}
+            </LeftIcon>
+            <Text>{children}</Text>
+            <RightIcon>{Icons.arrowDown}</RightIcon>
         </Button>
-
     )
 
 }
 
+export function JoinButton({ children }) {
+    return (
+        <Button3>
+            <LeftIcon style={{ color: `${colors.gray.medium}` }}>
+                {Icons.userAdd}
+            </LeftIcon>
+            <Text2>{children}</Text2>
+        </Button3>
+    )
+};
 
-export  function CreateAccountButton({children}){
-    return(
+export function FindButton({ children }) {
+    return (
+        <Button5>
+            <LeftIcon style={{ color: `${colors.gray.medium}` }}>
+                {Icons.search}
+            </LeftIcon>
+            <Text2>{children}</Text2>
+        </Button5>
+    )
+};
+
+export function LoginButton({ children }) {
+    return (
+        <Button4>
+            <LeftIcon>
+                {Icons.userReceived}
+            </LeftIcon>
+            <Text3>{children}</Text3>
+        </Button4>
+    )
+};
+
+export function SearchButton({ children }) {
+    return (
+        <Button6>
+            <Text3>{children}</Text3>
+        </Button6>
+    )
+};
+export function CreateAccountButton({ children }) {
+    return (
         <Button2>
-        <Text>{children}</Text>
+            <Text>{children}</Text>
         </Button2>
-
     )
+};
 
-}
+export function LogoutButton({ children }) {
+    return (
+        <Button7>
+            <LeftIcon style={{ color: `${colors.gray.medium}` }}>
+                {Icons.logoutCircle}
+            </LeftIcon>
+            <Text2>{children}</Text2>
+        </Button7>
+    )
+};
+
+export function SaveButton({ children }) {
+    return (
+        <Button8>
+            <LeftIcon style={{ color: `${colors.white}` }}>
+                {Icons.heartDark}
+            </LeftIcon>
+            <Text3>{children}</Text3>
+        </Button8>
+    )
+};
+
+export function ProfileButton({ children }) {
+    return (
+        <Button9>
+            <LeftIcon style={{ color: `${colors.white}` }}>
+                {Icons.user}
+            </LeftIcon>
+            <Text3>{children}</Text3>
+        </Button9>
+    )
+};
+
+export function MyPropertyButton({ children }) {
+    return (
+        <Button10>
+            <LeftIcon style={{ color: `${colors.white}` }}>
+                {Icons.home}
+            </LeftIcon>
+            <Text3>{children}</Text3>
+        </Button10>
+    )
+};
