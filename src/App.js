@@ -5,16 +5,16 @@ import styled from "@emotion/styled";
 import buildings from "./assets/picture.svg"
 
 import { colors, typography } from "./styles";
-import { CreateAccountButton } from "./components/Button";
+import { CreateAccountButton, SearchButton } from "./components/Button";
 import { PrimaryButton } from "./components/Button";
 import { TeamCard } from "./components/teamCard";
 import teamMember from "./assets/team.svg";
 import { PropertyCard } from "./components/propertyCard"
+import Navbar from "./components/navbar";
 import Jesus from "./assets/members/MiLord.jpeg";
 import olenka from "./assets/members/olenka.jpeg";
 import Sebastian from "./assets/members/Sebastian.jpeg";
-import Tita  from "./assets/members/Tita.jpeg";
-
+import Tita from "./assets/members/Tita.jpeg";
 
 // padding: 64px 192px;
 // gap: 26px;
@@ -56,6 +56,7 @@ const FiltersContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   padding: 8px 16px;
   gap: 8px;
   margin-top:64px;
@@ -83,9 +84,20 @@ const InputContainer = styled.div`
   height: 56px;
 `;
 
+const InputContainer2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 304px;
+  height: 56px;
+`;
 const InputLabel = styled.label`
   ${typography.text.xxs};
   color: ${colors.gray.medium}
+  margin-left:8px;
 `;
 
 const Select = styled.select`
@@ -166,6 +178,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 `
+
 const Miembros=[{
   name:'Jesus Barboza',
   img:`${Jesus}`,
@@ -185,6 +198,7 @@ const Miembros=[{
   name:'Tita Ruiz',
   img:`${Tita}`,
   
+
 }];
 
 const Div = styled.div`
@@ -212,6 +226,7 @@ display: flex;
 function App() {
   return (
     <Wrapper>
+      <Navbar />
       <Section1 style={{ backgroundImage: `url(${buildings})`, backgroundPosition: 'center' }}>
         <TitleContainer>
           <Section1Title> Meet your new home</Section1Title>
@@ -226,9 +241,24 @@ function App() {
               <option value="house">A House</option>
             </Select>
           </InputContainer>
-          <div></div>
-          <div></div>
-          <div></div>
+          <InputContainer>
+            <InputLabel for="wantType">I WANT TO</InputLabel>
+
+            <Select name="types2" id="wantType">
+              <option value="rent">Rent</option>
+              <option value="sale">Sale</option>
+            </Select>
+          </InputContainer>
+          <InputContainer2>
+            <InputLabel for="where">I WANT TO</InputLabel>
+
+            <Select name="place" id="where">
+              <option value="mount-sinai">Mount Sinai</option>
+              <option value="mount-beautiful-valley">Mount Beautiful Valley</option>
+              <option value="mount-okinawa">Okinawa</option>
+            </Select>
+          </InputContainer2>
+          <SearchButton>SEARCH</SearchButton>
         </FiltersContainer>
       </Section1>
       <Section2>
@@ -242,13 +272,14 @@ function App() {
       <Section4>
         <Section4Title>Meet the Team</Section4Title>
         <Div>
-        
-        {Miembros.map((miembro)=>{
-          
-          return(
-        <TeamCard miembro={miembro} />)})}
+
+          {Miembros.map((miembro) => {
+
+            return (
+              <TeamCard miembro={miembro} />)
+          })}
         </Div>
-        
+
       </Section4>
       <Footer>
 
