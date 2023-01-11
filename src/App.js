@@ -10,6 +10,7 @@ import { PropertyCard } from "./components/propertyCard"
 import { PrimaryButton } from "./components/Button";
 import { TeamCard } from "./components/teamCard";
 import teamMember from "./assets/team.svg"
+import { getProperties } from "./services/properties-service";
 
 
 // padding: 64px 192px;
@@ -157,13 +158,13 @@ justify-content:center;
 align-items:center;
 
 
-
-
-
 `
 
 
 function App() {
+  getProperties().then(response=>{
+    console.log(response)
+  })
   return (
     <Wrapper>
       <Section1 style={{ backgroundImage: `url(${buildings})`, backgroundPosition: 'center' }}>
