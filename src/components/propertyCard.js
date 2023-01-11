@@ -6,6 +6,7 @@ const Wrapp = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content:space-between;
 
   padding: 64px 132px;
   gap: 10px;
@@ -19,6 +20,7 @@ const Wrapp = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content:space-between;
   align-items: center;
   padding: 0px;
   gap: 32px;
@@ -55,6 +57,7 @@ const CardContainer = styled.div`
 
   display: flex;
   flex-direction: column;
+  justify-content:space-between;
   
 
   background: ${colors.white}
@@ -98,38 +101,39 @@ const InformationContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color:${colors.gray.medium}
 `;
 
 const Category = styled.div`
   display: flex;
-  jsutify-content:space-between;
+  justify-content:space-between;
   align-items: center;
   padding: 0px;
-  gap: 10px;
+  gap: 12px;
 
-  width: 284px;
+  width: 300px;
   height: 32px;
 `;
 
 const Price = styled.div`
-  ${typography.head.sm}
-  color: ${colors.gray.dark}
   display: flex;
   align-items: center;
   padding: 0px;
-  gap: 8px;
+  gap: 12px;
+  ${typography.head.sm}
+  color: ${colors.gray.dark}
 
   width: 161px;
   height: 32px;
 `;
 
 const HomeType = styled.div`
-  ${typography.text.md}
-  color: ${colors.gray.medium}
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding: 0px;
   gap: 4px;
+  ${typography.text.md}
+  color: ${colors.gray.medium}
 
   width: 113px;
   height: 24px;
@@ -154,6 +158,7 @@ const Features = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 16px;
+  margin-top: 26px;
 
   width: 235px;
   height: 24px;
@@ -201,7 +206,7 @@ export function PropertyCard({ propertyPic }) {
               <Price>
                 {Icons.dollarCircle}
                 3000
-                </Price>
+              </Price>
               <HomeType>
                 {Icons.building}
                 Apartment
