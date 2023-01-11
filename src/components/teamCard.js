@@ -5,6 +5,7 @@ import teamMember from "../assets/team.svg";
 
 
 const TeamCardContainer = styled.div`
+    width:180px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,7 +53,7 @@ flex-direction:row;
 justify-content: space-between;
 align-items:center;
 
-`
+`;
 
 const Img = styled.img`
 border-radius:100px;
