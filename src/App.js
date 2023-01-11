@@ -11,7 +11,10 @@ import { TeamCard } from "./components/teamCard";
 import teamMember from "./assets/team.svg";
 import { PropertyCard } from "./components/propertyCard"
 import Navbar from "./components/navbar";
-
+import Jesus from "./assets/members/MiLord.jpeg";
+import olenka from "./assets/members/olenka.jpeg";
+import Sebastian from "./assets/members/Sebastian.jpeg";
+import Tita  from "./assets/members/Tita.jpeg";
 
 // padding: 64px 192px;
 // gap: 26px;
@@ -162,12 +165,38 @@ text-align:center;
 display:flex;
 justify-content:center;
 align-items:center;
+`
+const Miembros=[{
+  name:'Jesus',
+  img:`${Jesus}`,
+  
+},
+{
+  name:'Sebas',
+  img:`${Sebastian}`,
+  
+},
+{
+  name:'Olenka',
+  img:`${olenka}`,
+  
+},
+{
+  name:'Tita',
+  img:`${Tita}`,
+  
+}];
 
-
-
-
+const Div = styled.div`
+width:1056px;
+display:flex;
+flex-direction:row;
+justify-content: space-between;
+align-items:center;
 
 `
+
+
 
 
 function App() {
@@ -203,7 +232,14 @@ function App() {
       </Section3>
       <Section4>
         <Section4Title>Meet the Team</Section4Title>
-        <TeamCard />
+        <Div>
+        
+        {Miembros.map((miembro)=>{
+          
+          return(
+        <TeamCard miembro={miembro} />)})}
+        </Div>
+        
       </Section4>
     </Wrapper>
 
