@@ -1,5 +1,5 @@
 import {
-    RiArrowDownSLine, RiNotificationFill, RiArticleLine, RiFileUserLine, RiNotificationLine,
+    RiCloseFill,RiArrowDownSLine, RiNotificationFill, RiArticleLine, RiFileUserLine, RiNotificationLine,
     RiCheckFill, RiCloseLine, RiMoneyDollarCircleLine, RiBriefcaseLine, RiUserLine, RiHeartLine, RiMoneyDollarCircleFill, RiFocusLine,
     RiMailLine, RiTimeLine, RiGithubFill, RiCalendarLine, RiHeartFill, RiAccountCircleLine, RiLogoutCircleLine, RiBuildingLine, RiTwitterFill,
     RiSearchLine, RiReactjsLine, RiArrowLeftSLine, RiNavigationLine, RiUploadLine, RiPauseCircleLine, RiMailCheckLine, RiChatCheckLine,
@@ -53,6 +53,7 @@ export const Icons = {
     mailCheck: <RiMailCheckLine />,
     chatCheck: <RiChatCheckLine />,
     download: <RiDownloadLine />,
+    closed: <RiCloseFill style={{  width: "30px", height: "30px" }}/>,
     arrowUp: <RiArrowUpSLine />,
     closeCircle: <RiCloseCircleLine />,
     mailOpen: <RiMailOpenLine />,

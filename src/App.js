@@ -11,6 +11,8 @@ import HomePage from "./pages/home-page";
 import { useEffect } from "react";
 import { useAuth } from "./context/auth-context";
 import LoginModal from "./components/login-modal";
+import MyPropertiesPage from "./pages/my-properties-page";
+import SavedPropertiesPage from "./pages/saved_properties-page";
 
 
 
@@ -19,7 +21,7 @@ const Wrapper = styled.div``;
 
 function App() {
 
-  const {setProperties} = useAuth()
+  const {setProperties,user, isOpenModal, userType} = useAuth()
   useEffect(() => {
     getProperties().then(response=>{
     setProperties(response)
@@ -27,6 +29,7 @@ function App() {
     }).catch(error=>{console.log(error)})
     
   }, []);
+
 
   return (
     <Wrapper>
@@ -39,6 +42,8 @@ function App() {
           <Route path="/signup" element= {<SignupPage />}/>
           <Route path="/properties" element= {<PropertiesPage />}/>
           <Route path="/properties/:id" element= {<PropertyPage />}/>
+          <Route path="/my_properties" element= {<MyPropertiesPage />}/>
+          <Route path="/saved_properties" element= {<SavedPropertiesPage />}/>
 
         </Routes>
       }
