@@ -14,7 +14,6 @@ const Wrapp = styled.div`
   height: 604px;
   left: calc(50% - 1440px/2);
   top: 672px;
-
 `;
 
 const Container = styled.div`
