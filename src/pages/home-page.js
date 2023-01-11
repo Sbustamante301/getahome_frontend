@@ -14,13 +14,14 @@ const Section2 = styled.div`
   top: 1588px;
 `
 
-function HomePage(){
+function HomePage(property){
+ 
 
   return (
     <>
       <SectionMeetHome/>
       <Section2>
-        <PropertyCard propertyPic={'https://www.musicmundial.com/wp-content/uploads/2023/01/Lee-know-de-Stray-Kids-sorprende-a-sus-fans-estadounidenses-por-su-extrema-belleza.jpg'} />
+        {/* <PropertyCard property={property} /> */}
       </Section2>
       
       <SectionMeetTeam/>

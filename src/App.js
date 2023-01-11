@@ -7,20 +7,27 @@ import SignupPage from "./pages/signup-page";
 import PropertiesPage from "./pages/properties-page";
 import PropertyPage from "./pages/property-page";
 import HomePage from "./pages/home-page";
+
+import { useEffect } from "react";
 import { useAuth } from "./context/auth-context";
 import LoginModal from "./components/login-modal";
+
 
 
 
 const Wrapper = styled.div``;
 
 function App() {
-  const {user, isOpenModal, userType} = useAuth()
-  console.log("User",user)
-  console.log("UserType",userType)
-  getProperties().then(response=>{
-    console.log(response)
-  })
+
+  const {setProperties} = useAuth()
+  useEffect(() => {
+    getProperties().then(response=>{
+    setProperties(response)
+  
+    }).catch(error=>{console.log(error)})
+    
+  }, []);
+
   return (
     <Wrapper>
       { !user ? <NavbarUnAuthenticated /> : <NavbarAuthenticated /> }
