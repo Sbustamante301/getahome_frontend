@@ -102,11 +102,9 @@ align-items: center;
 padding:64px, 10px, 64px, 10px;
 gap: 10px;
 
-position: absolute;
 height: 312px;
-width:1511px;
+width:100%;
 
-top: 1276px;
 background: ${colors.pink.shallow}
 
 
@@ -115,18 +113,13 @@ const Section4 = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-padding: 64px 192px;
 gap: 26px;
 
-position: absolute;
-width: 1100px;
+width: 100%;
 height: 486px;
-left: 0px;
-top: 1588px;
 
-
-
-background: ${colors.white}`
+background: ${colors.white}
+`;
 
 const Wrapper = styled.div``;
 
