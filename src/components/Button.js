@@ -85,6 +85,23 @@ export const Button5 = styled.button`
     border-radius: 16px;
 `;
 
+export const Button6 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    padding:8px 16px;
+    gap: 8px;
+
+    color ${colors.white};
+    background: ${colors.pink.medium};
+    width: 96px;
+    height: 40px;
+    border: none;
+    border-radius: 16px;
+    margin:16px;
+`;
+
 const LeftIcon = styled.div`
 color:${colors.white};
 
@@ -145,7 +162,7 @@ export function JoinButton({ children }) {
     )
 };
 
-export function SearchButton({ children }) {
+export function FindButton({ children }) {
     return (
         <Button5>
             <LeftIcon style={{ color: `${colors.gray.medium}` }}>
@@ -167,6 +184,13 @@ export function LoginButton({ children }) {
     )
 };
 
+export function SearchButton({ children }) {
+    return (
+        <Button6>
+            <Text3>{children}</Text3>
+        </Button6>
+    )
+};
 export function CreateAccountButton({ children }) {
     return (
         <Button2>

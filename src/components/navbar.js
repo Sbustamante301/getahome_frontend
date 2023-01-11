@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import logo from "../assets/Logo.png"
 import { Icons } from "../utils";
-import { JoinButton, LoginButton, SearchButton } from "../components/Button"
+import { JoinButton, LoginButton, FindButton } from "../components/Button"
 
 const NavbarContainer = styled("div")`
   display: flex;
@@ -61,9 +61,9 @@ function Navbar() {
           // value={query}
           // onChange={(event) => setQuery(event.target.value)}
           />
-          <SearchButton>
+          <FindButton>
             Find a Home
-          </SearchButton>
+          </FindButton>
         </Form>
         <JoinButton>Join</JoinButton>
         <LoginButton>Login</LoginButton>
