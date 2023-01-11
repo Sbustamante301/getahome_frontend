@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import logo from "../assets/Logo.png"
 import { Icons } from "../utils";
-import { JoinButton, LoginButton, FindButton } from "../components/Button"
+import { JoinButton, LoginButton, FindButton, LogoutButton, SaveButton, ProfileButton, MyPropertyButton } from "../components/Button"
 
 const NavbarContainer = styled("div")`
   display: flex;
@@ -49,7 +49,30 @@ const Input = styled.input`
   border: none;
   justify-content: center;
 `;
-function Navbar() {
+const Form2 = styled.form`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width:476px;
+  height: 40px;
+`;
+
+const Input2 = styled.input`
+  display: flex;
+  flex-direction: row;
+  align-self: flex-start;
+  align-items: center;
+  padding: 4px 8px;
+  gap: 10px;
+
+  width: 306px;
+  height: 40px;
+
+  border: none;
+  justify-content: center;
+`;
+
+export function NavbarUnAuthenticated() {
 
   return (
     <NavbarContainer>
@@ -73,4 +96,51 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export function NavbarSeeker() {
+  return (
+    <NavbarContainer>
+      <FormWrapp>
+        <img src={logo} />
+        <Form2>
+          <Input2
+            name="query"
+          // value={query}
+          // onChange={(event) => setQuery(event.target.value)}
+          />
+          <FindButton>
+            Find a Home
+          </FindButton>
+        </Form2>
+        <LogoutButton>LOGOUT</LogoutButton>
+        <SaveButton>SAVE PROPERTIES</SaveButton>
+        <ProfileButton>PROFILE</ProfileButton>
+
+      </FormWrapp>
+    </NavbarContainer>
+  );
+};
+
+export function NavbarLandLord() {
+  return (
+    <NavbarContainer>
+      <FormWrapp>
+        <img src={logo} />
+        <Form2>
+          <Input2
+            name="query"
+          // value={query}
+          // onChange={(event) => setQuery(event.target.value)}
+          />
+          <FindButton>
+            Find a Home
+          </FindButton>
+        </Form2>
+        <LogoutButton>LOGOUT</LogoutButton>
+        <MyPropertyButton>MY PROPERTIES</MyPropertyButton>
+        <ProfileButton>PROFILE</ProfileButton>
+
+      </FormWrapp>
+    </NavbarContainer>
+  );
+};
+

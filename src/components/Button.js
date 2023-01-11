@@ -102,6 +102,70 @@ export const Button6 = styled.button`
     margin:16px;
 `;
 
+export const Button7 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    padding:8px 16px;
+    gap: 8px;
+
+    color ${colors.gray.medium};
+    border: 1px solid ${colors.pink.medium};
+    width: 130px;
+    height: 40px;
+    background: ${colors.white};
+    border-radius: 16px;
+`;
+
+export const Button8 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    padding:8px 16px;
+    gap: 8px;
+
+    color ${colors.white};
+    background: ${colors.pink.medium};
+    width: 218px;
+    height: 40px;
+    border: none;
+    border-radius: 16px;
+`;
+
+export const Button9 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    padding:8px 16px;
+    gap: 8px;
+
+    color ${colors.white};
+    background: ${colors.pink.medium};
+    width: 130px;
+    height: 40px;
+    border: none;
+    border-radius: 16px;
+`;
+
+export const Button10 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    padding:8px 16px;
+    gap: 8px;
+
+    color ${colors.white};
+    background: ${colors.pink.medium};
+    width: 192px;
+    height: 40px;
+    border: none;
+    border-radius: 16px;
+`;
+
 const LeftIcon = styled.div`
 color:${colors.white};
 
@@ -196,7 +260,49 @@ export function CreateAccountButton({ children }) {
         <Button2>
             <Text>{children}</Text>
         </Button2>
-
     )
+};
 
-}
+export function LogoutButton({ children }) {
+    return (
+        <Button7>
+            <LeftIcon style={{ color: `${colors.gray.medium}` }}>
+                {Icons.logoutCircle}
+            </LeftIcon>
+            <Text2>{children}</Text2>
+        </Button7>
+    )
+};
+
+export function SaveButton({ children }) {
+    return (
+        <Button8>
+            <LeftIcon style={{ color: `${colors.white}` }}>
+                {Icons.heartDark}
+            </LeftIcon>
+            <Text3>{children}</Text3>
+        </Button8>
+    )
+};
+
+export function ProfileButton({ children }) {
+    return (
+        <Button9>
+            <LeftIcon style={{ color: `${colors.white}` }}>
+                {Icons.user}
+            </LeftIcon>
+            <Text3>{children}</Text3>
+        </Button9>
+    )
+};
+
+export function MyPropertyButton({ children }) {
+    return (
+        <Button8>
+            <LeftIcon style={{ color: `${colors.white}` }}>
+                {Icons.home}
+            </LeftIcon>
+            <Text3>{children}</Text3>
+        </Button8>
+    )
+};
