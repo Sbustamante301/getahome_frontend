@@ -2,6 +2,7 @@ import styled from "@emotion/styled"
 import { useState } from "react"
 import { useAuth } from "../context/auth-context"
 import { colors } from "../styles"
+import { Icons } from "../utils"
 import { LoginButton } from "./Button"
 import Input from "./Input"
 
@@ -18,6 +19,7 @@ const Wrapper = styled.div`
   justify-content:center;
 `
 const LoginForm = styled.form`
+  position:relative;
   margin-top:96px;
   background: ${colors.white};
   width: 388px;
@@ -40,9 +42,14 @@ const Error = styled.p`
   color: red;
   padding-left: 1rem;
 `;
+const CloseDiv = styled.div`
+  position:absolute;
+  top:0;
+  right:0;
+`
 
 export default function LoginModal(){
-  const { login, error } = useAuth()
+  const { login, error, setIsOpenModal } = useAuth()
   const [form, setForm] = useState({
     email:"",
     password:""
@@ -62,6 +69,9 @@ export default function LoginModal(){
   return(
     <Wrapper>
       <LoginForm onSubmit={handleLogin}>
+        <CloseDiv onClick={()=>setIsOpenModal(false)}>
+          {Icons.closed}
+        </CloseDiv>
         <Text>Login</Text>        
         <Input value={form.email} onChange={handleChangeInput} id="email" label="EMAIL" name="email" type="text" placeholder={"user@mail.com"}/>
         <Input value={form.password} onChange={handleChangeInput} id="password" label="PASSWORD" name="password" type="password" placeholder={"******"}/>

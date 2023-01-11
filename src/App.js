@@ -9,6 +9,8 @@ import PropertyPage from "./pages/property-page";
 import HomePage from "./pages/home-page";
 import { useAuth } from "./context/auth-context";
 import LoginModal from "./components/login-modal";
+import MyPropertiesPage from "./pages/my-properties-page";
+import SavedPropertiesPage from "./pages/saved_properties-page";
 
 
 
@@ -19,7 +21,6 @@ function App() {
   console.log("User",user)
   console.log("UserType",userType)
   getProperties().then(response=>{
-    console.log(response)
   })
   return (
     <Wrapper>
@@ -32,6 +33,8 @@ function App() {
           <Route path="/signup" element= {<SignupPage />}/>
           <Route path="/properties" element= {<PropertiesPage />}/>
           <Route path="/properties/:id" element= {<PropertyPage />}/>
+          <Route path="/my_properties" element= {<MyPropertiesPage />}/>
+          <Route path="/saved_properties" element= {<SavedPropertiesPage />}/>
 
         </Routes>
       }

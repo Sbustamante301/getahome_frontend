@@ -202,9 +202,9 @@ export function PrimaryButton({ children, Icon }) {
 
 }
 
-export function JoinButton({ children }) {
+export function JoinButton({ children, onClick }) {
     return (
-        <Button3>
+        <Button3 onClick={onClick}>
             <LeftIcon style={{ color: `${colors.gray.medium}` }}>
                 {Icons.userAdd}
             </LeftIcon>
@@ -213,9 +213,9 @@ export function JoinButton({ children }) {
     )
 };
 
-export function FindButton({ children }) {
+export function FindButton({ children, onClick }) {
     return (
-        <Button5>
+        <Button5 onClick={onClick}>
             <LeftIcon style={{ color: `${colors.gray.medium}` }}>
                 {Icons.search}
             </LeftIcon>
@@ -262,9 +262,9 @@ export function LogoutButton({ children, onClick }) {
     )
 };
 
-export function SaveButton({ children }) {
+export function SaveButton({ children, onClick }) {
     return (
-        <Button8>
+        <Button8 onClick={onClick}>
             <LeftIcon style={{ color: `${colors.white}` }}>
                 {Icons.heartDark}
             </LeftIcon>
@@ -284,9 +284,9 @@ export function ProfileButton({ children }) {
     )
 };
 
-export function MyPropertyButton({ children }) {
+export function MyPropertyButton({ children, onClick }) {
     return (
-        <Button10>
+        <Button10 onClick={onClick}>
             <LeftIcon style={{ color: `${colors.white}` }}>
                 {Icons.home}
             </LeftIcon>

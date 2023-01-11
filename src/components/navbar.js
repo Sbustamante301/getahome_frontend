@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import logo from "../assets/Logo.svg"
-import { Icons } from "../utils";
 import { JoinButton, LoginButton, FindButton, LogoutButton, SaveButton, ProfileButton, MyPropertyButton } from "../components/Button"
 import { useAuth } from "../context/auth-context";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavbarContainer = styled("div")`
   display: flex;
@@ -74,26 +74,39 @@ const Input2 = styled.input`
 
 export function NavbarUnAuthenticated() {
   const {setIsOpenModal} = useAuth();
-
+  const navigate = useNavigate(); 
   function handleLogin(event){
     event.preventDefault();
     setIsOpenModal(true)
   }
+
+  function handleSignUp(event){
+    event.preventDefault();
+    navigate("/signup");    
+  }
+
+  function handleShowProperties(event){
+    event.preventDefault();
+    navigate("/properties");
+  }
+
   return (
     <NavbarContainer>
       <FormWrapp>
-        <img src={logo} alt="image1"/>
+        <Link to="/home">
+          <img src={logo} alt="image1"/>
+        </Link>
         <Form>
           <Input
             name="query"
           // value={query}
           // onChange={(event) => setQuery(event.target.value)}
           />
-          <FindButton>
+          <FindButton onClick={handleShowProperties}>
             Find a Home
           </FindButton>
         </Form>
-        <JoinButton>Join</JoinButton>
+        <JoinButton onClick={handleSignUp}>Join</JoinButton>
         <LoginButton handleLogin={handleLogin}>Login</LoginButton>
 
       </FormWrapp>
@@ -102,15 +115,26 @@ export function NavbarUnAuthenticated() {
 }
 
 export function NavbarAuthenticated() {
+  const navigate = useNavigate(); 
   const {userType, logout} = useAuth();
   function handleLogout(){
     logout();
+  }
+  function handleMyProperties(event){
+    event.preventDefault();
+    navigate("/my_properties")
+  }
+  function handleSavedProperties(event){
+    event.preventDefault();
+    navigate("/saved_properties")
   }
 
   return (
     <NavbarContainer>
       <FormWrapp>
-        <img src={logo} alt={"image2"}/>
+        <Link to="/home">
+          <img src={logo} alt={"image2"}/>
+        </Link>
         <Form2>
           <Input2
             name="query"
@@ -122,7 +146,8 @@ export function NavbarAuthenticated() {
           </FindButton>
         </Form2>
         <LogoutButton onClick={handleLogout}>LOGOUT</LogoutButton>
-        {userType === 1 ? <MyPropertyButton>MY PROPERTIES</MyPropertyButton> : <SaveButton>SAVED PROPERTIES</SaveButton>}
+        {userType === 1 ? <MyPropertyButton onClick={handleMyProperties}>MY PROPERTIES</MyPropertyButton> 
+                        : <SaveButton onClick={handleSavedProperties}>SAVED PROPERTIES</SaveButton>}
         
         <ProfileButton>PROFILE</ProfileButton>
 
