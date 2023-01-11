@@ -23,15 +23,25 @@ import SignupPage from "./pages/signup-page";
 import PropertiesPage from "./pages/properties-page";
 import PropertyPage from "./pages/property-page";
 import HomePage from "./pages/home-page";
+import { useEffect } from "react";
+import { useAuth } from "./context/auth-context";
 
 
 
 const Wrapper = styled.div``;
 
 function App() {
-  getProperties().then(response=>{
+  const {setProperties} = useAuth()
+  useEffect(() => {
+    getProperties().then(response=>{
+    setProperties(response)
     console.log(response)
-  })
+    }).catch(error=>{console.log(error)})
+    
+  }, []);
+  // getProperties().then(response=>{
+  //   console.log(response)
+  // })
   return (
     <Wrapper>
       <NavbarUnAuthenticated />

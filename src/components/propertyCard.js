@@ -184,7 +184,9 @@ const Pet = styled.div`
   align-items: center;
 `;
 
-export function PropertyCard({ propertyPic }) {
+export function PropertyCard({ property}) {
+
+
   return (
     <Wrapp>
       <Container>
@@ -194,7 +196,7 @@ export function PropertyCard({ propertyPic }) {
         </TextContainer>
         <CardContainer>
           <ImgContainer>
-            <Property src={propertyPic} />
+            <Property src={property.url} />
             <Tag>
               {Icons.coins}
               For Rental

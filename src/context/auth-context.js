@@ -6,6 +6,7 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [properties, setProperties]= useState([]);
   // const [select, setSelect] = useState("italian");
   // const [actualProduct, setActualProduct] = useState(null);
   // const [cart, setCart] = useState(sessionStorage.getItem("cart") || []);
@@ -44,6 +45,9 @@ function AuthProvider({ children }) {
   return (
     <AuthContext.Provider
       value={{
+        properties,
+        setProperties
+
 
       }}
     >
