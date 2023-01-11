@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { colors,typography } from "../styles";
 import { Icons } from "../utils";
-import teamMember from "../assets/team.svg";
+
 
 
 const TeamCardContainer = styled.div`
