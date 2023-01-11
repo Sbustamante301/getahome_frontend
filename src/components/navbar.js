@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import logo from "../assets/Logo.png"
 import { Icons } from "../utils";
 import { JoinButton, LoginButton, FindButton, LogoutButton, SaveButton, ProfileButton, MyPropertyButton } from "../components/Button"
+import { useAuth } from "../context/auth-context";
 
 const NavbarContainer = styled("div")`
   display: flex;
@@ -72,11 +73,16 @@ const Input2 = styled.input`
 `;
 
 export function NavbarUnAuthenticated() {
+  const {setIsOpenModal} = useAuth();
 
+  function handleLogin(event){
+    event.preventDefault();
+    setIsOpenModal(true)
+  }
   return (
     <NavbarContainer>
       <FormWrapp>
-        <img src={logo} />
+        <img src={logo} alt="image1"/>
         <Form>
           <Input
             name="query"
@@ -88,18 +94,23 @@ export function NavbarUnAuthenticated() {
           </FindButton>
         </Form>
         <JoinButton>Join</JoinButton>
-        <LoginButton>Login</LoginButton>
+        <LoginButton handleLogin={handleLogin}>Login</LoginButton>
 
       </FormWrapp>
     </NavbarContainer>
   );
 }
 
-export function NavbarSeeker() {
+export function NavbarAuthenticated() {
+  const {userType, logout} = useAuth();
+  function handleLogout(){
+    logout();
+  }
+
   return (
     <NavbarContainer>
       <FormWrapp>
-        <img src={logo} />
+        <img src={logo} alt={"image2"}/>
         <Form2>
           <Input2
             name="query"
@@ -110,32 +121,9 @@ export function NavbarSeeker() {
             Find a Home
           </FindButton>
         </Form2>
-        <LogoutButton>LOGOUT</LogoutButton>
-        <SaveButton>SAVE PROPERTIES</SaveButton>
-        <ProfileButton>PROFILE</ProfileButton>
-
-      </FormWrapp>
-    </NavbarContainer>
-  );
-};
-
-export function NavbarLandLord() {
-  return (
-    <NavbarContainer>
-      <FormWrapp>
-        <img src={logo} />
-        <Form2>
-          <Input2
-            name="query"
-          // value={query}
-          // onChange={(event) => setQuery(event.target.value)}
-          />
-          <FindButton>
-            Find a Home
-          </FindButton>
-        </Form2>
-        <LogoutButton>LOGOUT</LogoutButton>
-        <MyPropertyButton>MY PROPERTIES</MyPropertyButton>
+        <LogoutButton onClick={handleLogout}>LOGOUT</LogoutButton>
+        {userType === 1 ? <MyPropertyButton>MY PROPERTIES</MyPropertyButton> : <SaveButton>SAVED PROPERTIES</SaveButton>}
+        
         <ProfileButton>PROFILE</ProfileButton>
 
       </FormWrapp>
