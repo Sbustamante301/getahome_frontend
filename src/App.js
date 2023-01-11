@@ -6,10 +6,10 @@ import buildings from "./assets/picture.svg"
 
 import { colors, typography } from "./styles";
 import { CreateAccountButton } from "./components/Button";
-import { PropertyCard } from "./components/propertyCard"
 import { PrimaryButton } from "./components/Button";
 import { TeamCard } from "./components/teamCard";
-import teamMember from "./assets/team.svg"
+import teamMember from "./assets/team.svg";
+import { PropertyCard } from "./components/propertyCard"
 
 
 // padding: 64px 192px;
@@ -26,6 +26,18 @@ const Section1 = styled.div`
   left: 0px;
   top: 1588px;
 `
+
+const Section2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  height: 600px;
+  left: 0px;
+  top: 1588px;
+`
+
 const TitleContainer = styled.div`
   margin-top: 60px;
   display: flex;
@@ -185,7 +197,9 @@ function App() {
           <div></div>
         </FiltersContainer>
       </Section1>
-      <PropertyCard propertyPic={'https://www.musicmundial.com/wp-content/uploads/2023/01/Lee-know-de-Stray-Kids-sorprende-a-sus-fans-estadounidenses-por-su-extrema-belleza.jpg'} />
+      <Section2>
+        <PropertyCard propertyPic={'https://www.musicmundial.com/wp-content/uploads/2023/01/Lee-know-de-Stray-Kids-sorprende-a-sus-fans-estadounidenses-por-su-extrema-belleza.jpg'} />
+      </Section2>
       <Section3>
         <Section3Title>Getting someone to rent your apartment has never been this easy
       <CreateAccountButton>Create An Account Now</CreateAccountButton>
@@ -193,7 +207,7 @@ function App() {
       </Section3>
       <Section4>
         <Section4Title>Meet the Team</Section4Title>
-        <TeamCard/>
+        <TeamCard />
       </Section4>
     </Wrapper>
 
