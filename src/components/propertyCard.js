@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils"
+
 const CardContainer = styled.div`
   position:relative;
   width: 300px;
@@ -14,6 +15,7 @@ const CardContainer = styled.div`
 
   background: ${colors.white}
 
+ 
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
   border-bottom: 7px solid ${colors.pink.dark};
   border-radius: 8px;
@@ -22,13 +24,17 @@ const CardContainer = styled.div`
 const ImgContainer = styled.div`
   display: flex;
   flex-direction: column;
+  border-top-radius: 8px;
+  border-top-right-radius:8px;
+  border-top-left-radius:8px;
 `;
 
 const Property = styled.img`
   width: 300px;
   height: 200px;
   bordes: 1px solid ${colors.gray.dark};
-  border-top-radius: 8px;
+  border-top-right-radius:8px;
+  border-top-left-radius:8px;
 `;
 
 const Tag = styled.div`
@@ -36,8 +42,8 @@ const Tag = styled.div`
   width: 110px;
   height: 28px;
   right: 0px;
-  background-color:${colors.pink.medium}
-  // border-top-right-radius:8px;
+  background-color:${colors.pink.medium};
+  border-top-right-radius:8px;
 `;
 
 const InformationContainer = styled.div`
@@ -103,6 +109,7 @@ const Features = styled.div`
 
   width: 235px;
   height: 24px;
+  
 `;
 
 const Bed = styled.div`
