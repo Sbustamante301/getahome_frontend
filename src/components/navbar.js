@@ -3,6 +3,13 @@ import logo from "../assets/Logo.png"
 import { Icons } from "../utils";
 import { JoinButton, LoginButton, FindButton, LogoutButton, SaveButton, ProfileButton, MyPropertyButton } from "../components/Button"
 
+
+// width: 1200px;
+// width: 100%;
+// height: 72px;
+// box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+
+// width: 1136px;
 const NavbarContainer = styled("div")`
   display: flex;
   flex-direction: row;

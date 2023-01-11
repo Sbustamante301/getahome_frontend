@@ -26,6 +26,7 @@ flex-direction:row;
 justify-content: center;
 align-items: center;
 gap: 8px;
+
 border:none;
 width: 264px;
 height: 56px;
@@ -47,7 +48,7 @@ export const Button3 = styled.button`
 
     color ${colors.gray.medium};
     border: 1px solid ${colors.pink.medium};
-    width: 101px;
+    width: 100px;
     height: 40px;
     background: ${colors.white};
     border-radius: 16px;
@@ -298,11 +299,11 @@ export function ProfileButton({ children }) {
 
 export function MyPropertyButton({ children }) {
     return (
-        <Button8>
+        <Button10>
             <LeftIcon style={{ color: `${colors.white}` }}>
                 {Icons.home}
             </LeftIcon>
             <Text3>{children}</Text3>
-        </Button8>
+        </Button10>
     )
 };

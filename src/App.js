@@ -214,8 +214,8 @@ align-items:center;
 function App() {
   return (
     <Wrapper>
-      <NavbarUnAuthenticated />
-      {/* <NavbarSeeker /> */}
+      {/* <NavbarUnAuthenticated /> */}
+      <NavbarSeeker />
       {/* <NavbarLandLord /> */}
       <Section1 style={{ backgroundImage: `url(${buildings})`, backgroundPosition: 'center' }}>
         <TitleContainer>
