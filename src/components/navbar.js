@@ -128,6 +128,10 @@ export function NavbarAuthenticated() {
     event.preventDefault();
     navigate("/saved_properties")
   }
+  function handleShowProperties(event){
+    event.preventDefault();
+    navigate("/properties");
+  }
 
   return (
     <NavbarContainer>
@@ -138,10 +142,9 @@ export function NavbarAuthenticated() {
         <Form2>
           <Input2
             name="query"
-          // value={query}
-          // onChange={(event) => setQuery(event.target.value)}
+      
           />
-          <FindButton>
+          <FindButton onClick={handleShowProperties}>
             Find a Home
           </FindButton>
         </Form2>
