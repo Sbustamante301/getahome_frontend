@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import logo from "../assets/Logo.png"
+import logo from "../assets/Logo.svg"
 import { Icons } from "../utils";
 import { JoinButton, LoginButton, FindButton, LogoutButton, SaveButton, ProfileButton, MyPropertyButton } from "../components/Button"
 
