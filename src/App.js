@@ -188,7 +188,7 @@ const Miembros=[{
 }];
 
 const Div = styled.div`
-width:846px;
+width:1056px;
 display:flex;
 flex-direction:row;
 justify-content: space-between;
