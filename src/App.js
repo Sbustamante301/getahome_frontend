@@ -8,6 +8,8 @@ import { colors, typography } from "./styles";
 import { CreateAccountButton } from "./components/Button";
 import { PropertyCard } from "./components/propertyCard"
 import { PrimaryButton } from "./components/Button";
+import { TeamCard } from "./components/teamCard";
+import teamMember from "./assets/team.svg"
 
 
 // padding: 64px 192px;
@@ -75,8 +77,8 @@ const Select = styled.select`
   justify-content: strech;
   width: 100%;
   ${typography.text.md};
-  color: ${colors.gray.dark}
-  outline: none;
+  color: ${colors.gray.dark};
+  border: none;
 `;
 
 
@@ -85,13 +87,13 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-padding: 64px 10px;
+padding:64px, 10px, 64px, 10px;
 gap: 10px;
 
 position: absolute;
 height: 312px;
-left: 0px;
-right: 0px;
+width:1511px;
+
 top: 1276px;
 background: ${colors.pink.shallow}
 
@@ -105,10 +107,13 @@ padding: 64px 192px;
 gap: 26px;
 
 position: absolute;
-width: 1440px;
+width: 1100px;
 height: 486px;
 left: 0px;
 top: 1588px;
+
+
+
 background: ${colors.white}`
 
 const Wrapper = styled.div``;
@@ -135,6 +140,24 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
+
+
+
+`
+
+const Section4Title = styled.div`
+${typography.head.lg};
+color:${colors.pink.dark};
+
+width: 356px;
+height: 59px;
+text-align:center;
+display:flex;
+justify-content:center;
+align-items:center;
+
+
+
 
 
 `
@@ -167,14 +190,10 @@ function App() {
         <Section3Title>Getting someone to rent your apartment has never been this easy
       <CreateAccountButton>Create An Account Now</CreateAccountButton>
         </Section3Title>
-
-
-
       </Section3>
-
       <Section4>
         <Section4Title>Meet the Team</Section4Title>
-        <TeamCard />
+        <TeamCard/>
       </Section4>
     </Wrapper>
 
