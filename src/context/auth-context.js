@@ -6,10 +6,14 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+
+  const [properties, setProperties]= useState([]);
+
   const [userType, setUserType] = useState(null)
   const [currentProperty, setCurrentProperty] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [error, setError] = useState(null)
+
 
   // const navigate = useNavigate();
 
@@ -49,6 +53,9 @@ function AuthProvider({ children }) {
   return (
     <AuthContext.Provider
       value={{
+
+        properties,
+        setProperties,
         user,
         isOpenModal,
         currentProperty,
@@ -61,6 +68,7 @@ function AuthProvider({ children }) {
         setUser,
         setIsOpenModal,
         setCurrentProperty
+
       }}
     >
       {children}

@@ -8,23 +8,24 @@ export async function getProperties() {
 }
 
 export async function createProperty(newProperty) {
-  const property = await apiFetch("properties", { 
-  body: newProperty
+  const property = await apiFetch("properties", {
+    body: newProperty
   })
   return property;
 }
 
 export async function showProperty(id) {
+  console.log('ID', id)
   const showProperty = await apiFetch(`properties/${id}`);
-    
-    return showProperty;
+
+  return showProperty;
 }
-  
+
 export async function deleteProperty(id) {
   await apiFetch("properties", { method: "DELETE" });
   sessionStorage.removeItem(tokenKey);
 }
-  
+
 
 
 
