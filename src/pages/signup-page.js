@@ -3,6 +3,7 @@ import styled from "@emotion/styled"
 import SectionFooter from "../components/sections/sectionFooter"
 import landlord from "../assets/landlord.svg"
 import homeseeker from "../assets/homeseeker.svg"
+import { Icons } from "../utils"
 
 const Section1 = styled.div`
     background:${colors.pink.shallow};
