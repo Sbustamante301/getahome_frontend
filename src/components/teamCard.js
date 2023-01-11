@@ -9,8 +9,8 @@ const TeamCardContainer = styled.div`
     align-items: center;
     padding: 0px;
     gap: 16px;
-    width:240px;
-    height:273px;
+    
+  
 
 
 
@@ -19,24 +19,42 @@ const TeamCardContainer = styled.div`
 const LeftIcon=styled.div`
 color:${colors.gray.medium};
 width:20px;
-height:20px;
+height:19.51px;
+display:flex;
+flex-direction:row;
+justify-content:center;
+
+
+
+
 `;
 const RightIcon=styled.div`
 color:${colors.gray.medium};
-width:20px;
-height:20px;
+width:18px;
+height:18px;
 `;
 const Text = styled.h1`
-margin-bottom:4px;
+${typography.head.sm}
 
-text-align: center;
-letter-spacing: 1.25px;
-text-transform: uppercase;
 
+
+
+
+
+
+`
+const Div = styled.div`
+width:84px;
+display:flex;
+flex-direction:row;
+justify-content: space-between;
+align-items:center;
 
 `
 
 const Img = styled.img`
+border-radius:100px;
+background:${colors.backgroundLight};
 height:180px;
 width:180px;
 
@@ -49,12 +67,14 @@ export function TeamCard(){
         <TeamCardContainer>
             <Img src={teamMember}/>
             <Text>Ruby Ramirez</Text>
+            <Div>
             <LeftIcon>
                 {Icons.github}
             </LeftIcon>
             <RightIcon>
-                {Icons.linkedin}
+                {Icons.linkedinBox}
             </RightIcon>
+            </Div>
          </TeamCardContainer>
 
 
