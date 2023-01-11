@@ -48,7 +48,6 @@ color:${colors.white}
 `
 const Text = styled.div`
 margin-bottom:4px;
-${typography.text.button};
 color:${colors.white};
 text-align: center;
 letter-spacing: 1.25px;
@@ -58,11 +57,11 @@ text-transform: uppercase;
 `
 
 
-export  function PrimaryButton({children}){
+export  function PrimaryButton({children,Icon}){
     return(
         <Button>
         <LeftIcon>
-        {Icons.user}
+        {Icon}
         </LeftIcon>
         <Text>{children}</Text>
         <RightIcon>{Icons.arrowDown}</RightIcon>
