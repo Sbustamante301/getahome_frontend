@@ -8,6 +8,11 @@ import { colors, typography } from "./styles";
 import { CreateAccountButton, SearchButton } from "./components/Button";
 import { PrimaryButton } from "./components/Button";
 import { TeamCard } from "./components/teamCard";
+
+import teamMember from "./assets/team.svg"
+import { getProperties } from "./services/properties-service";
+
+
 import teamMember from "./assets/team.svg";
 import { PropertyCard } from "./components/propertyCard"
 import { NavbarUnAuthenticated, NavbarSeeker, NavbarLandLord } from "./components/navbar";
@@ -15,6 +20,7 @@ import Jesus from "./assets/members/MiLord.jpeg";
 import olenka from "./assets/members/olenka.jpeg";
 import Sebastian from "./assets/members/Sebastian.jpeg";
 import Tita from "./assets/members/Tita.jpeg";
+
 
 // padding: 64px 192px;
 // gap: 26px;
@@ -179,6 +185,7 @@ justify-content:center;
 align-items:center;
 `
 
+
 const Miembros=[{
   name:'Jesus Barboza',
   img:`${Jesus}`,
@@ -208,6 +215,7 @@ flex-direction:row;
 justify-content: space-between;
 align-items:center;
 
+
 `
 const Footer = styled.div`
 display: flex;
@@ -224,6 +232,9 @@ display: flex;
 
 
 function App() {
+  getProperties().then(response=>{
+    console.log(response)
+  })
   return (
     <Wrapper>
       {/* <NavbarUnAuthenticated /> */}
