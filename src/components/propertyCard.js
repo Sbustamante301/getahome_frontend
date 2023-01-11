@@ -184,11 +184,11 @@ const Pet = styled.div`
   align-items: center;
 `;
 
-export function PropertyCard({ property}) {
+export function PropertyCard({ property, showProperty}) {
 
 
   return (
-    <Wrapp>
+    <Wrapp onClick={showProperty}>
       <Container>
         <TextContainer>
           <PrepTitle>Find an Appartment you Love</PrepTitle>

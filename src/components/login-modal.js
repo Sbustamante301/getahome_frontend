@@ -58,6 +58,7 @@ export default function LoginModal(){
   function handleLogin(event){
     event.preventDefault();
     login(form);
+    
   }
 
   function handleChangeInput(event){

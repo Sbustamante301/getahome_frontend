@@ -168,6 +168,9 @@ color:${colors.white}
 const Text = styled.div`
     margin-bottom:4px;
     color:${colors.white};
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
     text-align: center;
     letter-spacing: 1.25px;
     text-transform: uppercase;

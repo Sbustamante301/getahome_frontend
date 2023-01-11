@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { PropertyCard } from "../components/propertyCard"
 import SectionMeetTeam from "../components/sections/sectionmeetTeam";
 import SectionFooter from "../components/sections/sectionFooter";
+import SectionSignup from "../components/sections/sectionSignup";
 
 const Section2 = styled.div`
   display: flex;
@@ -21,8 +22,9 @@ function HomePage(property){
     <>
       <SectionMeetHome/>
       <Section2>
-        {/* <PropertyCard property={property} /> */}
+        <PropertyCard property={property} />
       </Section2>
+      <SectionSignup/>
       
       <SectionMeetTeam/>
       <SectionFooter/>
