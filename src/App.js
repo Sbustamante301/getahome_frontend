@@ -10,11 +10,11 @@ import { PrimaryButton } from "./components/Button";
 import { TeamCard } from "./components/teamCard";
 import teamMember from "./assets/team.svg";
 import { PropertyCard } from "./components/propertyCard"
+import Navbar from "./components/navbar";
 import Jesus from "./assets/members/MiLord.jpeg";
 import olenka from "./assets/members/olenka.jpeg";
 import Sebastian from "./assets/members/Sebastian.jpeg";
 import Tita  from "./assets/members/Tita.jpeg";
-
 
 // padding: 64px 192px;
 // gap: 26px;
@@ -202,6 +202,7 @@ align-items:center;
 function App() {
   return (
     <Wrapper>
+      <Navbar />
       <Section1 style={{ backgroundImage: `url(${buildings})`, backgroundPosition: 'center' }}>
         <TitleContainer>
           <Section1Title> Meet your new home</Section1Title>
