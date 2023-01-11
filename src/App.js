@@ -110,15 +110,16 @@ background: ${colors.pink.shallow}
 
 `;
 const Section4 = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  width: 100%;
+  height: 486px;
+  left: 0px;
+  top: 1588px;
 
-width: 100%;
-height: 486px;
-
-background: ${colors.white}
+  background: ${colors.white}
 `;
 
 const Wrapper = styled.div``;
@@ -190,11 +191,9 @@ function App() {
           <div></div>
         </FiltersContainer>
       </Section1>
-
       <Section2>
         <PropertyCard propertyPic={'https://www.musicmundial.com/wp-content/uploads/2023/01/Lee-know-de-Stray-Kids-sorprende-a-sus-fans-estadounidenses-por-su-extrema-belleza.jpg'} />
       </Section2>
-
       <Section3>
         <Section3Title>Getting someone to rent your apartment has never been this easy
       <CreateAccountButton>Create An Account Now</CreateAccountButton>

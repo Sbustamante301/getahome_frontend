@@ -31,16 +31,20 @@ const TextContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 16px;
 `;
 
 const PrepTitle = styled.p`
   ${typography.text.button};
-  color: ${colors.gray.dark}
+  color: ${colors.gray.dark};
+  letter-spacing: 0.1px;
+  margin:0;
 `;
 
 const Title = styled.h1`
   ${typography.head.md};
-  color: ${colors.pink.dark}
+  color: ${colors.pink.dark};
+  margin: 0;
 `;
 const CardContainer = styled.div`
   position:relative;
