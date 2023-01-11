@@ -8,7 +8,6 @@ const Section2 = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 100%;
   height: 600px;
   left: 0px;
