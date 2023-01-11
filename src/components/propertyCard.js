@@ -7,8 +7,6 @@ const Wrapp = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content:space-between;
-
-  padding: 64px 132px;
   gap: 10px;
 
   height: 604px;
@@ -190,10 +188,10 @@ export function PropertyCard({ property, showProperty}) {
   return (
     <Wrapp onClick={showProperty}>
       <Container>
-        <TextContainer>
+        {/* <TextContainer>
           <PrepTitle>Find an Appartment you Love</PrepTitle>
           <Title>Homes for rent at the best prices</Title>
-        </TextContainer>
+        </TextContainer> */}
         <CardContainer>
           <ImgContainer>
             <Property src={property.url} />
