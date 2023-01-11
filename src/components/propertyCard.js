@@ -86,6 +86,10 @@ const Tag = styled.div`
   width: 110px;
   height: 28px;
   right: 0px;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  color:${colors.white};
   background-color:${colors.pink.medium};
   border-top-right-radius:8px;
 `;
@@ -187,7 +191,10 @@ export function PropertyCard({ propertyPic }) {
         <CardContainer>
           <ImgContainer>
             <Property src={propertyPic} />
-            <Tag>For Rent</Tag>
+            <Tag>
+              {Icons.coins}
+              For Rental
+            </Tag>
           </ImgContainer>
           <InformationContainer>
             <Category>

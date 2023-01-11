@@ -233,8 +233,8 @@ function App() {
             <InputLabel for="wantType">I WANT TO</InputLabel>
 
             <Select name="types2" id="wantType">
-              <option value="rent">RENT</option>
-              <option value="sale">SALE</option>
+              <option value="rent">Rent</option>
+              <option value="sale">Sale</option>
             </Select>
           </InputContainer>
           <InputContainer2>
