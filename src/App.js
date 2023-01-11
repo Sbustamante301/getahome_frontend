@@ -167,22 +167,22 @@ justify-content:center;
 align-items:center;
 `
 const Miembros=[{
-  name:'Jesus',
+  name:'Jesus Barboza',
   img:`${Jesus}`,
   
 },
 {
-  name:'Sebas',
+  name:'Sebas Bustamante',
   img:`${Sebastian}`,
   
 },
 {
-  name:'Olenka',
+  name:'Olenka Sánchez',
   img:`${olenka}`,
   
 },
 {
-  name:'Tita',
+  name:'Tita Ruiz',
   img:`${Tita}`,
   
 }];
@@ -195,8 +195,18 @@ justify-content: space-between;
 align-items:center;
 
 `
+const Footer = styled.div`
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  width: 100%;
+  height: 73px;
+  left: 0px;
+  top: 2074px;
 
-
+  background: ${colors.background}
+`;
 
 
 function App() {
@@ -240,6 +250,9 @@ function App() {
         </Div>
         
       </Section4>
+      <Footer>
+
+      </Footer>
     </Wrapper>
 
   );

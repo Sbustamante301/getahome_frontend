@@ -36,14 +36,9 @@ width:18px;
 height:18px;
 `;
 const Text = styled.div`
-${typography.head.sm}
-
-
-
-
-
-
-
+${typography.head.sm};
+width:229px;
+text-align:center;
 `
 const Div = styled.div`
 margin:0px;
@@ -61,7 +56,6 @@ background:${colors.backgroundLight};
 height:180px;
 width:180px;
 
-
 `;
 
 
@@ -72,8 +66,8 @@ export function TeamCard({miembro}){
     return(
         
         <TeamCardContainer>
-            <Img src={miembro?.img}/>
-            <Text>{miembro?.name}</Text>
+            <Img src={miembro.img}/>
+            <Text>{miembro.name}</Text>
             <Div>
             <LeftIcon>
                 {Icons.github}
