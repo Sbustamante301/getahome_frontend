@@ -3,7 +3,10 @@ import { colors,typography} from "../../styles";
 import { Icons } from "../../utils";
 
 const Footer = styled.div`
-display: flex;
+  border-style: solid none none none;
+  border-width: thin;
+  border-color: ${colors.pink.dark};
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 26px;
