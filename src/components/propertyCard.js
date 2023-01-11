@@ -2,6 +2,46 @@ import styled from "@emotion/styled";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils"
 
+const Wrapp = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 64px 132px;
+  gap: 10px;
+
+  height: 604px;
+  left: calc(50% - 1440px/2);
+  top: 672px;
+
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 32px;
+
+  
+  height: 476px;
+`;
+const TextContainer = styled.div`
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const PrepTitle = styled.p`
+  ${typography.text.button};
+  color: ${colors.gray.dark}
+`;
+
+const Title = styled.h1`
+  ${typography.head.md};
+  color: ${colors.pink.dark}
+`;
 const CardContainer = styled.div`
   position:relative;
   width: 300px;
@@ -134,35 +174,43 @@ const Pet = styled.div`
 
 export function PropertyCard({ propertyPic }) {
   return (
-    <CardContainer>
-      <ImgContainer>
-        <Property src={propertyPic} />
-        <Tag>For Rent</Tag>
-      </ImgContainer>
-      <InformationContainer>
-        <Category>
-          <Price>
-            {Icons.dollarCircle}
-            3000
-            </Price>
-          <HomeType>
-            {Icons.building}
-            Apartment
-          </HomeType>
-        </Category>
-        <Address>
-          La Crucet III etapa block 15 dpto 504
-        </Address>
-        <Features>
-          <Bed>{Icons.bed} 4</Bed>
-          <Bath>{Icons.bath} 2</Bath>
-          <Area>{Icons.area} 180 m2</Area>
-          <Pet>{Icons.paw}</Pet>
-        </Features>
+    <Wrapp>
+      <Container>
+        <TextContainer>
+          <PrepTitle>Find an Appartment you Love</PrepTitle>
+          <Title>Homes for rent at the best prices</Title>
+        </TextContainer>
+        <CardContainer>
+          <ImgContainer>
+            <Property src={propertyPic} />
+            <Tag>For Rent</Tag>
+          </ImgContainer>
+          <InformationContainer>
+            <Category>
+              <Price>
+                {Icons.dollarCircle}
+                3000
+                </Price>
+              <HomeType>
+                {Icons.building}
+                Apartment
+              </HomeType>
+            </Category>
+            <Address>
+              La Crucet III etapa block 15 dpto 504
+            </Address>
+            <Features>
+              <Bed>{Icons.bed} 4</Bed>
+              <Bath>{Icons.bath} 2</Bath>
+              <Area>{Icons.area} 180 m2</Area>
+              <Pet>{Icons.paw}</Pet>
+            </Features>
 
-      </InformationContainer>
+          </InformationContainer>
 
-    </CardContainer>
+        </CardContainer>
+      </Container>
+    </Wrapp>
 
   )
 }
