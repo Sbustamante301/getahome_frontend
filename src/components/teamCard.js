@@ -3,6 +3,7 @@ import { colors,typography } from "../styles";
 import { Icons } from "../utils";
 import teamMember from "../assets/team.svg";
 
+
 const TeamCardContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -33,7 +34,7 @@ color:${colors.gray.medium};
 width:18px;
 height:18px;
 `;
-const Text = styled.h1`
+const Text = styled.div`
 ${typography.head.sm}
 
 
@@ -44,6 +45,7 @@ ${typography.head.sm}
 
 `
 const Div = styled.div`
+margin:0px;
 width:84px;
 display:flex;
 flex-direction:row;
@@ -60,13 +62,17 @@ width:180px;
 
 
 `;
-export function TeamCard(){
+
+
+export function TeamCard({miembro}){
+    console.log("Entre")
+    console.log(typeof{miembro})
     
     return(
-
+        
         <TeamCardContainer>
-            <Img src={teamMember}/>
-            <Text>Ruby Ramirez</Text>
+            <Img src={miembro?.img}/>
+            <Text>{miembro?.name}</Text>
             <Div>
             <LeftIcon>
                 {Icons.github}
