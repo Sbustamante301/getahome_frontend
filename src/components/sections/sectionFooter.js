@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import logo from "../../assets/Logo.svg"
-import { RiHeartFill } from "react-icons/ri";
+import { RiHeartFill, RiGithubFill, RiReactjsLine } from "react-icons/ri";
+import { DiRuby } from "react-icons/di";
 import { useAuth } from "../../context/auth-context";
 import { colors, typography } from "../../styles";
 import { Icons } from "../../utils";
@@ -50,6 +51,7 @@ const FooterInfoContainer = styled.div`
   gap: 16px;
 
   height: 124px;
+  width: 80%;
 `;
 
 const LeftContainer = styled.div`
@@ -74,12 +76,58 @@ const MembersContainer = styled.div`
   height: 68px;
 `;
 
+const MembersGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width:100%;
+  gap:4px;
+`;
+
+const MemberGit1 = styled.div`
+  grid-area: 1 / 1 / 2 / 2;
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+const MemberGit2 = styled.div`
+  grid-area: 1 / 2 / 2 / 3;
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+const MemberGit3 = styled.div`
+  grid-area: 2 / 1 / 3 / 2;
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+const MemberGit4 = styled.div`
+  grid-area: 2 / 2 / 3 / 3;
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+const RightContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 188px;
+  height: 68px;
+`;
+
 const FooterText = styled.p`
   height: 20px;
 
   ${typography.text.sm};
   letter-spacing: 0.25px;
-  color:${colors.gray.dark}
+  color:${colors.gray.medium}
 `;
 
 const SubtitleFooter = styled.p`
@@ -88,7 +136,7 @@ const SubtitleFooter = styled.p`
 
   ${typography.text.xs};
   letter-spacing: 0.4px;
-  color:${colors.gray.dark}; 
+  color:${colors.gray.medium}; 
 `;
 
 const LeftIcon = styled.div``;
@@ -120,7 +168,45 @@ export default function SectionFooter() {
 
             <MembersContainer>
               <SubtitleFooter>Build with <RiHeartFill style={{ color: colors.pink.dark }} /> by:</SubtitleFooter>
+              <MembersGrid>
+                <a href='https://github.com/JesusBarboza1994' style={{ textDecoration: 'none' }}>
+                  <MemberGit1>
+                    <RiGithubFill style={{ width: '20px', height: '20px', color: colors.gray.medium }} />
+                    <FooterText style={{ marginLeft: '4px' }} >Jesus Barboza</FooterText>
+                  </MemberGit1>
+                </a>
+                <a href='https://github.com/Olesa0896' style={{ textDecoration: 'none' }}>
+                  <MemberGit2>
+                    <RiGithubFill style={{ width: '20px', height: '20px', color: colors.gray.medium }} />
+                    <FooterText style={{ marginLeft: '4px' }} >Olenka Sánchez</FooterText>
+                  </MemberGit2>
+                </a>
+                <a href='https://github.com/Sbustamante301' style={{ textDecoration: 'none' }}>
+                  <MemberGit3>
+                    <RiGithubFill style={{ width: '20px', height: '20px', color: colors.gray.medium }} />
+                    <FooterText style={{ marginLeft: '4px' }} >Sebas Bustamante</FooterText>
+                  </MemberGit3>
+                </a>
+                <a href='https://github.com/titaRuiz1' style={{ textDecoration: 'none' }}>
+                  <MemberGit4>
+                    <RiGithubFill style={{ width: '20px', height: '20px', color: colors.gray.medium }} />
+                    <FooterText style={{ marginLeft: '4px' }} >Tita Ruiz</FooterText>
+                  </MemberGit4>
+                </a>
+              </MembersGrid>
             </MembersContainer>
+
+            <RightContainer>
+              <SubtitleFooter>Source code:</SubtitleFooter>
+              <FooterText >
+                <DiRuby style={{ width: '16px', height: '16px', marginRight: '4px', color: colors.gray.medium }} />
+                Ruby on Rails REST API
+              </FooterText>
+              <FooterText>
+                <RiReactjsLine style={{ width: '16px', height: '16px', marginRight: '4px', color: colors.gray.medium }} />
+                React Responsive SPA
+              </FooterText>
+            </RightContainer>
 
           </FooterInfoContainer>
         </Footer2>)
