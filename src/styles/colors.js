@@ -15,7 +15,7 @@ export const colors = {
    },
    background:"#F5F5F6",
    backgroundLight:"#E1E2E1",
-   white: "FFFFFF#",
+   white: "#FFFFFF",
 
 
 };
