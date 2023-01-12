@@ -28,7 +28,8 @@ function App() {
   
     }).catch(error=>{console.log(error)})
     
-  }, []);
+  },[]);
+
 
 
   return (

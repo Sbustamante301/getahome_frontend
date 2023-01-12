@@ -22,7 +22,6 @@ export async function showProperty(id) {
 
 export async function deleteProperty(id) {
   await apiFetch("properties", { method: "DELETE" });
-  sessionStorage.removeItem(tokenKey);
 }
 
 
