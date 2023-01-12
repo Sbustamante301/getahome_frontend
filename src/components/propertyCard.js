@@ -21,8 +21,6 @@ const Container = styled.div`
   align-items: center;
   padding: 0px;
   gap: 32px;
-
-  
   height: 476px;
 `;
 const TextContainer = styled.div`

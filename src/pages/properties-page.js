@@ -4,6 +4,7 @@ import { PropertyCard } from "../components/propertyCard";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import Filter from "../components/filter";
+import { useEffect } from "react";
 
 
 
@@ -24,8 +25,14 @@ padding: 32px 152px;
 `
 
 export default function PropertiesPage(){
-  const {properties, setCurrentProperty}= useAuth();
+  const {properties, setCurrentProperty, propertyFilter}= useAuth();
+  useEffect(() => {
+    console.log(propertyFilter)
   
+  }, [propertyFilter])
+  
+  
+  // const filterProperties = 
   return(
     <Wrapper>
       <Filter/>
