@@ -10,6 +10,7 @@ import {
 
 import { DiRuby } from "react-icons/di";
 import { BiBath, BiArea, BiBed } from "react-icons/bi"
+import { FaRegEdit } from "react-icons/fa";
 import { FaPaw } from "react-icons/fa"
 import { GiPositionMarker } from "react-icons/gi";
 import { colors } from "./styles"
@@ -74,6 +75,7 @@ export const Icons = {
     building: <RiBuildingLine />,
     home: <RiHome8Line />,
     bin: <RiDeleteBin6Line />,
+    edit: <FaRegEdit />,
 
     positioner: <GiPositionMarker />,
 
