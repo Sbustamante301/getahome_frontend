@@ -5,14 +5,15 @@ import { useState, useEffect } from "react";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils";
 import { useAuth } from "../context/auth-context";
+import { LoginCardButton, ContactAdvertiserButton } from "../components/Button"
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+  justify-content: flex-start;
 
-  width: 80%;
+  width: 90%;
 `;
 
 const InfoContainer = styled.div`
@@ -30,7 +31,122 @@ const RightContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 290px;
 
+`;
+
+const UnlogedDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+  gap: 10px;
+
+  height: 248px;
+  width: 100%;
+`;
+
+const LogedDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px;
+  gap: 10px;
+
+  height: 290px;
+  width: 100%;
+`;
+
+const UnloginCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px;
+  gap: 16px;
+
+  width: 226px;
+  height: 184px;
+
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+`;
+
+const LogedCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 16px;
+
+  width: 258px;
+  height: 148px;
+
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+`;
+
+const FavoriteDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+  gap: 4px;
+
+  width: 101px;
+  height: 60px;
+`;
+
+const TextCard1 = styled.p`
+  width: 142px;
+  height: 72px;
+
+  ${typography.text.md};
+  text-align: center;
+  letter-spacing: 0.5px;
+`;
+
+const TextCard2 = styled.p`
+  width: 100px;
+
+  ${typography.text.xs};
+  text-align: center;
+  letter-spacing: 0.4px;
+`;
+
+const TitleSeeker = styled.h6`
+  width: 258px;
+  height: 28px;
+  margin:0;
+  padding:0;
+
+  ${typography.head.xs};
+  text-align: center;
+  letter-spacing: 0.15px;
+  color: ${colors.gray.dark}
+`;
+
+const SeekerEmail = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 258px;
+  height: 172px;
+`;
+
+const SeekerSubtitle = styled.p`
+  ${typography.text.sm}
+  text-align: center;
+  letter-spacing: 0.25px;
+  color:${colors.pink.dark}
+`;
+
+const SeekerInfo = styled.p`
+  ${typography.text.sm}
+  text-align: center;
+  letter-spacing: 0.25px;
+  color:${colors.gray.dark}
 `;
 
 const SliderContainer = styled.div`
@@ -224,7 +340,19 @@ const RightIcon = styled.div`
 `;
 
 export default function PropertyPage() {
-  const { currentProperty } = useAuth();
+  const { currentProperty, setIsOpenModal, user } = useAuth();
+  const [showContact, setShoreContact] = useState(false);
+
+  function handleLogin(event) {
+    event.preventDefault();
+    setIsOpenModal(true)
+  }
+
+  function handleContactAdd(event) {
+    event.preventDefault();
+
+    setShoreContact(true)
+  }
 
   return (
     <Wrapper>
@@ -270,7 +398,7 @@ export default function PropertyPage() {
                 <Feature>
                   <FeatureText>
                     <FaPaw style={{ width: "20px", height: "20px" }} /> Pets allowed
-                </FeatureText>
+                  </FeatureText>
                 </Feature>
               ) : ""}
 
@@ -295,6 +423,41 @@ export default function PropertyPage() {
         </InformationContainer>
       </InfoContainer>
       <RightContainer>
+        {!user ? (
+          <UnlogedDiv>
+            <UnloginCard>
+              <TextCard1>Log in or Join to contact the advertiser</TextCard1>
+              <LoginCardButton handleLogin={handleLogin}>LOGIN</LoginCardButton>
+            </UnloginCard>
+          </UnlogedDiv>
+        ) : (
+            <LogedDiv>
+              {showContact ?
+                (<LogedCard>
+                  <TitleSeeker>Contact information</TitleSeeker>
+                  <SeekerEmail>
+                    <SeekerSubtitle>Email</SeekerSubtitle>
+                    <SeekerInfo>xxxxx@mail.com</SeekerInfo>
+                  </SeekerEmail>
+                  <SeekerEmail>
+                    <SeekerSubtitle>Phone</SeekerSubtitle>
+                    <SeekerInfo>92392445</SeekerInfo>
+                  </SeekerEmail>
+                </LogedCard>)
+                : (<LogedCard>
+                  <ContactAdvertiserButton onClick={handleContactAdd}>CONTACT ADVERTISER</ContactAdvertiserButton>
+                  <FavoriteDiv>
+                    {Icons.heart}
+                    <TextCard2>Add to favorites</TextCard2>
+                  </FavoriteDiv>
+                </LogedCard>)}
+
+            </LogedDiv>
+          )
+
+
+        }
+
 
       </RightContainer>
 
