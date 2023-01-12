@@ -1,6 +1,8 @@
-import { colors,typography } from "../styles"
+
+import { colors, typography } from "../styles"
+
 import styled from "@emotion/styled"
-import SectionFooter from "../components/sections/sectionFooter"
+import { SectionFooter2 } from "../components/sections/sectionFooter"
 import landlord from "../assets/landlord.svg"
 import homeseeker from "../assets/homeseeker.svg"
 import { Icons } from "../utils"
@@ -32,13 +34,13 @@ const Section2 = styled.div`
     
 `;
 
-const Div= styled.div`
+const Div = styled.div`
 background: rgb(255,255,255);
 background: linear-gradient(360deg, rgba(255,255,255,1) 50%, rgba(244, 143, 177, 0.15) 50%);
 width:100%;
 height:704px;
 `;
-const Div2= styled.div`
+const Div2 = styled.div`
 background: rgb(255,255,255);
 background: linear-gradient(360deg, rgba(255,255,255,1) 50%, rgba(244, 143, 177, 0.15) 50%);
 width:100%;
@@ -69,10 +71,10 @@ height:88px;
 
 `;
 
-const Img= styled.img`
+const Img = styled.img`
 `;
 
-const ImgDiv= styled.div`
+const ImgDiv = styled.div`
 width:280px;
 height:274px;
 display:flex;
@@ -89,13 +91,13 @@ padding:0px;
 
 `;
 
-const ImgTitle=styled.div`
+const ImgTitle = styled.div`
 ${typography.head.xs}
 ${colors.gray.dark}
 
 `;
 
-const ImgSubtitle=styled.div`
+const ImgSubtitle = styled.div`
 ${typography.head.xxxs}
 ${colors.gray.dark}
 `;
@@ -131,6 +133,7 @@ ${colors.gray.dark}
         </Div>
 
     )
+
 }
 
 const Form = styled.form`
@@ -150,8 +153,10 @@ padding:70px;
 
 `;
 
+
 const DivForm=styled.div`
 background:white;
+
 border-width:thin;
 box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 border-radius: 8px;
@@ -167,7 +172,7 @@ margin:100px;
 
 `;
 
-const FormTitle= styled.div`
+const FormTitle = styled.div`
 
 
 `;
@@ -224,6 +229,7 @@ ${typography.head.sm};
 
 
 `;
+
 
 function SignupForm(){
    const [error,setError] = useState(null);
@@ -308,12 +314,13 @@ function SignupForm(){
     </DivForm>
     </Div2>
     
-
-
-
-
-      )
+  )
 }
+
+
+
+
+
 
 const P = styled.p`
 ${typography.text.xs};
@@ -336,4 +343,5 @@ export default function SignupPage(){
         
         </>
     )
+
 }

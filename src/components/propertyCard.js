@@ -225,7 +225,6 @@ export function PropertyCard({ property, showProperty }) {
             </Features>
 
           </InformationContainer>
-
         </CardContainer>
       </Container>
     </Wrapp>
