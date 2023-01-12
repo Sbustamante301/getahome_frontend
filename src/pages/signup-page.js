@@ -1,4 +1,4 @@
-import { colors,typography} from "../styles"
+import { colors,typography } from "../styles"
 import styled from "@emotion/styled"
 import SectionFooter from "../components/sections/sectionFooter"
 import landlord from "../assets/landlord.svg"
@@ -8,6 +8,7 @@ import { useState } from "react"
 import { CreateAccountButton } from "../components/Button"
 import { createUser } from "../services/users-service"
 import Input from "../components/Input"
+import { useAuth } from "../context/auth-context"
 
 // background:${colors.pink.shallow};
 const Section1 = styled.div`
@@ -100,19 +101,27 @@ ${colors.gray.dark}
 `;
 
  function Hidden({HandleComponent}){
-    return(
+  const {userType, setUserType} = useAuth();  
+  function AssignUser(typeNumber){
+    setUserType(typeNumber)
+
+  }
+  return(
         <Div>
         <Section1>
             <Title>Selecciona el perfil con el que te identificas</Title>
                 <SubTitle>Que estas buscando?</SubTitle>
         </Section1>
         <Section2>
-            <ImgDiv onClick={HandleComponent}>
+            <ImgDiv onClick={()=>{HandleComponent();
+            AssignUser(1)}}>
                 <Img src={landlord}/>
                 <ImgTitle>Landlord</ImgTitle>
                 <ImgSubtitle>You want to rent or sell a home</ImgSubtitle>
             </ImgDiv>
-            <ImgDiv onClick={HandleComponent}>
+            <ImgDiv onClick={()=>{HandleComponent()
+            AssignUser(2)
+            }}>
                 <Img src={homeseeker}/>
                 <ImgTitle>Homeseeker</ImgTitle>
                 <ImgSubtitle>You want to find a home</ImgSubtitle>
@@ -142,7 +151,7 @@ padding:70px;
 `;
 
 const DivForm=styled.div`
-background:${colors.white};
+background:white;
 border-width:thin;
 box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 border-radius: 8px;
@@ -150,10 +159,11 @@ width:388px;
 height:468px;
 display:flex;
 flex-direction:column;
-align-items:center;
-text-align:center;
+align-items:left;
+text-align:left;
 padding:70px;
--right:20px;
+margin:100px;
+
 
 `;
 
@@ -209,14 +219,22 @@ ${typography.text.xxs};
 //       </Div2>    
 //     )
 // }
+const H1=styled.h1`
+${typography.head.sm};
+
+
+`;
 
 function SignupForm(){
+   const [error,setError] = useState(null);
+   const {userType, setUserType} = useAuth();
     const [formdata, setFormdata] = useState({
         name:"",
         email:"",
         phone:"",
         password_digest:"",
         passwordConfirmation:"",
+        user_type:userType,
       })
 
 
@@ -226,14 +244,23 @@ function SignupForm(){
       }
       
       function handleSubmit(event){
-        const {passwordConfirmation,...newForm} = formdata;
         event.preventDefault();
+        if(formdata.passwordConfirmation===formdata.password_digest){
+          setError(null);
+        const {passwordConfirmation,...newForm} = formdata;
+        
         createUser(formdata).then(console.log).catch(console.log)
+        console.log(formdata)
       }
+    else{
+      setError("Passwords must coincide");
+    }
+  }
       return(
         <Div2>
         <DivForm>
       <form onSubmit={handleSubmit}>
+        <H1>Create your Account</H1>
         <Input
           label={"NAME"}
           id="name"
@@ -266,6 +293,7 @@ function SignupForm(){
           value={formdata.password_digest}
           onChange={handleChange}
           placeholder="******"/>
+          <P>At least 6 characters</P>
           <Input
           label={"PASSWORD CONFIRMATION"}
           id="passwordConfirmation"
@@ -274,6 +302,7 @@ function SignupForm(){
           value={formdata.passwordConfirmation}
           onChange={handleChange}
           placeholder="******"/>
+          <p>{error?error:null}</p>
         <CreateAccountButton>Create Account</CreateAccountButton>
       </form>
     </DivForm>
@@ -286,9 +315,16 @@ function SignupForm(){
       )
 }
 
+const P = styled.p`
+${typography.text.xs};
+color:${colors.gray.light};
+
+`;
+
+
 
 export default function SignupPage(){
-    const [newUserType,SetNewUserType] = useState(null);
+    const {userType, setUserType} = useAuth();
     const [open,setOpen] = useState(false)
      function HandleComponent(){
         setOpen(!open)
