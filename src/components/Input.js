@@ -10,7 +10,6 @@ const Label = styled.label`
 
 const StyledInput = styled.input`
   padding: 0.5rem;
-  border: none;
   style:none;
   background-color: white;
   color: ${colors.gray.dark};

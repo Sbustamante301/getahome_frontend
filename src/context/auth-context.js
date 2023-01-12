@@ -7,10 +7,19 @@ const AuthContext = createContext();
 function AuthProvider({ children }) {
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
   const [properties, setProperties]= useState([]);
-  const [userType, setUserType] = useState(null)
+  const [userType, setUserType] = useState(null);
   const [currentProperty, setCurrentProperty] = useState(null);
-  const [isOpenModal, setIsOpenModal] = useState(false)
-  const [error, setError] = useState(null)
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [error, setError] = useState(null);
+  const [propertyFilter, setPropertyFilters] = useState({
+    prices: null,
+    areas:null,
+    types: null,
+    petAllowed: null,
+    beds: null,
+    baths:null,
+
+  })
 
 
   // const navigate = useNavigate();
@@ -53,12 +62,14 @@ function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         properties,
-        setProperties,
         user,
         isOpenModal,
         currentProperty,
         userType,
         error,
+        propertyFilter,
+        setPropertyFilters,
+        setProperties,
         setError,
         login:handleLogin,
         logout:handleLogout,
