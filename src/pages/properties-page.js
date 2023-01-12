@@ -46,7 +46,10 @@ export default function PropertiesPage(){
         })} 
       </ContainerList>
     </Wrapper>
-  
+
+
+
+
     )
 
 
