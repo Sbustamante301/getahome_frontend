@@ -181,13 +181,13 @@ const Pet = styled.div`
   align-items: center;
 `;
 
-export function PropertyCard({ property, showProperty}) {
+export function PropertyCard({ property, showProperty }) {
 
 
   return (
 
-    
-    
+
+
 
     <Wrapp onClick={showProperty}>
 
@@ -215,19 +215,19 @@ export function PropertyCard({ property, showProperty}) {
               </HomeType>
             </Category>
             <Address>
-                {property.property.address} 
+              {property.property.address}
             </Address>
             <Features>
               <Bed>{Icons.bed} {property.property.bedrooms}</Bed>
               <Bath>{Icons.bath} {property.property.bathrooms}</Bath>
               <Area>{Icons.area} {property.property.area} m2</Area>
-               <Pet>{property.property.pet_allowed ? Icons.paw : null }</Pet>
+              <Pet>{property.property.pet_allowed ? Icons.paw : null}</Pet>
             </Features>
 
           </InformationContainer>
 
         </CardContainer>
-      {/* </Container> */}
+      </Container>
     </Wrapp>
 
   )
