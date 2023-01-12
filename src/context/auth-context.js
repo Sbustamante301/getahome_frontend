@@ -67,6 +67,7 @@ function AuthProvider({ children }) {
         isOpenModal,
         currentProperty,
         userType,
+        setUserType,
         error,
         propertyFilter,
         setPropertyFilters,

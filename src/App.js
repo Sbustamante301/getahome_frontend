@@ -17,7 +17,6 @@ import EditPropertyPage from "./pages/edit-property-page";
 
 
 
-
 const Wrapper = styled.div``;
 
 function App() {
