@@ -295,7 +295,7 @@ export function SearchButton({ children }) {
 };
 export function CreateAccountButton({ children }) {
     return (
-        <Button2>
+        <Button2 type="submit">
             <Text>{children}</Text>
         </Button2>
     )
