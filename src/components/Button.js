@@ -158,6 +158,40 @@ export const Button10 = styled.button`
     border: none;
     border-radius: 16px;
 `;
+export const Button11 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    padding:8px 16px;
+    gap: 8px;
+    margin-top:16px;
+
+    color ${colors.white};
+    background: ${colors.pink.medium};
+    width: 212px;
+    height: 40px;
+    border: none;
+    border-radius: 16px;
+`;
+
+
+
+export const Button12 = styled.button`
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8px 16px;
+gap: 8px;
+
+color ${ colors.white};
+background: ${ colors.pink.medium};
+width: 192px;
+height: 48px;
+border: none;
+border - radius: 16px;
+`;
 const LeftIcon = styled.div`
 color:${colors.white};
 `
@@ -192,6 +226,7 @@ const Text3 = styled.div`
     text-transform: uppercase;
 `;
 
+
 export function PrimaryButton({ children, Icon }) {
     return (
         <Button>
@@ -208,7 +243,7 @@ export function PrimaryButton({ children, Icon }) {
 export function JoinButton({ children, onClick }) {
     return (
         <Button3 onClick={onClick}>
-            <LeftIcon style={{ color: `${colors.gray.medium}` }}>
+            <LeftIcon style={{ color: `${colors.gray.medium} ` }}>
                 {Icons.userAdd}
             </LeftIcon>
             <Text2>{children}</Text2>
@@ -219,7 +254,7 @@ export function JoinButton({ children, onClick }) {
 export function FindButton({ children, onClick }) {
     return (
         <Button5 onClick={onClick}>
-            <LeftIcon style={{ color: `${colors.gray.medium}` }}>
+            <LeftIcon style={{ color: `${colors.gray.medium} ` }}>
                 {Icons.search}
             </LeftIcon>
             <Text2>{children}</Text2>
@@ -228,7 +263,7 @@ export function FindButton({ children, onClick }) {
 };
 
 export function LoginButton({ children, handleLogin }) {
-    
+
     return (
         <Button4 onClick={handleLogin}>
             <LeftIcon>
@@ -236,6 +271,18 @@ export function LoginButton({ children, handleLogin }) {
             </LeftIcon>
             <Text3>{children}</Text3>
         </Button4>
+    )
+};
+
+export function LoginCardButton({ children, handleLogin }) {
+
+    return (
+        <Button11 onClick={handleLogin}>
+            <LeftIcon>
+                {Icons.userReceived}
+            </LeftIcon>
+            <Text3>{children}</Text3>
+        </Button11>
     )
 };
 
@@ -257,7 +304,7 @@ export function CreateAccountButton({ children }) {
 export function LogoutButton({ children, onClick }) {
     return (
         <Button7 onClick={onClick}>
-            <LeftIcon style={{ color: `${colors.gray.medium}` }}>
+            <LeftIcon style={{ color: `${colors.gray.medium} ` }}>
                 {Icons.logoutCircle}
             </LeftIcon>
             <Text2>{children}</Text2>
@@ -268,7 +315,7 @@ export function LogoutButton({ children, onClick }) {
 export function SaveButton({ children, onClick }) {
     return (
         <Button8 onClick={onClick}>
-            <LeftIcon style={{ color: `${colors.white}` }}>
+            <LeftIcon style={{ color: `${colors.white} ` }}>
                 {Icons.heartDark}
             </LeftIcon>
             <Text3>{children}</Text3>
@@ -279,7 +326,7 @@ export function SaveButton({ children, onClick }) {
 export function ProfileButton({ children }) {
     return (
         <Button9>
-            <LeftIcon style={{ color: `${colors.white}` }}>
+            <LeftIcon style={{ color: `${colors.white} ` }}>
                 {Icons.user}
             </LeftIcon>
             <Text3>{children}</Text3>
@@ -290,10 +337,29 @@ export function ProfileButton({ children }) {
 export function MyPropertyButton({ children, onClick }) {
     return (
         <Button10 onClick={onClick}>
-            <LeftIcon style={{ color: `${colors.white}` }}>
+            <LeftIcon style={{ color: `${colors.white} ` }}>
                 {Icons.home}
             </LeftIcon>
             <Text3>{children}</Text3>
         </Button10>
+    )
+};
+
+export function ContactAdvertiserButton({ children, onClick }) {
+    return (
+        <Button11 onClick={onClick}>
+            <Text3>{children}</Text3>
+        </Button11>
+    )
+};
+
+export function EditPropertyButton({ children, onClick }) {
+    return (
+        <Button12 onClick={onClick}>
+            <LeftIcon style={{ color: `${colors.white} ` }}>
+                {Icons.home}
+            </LeftIcon>
+            <Text3>{children}</Text3>
+        </Button12>
     )
 };

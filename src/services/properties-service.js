@@ -15,7 +15,6 @@ export async function createProperty(newProperty) {
 }
 
 export async function showProperty(id) {
-  console.log('ID', id)
   const showProperty = await apiFetch(`properties/${id}`);
 
   return showProperty;
