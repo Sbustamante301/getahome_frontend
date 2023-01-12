@@ -8,12 +8,14 @@ import Filter from "../components/filter";
 
 
 const ContainerList = styled.div`
-display:grid
+display: grid;
 grid-template-columns: 1fr 1fr 1fr;
-row-gap: 16px;
-height: 800px;
+padding: 132px 184px 132px 184px;
+row-gap: 32px;
+column-gap: 86px;
 justify-items:center;
 justify-content:center;
+
 // overflow-y: scroll;
 // overflow-x:hidden;
 `

@@ -31,6 +31,7 @@ function App() {
   },[]);
 
 
+
   return (
     <Wrapper>
       { !user ? <NavbarUnAuthenticated /> : <NavbarAuthenticated /> }
