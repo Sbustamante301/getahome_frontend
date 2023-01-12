@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
+import { useAuth } from "../context/auth-context"
+import { Link } from "react-router-dom";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils"
-import { useAuth } from "../context/auth-context"
 import { EditCardButton, CloseCardButton } from "../components/Button"
 
 const Wrapp = styled.div`
@@ -10,13 +11,8 @@ const Wrapp = styled.div`
   align-items: center;
   justify-content:space-between;
   gap: 10px;
-
-  // height: 604px;
-  // left: calc(50% - 1440px/2);
-  // top: 672px;
 `;
 
-// height: 476px;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,7 +21,6 @@ const Container = styled.div`
   padding: 0px;
   gap: 32px;
   height: ${(props) => props.height};
-  border: 1px solid;
 `;
 const TextContainer = styled.div`
   display:flex;
@@ -210,9 +205,6 @@ const Pet = styled.div`
 export function PropertyCard({ property, showProperty }) {
   const { user } = useAuth();
 
-  function handleEdit(event) {
-    event.preventDefault()
-  }
 
   function handleClose(event) {
     event.preventDefault()
@@ -257,7 +249,9 @@ export function PropertyCard({ property, showProperty }) {
           {(user.user_type === 1 && property.property.user_id === user.id) ?
             (<LowFrame>
               <ButtonContainer>
-                <EditCardButton onClick={handleEdit}>EDIT</EditCardButton>
+                <Link style={{ textDecoration: "none" }} to={`/properties/edit/${property.property.id}`}>
+                  <EditCardButton>EDIT</EditCardButton>
+                </Link>
                 <CloseCardButton onClick={handleClose}>CLOSE</CloseCardButton>
               </ButtonContainer>
             </LowFrame>)

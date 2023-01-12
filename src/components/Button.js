@@ -392,9 +392,9 @@ export function EditPropertyButton({ children, onClick }) {
     )
 };
 
-export function EditCardButton({ children, onClick }) {
+export function EditCardButton({ children }) {
     return (
-        <Button13 onClick={onClick}>
+        <Button13>
             <LeftIcon style={{ color: `${colors.white} ` }}>
                 {Icons.edit}
             </LeftIcon>
