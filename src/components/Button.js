@@ -175,22 +175,50 @@ export const Button11 = styled.button`
     border-radius: 16px;
 `;
 
-
-
 export const Button12 = styled.button`
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 8px 16px;
-gap: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 16px;
+    gap: 8px;
 
-color ${ colors.white};
-background: ${ colors.pink.medium};
-width: 192px;
-height: 48px;
-border: none;
-border - radius: 16px;
+    color ${ colors.white};
+    background: ${ colors.pink.medium};
+    width: 192px;
+    height: 48px;
+    border: none;
+    border-radius: 16px;
+`;
+
+export const Button13 = styled.button`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 8px;
+    gap: 8px;
+
+    color ${ colors.white};
+    background: ${ colors.pink.dark};
+    width: 84px;
+    height: 32px;
+    border: none;
+`;
+
+export const Button14 = styled.button`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 8px;
+    gap: 8px;
+
+    color ${ colors.white};
+    background: ${ colors.pink.dark};
+    width: 100px;
+    height: 32px;
+    border: none;
 `;
 const LeftIcon = styled.div`
 color:${colors.white};
@@ -357,9 +385,31 @@ export function EditPropertyButton({ children, onClick }) {
     return (
         <Button12 onClick={onClick}>
             <LeftIcon style={{ color: `${colors.white} ` }}>
-                {Icons.home}
+                {Icons.edit}
             </LeftIcon>
             <Text3>{children}</Text3>
         </Button12>
     )
 };
+
+export function EditCardButton({ children, onClick }) {
+    return (
+        <Button13 onClick={onClick}>
+            <LeftIcon style={{ color: `${colors.white} ` }}>
+                {Icons.edit}
+            </LeftIcon>
+            <Text3>{children}</Text3>
+        </Button13>
+    )
+}
+
+export function CloseCardButton({ children, onClick }) {
+    return (
+        <Button13 onClick={onClick}>
+            <LeftIcon style={{ color: `${colors.white} ` }}>
+                {Icons.home}
+            </LeftIcon>
+            <Text3>{children}</Text3>
+        </Button13>
+    )
+}

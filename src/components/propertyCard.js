@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils"
+import { useAuth } from "../context/auth-context"
+import { EditCardButton, CloseCardButton } from "../components/Button"
 
 const Wrapp = styled.div`
   display: flex;
@@ -14,6 +16,7 @@ const Wrapp = styled.div`
   // top: 672px;
 `;
 
+// height: 476px;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -21,7 +24,8 @@ const Container = styled.div`
   align-items: center;
   padding: 0px;
   gap: 32px;
-  height: 476px;
+  height: ${(props) => props.height};
+  border: 1px solid;
 `;
 const TextContainer = styled.div`
   display:flex;
@@ -46,12 +50,12 @@ const Title = styled.h1`
 const CardContainer = styled.div`
   position:relative;
   width: 300px;
-  height: 360px;
+  height: ${(props) => props.height};
 
 
   display: flex;
   flex-direction: column;
-  // justify-content:space-between;
+  justify-content:space-between;
   
   background: ${colors.white}
 
@@ -99,6 +103,7 @@ const InformationContainer = styled.div`
   justify-content: center;
   color:${colors.gray.medium};
   padding:8px;
+  height: ${(props) => props.height};
 `;
 
 const Category = styled.div`
@@ -107,7 +112,6 @@ const Category = styled.div`
   align-items: center;
   padding: 0px;
   gap: 12px;
-  width: 300px;
   height: 32px;
   
 `;
@@ -161,6 +165,28 @@ const Features = styled.div`
   
 `;
 
+const LowFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+
+  width: 300px;
+  height: 48px;
+  background: ${colors.pink.dark};
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 32px;
+`;
+
 const Bed = styled.div`
   display: flex;
   align-items: center;
@@ -182,18 +208,22 @@ const Pet = styled.div`
 `;
 
 export function PropertyCard({ property, showProperty }) {
+  const { user } = useAuth();
 
+  function handleEdit(event) {
+    event.preventDefault()
+  }
+
+  function handleClose(event) {
+    event.preventDefault()
+  }
 
   return (
-
-
-
-
     <Wrapp onClick={showProperty}>
 
-      <Container>
+      <Container height={(user.user_type === 1 && property.property.user_id === user.id) ? '400px' : '360px'}>
 
-        <CardContainer>
+        <CardContainer height={(user.user_type === 1 && property.property.user_id === user.id) ? '400px' : '360px'}>
           <ImgContainer>
             <Property src={property.url} />
             <Tag>
@@ -203,7 +233,7 @@ export function PropertyCard({ property, showProperty }) {
 
             </Tag>
           </ImgContainer>
-          <InformationContainer>
+          <InformationContainer >
             <Category>
               <Price >
                 {Icons.dollarCircle}
@@ -223,8 +253,15 @@ export function PropertyCard({ property, showProperty }) {
               <Area>{Icons.area} {property.property.area} m2</Area>
               <Pet>{property.property.pet_allowed ? Icons.paw : null}</Pet>
             </Features>
-
           </InformationContainer>
+          {(user.user_type === 1 && property.property.user_id === user.id) ?
+            (<LowFrame>
+              <ButtonContainer>
+                <EditCardButton onClick={handleEdit}>EDIT</EditCardButton>
+                <CloseCardButton onClick={handleClose}>CLOSE</CloseCardButton>
+              </ButtonContainer>
+            </LowFrame>)
+            : ""}
         </CardContainer>
       </Container>
     </Wrapp>
