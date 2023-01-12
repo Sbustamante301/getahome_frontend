@@ -12,13 +12,14 @@ function AuthProvider({ children }) {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [error, setError] = useState(null);
   const [propertyFilter, setPropertyFilters] = useState({
-    prices: null,
-    areas:null,
-    types: null,
+    prices: {min: null, max:null},
+    areas: {min: null, max:null},
+    types: [false, false], //house, apartment
     petAllowed: null,
-    beds: null,
-    baths:null,
-
+    beds: 0,
+    baths:0,
+    mode:[false, false], //buy, rent
+    search:""
   })
 
 

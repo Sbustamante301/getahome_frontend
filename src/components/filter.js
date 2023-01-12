@@ -1,22 +1,23 @@
 import styled from "@emotion/styled"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconBase } from "react-icons";
 import { useAuth } from "../context/auth-context";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils";
-import Input from "./Input"
 
 const Wrapper=styled.div`
   display:flex;
   justify-content:space-between;
 `
-const Select = styled.select`
+const Select = styled.div`
   display: flex;
   justify-content: strech;
   width: 185px;
   ${typography.text.md};
   color: ${colors.gray.dark};
-  border: none;
+  border: 1px solid ${colors.pink.medium};
+  border-radius: 8px;
+  padding:8px;
 `;
 const ButtonContainer = styled.div`
   position:relative;
@@ -37,6 +38,7 @@ const Button = styled.div`
 `
 const StyledInput = styled.input`
   width:240px;
+  height:40px;
   border: 1px solid ${colors.pink.medium};
   border-radius: 8px;
   padding:8px;
@@ -119,45 +121,105 @@ export default function Filter(){
     more: false,
     price: false,
     bedBath: false,
-    type: false
+    type: false,
+    mode: false
   });
   const [filter, setFilter] = useState({
     more: "MORE",
-    price: "PRICE",
-    bedBath: "BEDS & BATH",
-    type: "PROPERTY TYPE"
+    price: "PRICE"
   });
   const [prices, setPrices] = useState({
     min:"",
     max:""
   })
+  const [areas, setAreas] = useState({
+    min:"",
+    max:""
+  })
+  const [beds, setBeds ] = useState(0);
+  const [baths, setBaths] = useState(0);
+  const [petAllowed, setPetAllowed] = useState(false);
+  const [house, setHouse] = useState(false);
+  const [apartment, setApartment] = useState(false);
+  const [buy, setBuy] = useState(false)
+  const [rent, setRent] = useState(false)
+  const [search, setSearch] = useState("")
+    
 
   function handleDone(event){
     event.preventDefault();
     const id = event.target.id;
-    setPropertyFilters({...propertyFilter, [id]: prices})
-    
+    if(id === "prices") setPropertyFilters({...propertyFilter, [id]: prices})
+    if(id === "bathsbeds") setPropertyFilters({...propertyFilter, "beds": beds, "baths":baths})
+    if(id === "more") setPropertyFilters({...propertyFilter, "petAllowed": petAllowed, "areas": areas})
+    if(id === "types") setPropertyFilters({...propertyFilter, "types": [house, apartment]});
+    setShowFilter({
+      more: false,
+      price: false,
+      bedBath: false,
+      type: false
+    });
   }
 
   function handleChangeInput(event){
     event.preventDefault();
     const { name, value } = event.target;
-    setPrices({ ...prices, [name]: value });
+    if(name.includes("price")) setPrices({ ...prices, [name.replace("price","")]: value });
+    if(name.includes("area")) setAreas({ ...areas, [name.replace("area","")]: value });
   }
+
+  function changeText(filter){
+    if(filter === "types"){
+      if(!(propertyFilter.types[0] || propertyFilter.types[1])) return "PROPERTY TYPE";
+      if(propertyFilter.types[0] && propertyFilter.types[1]) return "HOUSES & APARTMENTS";
+      if(propertyFilter.types[0]) return "HOUSES"
+      if(propertyFilter.types[1]) return "APARTMENTS"
+    }else if(filter === "bedbath"){
+      if(propertyFilter.beds === 0 && propertyFilter.baths === 0 ) return "BEDS & BATH"
+      return `${propertyFilter.beds}+ BD, ${propertyFilter.baths}+ BA`
+    }else if(filter === "price"){
+      if(!(propertyFilter.prices.min || propertyFilter.prices.max)) return "PRICE";
+      if(propertyFilter.prices.min && propertyFilter.prices.max) return `$${(propertyFilter.prices.min/1000).toFixed(1)}K - $${(propertyFilter.prices.max/1000).toFixed(1)}K`;
+      if(propertyFilter.prices.min) return `>= $${(propertyFilter.prices.min/1000).toFixed(1)}K`
+      if(propertyFilter.prices.max) return `<= $${(propertyFilter.prices.max/1000).toFixed(1)}K` 
+    }
+  }
+
+  function handleMode(event){
+    console.log("buy", buy)
+    console.log("rent", rent)
+    event.preventDefault();
+    const id = event.target.id;
+    if(id==="both"){
+      setRent(!rent)
+      setBuy(!buy)
+    } 
+    if(id==="rent") setRent(!rent)
+    if(id==="buy") setBuy(!buy)
+  }
+
+
+  useEffect(()=>{
+    setPropertyFilters({...propertyFilter, "mode":[buy, rent]})
+  },[buy, rent])
+
+  useEffect(()=>{
+    setPropertyFilters({...propertyFilter, "search":search})
+  },[search])
 
   return(
     <Wrapper>
-      <StyledInput name={"address"} placeholder={"Search by adress"}/>
+      <StyledInput onChange={(e)=>setSearch(e.target.value)} value={search} name={"address"} placeholder={"Search by adress"}/>
       <Container>
         <ButtonContainer>
-          <Button onClick={()=> setShowFilter({price: !showFilter.price})}>{filter.price}</Button>
+          <Button onClick={()=> setShowFilter({price: !showFilter.price})}>{changeText("price")}</Button>
           {showFilter.price ? 
             <MoreDiv style={{display:"flex", flexDirection:"column", gap:4}}>
               <Text>PRICE RANGE</Text>
               <PriceInputDiv>
-                <StyledInput2 onChange={handleChangeInput} placeholder={"min"} name={"min"} id={"minPrice"} value={prices.min}/>
+                <StyledInput2 onChange={handleChangeInput} placeholder={"min"} name={"minprice"} id={"minPrice"} value={prices.min}/>
                 <h1> - </h1>
-                <StyledInput2 onChange={handleChangeInput} placeholder={"max"} name={"max"} id={"maxPrice"} value={prices.max}/>
+                <StyledInput2 onChange={handleChangeInput} placeholder={"max"} name={"maxprice"} id={"maxPrice"} value={prices.max}/>
               </PriceInputDiv>
               <div style={{display:"flex", justifyContent:"flex-end", marginTop:4}}>
                 <Button onClick={handleDone} style={{padding:8, width:60}} id="prices">DONE</Button>
@@ -166,48 +228,68 @@ export default function Filter(){
           null}
         </ButtonContainer>
         <ButtonContainer>
-          <Button onClick={()=> setShowFilter({type: !showFilter.type})}>{filter.type}</Button>
+          <Button onClick={()=> setShowFilter({type: !showFilter.type})}>{changeText("types")}</Button>
           {showFilter.type ?
             <MoreDiv style={{display:"flex", flexDirection:"column", gap:1}}>
               <Text>PROPERTY TYPE</Text>
               <PriceInputDiv>
-                <StyledCheckbox type="checkbox" name={"houses"} id={"houses"} />
-                <label>Houses</label>
-                <StyledCheckbox type="checkbox" name={"apartments"} id={"apartments"} />
-                <label>Apartments</label>
+                <StyledCheckbox onChange={(event)=>setHouse(event.target.checked)} checked={house} type="checkbox" name={"houses"} id={"house"} />
+                <label htmlFor="house">Houses</label>
+                <StyledCheckbox onChange={(event)=>setApartment(event.target.checked)} checked={apartment} type="checkbox" name={"apartments"} id={"apartment"} />
+                <label htmlFor="apartment">Apartments</label>
               </PriceInputDiv>
               <div style={{display:"flex", justifyContent:"flex-end", marginTop:4}}>
-                <Button style={{padding:8, width:60}}  >DONE</Button>
+                <Button onClick={handleDone} style={{padding:8, width:60}} id="types" >DONE</Button>
               </div>
             </MoreDiv> :
           null}
         </ButtonContainer>
         <ButtonContainer>
-          <Button onClick={()=> setShowFilter({bedBath: !showFilter.bedBath})}>{filter.bedBath}</Button>
+          <Button onClick={()=> setShowFilter({bedBath: !showFilter.bedBath})}>{changeText("bedbath")}</Button>
           {showFilter.bedBath ? 
             <MoreDiv style={{display:"flex", flexDirection:"column", gap:16}}>
               <div>
                 <Text>BEDS</Text>
                 <NumberChoseDiv>
-                  <NumberDivFirst>Any</NumberDivFirst>
-                  <NumberDiv style={{background:colors.pink.medium, color:colors.white}}>1+</NumberDiv>
-                  <NumberDiv>2+</NumberDiv>
-                  <NumberDiv>3+</NumberDiv>
-                  <NumberDivLast>4+</NumberDivLast>
+                  <NumberDivFirst onClick={()=>setBeds(0)} 
+                                  style={{background:`${beds === 0 ? colors.pink.medium : colors.white}`,
+                                  color: `${beds === 0 ? colors.white : colors.gray.medium}`}}>Any</NumberDivFirst>
+                  <NumberDiv onClick={()=>setBeds(1)} 
+                             style={{background:`${beds === 1 ? colors.pink.medium : colors.white}`,
+                             color: `${beds === 1 ? colors.white : colors.gray.medium}`}}>1+</NumberDiv>
+                  <NumberDiv onClick={()=>setBeds(2)} 
+                             style={{background:`${beds === 2 ? colors.pink.medium : colors.white}`,
+                             color: `${beds === 2 ? colors.white : colors.gray.medium}`}}>2+</NumberDiv>
+                  <NumberDiv onClick={()=>setBeds(3)} 
+                             style={{background:`${beds === 3 ? colors.pink.medium : colors.white}`,
+                             color: `${beds === 3 ? colors.white : colors.gray.medium}`}}>3+</NumberDiv>
+                  <NumberDivLast onClick={()=>setBeds(4)} 
+                                 style={{background:`${beds === 4 ? colors.pink.medium : colors.white}`,
+                                 color: `${beds === 4 ? colors.white : colors.gray.medium}`}}>4+</NumberDivLast>
                 </NumberChoseDiv>
               </div>
               <div>
                 <Text>BATHS</Text>
                 <NumberChoseDiv>
-                  <NumberDivFirst>Any</NumberDivFirst>
-                  <NumberDiv>1+</NumberDiv>
-                  <NumberDiv>2+</NumberDiv>
-                  <NumberDiv>3+</NumberDiv>
-                  <NumberDivLast>4+</NumberDivLast>
+                <NumberDivFirst onClick={()=>setBaths(0)} 
+                                  style={{background:`${baths === 0 ? colors.pink.medium : colors.white}`,
+                                  color: `${baths === 0 ? colors.white : colors.gray.medium}`}}>Any</NumberDivFirst>
+                  <NumberDiv onClick={()=>setBaths(1)} 
+                             style={{background:`${baths === 1 ? colors.pink.medium : colors.white}`,
+                             color: `${baths === 1 ? colors.white : colors.gray.medium}`}}>1+</NumberDiv>
+                  <NumberDiv onClick={()=>setBaths(2)} 
+                             style={{background:`${baths === 2 ? colors.pink.medium : colors.white}`,
+                             color: `${baths === 2 ? colors.white : colors.gray.medium}`}}>2+</NumberDiv>
+                  <NumberDiv onClick={()=>setBaths(3)} 
+                             style={{background:`${baths === 3 ? colors.pink.medium : colors.white}`,
+                             color: `${baths === 3 ? colors.white : colors.gray.medium}`}}>3+</NumberDiv>
+                  <NumberDivLast onClick={()=>setBaths(4)} 
+                                 style={{background:`${baths === 4 ? colors.pink.medium : colors.white}`,
+                                 color: `${baths === 4 ? colors.white : colors.gray.medium}`}}>4+</NumberDivLast>
                 </NumberChoseDiv>
               </div>
               <div style={{display:"flex", justifyContent:"flex-end", marginTop:4}}>
-                <Button style={{padding:8, width:60}}>DONE</Button>
+                <Button onClick={handleDone} style={{padding:8, width:60}} id="bathsbeds">DONE</Button>
               </div>
             </MoreDiv> :
           null}
@@ -215,30 +297,52 @@ export default function Filter(){
         <ButtonContainer>
           <Button onClick={()=> setShowFilter({more: !showFilter.more})}>{filter.more} {Icons.arrowDown}</Button>
           { showFilter.more ? 
-            <MoreDiv style={{}}>
+            <MoreDiv style={{display:"flex", flexDirection:"column", gap:16}}>
               <div style={{display:"flex", alignItems:"center"}}>
-                <StyledCheckbox type={"checkbox"}/>
-                <label>Pets Allowed</label>
+                <StyledCheckbox onChange={(event)=>setPetAllowed(event.target.checked)} checked={petAllowed} type={"checkbox"} id={"petAllowed"}/>
+                <label htmlFor="petAllowed">Pets Allowed</label>
               </div>
               <div>
+                <Text>AREA IN M2</Text>
                 <PriceInputDiv>
-                <StyledInput2 placeholder={"min"} name={"minArea"} id={"minArea"}/>
+                <StyledInput2 onChange={handleChangeInput} value={areas.min} placeholder={"min"} name={"minarea"} id={"minArea"}/>
                 <h1> - </h1>
-                <StyledInput2 placeholder={"min"} name={"minArea"} id={"minArea"}/>
+                <StyledInput2 onChange={handleChangeInput} value={areas.max} placeholder={"max"} name={"maxarea"} id={"maxArea"}/>
               </PriceInputDiv>
               </div>
               <div style={{display:"flex", justifyContent:"flex-end", marginTop:4}}>
-                <Button style={{padding:8, width:60}}>DONE</Button>
+                <Button onClick={handleDone} style={{padding:8, width:60}} id="more">DONE</Button>
               </div>
             </MoreDiv> :
           null}
         </ButtonContainer>
       </Container>
-      
-      <Select name="types" id="lookType">
-        <option value="apartment">An Apartment</option>
-        <option value="house">A House</option>
-      </Select>
+
+        <Select>
+          <ButtonContainer>
+            <Button onClick={()=> setShowFilter({mode: !showFilter.mode})}
+                    style={{color:`${colors.gray.dark}` , background:`${colors.white}`, width:"100%"}}>
+              TEXT {Icons.arrowDown}
+            </Button>
+            {showFilter.mode ? 
+              <div style={{zIndex:1}} >
+                <div>
+                  <input onChange={handleMode} type={"checkbox"} id={"both"} checked={buy && rent}/> 
+                  <label>Both</label> 
+                </div>
+                <div>
+                  <input onChange={handleMode} type={"checkbox"} id={"buy"} checked={buy}/> 
+                  <label>Buying</label> 
+                </div>
+                <div>
+                  <input onChange={handleMode} type={"checkbox"} id={"rent"} checked={rent}/> 
+                  <label>Renting</label> 
+                </div>
+              </div> :
+            null}
+          </ButtonContainer>
+        </Select>
+             
     </Wrapper>
   )
 }

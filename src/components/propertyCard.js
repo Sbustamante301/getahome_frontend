@@ -190,18 +190,17 @@ export function PropertyCard({ property, showProperty}) {
     
 
     <Wrapp onClick={showProperty}>
-      {/* <Container> */}
 
-        {/* <TextContainer>
-          <PrepTitle>Find an Appartment you Love</PrepTitle>
-          <Title>Homes for rent at the best prices</Title>
-        </TextContainer> */}
+      <Container>
+
         <CardContainer>
           <ImgContainer>
             <Property src={property.url} />
             <Tag>
               {Icons.coins}
-              {property.property.mode === 1 ? "For Sale" : "For Rental" }
+
+              {property.property.mode === 1 ? "For Sale" : "For Rent"}
+
             </Tag>
           </ImgContainer>
           <InformationContainer>
