@@ -7,6 +7,7 @@ import { Icons } from "../utils";
 import { useAuth } from "../context/auth-context";
 import { LoginCardButton, ContactAdvertiserButton } from "../components/Button"
 import { SectionFooter2 } from "../components/sections/sectionFooter";
+import PruebaMapa from "../pages/mapa"
 
 const Wrapper = styled.div`
   display: flex;
@@ -418,7 +419,7 @@ export default function PropertyPage() {
               {currentProperty.property.address}
             </AboutParragraph>
             <Map>
-
+              <PruebaMapa />
             </Map>
           </Location>
         </InformationContainer>
