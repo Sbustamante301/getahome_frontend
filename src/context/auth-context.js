@@ -5,49 +5,67 @@ import { createUser, getUser } from "../services/users-service";
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
   const [properties, setProperties]= useState([]);
-  // const [select, setSelect] = useState("italian");
-  // const [actualProduct, setActualProduct] = useState(null);
-  // const [cart, setCart] = useState(sessionStorage.getItem("cart") || []);
-  // const [items, setItems] = useState(sessionStorage.getItem("items") || []);
+  const [userType, setUserType] = useState(null)
+  const [currentProperty, setCurrentProperty] = useState(null);
+  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [error, setError] = useState(null)
+
 
   // const navigate = useNavigate();
 
-  // useEffect(() => {
+  useEffect(() => {
    
-  //   getUser()
-  //     .then(setUser)
-  //     .catch((error) => console.log(error));
-  // }, []);
+    getUser()
+      .then(response =>{
+        setUser(response);
 
-  // function handleLogin(credentials) {
-  //   return login(credentials).then((user) => {
-  //     setUser(user);
-  //     // navigate("/categories");
-  //   });
-  // }
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
-  // function handleSignup(userData) {
-  //   return createUser(userData).then((user) => {
-  //     setUser(user);
-  //     // navigate("/categories");
-  //   });
-  // }
+  function handleLogin(credentials) {
+    return login(credentials).then((user) => {
+      setUser(user);
+      setUserType(user.user_type);
+      setIsOpenModal(false);
+      sessionStorage.setItem("user",JSON.stringify(user))
+    }).catch(error=>{
+      setError(error.message)
+    });
+  }
 
-  // function handleLogout() {
-  //   return logout().finally(() => {
-  //     setUser(null);
-  //     // navigate("/");
-  //   });
-  // }
+  function handleSignup(userData) {
+    return createUser(userData).then((user) => {
+      setUser(user);
+    });
+  }
+
+  function handleLogout() {
+    return logout().finally(() => {
+      setUser(null);
+      // navigate("/");
+    });
+  }
 
   return (
     <AuthContext.Provider
       value={{
         properties,
-        setProperties
-
+        setProperties,
+        user,
+        isOpenModal,
+        currentProperty,
+        userType,
+        error,
+        setError,
+        login:handleLogin,
+        logout:handleLogout,
+        signup: handleSignup,
+        setUser,
+        setIsOpenModal,
+        setCurrentProperty
 
       }}
     >

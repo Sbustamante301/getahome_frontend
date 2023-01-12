@@ -60,9 +60,6 @@ width:180px;
 
 
 export function TeamCard({miembro}){
-    console.log("Entre")
-    console.log(typeof{miembro})
-    
     return(
         
         <TeamCardContainer>

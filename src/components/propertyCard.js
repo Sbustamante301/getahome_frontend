@@ -7,8 +7,6 @@ const Wrapp = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content:space-between;
-
-  padding: 64px 132px;
   gap: 10px;
 
   // height: 604px;
@@ -186,13 +184,17 @@ const Pet = styled.div`
   align-items: center;
 `;
 
-export function PropertyCard({ property}) {
+export function PropertyCard({ property, showProperty}) {
 
 
   return (
+
     
-    <>
-    {/* //   <Container> */}
+    
+
+    <Wrapp onClick={showProperty}>
+      <Container>
+
         {/* <TextContainer>
           <PrepTitle>Find an Appartment you Love</PrepTitle>
           <Title>Homes for rent at the best prices</Title>

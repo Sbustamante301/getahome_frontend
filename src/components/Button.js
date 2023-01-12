@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useAuth } from "../context/auth-context";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils";
 
@@ -18,7 +19,6 @@ background: ${colors.pink.medium};
 border-radius: 16px;
 padding:16px;
 `;
-
 export const Button2 = styled.button`
 
 display:flex;
@@ -37,7 +37,6 @@ border-radius: 16px;
 padding:16px, 24px, 16px, 24px;
 
 `;
-
 export const Button3 = styled.button`
     display:flex;
     flex-direction:row;
@@ -53,7 +52,6 @@ export const Button3 = styled.button`
     background: ${colors.white};
     border-radius: 16px;
 `;
-
 export const Button4 = styled.button`
     display:flex;
     flex-direction:row;
@@ -69,7 +67,6 @@ export const Button4 = styled.button`
     border: none;
     border-radius: 16px;
 `;
-
 export const Button5 = styled.button`
     display:flex;
     flex-direction:row;
@@ -85,7 +82,6 @@ export const Button5 = styled.button`
     border: none;
     border-radius: 16px;
 `;
-
 export const Button6 = styled.button`
     display:flex;
     flex-direction:row;
@@ -102,7 +98,6 @@ export const Button6 = styled.button`
     border-radius: 16px;
     margin:16px;
 `;
-
 export const Button7 = styled.button`
     display:flex;
     flex-direction:row;
@@ -118,7 +113,6 @@ export const Button7 = styled.button`
     background: ${colors.white};
     border-radius: 16px;
 `;
-
 export const Button8 = styled.button`
     display:flex;
     flex-direction:row;
@@ -134,7 +128,6 @@ export const Button8 = styled.button`
     border: none;
     border-radius: 16px;
 `;
-
 export const Button9 = styled.button`
     display:flex;
     flex-direction:row;
@@ -150,7 +143,6 @@ export const Button9 = styled.button`
     border: none;
     border-radius: 16px;
 `;
-
 export const Button10 = styled.button`
     display:flex;
     flex-direction:row;
@@ -166,11 +158,8 @@ export const Button10 = styled.button`
     border: none;
     border-radius: 16px;
 `;
-
 const LeftIcon = styled.div`
 color:${colors.white};
-
-
 `
 const RightIcon = styled.div`
 color:${colors.white}
@@ -179,11 +168,13 @@ color:${colors.white}
 const Text = styled.div`
     margin-bottom:4px;
     color:${colors.white};
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
     text-align: center;
     letter-spacing: 1.25px;
     text-transform: uppercase;
 `;
-
 const Text2 = styled.div`
     margin-bottom:4px;
     color:${colors.gray.medium};
@@ -192,7 +183,6 @@ const Text2 = styled.div`
     letter-spacing: 1.25px;
     text-transform: uppercase;
 `;
-
 const Text3 = styled.div`
     margin-bottom:4px;
     color:${colors.white};
@@ -201,7 +191,6 @@ const Text3 = styled.div`
     letter-spacing: 1.25px;
     text-transform: uppercase;
 `;
-
 
 export function PrimaryButton({ children, Icon }) {
     return (
@@ -216,9 +205,9 @@ export function PrimaryButton({ children, Icon }) {
 
 }
 
-export function JoinButton({ children }) {
+export function JoinButton({ children, onClick }) {
     return (
-        <Button3>
+        <Button3 onClick={onClick}>
             <LeftIcon style={{ color: `${colors.gray.medium}` }}>
                 {Icons.userAdd}
             </LeftIcon>
@@ -227,9 +216,9 @@ export function JoinButton({ children }) {
     )
 };
 
-export function FindButton({ children }) {
+export function FindButton({ children, onClick }) {
     return (
-        <Button5>
+        <Button5 onClick={onClick}>
             <LeftIcon style={{ color: `${colors.gray.medium}` }}>
                 {Icons.search}
             </LeftIcon>
@@ -238,9 +227,10 @@ export function FindButton({ children }) {
     )
 };
 
-export function LoginButton({ children }) {
+export function LoginButton({ children, handleLogin }) {
+    
     return (
-        <Button4>
+        <Button4 onClick={handleLogin}>
             <LeftIcon>
                 {Icons.userReceived}
             </LeftIcon>
@@ -264,9 +254,9 @@ export function CreateAccountButton({ children }) {
     )
 };
 
-export function LogoutButton({ children }) {
+export function LogoutButton({ children, onClick }) {
     return (
-        <Button7>
+        <Button7 onClick={onClick}>
             <LeftIcon style={{ color: `${colors.gray.medium}` }}>
                 {Icons.logoutCircle}
             </LeftIcon>
@@ -275,9 +265,9 @@ export function LogoutButton({ children }) {
     )
 };
 
-export function SaveButton({ children }) {
+export function SaveButton({ children, onClick }) {
     return (
-        <Button8>
+        <Button8 onClick={onClick}>
             <LeftIcon style={{ color: `${colors.white}` }}>
                 {Icons.heartDark}
             </LeftIcon>
@@ -297,9 +287,9 @@ export function ProfileButton({ children }) {
     )
 };
 
-export function MyPropertyButton({ children }) {
+export function MyPropertyButton({ children, onClick }) {
     return (
-        <Button10>
+        <Button10 onClick={onClick}>
             <LeftIcon style={{ color: `${colors.white}` }}>
                 {Icons.home}
             </LeftIcon>
