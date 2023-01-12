@@ -1,4 +1,6 @@
+
 import { colors, typography } from "../styles"
+
 import styled from "@emotion/styled"
 import { SectionFooter2 } from "../components/sections/sectionFooter"
 import landlord from "../assets/landlord.svg"
@@ -8,6 +10,7 @@ import { useState } from "react"
 import { CreateAccountButton } from "../components/Button"
 import { createUser } from "../services/users-service"
 import Input from "../components/Input"
+import { useAuth } from "../context/auth-context"
 
 // background:${colors.pink.shallow};
 const Section1 = styled.div`
@@ -99,29 +102,38 @@ ${typography.head.xxxs}
 ${colors.gray.dark}
 `;
 
-function Hidden({ HandleComponent }) {
-  return (
-    <Div>
-      <Section1>
-        <Title>Selecciona el perfil con el que te identificas</Title>
-        <SubTitle>Que estas buscando?</SubTitle>
-      </Section1>
-      <Section2>
-        <ImgDiv onClick={HandleComponent}>
-          <Img src={landlord} />
-          <ImgTitle>Landlord</ImgTitle>
-          <ImgSubtitle>You want to rent or sell a home</ImgSubtitle>
-        </ImgDiv>
-        <ImgDiv onClick={HandleComponent}>
-          <Img src={homeseeker} />
-          <ImgTitle>Homeseeker</ImgTitle>
-          <ImgSubtitle>You want to find a home</ImgSubtitle>
-        </ImgDiv>
-      </Section2>
-      <SectionFooter2 />
-    </Div>
+ function Hidden({HandleComponent}){
+  const {userType, setUserType} = useAuth();  
+  function AssignUser(typeNumber){
+    setUserType(typeNumber)
 
-  )
+  }
+  return(
+        <Div>
+        <Section1>
+            <Title>Selecciona el perfil con el que te identificas</Title>
+                <SubTitle>Que estas buscando?</SubTitle>
+        </Section1>
+        <Section2>
+            <ImgDiv onClick={()=>{HandleComponent();
+            AssignUser(1)}}>
+                <Img src={landlord}/>
+                <ImgTitle>Landlord</ImgTitle>
+                <ImgSubtitle>You want to rent or sell a home</ImgSubtitle>
+            </ImgDiv>
+            <ImgDiv onClick={()=>{HandleComponent()
+            AssignUser(2)
+            }}>
+                <Img src={homeseeker}/>
+                <ImgTitle>Homeseeker</ImgTitle>
+                <ImgSubtitle>You want to find a home</ImgSubtitle>
+            </ImgDiv>
+        </Section2>
+        <SectionFooter/>
+        </Div>
+
+    )
+
 }
 
 const Form = styled.form`
@@ -141,8 +153,10 @@ padding:70px;
 
 `;
 
-const DivForm = styled.div`
-background:${colors.white};
+
+const DivForm=styled.div`
+background:white;
+
 border-width:thin;
 box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 border-radius: 8px;
@@ -150,10 +164,11 @@ width:388px;
 height:468px;
 display:flex;
 flex-direction:column;
-align-items:center;
-text-align:center;
+align-items:left;
+text-align:left;
 padding:70px;
--right:20px;
+margin:100px;
+
 
 `;
 
@@ -209,98 +224,124 @@ ${typography.text.xxs};
 //       </Div2>    
 //     )
 // }
-
-function SignupForm() {
-  const [formdata, setFormdata] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    password_digest: "",
-    passwordConfirmation: "",
-  })
+const H1=styled.h1`
+${typography.head.sm};
 
 
-  function handleChange(event) {
-    const { name, value } = event.target
-    setFormdata({ ...formdata, [name]: value })
+`;
+
+
+function SignupForm(){
+   const [error,setError] = useState(null);
+   const {userType, setUserType} = useAuth();
+    const [formdata, setFormdata] = useState({
+        name:"",
+        email:"",
+        phone:"",
+        password_digest:"",
+        passwordConfirmation:"",
+        user_type:userType,
+      })
+
+
+      function handleChange(event){
+        const {name, value} = event.target
+        setFormdata({...formdata, [name]:value})
+      }
+      
+      function handleSubmit(event){
+        event.preventDefault();
+        if(formdata.passwordConfirmation===formdata.password_digest){
+          setError(null);
+        const {passwordConfirmation,...newForm} = formdata;
+        
+        createUser(formdata).then(console.log).catch(console.log)
+        console.log(formdata)
+      }
+    else{
+      setError("Passwords must coincide");
+    }
   }
-
-  function handleSubmit(event) {
-    const { passwordConfirmation, ...newForm } = formdata;
-    event.preventDefault();
-    createUser(formdata).then(console.log).catch(console.log)
-  }
-  return (
-    <>
-      <Div2>
+      return(
+        <Div2>
         <DivForm>
-          <form onSubmit={handleSubmit}>
-            <Input
-              label={"NAME"}
-              id="name"
-              name="name"
-              type="text"
-              value={formdata.name}
-              onChange={handleChange}
-              placeholder="John Doe" />
-            <Input
-              label={"EMAIL"}
-              id="email"
-              name="email"
-              type="email"
-              value={formdata.email}
-              onChange={handleChange}
-              placeholder="user@mail.com" />
-            <Input
-              label={"PHONE"}
-              id="phone"
-              name="phone"
-              type="text"
-              value={formdata.phone}
-              onChange={handleChange}
-              placeholder="999-999-999  " />
-            <Input
-              label={"PASSWORD"}
-              id="password_digest"
-              name="password_digest"
-              type="password"
-              value={formdata.password_digest}
-              onChange={handleChange}
-              placeholder="******" />
-            <Input
-              label={"PASSWORD CONFIRMATION"}
-              id="passwordConfirmation"
-              name="passwordConfirmation"
-              type="password"
-              value={formdata.passwordConfirmation}
-              onChange={handleChange}
-              placeholder="******" />
-            <CreateAccountButton>Create Account</CreateAccountButton>
-          </form>
-        </DivForm>
-      </Div2>
-      <SectionFooter2 />
-    </>
-
-
-
-
-
+      <form onSubmit={handleSubmit}>
+        <H1>Create your Account</H1>
+        <Input
+          label={"NAME"}
+          id="name"
+          name="name" 
+          type="text" 
+          value={formdata.name}
+          onChange={handleChange}
+          placeholder="John Doe"/>
+        <Input
+          label={"EMAIL"}
+          id="email"
+          name="email" 
+          type="email" 
+          value={formdata.email}
+          onChange={handleChange}
+          placeholder="user@mail.com"/>
+          <Input
+          label={"PHONE"}
+          id="phone"
+          name="phone" 
+          type="text" 
+          value={formdata.phone}
+          onChange={handleChange}
+          placeholder="999-999-999  "/>
+          <Input
+          label={"PASSWORD"}
+          id="password_digest"
+          name="password_digest" 
+          type="password" 
+          value={formdata.password_digest}
+          onChange={handleChange}
+          placeholder="******"/>
+          <P>At least 6 characters</P>
+          <Input
+          label={"PASSWORD CONFIRMATION"}
+          id="passwordConfirmation"
+          name="passwordConfirmation" 
+          type="password" 
+          value={formdata.passwordConfirmation}
+          onChange={handleChange}
+          placeholder="******"/>
+          <p>{error?error:null}</p>
+        <CreateAccountButton>Create Account</CreateAccountButton>
+      </form>
+    </DivForm>
+    </Div2>
+    
   )
 }
 
 
-export default function SignupPage() {
-  const [newUserType, SetNewUserType] = useState(null);
-  const [open, setOpen] = useState(false)
-  function HandleComponent() {
-    setOpen(!open)
-  }
-  return (
 
-    <>
-      {open === true ? <SignupForm /> : <Hidden HandleComponent={HandleComponent} />}
 
-    </>
-  )
+
+
+const P = styled.p`
+${typography.text.xs};
+color:${colors.gray.light};
+
+`;
+
+
+
+export default function SignupPage(){
+    const {userType, setUserType} = useAuth();
+    const [open,setOpen] = useState(false)
+     function HandleComponent(){
+        setOpen(!open)
+    }
+    return(
+        
+        <>
+            {open===true?<SignupForm/>:<Hidden HandleComponent={HandleComponent}/>}
+        
+        </>
+    )
+
 }
