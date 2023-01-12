@@ -39,9 +39,7 @@ function App() {
     }).catch(error=>{console.log(error)})
     
   }, []);
-  // getProperties().then(response=>{
-  //   console.log(response)
-  // })
+
   return (
     <Wrapper>
       <NavbarUnAuthenticated />
