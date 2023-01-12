@@ -5,9 +5,14 @@ import { useState, useEffect } from "react";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils";
 import { useAuth } from "../context/auth-context";
-import { LoginCardButton, ContactAdvertiserButton } from "../components/Button"
+import { LoginCardButton, ContactAdvertiserButton } from "../components/Button";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
+import Mapa from "../components/mapa";
 
+const BigWraper = styled.div`
+  display: flex;
+  flex-direction:column;
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -94,7 +99,7 @@ const FavoriteDiv = styled.div`
   padding: 0px;
   gap: 4px;
 
-  width: 101px;
+  width: 100px;
   height: 60px;
 `;
 
@@ -313,6 +318,7 @@ const Location = styled.div`
 const Map = styled.div`
   width: 760px;
   height: 760px;
+  margin-bottom: 32px;
   border: 1px solid ${colors.pink.dark}
 `;
 
@@ -356,113 +362,111 @@ export default function PropertyPage() {
   }
 
   return (
-    <Wrapper>
-      <InfoContainer>
-        <SliderContainer>
-          <LeftIcon>
-            {Icons.arrowLeft}
-          </LeftIcon>
-          <Image src={currentProperty.url}></Image>
-          <RightIcon>
-            {Icons.arrowRight}
-          </RightIcon>
-        </SliderContainer>
+    <BigWraper>
+      <Wrapper>
+        <InfoContainer>
+          <SliderContainer>
+            <LeftIcon>
+              {Icons.arrowLeft}
+            </LeftIcon>
+            <Image src={currentProperty.url}></Image>
+            <RightIcon>
+              {Icons.arrowRight}
+            </RightIcon>
+          </SliderContainer>
 
-        <InformationContainer>
-          <Category>
-            <Address>
-              <BigAddress>{currentProperty.property.address}</BigAddress>
-            </Address>
-            <TotalCost>
-              <Price><PriceText>{Icons.dollarCircle} {currentProperty.property.price}</PriceText></Price>
-              <Maintenance><MaintenanceText>+{currentProperty.property.maintenance}</MaintenanceText> </Maintenance>
-            </TotalCost>
-          </Category>
-          <Features>
-            <SubFeatures>
-              <Feature>
-                <FeatureText>
-                  <BiBed style={{ width: "20px", height: "20px" }} /> {currentProperty.property.bedrooms} bedrooms
-                </FeatureText>
-              </Feature>
-              <Feature>
-                <FeatureText>
-                  <BiBath style={{ width: "20px", height: "20px" }} /> {currentProperty.property.bathrooms} bathrooms
-                </FeatureText>
-              </Feature>
-              <Feature>
-                <FeatureText>
-                  <BiArea style={{ width: "20px", height: "20px" }} /> {currentProperty.property.area} m2
-                </FeatureText>
-              </Feature>
-              {currentProperty.property.pet_allowed ? (
+          <InformationContainer>
+            <Category>
+              <Address>
+                <BigAddress>{currentProperty.property.address}</BigAddress>
+              </Address>
+              <TotalCost>
+                <Price><PriceText>{Icons.dollarCircle} {currentProperty.property.price}</PriceText></Price>
+                <Maintenance><MaintenanceText>+{currentProperty.property.maintenance}</MaintenanceText> </Maintenance>
+              </TotalCost>
+            </Category>
+            <Features>
+              <SubFeatures>
                 <Feature>
                   <FeatureText>
-                    <FaPaw style={{ width: "20px", height: "20px" }} /> Pets allowed
+                    <BiBed style={{ width: "20px", height: "20px" }} /> {currentProperty.property.bedrooms} bedrooms
                   </FeatureText>
                 </Feature>
-              ) : ""}
+                <Feature>
+                  <FeatureText>
+                    <BiBath style={{ width: "20px", height: "20px" }} /> {currentProperty.property.bathrooms} bathrooms
+                  </FeatureText>
+                </Feature>
+                <Feature>
+                  <FeatureText>
+                    <BiArea style={{ width: "20px", height: "20px" }} /> {currentProperty.property.area} m2
+                  </FeatureText>
+                </Feature>
+                {currentProperty.property.pet_allowed ? (
+                  <Feature>
+                    <FeatureText>
+                      <FaPaw style={{ width: "20px", height: "20px" }} /> Pets allowed
+                    </FeatureText>
+                  </Feature>
+                ) : ""}
 
-            </SubFeatures>
-          </Features>
+              </SubFeatures>
+            </Features>
 
-          <About>
-            <AboutTitle>About this Property</AboutTitle>
-            <AboutParragraph>
-              {currentProperty.property.description}
-            </AboutParragraph>
-          </About>
-          <Location>
-            <AboutTitle>Location</AboutTitle>
-            <AboutParragraph>
-              {currentProperty.property.address}
-            </AboutParragraph>
-            <Map>
+            <About>
+              <AboutTitle>About this Property</AboutTitle>
+              <AboutParragraph>
+                {currentProperty.property.description}
+              </AboutParragraph>
+            </About>
+            <Location>
+              <AboutTitle>Location</AboutTitle>
+              <AboutParragraph>
+                {currentProperty.property.address}
+              </AboutParragraph>
+              <Map>
+                <Mapa />
+              </Map>
+            </Location>
+          </InformationContainer>
+        </InfoContainer>
+        <RightContainer>
+          {!user ? (
+            <UnlogedDiv>
+              <UnloginCard>
+                <TextCard1>Log in or Join to contact the advertiser</TextCard1>
+                <LoginCardButton handleLogin={handleLogin}>LOGIN</LoginCardButton>
+              </UnloginCard>
+            </UnlogedDiv>
+          ) : (
+              <LogedDiv>
+                {showContact ?
+                  (<LogedCard>
+                    <TitleSeeker>Contact information</TitleSeeker>
+                    <SeekerEmail>
+                      <SeekerSubtitle>Email</SeekerSubtitle>
+                      <SeekerInfo>xxxxx@mail.com</SeekerInfo>
+                    </SeekerEmail>
+                    <SeekerEmail>
+                      <SeekerSubtitle>Phone</SeekerSubtitle>
+                      <SeekerInfo>92392445</SeekerInfo>
+                    </SeekerEmail>
+                  </LogedCard>)
+                  : (<LogedCard>
+                    <ContactAdvertiserButton onClick={handleContactAdd}>CONTACT ADVERTISER</ContactAdvertiserButton>
+                    <FavoriteDiv>
+                      {Icons.heart}
+                      <TextCard2>Add to favorites</TextCard2>
+                    </FavoriteDiv>
+                  </LogedCard>)}
 
-            </Map>
-          </Location>
-        </InformationContainer>
-      </InfoContainer>
-      <RightContainer>
-        {!user ? (
-          <UnlogedDiv>
-            <UnloginCard>
-              <TextCard1>Log in or Join to contact the advertiser</TextCard1>
-              <LoginCardButton handleLogin={handleLogin}>LOGIN</LoginCardButton>
-            </UnloginCard>
-          </UnlogedDiv>
-        ) : (
-            <LogedDiv>
-              {showContact ?
-                (<LogedCard>
-                  <TitleSeeker>Contact information</TitleSeeker>
-                  <SeekerEmail>
-                    <SeekerSubtitle>Email</SeekerSubtitle>
-                    <SeekerInfo>xxxxx@mail.com</SeekerInfo>
-                  </SeekerEmail>
-                  <SeekerEmail>
-                    <SeekerSubtitle>Phone</SeekerSubtitle>
-                    <SeekerInfo>92392445</SeekerInfo>
-                  </SeekerEmail>
-                </LogedCard>)
-                : (<LogedCard>
-                  <ContactAdvertiserButton onClick={handleContactAdd}>CONTACT ADVERTISER</ContactAdvertiserButton>
-                  <FavoriteDiv>
-                    {Icons.heart}
-                    <TextCard2>Add to favorites</TextCard2>
-                  </FavoriteDiv>
-                </LogedCard>)}
-
-            </LogedDiv>
-          )
-
-
-        }
-
-
-      </RightContainer>
+              </LogedDiv>
+            )
+          }
+        </RightContainer>
+      </Wrapper>
       <SectionFooter2 />
-    </Wrapper>
+    </BigWraper>
   )
 }
 

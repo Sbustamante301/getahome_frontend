@@ -16,37 +16,36 @@ import SavedPropertiesPage from "./pages/saved_properties-page";
 
 
 
-
 const Wrapper = styled.div``;
 
 function App() {
 
-  const {setProperties,user, isOpenModal, userType} = useAuth()
+  const { setProperties, user, isOpenModal, userType } = useAuth()
   useEffect(() => {
-    getProperties().then(response=>{
-    setProperties(response)
-  
-    }).catch(error=>{console.log(error)})
-    
-  },[]);
+    getProperties().then(response => {
+      setProperties(response)
+
+    }).catch(error => { console.log(error) })
+
+  }, []);
 
 
 
   return (
     <Wrapper>
-      { !user ? <NavbarUnAuthenticated /> : <NavbarAuthenticated /> }
+      {!user ? <NavbarUnAuthenticated /> : <NavbarAuthenticated />}
       {
-        isOpenModal ? <LoginModal/> :
-        <Routes>
-          <Route index element={<Navigate to="home" />} />
-          <Route path="/home" element= {<HomePage />}/>
-          <Route path="/signup" element= {<SignupPage />}/>
-          <Route path="/properties" element= {<PropertiesPage />}/>
-          <Route path="/properties/:id" element= {<PropertyPage />}/>
-          <Route path="/my_properties" element= {<MyPropertiesPage />}/>
-          <Route path="/saved_properties" element= {<SavedPropertiesPage />}/>
+        isOpenModal ? <LoginModal /> :
+          <Routes>
+            <Route index element={<Navigate to="home" />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/properties" element={<PropertiesPage />} />
+            <Route path="/properties/:id" element={<PropertyPage />} />
+            <Route path="/my_properties" element={<MyPropertiesPage />} />
+            <Route path="/saved_properties" element={<SavedPropertiesPage />} />
 
-        </Routes>
+          </Routes>
       }
     </Wrapper>
 
