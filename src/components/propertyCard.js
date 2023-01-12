@@ -229,8 +229,8 @@ export function PropertyCard({ property, showProperty}) {
           </InformationContainer>
 
         </CardContainer>
-      {/* {/* </Container> */}
-    </>
+      </Container>
+    </Wrapp>
 
   )
 }
