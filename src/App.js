@@ -13,7 +13,7 @@ import { useAuth } from "./context/auth-context";
 import LoginModal from "./components/login-modal";
 import MyPropertiesPage from "./pages/my-properties-page";
 import SavedPropertiesPage from "./pages/saved_properties-page";
-
+import PruebaMapa from "./pages/mapa";
 
 
 
@@ -21,32 +21,33 @@ const Wrapper = styled.div``;
 
 function App() {
 
-  const {setProperties,user, isOpenModal, userType} = useAuth()
+  const { setProperties, user, isOpenModal, userType } = useAuth()
   useEffect(() => {
-    getProperties().then(response=>{
-    setProperties(response)
-  
-    }).catch(error=>{console.log(error)})
-    
-  },[]);
+    getProperties().then(response => {
+      setProperties(response)
+
+    }).catch(error => { console.log(error) })
+
+  }, []);
 
 
 
   return (
     <Wrapper>
-      { !user ? <NavbarUnAuthenticated /> : <NavbarAuthenticated /> }
+      {!user ? <NavbarUnAuthenticated /> : <NavbarAuthenticated />}
       {
-        isOpenModal ? <LoginModal/> :
-        <Routes>
-          <Route index element={<Navigate to="home" />} />
-          <Route path="/home" element= {<HomePage />}/>
-          <Route path="/signup" element= {<SignupPage />}/>
-          <Route path="/properties" element= {<PropertiesPage />}/>
-          <Route path="/properties/:id" element= {<PropertyPage />}/>
-          <Route path="/my_properties" element= {<MyPropertiesPage />}/>
-          <Route path="/saved_properties" element= {<SavedPropertiesPage />}/>
+        isOpenModal ? <LoginModal /> :
+          <Routes>
+            <Route index element={<Navigate to="home" />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/properties" element={<PropertiesPage />} />
+            <Route path="/properties/:id" element={<PropertyPage />} />
+            <Route path="/my_properties" element={<MyPropertiesPage />} />
+            <Route path="/saved_properties" element={<SavedPropertiesPage />} />
+            <Route path="/prueba" element={<PruebaMapa />} />
 
-        </Routes>
+          </Routes>
       }
     </Wrapper>
 
