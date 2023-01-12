@@ -4,7 +4,7 @@ import { FaPaw } from "react-icons/fa"
 import { useState, useEffect } from "react";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils";
-import { showProperty } from "../services/properties-service";
+import { useAuth } from "../context/auth-context";
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,6 +22,15 @@ const InfoContainer = styled.div`
   justify-content: center;
 
   width: 80%;
+`;
+
+// width: 80%;
+const RightContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
 `;
 
 const SliderContainer = styled.div`
@@ -138,6 +147,58 @@ const Feature = styled.div`
 
 `;
 
+const About = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 760px;
+  height: 204px;
+`;
+
+const AboutTitle = styled.div`
+  display: flex;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 760px;
+  height: 36px;
+  ${typography.head.xs}
+  color:${colors.pink.dark}
+`;
+
+const AboutParragraph = styled.div`
+  display: flex;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 760px;
+  height: 168px;
+  ${typography.head.sm}
+  color:${colors.gray.dark}
+`;
+
+const Location = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 760px;
+  height: 828px;
+`;
+
+const Map = styled.div`
+  width: 760px;
+  height: 760px;
+  border: 1px solid ${colors.pink.dark}
+`;
+
 const BigAddress = styled.h1`
   ${typography.head.md}
 `;
@@ -163,69 +224,81 @@ const RightIcon = styled.div`
 `;
 
 export default function PropertyPage() {
-  // const [property, setProperty] = useState(null);
-  // console.log('PROPERTY', property)
-
-  // useEffect(() => {
-  //   showProperty(1).then(setProperty);
-  // }, []);
-
+  const { currentProperty } = useAuth();
 
   return (
     <Wrapper>
       <InfoContainer>
-        <h1>Propery Page</h1>
         <SliderContainer>
           <LeftIcon>
             {Icons.arrowLeft}
           </LeftIcon>
-          <Image src={'https://www.musicmundial.com/wp-content/uploads/2023/01/Lee-know-de-Stray-Kids-sorprende-a-sus-fans-estadounidenses-por-su-extrema-belleza.jpg'}></Image>
+          <Image src={currentProperty.url}></Image>
           <RightIcon>
             {Icons.arrowRight}
           </RightIcon>
         </SliderContainer>
+
         <InformationContainer>
           <Category>
             <Address>
-              <BigAddress>La direccion que bajeee</BigAddress>
+              <BigAddress>{currentProperty.property.address}</BigAddress>
             </Address>
             <TotalCost>
-              <Price><PriceText>{Icons.dollarCircle} 3000</PriceText></Price>
-              <Maintenance><MaintenanceText>+100</MaintenanceText> </Maintenance>
+              <Price><PriceText>{Icons.dollarCircle} {currentProperty.property.price}</PriceText></Price>
+              <Maintenance><MaintenanceText>+{currentProperty.property.maintenance}</MaintenanceText> </Maintenance>
             </TotalCost>
           </Category>
           <Features>
             <SubFeatures>
               <Feature>
                 <FeatureText>
-                  <BiBed style={{ width: "20px", height: "20px" }} /> 4 bedrooms
+                  <BiBed style={{ width: "20px", height: "20px" }} /> {currentProperty.property.bedrooms} bedrooms
                 </FeatureText>
               </Feature>
               <Feature>
                 <FeatureText>
-                  <BiBath style={{ width: "20px", height: "20px" }} /> 4 bathrooms
+                  <BiBath style={{ width: "20px", height: "20px" }} /> {currentProperty.property.bathrooms} bathrooms
                 </FeatureText>
               </Feature>
               <Feature>
                 <FeatureText>
-                  <BiArea style={{ width: "20px", height: "20px" }} /> 180 m2
+                  <BiArea style={{ width: "20px", height: "20px" }} /> {currentProperty.property.area} m2
                 </FeatureText>
               </Feature>
-              <Feature>
-                <FeatureText>
-                  <FaPaw style={{ width: "20px", height: "20px" }} /> Pets allowed
+              {currentProperty.property.pet_allowed ? (
+                <Feature>
+                  <FeatureText>
+                    <FaPaw style={{ width: "20px", height: "20px" }} /> Pets allowed
                 </FeatureText>
-              </Feature>
+                </Feature>
+              ) : ""}
+
             </SubFeatures>
           </Features>
+
+          <About>
+            <AboutTitle>About this Property</AboutTitle>
+            <AboutParragraph>
+              {currentProperty.property.description}
+            </AboutParragraph>
+          </About>
+          <Location>
+            <AboutTitle>Location</AboutTitle>
+            <AboutParragraph>
+              {currentProperty.property.address}
+            </AboutParragraph>
+            <Map>
+
+            </Map>
+          </Location>
         </InformationContainer>
-
-
       </InfoContainer>
-      {/* <RightContainer>
+      <RightContainer>
 
-      </RightContainer> */}
+      </RightContainer>
 
     </Wrapper>
   )
 }
+

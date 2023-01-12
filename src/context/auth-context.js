@@ -6,8 +6,8 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
-  const [properties, setProperties]= useState([]);
-  const [userType, setUserType] = useState(user.user_type || null)
+  const [properties, setProperties] = useState([]);
+  const [userType, setUserType] = useState(null)
   const [currentProperty, setCurrentProperty] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [error, setError] = useState(null)
@@ -16,9 +16,9 @@ function AuthProvider({ children }) {
   // const navigate = useNavigate();
 
   useEffect(() => {
-   
+
     getUser()
-      .then(response =>{
+      .then(response => {
         setUser(response);
 
       })
@@ -30,8 +30,8 @@ function AuthProvider({ children }) {
       setUser(user);
       setUserType(user.user_type);
       setIsOpenModal(false);
-      sessionStorage.setItem("user",JSON.stringify(user))
-    }).catch(error=>{
+      sessionStorage.setItem("user", JSON.stringify(user))
+    }).catch(error => {
       setError(error.message)
     });
   }
@@ -60,8 +60,8 @@ function AuthProvider({ children }) {
         userType,
         error,
         setError,
-        login:handleLogin,
-        logout:handleLogout,
+        login: handleLogin,
+        logout: handleLogout,
         signup: handleSignup,
         setUser,
         setIsOpenModal,
