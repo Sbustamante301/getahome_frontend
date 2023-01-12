@@ -47,8 +47,7 @@ const CardContainer = styled.div`
   position:relative;
   width: 300px;
   height: 360px;
-  // left: 8px;
-  // top: 8px;
+
 
   display: flex;
   flex-direction: column;
@@ -155,10 +154,10 @@ const Features = styled.div`
   flex-direction: row;
   align-items: flex-start;
   padding: 0px;
-  gap: 16px;
-  margin-top: 26px;
+  gap: 18px;
+  margin-top: 16px;
   width: 235px;
-  height: 24px;
+  height: 18px;
   
 `;
 
@@ -191,7 +190,7 @@ export function PropertyCard({ property, showProperty}) {
     
 
     <Wrapp onClick={showProperty}>
-      <Container>
+      {/* <Container> */}
 
         {/* <TextContainer>
           <PrepTitle>Find an Appartment you Love</PrepTitle>
@@ -202,7 +201,7 @@ export function PropertyCard({ property, showProperty}) {
             <Property src={property.url} />
             <Tag>
               {Icons.coins}
-              For Rental
+              {property.property.mode === 1 ? "For Sale" : "For Rental" }
             </Tag>
           </ImgContainer>
           <InformationContainer>
@@ -229,7 +228,7 @@ export function PropertyCard({ property, showProperty}) {
           </InformationContainer>
 
         </CardContainer>
-      </Container>
+      {/* </Container> */}
     </Wrapp>
 
   )
