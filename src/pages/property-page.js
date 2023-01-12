@@ -6,6 +6,7 @@ import { colors, typography } from "../styles";
 import { Icons } from "../utils";
 import { useAuth } from "../context/auth-context";
 import { LoginCardButton, ContactAdvertiserButton } from "../components/Button"
+import { SectionFooter2 } from "../components/sections/sectionFooter";
 
 const Wrapper = styled.div`
   display: flex;
@@ -460,7 +461,7 @@ export default function PropertyPage() {
 
 
       </RightContainer>
-
+      <SectionFooter2 />
     </Wrapper>
   )
 }

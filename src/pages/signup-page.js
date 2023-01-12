@@ -1,6 +1,6 @@
-import { colors,typography} from "../styles"
+import { colors, typography } from "../styles"
 import styled from "@emotion/styled"
-import SectionFooter from "../components/sections/sectionFooter"
+import { SectionFooter2 } from "../components/sections/sectionFooter"
 import landlord from "../assets/landlord.svg"
 import homeseeker from "../assets/homeseeker.svg"
 import { Icons } from "../utils"
@@ -31,13 +31,13 @@ const Section2 = styled.div`
     
 `;
 
-const Div= styled.div`
+const Div = styled.div`
 background: rgb(255,255,255);
 background: linear-gradient(360deg, rgba(255,255,255,1) 50%, rgba(244, 143, 177, 0.15) 50%);
 width:100%;
 height:704px;
 `;
-const Div2= styled.div`
+const Div2 = styled.div`
 background: rgb(255,255,255);
 background: linear-gradient(360deg, rgba(255,255,255,1) 50%, rgba(244, 143, 177, 0.15) 50%);
 width:100%;
@@ -68,10 +68,10 @@ height:88px;
 
 `;
 
-const Img= styled.img`
+const Img = styled.img`
 `;
 
-const ImgDiv= styled.div`
+const ImgDiv = styled.div`
 width:280px;
 height:274px;
 display:flex;
@@ -88,40 +88,40 @@ padding:0px;
 
 `;
 
-const ImgTitle=styled.div`
+const ImgTitle = styled.div`
 ${typography.head.xs}
 ${colors.gray.dark}
 
 `;
 
-const ImgSubtitle=styled.div`
+const ImgSubtitle = styled.div`
 ${typography.head.xxxs}
 ${colors.gray.dark}
 `;
 
- function Hidden({HandleComponent}){
-    return(
-        <Div>
-        <Section1>
-            <Title>Selecciona el perfil con el que te identificas</Title>
-                <SubTitle>Que estas buscando?</SubTitle>
-        </Section1>
-        <Section2>
-            <ImgDiv onClick={HandleComponent}>
-                <Img src={landlord}/>
-                <ImgTitle>Landlord</ImgTitle>
-                <ImgSubtitle>You want to rent or sell a home</ImgSubtitle>
-            </ImgDiv>
-            <ImgDiv onClick={HandleComponent}>
-                <Img src={homeseeker}/>
-                <ImgTitle>Homeseeker</ImgTitle>
-                <ImgSubtitle>You want to find a home</ImgSubtitle>
-            </ImgDiv>
-        </Section2>
-        <SectionFooter/>
-        </Div>
+function Hidden({ HandleComponent }) {
+  return (
+    <Div>
+      <Section1>
+        <Title>Selecciona el perfil con el que te identificas</Title>
+        <SubTitle>Que estas buscando?</SubTitle>
+      </Section1>
+      <Section2>
+        <ImgDiv onClick={HandleComponent}>
+          <Img src={landlord} />
+          <ImgTitle>Landlord</ImgTitle>
+          <ImgSubtitle>You want to rent or sell a home</ImgSubtitle>
+        </ImgDiv>
+        <ImgDiv onClick={HandleComponent}>
+          <Img src={homeseeker} />
+          <ImgTitle>Homeseeker</ImgTitle>
+          <ImgSubtitle>You want to find a home</ImgSubtitle>
+        </ImgDiv>
+      </Section2>
+      <SectionFooter2 />
+    </Div>
 
-    )
+  )
 }
 
 const Form = styled.form`
@@ -141,7 +141,7 @@ padding:70px;
 
 `;
 
-const DivForm=styled.div`
+const DivForm = styled.div`
 background:${colors.white};
 border-width:thin;
 box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
@@ -157,7 +157,7 @@ padding:70px;
 
 `;
 
-const FormTitle= styled.div`
+const FormTitle = styled.div`
 
 
 `;
@@ -210,94 +210,97 @@ ${typography.text.xxs};
 //     )
 // }
 
-function SignupForm(){
-    const [formdata, setFormdata] = useState({
-        name:"",
-        email:"",
-        phone:"",
-        password_digest:"",
-        passwordConfirmation:"",
-      })
+function SignupForm() {
+  const [formdata, setFormdata] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password_digest: "",
+    passwordConfirmation: "",
+  })
 
 
-      function handleChange(event){
-        const {name, value} = event.target
-        setFormdata({...formdata, [name]:value})
-      }
-      
-      function handleSubmit(event){
-        const {passwordConfirmation,...newForm} = formdata;
-        event.preventDefault();
-        createUser(formdata).then(console.log).catch(console.log)
-      }
-      return(
-        <Div2>
+  function handleChange(event) {
+    const { name, value } = event.target
+    setFormdata({ ...formdata, [name]: value })
+  }
+
+  function handleSubmit(event) {
+    const { passwordConfirmation, ...newForm } = formdata;
+    event.preventDefault();
+    createUser(formdata).then(console.log).catch(console.log)
+  }
+  return (
+    <>
+      <Div2>
         <DivForm>
-      <form onSubmit={handleSubmit}>
-        <Input
-          label={"NAME"}
-          id="name"
-          name="name" 
-          type="text" 
-          value={formdata.name}
-          onChange={handleChange}
-          placeholder="John Doe"/>
-        <Input
-          label={"EMAIL"}
-          id="email"
-          name="email" 
-          type="email" 
-          value={formdata.email}
-          onChange={handleChange}
-          placeholder="user@mail.com"/>
-          <Input
-          label={"PHONE"}
-          id="phone"
-          name="phone" 
-          type="text" 
-          value={formdata.phone}
-          onChange={handleChange}
-          placeholder="999-999-999  "/>
-          <Input
-          label={"PASSWORD"}
-          id="password_digest"
-          name="password_digest" 
-          type="password" 
-          value={formdata.password_digest}
-          onChange={handleChange}
-          placeholder="******"/>
-          <Input
-          label={"PASSWORD CONFIRMATION"}
-          id="passwordConfirmation"
-          name="passwordConfirmation" 
-          type="password" 
-          value={formdata.passwordConfirmation}
-          onChange={handleChange}
-          placeholder="******"/>
-        <CreateAccountButton>Create Account</CreateAccountButton>
-      </form>
-    </DivForm>
-    </Div2>
-    
+          <form onSubmit={handleSubmit}>
+            <Input
+              label={"NAME"}
+              id="name"
+              name="name"
+              type="text"
+              value={formdata.name}
+              onChange={handleChange}
+              placeholder="John Doe" />
+            <Input
+              label={"EMAIL"}
+              id="email"
+              name="email"
+              type="email"
+              value={formdata.email}
+              onChange={handleChange}
+              placeholder="user@mail.com" />
+            <Input
+              label={"PHONE"}
+              id="phone"
+              name="phone"
+              type="text"
+              value={formdata.phone}
+              onChange={handleChange}
+              placeholder="999-999-999  " />
+            <Input
+              label={"PASSWORD"}
+              id="password_digest"
+              name="password_digest"
+              type="password"
+              value={formdata.password_digest}
+              onChange={handleChange}
+              placeholder="******" />
+            <Input
+              label={"PASSWORD CONFIRMATION"}
+              id="passwordConfirmation"
+              name="passwordConfirmation"
+              type="password"
+              value={formdata.passwordConfirmation}
+              onChange={handleChange}
+              placeholder="******" />
+            <CreateAccountButton>Create Account</CreateAccountButton>
+          </form>
+        </DivForm>
+      </Div2>
+      <SectionFooter2 />
+    </>
 
 
 
 
-      )
+
+  )
 }
 
 
-export default function SignupPage(){
-    const [newUserType,SetNewUserType] = useState(null);
-    const [open,setOpen] = useState(false)
-     function HandleComponent(){
-        setOpen(!open)
-    }
-    return(
-        
-        <>
-            {open===true?<SignupForm/>:<Hidden HandleComponent={HandleComponent}/>}
-        
-        </>
-    )
+export default function SignupPage() {
+  const [newUserType, SetNewUserType] = useState(null);
+  const [open, setOpen] = useState(false)
+  function HandleComponent() {
+    setOpen(!open)
+  }
+  return (
+
+    <>
+      {open === true ? <SignupForm /> : <Hidden HandleComponent={HandleComponent} />}
+
+    </>
+  )
 }
