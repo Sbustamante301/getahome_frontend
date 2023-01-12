@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 import logo from "../../assets/Logo.svg"
 import { RiHeartFill, RiGithubFill, RiReactjsLine } from "react-icons/ri";
 import { DiRuby } from "react-icons/di";
-import { useAuth } from "../../context/auth-context";
 import { colors, typography } from "../../styles";
 import { Icons } from "../../utils";
 
@@ -152,84 +151,85 @@ const FooterContainer = styled.div`
 `;
 
 
-export default function SectionFooter() {
-  const { user } = useAuth();
+export function SectionFooter() {
 
   return (
-    <>
-      {user ?
-        (<Footer2>
-          <FooterInfoContainer>
-            <LeftContainer>
-              <img src={logo} alt="image1" />
-              <FooterText>© 202X-Find that Home</FooterText>
-              <FooterText>Codeable - Cohort8 Final Project</FooterText>
-            </LeftContainer>
+    <Footer>
+      <Div1>
+        <FooterTitle>© 202X-Find that Home</FooterTitle>
+        <FooterTitle>Source Code</FooterTitle>
+        <FooterTitle>Codeable-Cohort X Final Project</FooterTitle>
+      </Div1>
+      <Div2>
+        <FooterContainer>
+          <LeftIcon>{Icons.ruby}</LeftIcon>
+          <FooterTitle>Ruby on Rails REST API</FooterTitle>
+        </FooterContainer>
 
-            <MembersContainer>
-              <SubtitleFooter>Build with <RiHeartFill style={{ color: colors.pink.dark }} /> by:</SubtitleFooter>
-              <MembersGrid>
-                <a href='https://github.com/JesusBarboza1994' style={{ textDecoration: 'none' }}>
-                  <MemberGit1>
-                    <RiGithubFill style={{ width: '20px', height: '20px', color: colors.gray.medium }} />
-                    <FooterText style={{ marginLeft: '4px' }} >Jesus Barboza</FooterText>
-                  </MemberGit1>
-                </a>
-                <a href='https://github.com/Olesa0896' style={{ textDecoration: 'none' }}>
-                  <MemberGit2>
-                    <RiGithubFill style={{ width: '20px', height: '20px', color: colors.gray.medium }} />
-                    <FooterText style={{ marginLeft: '4px' }} >Olenka Sánchez</FooterText>
-                  </MemberGit2>
-                </a>
-                <a href='https://github.com/Sbustamante301' style={{ textDecoration: 'none' }}>
-                  <MemberGit3>
-                    <RiGithubFill style={{ width: '20px', height: '20px', color: colors.gray.medium }} />
-                    <FooterText style={{ marginLeft: '4px' }} >Sebas Bustamante</FooterText>
-                  </MemberGit3>
-                </a>
-                <a href='https://github.com/titaRuiz1' style={{ textDecoration: 'none' }}>
-                  <MemberGit4>
-                    <RiGithubFill style={{ width: '20px', height: '20px', color: colors.gray.medium }} />
-                    <FooterText style={{ marginLeft: '4px' }} >Tita Ruiz</FooterText>
-                  </MemberGit4>
-                </a>
-              </MembersGrid>
-            </MembersContainer>
+        <FooterContainer>
+          <LeftIcon>{Icons.react}</LeftIcon>
+          <FooterTitle>React Responsive SPA</FooterTitle>
+        </FooterContainer>
 
-            <RightContainer>
-              <SubtitleFooter>Source code:</SubtitleFooter>
-              <FooterText >
-                <DiRuby style={{ width: '16px', height: '16px', marginRight: '4px', color: colors.gray.medium }} />
-                Ruby on Rails REST API
-              </FooterText>
-              <FooterText>
-                <RiReactjsLine style={{ width: '16px', height: '16px', marginRight: '4px', color: colors.gray.medium }} />
-                React Responsive SPA
-              </FooterText>
-            </RightContainer>
+      </Div2>
+    </Footer>
+  )
+};
 
-          </FooterInfoContainer>
-        </Footer2>)
-        :
-        (<Footer>
-          <Div1>
-            <FooterTitle>© 202X-Find that Home</FooterTitle>
-            <FooterTitle>Source Code</FooterTitle>
-            <FooterTitle>Codeable-Cohort X Final Project</FooterTitle>
-          </Div1>
-          <Div2>
-            <FooterContainer>
-              <LeftIcon>{Icons.ruby}</LeftIcon>
-              <FooterTitle>Ruby on Rails REST API</FooterTitle>
-            </FooterContainer>
+export function SectionFooter2() {
 
-            <FooterContainer>
-              <LeftIcon>{Icons.react}</LeftIcon>
-              <FooterTitle>React Responsive SPA</FooterTitle>
-            </FooterContainer>
+  return (
+    <Footer2>
+      <FooterInfoContainer>
+        <LeftContainer>
+          <img src={logo} alt="image1" />
+          <FooterText>© 202X-Find that Home</FooterText>
+          <FooterText>Codeable - Cohort8 Final Project</FooterText>
+        </LeftContainer>
 
-          </Div2>
-        </Footer>)}
-    </>
+        <MembersContainer>
+          <SubtitleFooter>Build with <RiHeartFill style={{ color: colors.pink.dark }} /> by:</SubtitleFooter>
+          <MembersGrid>
+            <a href='https://github.com/JesusBarboza1994' style={{ textDecoration: 'none' }}>
+              <MemberGit1>
+                <RiGithubFill style={{ width: '20px', height: '20px', color: colors.gray.medium }} />
+                <FooterText style={{ marginLeft: '4px' }} >Jesus Barboza</FooterText>
+              </MemberGit1>
+            </a>
+            <a href='https://github.com/Olesa0896' style={{ textDecoration: 'none' }}>
+              <MemberGit2>
+                <RiGithubFill style={{ width: '20px', height: '20px', color: colors.gray.medium }} />
+                <FooterText style={{ marginLeft: '4px' }} >Olenka Sánchez</FooterText>
+              </MemberGit2>
+            </a>
+            <a href='https://github.com/Sbustamante301' style={{ textDecoration: 'none' }}>
+              <MemberGit3>
+                <RiGithubFill style={{ width: '20px', height: '20px', color: colors.gray.medium }} />
+                <FooterText style={{ marginLeft: '4px' }} >Sebas Bustamante</FooterText>
+              </MemberGit3>
+            </a>
+            <a href='https://github.com/titaRuiz1' style={{ textDecoration: 'none' }}>
+              <MemberGit4>
+                <RiGithubFill style={{ width: '20px', height: '20px', color: colors.gray.medium }} />
+                <FooterText style={{ marginLeft: '4px' }} >Tita Ruiz</FooterText>
+              </MemberGit4>
+            </a>
+          </MembersGrid>
+        </MembersContainer>
+
+        <RightContainer>
+          <SubtitleFooter>Source code:</SubtitleFooter>
+          <FooterText >
+            <DiRuby style={{ width: '16px', height: '16px', marginRight: '4px', color: colors.gray.medium }} />
+            Ruby on Rails REST API
+          </FooterText>
+          <FooterText>
+            <RiReactjsLine style={{ width: '16px', height: '16px', marginRight: '4px', color: colors.gray.medium }} />
+            React Responsive SPA
+          </FooterText>
+        </RightContainer>
+
+      </FooterInfoContainer>
+    </Footer2>
   )
 }

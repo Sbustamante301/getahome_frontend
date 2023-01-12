@@ -2,7 +2,7 @@ import SectionMeetHome from "../components/sections/sectionMeetHome";
 import styled from "@emotion/styled";
 import { PropertyCard } from "../components/propertyCard"
 import SectionMeetTeam from "../components/sections/sectionmeetTeam";
-import SectionFooter from "../components/sections/sectionFooter";
+import { SectionFooter } from "../components/sections/sectionFooter";
 import SectionSignup from "../components/sections/sectionSignup";
 import { useAuth } from "../context/auth-context";
 import { useEffect, useState } from "react";
@@ -41,29 +41,29 @@ const PropertyContainer = styled.div`
   margin-top:2rem;
 `
 
-function HomePage(){
+function HomePage() {
   const { properties } = useAuth();
-  const randomProperties = properties.filter((_property, index)=> index<3)
+  const randomProperties = properties.filter((_property, index) => index < 3)
 
   return (
     <>
-      <SectionMeetHome/>
+      <SectionMeetHome />
       <Section2>
         <TextContainer>
           <PrepTitle>Find an Appartment you Love</PrepTitle>
           <Title>Homes for rent at the best prices</Title>
         </TextContainer>
         <PropertyContainer>
-          {randomProperties.map((property, index) =>{
+          {randomProperties.map((property, index) => {
             return <PropertyCard key={`r${index}`} property={property} />
           })}
         </PropertyContainer>
-        
+
       </Section2>
-      <SectionSignup/>
-      
-      <SectionMeetTeam/>
-      <SectionFooter/>
+      <SectionSignup />
+
+      <SectionMeetTeam />
+      <SectionFooter />
     </>
   )
 }
