@@ -13,7 +13,6 @@ import { useAuth } from "./context/auth-context";
 import LoginModal from "./components/login-modal";
 import MyPropertiesPage from "./pages/my-properties-page";
 import SavedPropertiesPage from "./pages/saved_properties-page";
-import PruebaMapa from "./pages/mapa";
 
 
 
@@ -45,7 +44,6 @@ function App() {
             <Route path="/properties/:id" element={<PropertyPage />} />
             <Route path="/my_properties" element={<MyPropertiesPage />} />
             <Route path="/saved_properties" element={<SavedPropertiesPage />} />
-            <Route path="/prueba" element={<PruebaMapa />} />
 
           </Routes>
       }
