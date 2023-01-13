@@ -32,7 +32,7 @@ const Wrapper = styled.div``;
 
 function App() {
 
-  const {setProperties,user, isOpenModal, userType,setSavedProperty,setMyProperty} = useAuth()
+  const { setProperties, user, isOpenModal, userType, setSavedProperty, setMyProperty } = useAuth()
 
 
   useEffect(() => {
@@ -44,15 +44,16 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getSaved().then(response=>{
-    setSavedProperty(response)
-    sessionStorage.setItem("savedProperty", JSON.stringify(response))
-  
-    }).catch(error=>{console.log(error)})
-    
-  },[]);
+    getSaved().then(response => {
+      setSavedProperty(response)
+      sessionStorage.setItem("savedProperty", JSON.stringify(response))
+
+    }).catch(error => { console.log(error) })
+
+  }, []);
 
   useEffect(() => {
+
     getMyProperties().then(response=>{
     setMyProperty(response)
     console.log(response)
@@ -77,7 +78,7 @@ function App() {
             <Route path="/properties/:id" element={<PropertyPage />} />
             <Route path="/my_properties" element={<MyPropertiesPage />} />
             <Route path="/saved_properties" element={<SavedPropertiesPage />} />
-            <Route path="/edit" element={<EditPropertyPage />} />
+            <Route path="/properties/edit/:id" element={<EditPropertyPage />} />
             <Route path="/profile" element={<ProfilePage />} />
 
           </Routes>

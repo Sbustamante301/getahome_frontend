@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth-context"
 import { colors, typography } from "../styles";
 import { Icons } from "../utils"
-import { EditCardButton, CloseCardButton } from "../components/Button"
-import { updateProperty } from "../services/properties-service";
+import { EditCardButton, CloseCardButton, RestoreCardButton, DeleteCardButton } from "../components/Button"
+import { updateProperty, deleteProperty } from "../services/properties-service";
 
 const Wrapp = styled.div`
   display: flex;
@@ -205,21 +205,38 @@ const Pet = styled.div`
 `;
 
 export function PropertyCard({ property, showProperty }) {
+
   const { user, savedProperty, setMyProperty, myProperty } = useAuth();
-  
+
   let index_favorites = [];
   let localSavedProperty = [];
   if (savedProperty.favorites) localSavedProperty = [...savedProperty.favorites]
-  localSavedProperty.map(property=>{
+  localSavedProperty.map(property => {
     index_favorites.push(property.property.id)
-  
+
   })
 
 
   function handleClose(event) {
     event.preventDefault();
     updateProperty(property.property.id, { status: false })
-      .then((data) => console.log(data))
+      .then(response => { console.log('CARD CERRADA', response) })
+      .catch(console.log)
+  }
+
+  function handleRestore(event) {
+    event.preventDefault();
+    console.log('ENTRE AL RESTORE')
+    updateProperty(property.property.id, { status: true })
+      .then(response => { console.log('CARD RESTAURADA', response) })
+      .catch(console.log)
+  }
+
+  function handleTrash(event) {
+    event.preventDefault();
+    console.log('ENTRE AL DELETE')
+    deleteProperty(property.property.id)
+      .then((data) => console.log('CardBORRADA', data))
       .catch(console.log)
     
     setMyProperty({...myProperty,"active": myProperty.active.filter(myProp=>myProp.id !== property.property.id)})
@@ -261,20 +278,26 @@ export function PropertyCard({ property, showProperty }) {
               <Bath>{Icons.bath} {property.property.bathrooms}</Bath>
               <Area>{Icons.area} {property.property.area} m2</Area>
               <Pet>{property.property.pet_allowed ? Icons.paw : null}</Pet>
-              {index_favorites.includes( property.property.id) ? Icons.heart : null}
+              {index_favorites.includes(property.property.id) ? Icons.heart : null}
             </Features>
           </InformationContainer>
           {(user?.user_type === 'landlord' && property.property.user_id === user.id) ?
-
-            (<LowFrame>
-              <ButtonContainer>
-                <Link style={{ textDecoration: "none" }} to={`/properties/edit/${property.property.id}`}>
-                  <EditCardButton>EDIT</EditCardButton>
-                </Link>
-                <CloseCardButton onClick={handleClose}>CLOSE</CloseCardButton>
-              </ButtonContainer>
-            </LowFrame>)
-            : ""}
+            property.property.status ?
+              (<LowFrame>
+                <ButtonContainer>
+                  <Link style={{ textDecoration: "none" }} to={`/properties/edit/${property.property.id}`}>
+                    <EditCardButton>EDIT</EditCardButton>
+                  </Link>
+                  <CloseCardButton onClick={handleClose}>CLOSE</CloseCardButton>
+                </ButtonContainer>
+              </LowFrame>)
+              : (<LowFrame>
+                <ButtonContainer>
+                  <RestoreCardButton onClick={handleRestore}>RESTORE</RestoreCardButton>
+                  <DeleteCardButton onClick={handleTrash}>DELETE</DeleteCardButton>
+                </ButtonContainer>
+              </LowFrame>
+              ) : null}
         </CardContainer>
       </Container>
     </Wrapp>
