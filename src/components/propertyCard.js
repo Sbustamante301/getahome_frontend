@@ -157,7 +157,7 @@ const Features = styled.div`
   padding: 0px;
   gap: 18px;
   margin-top: 16px;
-  width: 235px;
+  width: 355px;
   height: 18px;
   
 `;
@@ -200,6 +200,10 @@ const Area = styled.div`
 `;
 
 const Pet = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const Heart = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -286,7 +290,7 @@ export function PropertyCard({ property, showProperty }) {
               <Bath>{Icons.bath} {property.property.bathrooms}</Bath>
               <Area>{Icons.area} {property.property.area} m2</Area>
               <Pet>{property.property.pet_allowed ? Icons.paw : null}</Pet>
-              {index_favorites.includes(property.property.id) ? Icons.heart : null}
+              <Heart>{index_favorites.includes(property.property.id) ? Icons.heartDark : null}</Heart>
             </Features>
           </InformationContainer>
           </Link>

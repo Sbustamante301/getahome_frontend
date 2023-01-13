@@ -5,6 +5,7 @@ import { useAuth } from "../context/auth-context";
 import { PropertyCard } from "../components/propertyCard";
 import styled from "@emotion/styled";
 import { colors, typography } from "../styles";
+import { SectionFooter2 } from "../components/sections/sectionFooter";
 
 
 const Wrapper = styled.div`
@@ -92,6 +93,7 @@ export default function SavedPropertiesPage() {
           })
           : null}
       </ContainerList>
+      <SectionFooter2 />
     </Wrapper>
 
   )

@@ -523,7 +523,7 @@ export default function PropertyPage() {
                       <ContactAdvertiserButton onClick={handleContactAdd}>CONTACT ADVERTISER</ContactAdvertiserButton>
                       {favorite ?
                         (<FavoriteDiv onClick={handleAddFavorites} disabled>
-                          <RiHeartFill style={{ color: colors.pink.medium }} />
+                          {Icons.heartDark}
                           <TextCard2>Add to favorites</TextCard2>
                         </FavoriteDiv>)
                         : (<FavoriteDiv onClick={handleAddFavorites}>
