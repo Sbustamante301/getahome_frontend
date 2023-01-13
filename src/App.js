@@ -18,6 +18,7 @@ import PropertyFormPage from "./pages/property-form-page";
 
 
 import EditPropertyPage from "./pages/edit-property-page";
+import CheckboxF from "./components/sections/checkbox";
 
 
 
@@ -52,7 +53,7 @@ function App() {
           <Route path="/properties/:id" element= {<PropertyPage />}/>
           <Route path="/my_properties" element= {<MyPropertiesPage />}/>
           <Route path="/saved_properties" element= {<SavedPropertiesPage />}/>
-
+          
         </Routes>
 
       }

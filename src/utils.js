@@ -4,7 +4,8 @@ import {
     RiMailLine, RiTimeLine, RiGithubFill, RiCalendarLine, RiHeartFill, RiAccountCircleLine, RiLogoutCircleLine, RiBuildingLine, RiTwitterFill,
     RiSearchLine, RiReactjsLine, RiArrowLeftSLine, RiNavigationLine, RiUploadLine, RiPauseCircleLine, RiMailCheckLine, RiChatCheckLine,
     RiDownloadLine, RiArrowUpSLine, RiCloseCircleLine, RiMailOpenLine, RiPhoneLine, RiLinkedinBoxLine, RiFileAddLine, RiUserAddLine,
-    RiUserReceivedLine, RiLinkedinLine, RiArrowRightSLine, RiHotelBedLine, RiCoinsLine, RiBuilding3Line, RiHome8Line, RiDeleteBin6Line
+    RiUserReceivedLine, RiLinkedinLine, RiArrowRightSLine, RiHotelBedLine, RiCoinsLine, RiBuilding3Line, RiHome8Line, RiDeleteBin6Line,
+
 
 } from "react-icons/ri";
 
@@ -13,6 +14,7 @@ import { BiBath, BiArea, BiBed } from "react-icons/bi"
 import { FaRegEdit } from "react-icons/fa";
 import { FaPaw } from "react-icons/fa"
 import { GiPositionMarker } from "react-icons/gi";
+import {BSCheckSquare,BsSquare} from "react-icons/bs"
 import { colors } from "./styles"
 import styled from "@emotion/styled";
 
@@ -78,6 +80,7 @@ export const Icons = {
     edit: <FaRegEdit />,
 
     positioner: <GiPositionMarker />,
+    
 
 
 
