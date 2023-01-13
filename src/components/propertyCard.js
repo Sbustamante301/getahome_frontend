@@ -205,7 +205,7 @@ const Pet = styled.div`
 `;
 
 export function PropertyCard({ property, showProperty }) {
-  const { user, savedProperty, myProperty, setMyProperty } = useAuth();
+  const { user, savedProperty, setMyProperty, myProperty, setCurrentProperty } = useAuth();
 
   let index_favorites = [];
   let localSavedProperty = [];
@@ -218,17 +218,22 @@ export function PropertyCard({ property, showProperty }) {
 
   function handleClose(event) {
     event.preventDefault();
+    let updatedProperty = {"active":myProperty.active.filter(prop=> prop.property.id !== property.property.id),
+                          "closed":[...myProperty.closed, property]}
     updateProperty(property.property.id, { status: false })
       .then(response => { console.log('CARD CERRADA', response) })
       .catch(console.log)
+    setMyProperty(updatedProperty)
   }
 
   function handleRestore(event) {
     event.preventDefault();
-    console.log('ENTRE AL RESTORE')
+    let updatedProperty = {"active":[...myProperty.active, property],
+                          "closed":myProperty.closed.filter(prop=> prop.property.id !== property.property.id)}
     updateProperty(property.property.id, { status: true })
       .then(response => { console.log('CARD RESTAURADA', response) })
       .catch(console.log)
+    setMyProperty(updatedProperty)
   }
 
   function handleTrash(event) {
@@ -240,6 +245,8 @@ export function PropertyCard({ property, showProperty }) {
     deleteProperty(property.property.id)
       .then(setMyProperty(updateMyProperty))
       .catch(console.log)
+    
+    setMyProperty({...myProperty,"active": myProperty.active.filter(myProp=>myProp.id !== property.property.id)})
   }
 
   return (
@@ -249,8 +256,8 @@ export function PropertyCard({ property, showProperty }) {
       <Container height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
 
         <CardContainer height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
-
-          <ImgContainer>
+        <Link style={{textDecoration:"none"}} to={`/properties/${property.property.id}`}>
+          <ImgContainer onClick={()=>setCurrentProperty(property)}>
             <Property src={property.url} />
             <Tag>
               {Icons.coins}
@@ -259,7 +266,8 @@ export function PropertyCard({ property, showProperty }) {
 
             </Tag>
           </ImgContainer>
-          <InformationContainer >
+          
+          <InformationContainer onClick={()=>setCurrentProperty(property)}>
             <Category>
               <Price >
                 {Icons.dollarCircle}
@@ -281,6 +289,7 @@ export function PropertyCard({ property, showProperty }) {
               {index_favorites.includes(property.property.id) ? Icons.heart : null}
             </Features>
           </InformationContainer>
+          </Link>
           {(user?.user_type === 'landlord' && property.property.user_id === user.id) ?
             property.property.status ?
               (<LowFrame>
