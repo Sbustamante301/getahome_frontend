@@ -247,10 +247,10 @@ export function PropertyCard({ property, showProperty, id }) {
     console.log('PROPIEDAD BORRADA', updateMyProperty)
 
     deleteProperty(property.property.id)
-      .then(setMyProperty(updateMyProperty))
+      .then(console.log)
       .catch(console.log)
     
-    setMyProperty({...myProperty,"active": myProperty.active.filter(myProp=>myProp.id !== property.property.id)})
+    setMyProperty(updateMyProperty)
   }
 
   return (
