@@ -33,7 +33,7 @@ export async function showProperty(id) {
 }
 
 export async function deleteProperty(id) {
-  await apiFetch("properties", { method: "DELETE" });
+  await apiFetch(`properties/${id}`, { method: "DELETE" });
 }
 
 export async function updateProperty(id, data) {
