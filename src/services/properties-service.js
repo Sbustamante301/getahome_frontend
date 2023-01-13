@@ -26,7 +26,6 @@ export async function deleteProperty(id) {
 
 
 
-
 // INVOLVED_PROPERTIES
 
 // export async function createProperty() {

@@ -5,6 +5,7 @@ import SectionMeetHome from "../components/sections/sectionMeetHome";
 import { useState } from "react";
 import { CreateAccountButton } from "../components/Button";
 import { Icons } from "../utils";
+import { createProperty } from "../services/properties-service";
 const Div = styled.div`
 width:100%;
 
@@ -15,9 +16,6 @@ width:440px;
 height:48px;
 letter-spacing: 0.25px;
 margin-left:32px;
-
-
-
 `;
 
 
@@ -69,14 +67,12 @@ const Container = styled.div`
   gap: 20px;
   width:600px;
 `;
-
 const SelectContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 0px;
   gap: 16px;
-
   height: 52px;
 `;
 const SelectDiv = styled.div`
@@ -85,32 +81,25 @@ const SelectDiv = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 4px;
-
   width: 120px;
   height: 52px;
 `;
-
 const Select = styled.select`
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 8px;
   gap: 8px;
-
   width: 120px;
   height: 36px;
-  
   background: ${colors.white};
-
   border: 1px solid ${colors.pink.medium};
   border-radius: 8px;
-  
   flex: none;
   order: 1;
   align-self: stretch;
   flex-grow: 0;
 `;
-
 const TextArea = styled.input`
   display: flex;
   flex-direction: row;
@@ -132,47 +121,41 @@ const TextArea = styled.input`
   flex-grow: 0;
 `;
 const OperationTypeDiv = styled.div`
-
-width:105px;
-height:56px;
-gap:4px;
-display:flex;
-flex-direction:column;
-align-items:flex-start;
-padding:0px;
-margin-left:32px;
-margin-top:20px;
-
-
+  width:105px;
+  height:56px;
+  gap:4px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  padding:0px;
+  margin-left:32px;
+  margin-top:20px;
 `;
 const OperationTitle = styled.div`
-color:${colors.gray.medium};
-width:105px;
-height:16px;
-${typography.text.xxs};
+  color:${colors.gray.medium};
+  width:105px;
+  height:16px;
+  ${typography.text.xxs};
 `;
 const PropertyTitle = styled.div`
-color:${colors.gray.medium};
-width:99px;
-height:12px;
-${typography.text.xxs};
-display:flex;
-align-items:center;
-margin-left:5px;
-
+  color:${colors.gray.medium};
+  width:99px;
+  height:12px;
+  ${typography.text.xxs};
+  display:flex;
+  align-items:center;
+  margin-left:5px;
 `;
 const InputDiv = styled.div`
-width:356px;
-height:40px;
-gap:8px;
-margin-top:0px;
+  width:356px;
+  height:40px;
+  gap:8px;
+  margin-top:0px;
 `;
 const PetsDiv = styled.div`
-width:113px;
-height:36px;
-
+  width:113px;
+  height:36px;
 `;
-
 
 function Input({
   id,
@@ -202,136 +185,89 @@ function Input({
   );
 }
 
-
-
 export default function PropertyFormPage(){
     
-    //  const [formdata, setFormdata] = useState({
-    //      bedrooms:"",
-    //      bathrooms:"",
-    //      area:"",
-    //      pet_allowed:"",
-    //      price:"",
-    //      mode:"",
-    //      address:"",
-    //      description:"",
-    //      property_type:"",
-    //      status:"",
-    //      maintenance:"",
-    //    })
-      
-    //    function handleChange(event){
-    //      const {name, value} = event.target
-    //      setFormdata({...formdata, [name]:value})
-    //    }
     return(
         <>
         <Div>
-        <H1Div>Create a property listing</H1Div>
-        
-        <OperationTypeDiv>
-            <OperationTitle>OPERATION TYPE</OperationTitle>
-             {/* <CreateAccountButton>Rent Sale</CreateAccountButton> */}
-        </OperationTypeDiv>
-        <PropertyForm/>
-        
-       {/* <Form>
-       <AddressDiv>
-        <SearchIcon></SearchIcon>
+          <H1Div>Create a property listing</H1Div>
           
-        </AddressDiv> 
-        <RentDiv>
-        <DollarIcon></DollarIcon>
           
-          </RentDiv>
-        <MaintenanceDiv>
-        <DollarIcon></DollarIcon>
-          <Input
-          label={"MAINTANANCE"}
-          id="maintanance"
-          name="maintanance" 
-          type="text" 
-          value={formdata.maintenance}
-          onChange={handleChange}
-          placeholder="100"/>
-          </MaintenanceDiv>
-        <PropertyTypeDiv>
-            <PropertyTypeText>PROPERTY TYPE</PropertyTypeText>
-            <ApartHouseDiv>
-                <ApartDiv>Apartment</ApartDiv>
-                <HouseDiv>House</HouseDiv>
-            </ApartHouseDiv>
-        </PropertyTypeDiv>
-        <BedBathAreaDiv>
-            <BedroomSelect/>
-            <BathroomSelect/>
-            <AreaDiv/>
-
-        </BedBathAreaDiv>
-        <PetsDiv>
-            <PetsAllowedCheckbox/>
-            <PetsText>Allowing Pets</PetsText>
-        </PetsDiv>
-        <AboutDiv>
-            <AboutForm></AboutForm>
-            
-
-        </AboutDiv>
-        </Form> */}
-        
-        <CreateAccountButton>Publish Property Listing</CreateAccountButton>
+          <PropertyForm/>        
+          
         </Div>
         <SectionFooter/>
         </>
     )
 }
 
-const PhotosDiv = styled.div``;
-const UploadText = styled.h1``;
-const SizeText = styled.div``;
-const UploadedImg = styled.div``;
-
-export  function PropertyForm({}){
+export function PropertyForm(){
     
-    const [formdata, setFormdata] = useState({
-        bedrooms:"",
-        bathrooms:"",
-        area:"",
-        pet_allowed:"",
-        price:"",
-        mode:"",
-        address:"",
-        description:"",
-        property_type:"",
-        status:"",
-        maintenance:"",
-      })
-      const [imagesPreview, setImagesPreview] = useState([])
-      const [image, setImage] = useState(null)
-     
-      function handleChange(event){
-        const {name, value} = event.target
-        setFormdata({...formdata, [name]:value})
-      }
+  const [formdata, setFormdata] = useState({
+      bedrooms:"",
+      bathrooms:"",
+      area:"",
+      pet_allowed:"",
+      price:"",
+      mode:"rent",
+      address:"",
+      description:"",
+      property_type:"",
+      status:"",
+      maintenance:"",
+    })
+    const [imagesPreview, setImagesPreview] = useState([])
+    const [image, setImage] = useState(null)
+    
+    function handleChange(event){
+      const {name, value} = event.target
+      setFormdata({...formdata, [name]:value})
+      console.log(formdata)
+    }
       
-      function handleFileSelect(event){
-        const files = event.target.files;
-        const imgsPrev = [];
-        for (let i = 0; i < files.length; i++) {
-          const file = files[i];
-          const reader = new FileReader();
-      
-          reader.onloadend = () => {
-            imgsPrev.push(reader.result);
-            setImagesPreview(imgsPrev);
-          }
-      
-          reader.readAsDataURL(file);
+    function handleFileSelect(event){
+      const files = event.target.files;
+      const imgsPrev = [];
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+    
+        reader.onloadend = () => {
+          imgsPrev.push(reader.result);
+          setImagesPreview(imgsPrev);
         }
+        reader.readAsDataURL(file);
       }
+    }
+    function handleSubmit(event){
+      event.preventDefault();
+      createProperty(formdata)
+    }
+
     return(
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Container>
+            <OperationTypeDiv>
+              <OperationTitle>OPERATION TYPE</OperationTitle>
+              <ModeDiv>
+                <RentDiv
+                    onClick={()=>setFormdata({...formdata, "mode": "rent"})} 
+                    style={{background: `${ formdata.mode === "rent" ? colors.pink.medium : colors.white }`,
+                            color: `${ formdata.mode === "rent" ? colors.white : colors.gray.medium }`
+                }}>
+                  Rent
+                </RentDiv>
+                <SaleDiv
+                    onClick={()=>setFormdata({...formdata, "mode": "sale"})} 
+                    style={{background: `${ formdata.mode === "sale" ? colors.pink.medium : colors.white }`,
+                        color: `${ formdata.mode === "sale" ? colors.white : colors.gray.medium }`
+                }}>
+                  Sale
+                </SaleDiv>
+              </ModeDiv>
+            
+              
+            </OperationTypeDiv>
             <InputDiv style={{width:"600px"}}>
             <Input
             label={"ADDRESS"}
@@ -343,40 +279,38 @@ export  function PropertyForm({}){
             placeholder="start typing to autocomplete"/>
             </InputDiv>
 
-        <InputDiv>
-          <Input
-            label={"MONTHLY RENT"}
-            id="price"
-            name="price" 
-            type="text" 
-            value={formdata.price}
-            onChange={handleChange}
-            placeholder="2000"/>
-            
-        </InputDiv>
+            <InputDiv>
+              <Input
+                label={"MONTHLY RENT"}
+                id="price"
+                name="price" 
+                type="text" 
+                value={formdata.price}
+                onChange={handleChange}
+                placeholder="2000"/>    
+            </InputDiv>
         
-        <InputDiv>
-          <Input
-            label={"MAINTANANCE"}
-            id="maintanance"
-            name="maintanance" 
-            type="text" 
-            value={formdata.maintenance}
-            onChange={handleChange}
-            placeholder="100"/>
-        </InputDiv>
+            <InputDiv>
+              <Input
+                label={"MAINTANANCE"}
+                id="maintenance"
+                name="maintenance" 
+                type="text" 
+                value={formdata.maintenance}
+                onChange={handleChange}
+                placeholder="100"/>
+            </InputDiv>
             
             <InputDiv >
-            <PropertyTitle>PROPERTY TYPE</PropertyTitle>
+              <PropertyTitle>PROPERTY TYPE</PropertyTitle>
 
-            <input id="apartment" name="apartment"type="checkbox"/>
-            <label htmlFor="apartment">Apartment</label>
-            <input id="house" name="house"type="checkbox"/>
-            <label htmlFor="house">House</label>
+              <input id="apartment" name="apartment"type="checkbox"/>
+              <label htmlFor="apartment">Apartment</label>
+              <input id="house" name="house"type="checkbox"/>
+              <label htmlFor="house">House</label>
             </InputDiv>
             <SelectContainer>
               <SelectDiv>
-                
                 <Label htmlFor="bedrooms">BEDROOMS</Label>
                 <Select id="bedrooms" name="bedrooms">
                 <option value="1">1</option>
@@ -386,23 +320,20 @@ export  function PropertyForm({}){
                 <option value="5">5</option>
                 <option value="6">6</option>
                 </Select>
-                
               </SelectDiv>
-              
               <SelectDiv>
-                  <Label htmlFor="bathroom">BATHROOMS</Label>
-                  <Select id="bathrooms" name="bathrooms">
+                <Label htmlFor="bathroom">BATHROOMS</Label>
+                <Select id="bathrooms" name="bathrooms">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
-                  </Select>
-                </SelectDiv>
-                <SelectDiv>
-                  <Label htmlFor="area">AREA IN M2</Label>
-                  <TextArea id="area" name="area" placeholder="##"type="number"></TextArea>
-                </SelectDiv>
-                
+                </Select>
+              </SelectDiv>
+              <SelectDiv>
+                <Label htmlFor="area">AREA IN M2</Label>
+                <TextArea id="area" name="area" placeholder="##"type="number"></TextArea>
+              </SelectDiv>
             </SelectContainer>
             <PetsDiv>
                 <input id="pets" name="pets"type="checkbox"/>
@@ -410,7 +341,7 @@ export  function PropertyForm({}){
             </PetsDiv>
 
             <PetsTextDiv>Allowing pets increases the likehood of renters liking the property by 9001%.
-            It also makes you a better person
+              It also makes you a better person
             </PetsTextDiv>
 
             <div style={{display:'flex',flexDirection:'column'}}>
@@ -437,6 +368,7 @@ export  function PropertyForm({}){
               </ImageWrapper>
             </div>
           </Container>
+          <CreateAccountButton>Publish Property Listing</CreateAccountButton>
         </Form>
     )
 }
@@ -467,8 +399,6 @@ const ImgContainer = styled.div`
 const PrevImg = styled.img`
   width:100%;
 `
-
-
 const PetsTextDiv= styled.div`
 color:${colors.gray.medium};
 ${typography.text.xs};
@@ -476,6 +406,34 @@ width:468px;
 height:32px;
 display:flex;
 flex
+
+`;
+
+const RentDiv = styled.div`
+width:50px;
+height:36px;
+padding:8px;
+gap:10px;
+display:flex;
+border-radius: 8px 0px 0px 8px;
+align-items: center;
+
+`;
+const SaleDiv = styled.div`
+width:50px;
+height:36px;
+padding:8px;
+gap:10px;
+display:flex;
+border-style:solid;
+border-radius: 8px 0px 0px 8px;
+align-items: center;
+
+`;
+
+const ModeDiv = styled.div`
+display:flex;
+flex-wrap:wrap;
 
 `;
 
