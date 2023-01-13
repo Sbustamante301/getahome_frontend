@@ -9,7 +9,7 @@ import { useAuth } from "../context/auth-context";
 import { LoginCardButton, ContactAdvertiserButton, EditPropertyButton } from "../components/Button";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
 import Mapa from "../components/mapa";
-import { createFavorite } from "../services/properties-service"
+import { createFavorite, createContacted } from "../services/properties-service"
 
 const BigWraper = styled.div`
   display: flex;
@@ -362,6 +362,12 @@ export default function PropertyPage() {
 
   function handleContactAdd(event) {
     event.preventDefault();
+    createContacted({
+      id: currentProperty.property.id,
+      contacts: true,
+    })
+      .then((data) => console.log(data))
+      .catch(console.log)
 
     setShoreContact(true)
   }
