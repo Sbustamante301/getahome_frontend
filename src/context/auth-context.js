@@ -6,20 +6,20 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
-  const [properties, setProperties]= useState([]);
+  const [properties, setProperties] = useState([]);
   const [userType, setUserType] = useState(null);
   const [currentProperty, setCurrentProperty] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [error, setError] = useState(null);
   const [propertyFilter, setPropertyFilters] = useState({
-    prices: {min: null, max:null},
-    areas: {min: null, max:null},
+    prices: { min: null, max: null },
+    areas: { min: null, max: null },
     types: [false, false], //house, apartment
     petAllowed: null,
     beds: 0,
-    baths:0,
-    mode:[false, false], //buy, rent
-    search:""
+    baths: 0,
+    mode: [false, false], //buy, rent
+    search: ""
   })
 
 

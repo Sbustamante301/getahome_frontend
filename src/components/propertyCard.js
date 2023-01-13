@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
-import { useAuth } from "../context/auth-context"
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth-context"
 import { colors, typography } from "../styles";
 import { Icons } from "../utils"
 import { EditCardButton, CloseCardButton } from "../components/Button"
+import { updateProperty } from "../services/properties-service";
 
 const Wrapp = styled.div`
   display: flex;
@@ -207,21 +209,26 @@ export function PropertyCard({ property, showProperty }) {
 
 
   function handleClose(event) {
-    event.preventDefault()
+    event.preventDefault();
+    updateProperty(property.property.id, { status: false })
+      .then((data) => console.log(data))
+      .catch(console.log)
   }
 
   return (
     <Wrapp onClick={showProperty}>
 
-      <Container height={(user?.user_type === 1 && property.property.user_id === user.id) ? '400px' : '360px'}>
 
-        <CardContainer height={(user?.user_type === 1 && property.property.user_id === user.id) ? '400px' : '360px'}>
+      <Container height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
+
+        <CardContainer height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
+
           <ImgContainer>
             <Property src={property.url} />
             <Tag>
               {Icons.coins}
 
-              {property.property.mode === 1 ? "For Sale" : "For Rent"}
+              {property.property.mode === 'landlord' ? "For Sale" : "For Rent"}
 
             </Tag>
           </ImgContainer>
@@ -233,7 +240,7 @@ export function PropertyCard({ property, showProperty }) {
               </Price>
               <HomeType>
                 {Icons.building}
-                {property.property.property_type === 1 ? "Apartment" : "House"}
+                {property.property.property_type === 'landlord' ? "Apartment" : "House"}
               </HomeType>
             </Category>
             <Address>
@@ -246,7 +253,8 @@ export function PropertyCard({ property, showProperty }) {
               <Pet>{property.property.pet_allowed ? Icons.paw : null}</Pet>
             </Features>
           </InformationContainer>
-          {(user?.user_type === 1 && property.property.user_id === user.id) ?
+          {(user?.user_type === 'landlord' && property.property.user_id === user.id) ?
+
             (<LowFrame>
               <ButtonContainer>
                 <Link style={{ textDecoration: "none" }} to={`/properties/edit/${property.property.id}`}>
