@@ -334,6 +334,12 @@ const Map = styled.div`
 const BigAddress = styled.h1`
   ${typography.head.md}
 `;
+const SmallAddress = styled.h6`
+  ${typography.head.xxs};
+  letter-spacing: 0.15px;
+  color:${colors.gray.medium};
+  margin:0;
+`;
 const PriceText = styled.h4`
   ${typography.head.sm}
   color: ${colors.gray.dark}
@@ -423,6 +429,7 @@ export default function PropertyPage() {
             <Category>
               <Address>
                 <BigAddress>{currentProperty.property.address}</BigAddress>
+                <SmallAddress>Miraflores, Lima</SmallAddress>
               </Address>
               <TotalCost>
                 <Price><PriceText>{Icons.dollarCircle} {currentProperty.property.price}</PriceText></Price>
