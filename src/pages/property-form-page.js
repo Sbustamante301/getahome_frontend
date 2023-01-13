@@ -128,7 +128,7 @@ const OperationTypeDiv = styled.div`
   flex-direction:column;
   align-items:flex-start;
   padding:0px;
-  margin-left:32px;
+  margin-left:0px;
   margin-top:20px;
 `;
 const OperationTitle = styled.div`
@@ -207,14 +207,13 @@ export function PropertyForm(){
       bedrooms:"",
       bathrooms:"",
       area:"",
-      pet_allowed:"",
+      pet_allowed:false,
       price:"",
       mode:"rent",
       address:"",
       description:"",
-      property_type:"",
-      status:"",
-      maintenance:"",
+      property_type:"house",
+      maintanance:"",
     })
     const [imagesPreview, setImagesPreview] = useState([])
     const [image, setImage] = useState(null)
@@ -243,6 +242,14 @@ export function PropertyForm(){
       event.preventDefault();
       createProperty(formdata)
     }
+    function handleType(event){
+      if (event.target.id === "sale"){
+        setFormdata({...formdata, "mode": event.target.id, "maintanance":"","pet_allowed":false});
+      }else{
+        setFormdata({...formdata, "mode": event.target.id});
+
+      }
+    }
 
     return(
         <Form onSubmit={handleSubmit}>
@@ -250,15 +257,15 @@ export function PropertyForm(){
             <OperationTypeDiv>
               <OperationTitle>OPERATION TYPE</OperationTitle>
               <ModeDiv>
-                <RentDiv
-                    onClick={()=>setFormdata({...formdata, "mode": "rent"})} 
+                <RentDiv id="rent"
+                    onClick={handleType} 
                     style={{background: `${ formdata.mode === "rent" ? colors.pink.medium : colors.white }`,
                             color: `${ formdata.mode === "rent" ? colors.white : colors.gray.medium }`
                 }}>
                   Rent
                 </RentDiv>
-                <SaleDiv
-                    onClick={()=>setFormdata({...formdata, "mode": "sale"})} 
+                <SaleDiv id="sale"
+                    onClick={handleType} 
                     style={{background: `${ formdata.mode === "sale" ? colors.pink.medium : colors.white }`,
                         color: `${ formdata.mode === "sale" ? colors.white : colors.gray.medium }`
                 }}>
@@ -293,10 +300,10 @@ export function PropertyForm(){
             <InputDiv>
               <Input
                 label={"MAINTANANCE"}
-                id="maintenance"
-                name="maintenance" 
+                id="maintanance"
+                name="maintanance" 
                 type="text" 
-                value={formdata.maintenance}
+                value={formdata.maintanance}
                 onChange={handleChange}
                 placeholder="100"/>
             </InputDiv>
@@ -304,9 +311,9 @@ export function PropertyForm(){
             <InputDiv >
               <PropertyTitle>PROPERTY TYPE</PropertyTitle>
 
-              <input id="apartment" name="apartment"type="checkbox"/>
+              <input onChange={()=>setFormdata()} id="apartment" name="apartment"type="checkbox" checked={formdata.property_type==="apartment"}/>
               <label htmlFor="apartment">Apartment</label>
-              <input id="house" name="house"type="checkbox"/>
+              <input onChange={()=>setFormdata()} id="house" name="house"type="checkbox" checked={formdata.property_type==="house"}/>
               <label htmlFor="house">House</label>
             </InputDiv>
             <SelectContainer>
@@ -336,7 +343,7 @@ export function PropertyForm(){
               </SelectDiv>
             </SelectContainer>
             <PetsDiv>
-                <input id="pets" name="pets"type="checkbox"/>
+                <input id="pets" name="pets"type="checkbox" checked={formdata.pet_allowed} onChange={(e)=>setFormdata({...formdata, "pet_allowed":!formdata.pet_allowed})}/>
                 <Label htmlFor="pets">Pets Allowed</Label>
             </PetsDiv>
 
@@ -384,6 +391,7 @@ const ImageWrapper = styled.div`
   gap:12px;
   background: ${colors.pink.shallow};
   min-width:600px;
+  min-height:140px;
 `
 const ImgContainer = styled.div`
 
@@ -409,32 +417,34 @@ flex
 
 `;
 
-const RentDiv = styled.div`
-width:50px;
-height:36px;
-padding:8px;
+const SaleDiv = styled.div`
+width:60px;
+padding:8px 10px;
 gap:10px;
-display:flex;
-border-radius: 8px 0px 0px 8px;
+border-width:thin;
+border-style:solid;
+border-radius: 0px 8px 8px 0px;
+border-left:none;
 align-items: center;
+border-color:${colors.gray.medium};
 
 `;
-const SaleDiv = styled.div`
-width:50px;
-height:36px;
-padding:8px;
+const RentDiv = styled.div`
+width:60px;
+padding:8px 10px;
 gap:10px;
-display:flex;
+border-width:thin;
 border-style:solid;
 border-radius: 8px 0px 0px 8px;
 align-items: center;
+border-color:${colors.gray.medium};
 
 `;
 
 const ModeDiv = styled.div`
 display:flex;
-flex-wrap:wrap;
-
+border-color:${colors.gray.medium};
+align-items:center;
 `;
 
 
