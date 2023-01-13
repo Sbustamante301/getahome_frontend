@@ -32,7 +32,6 @@ export async function updateProperty(id, data) {
 
 
 
-
 // INVOLVED_PROPERTIES
 
 // export async function createProperty() {

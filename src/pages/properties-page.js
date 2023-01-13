@@ -28,7 +28,7 @@ padding: 32px 152px;
 export default function PropertiesPage() {
   const { properties, setCurrentProperty, propertyFilter } = useAuth();
   console.log(propertyFilter)
-  let filterProperties = [...properties].filter(property => true);
+  let filterProperties = [...properties].filter(property => property.property.status);
 
   // Filter by address
   filterProperties = filterProperties.filter(property => {

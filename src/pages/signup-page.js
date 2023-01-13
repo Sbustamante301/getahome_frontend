@@ -11,6 +11,7 @@ import { CreateAccountButton } from "../components/Button"
 import { createUser } from "../services/users-service"
 import Input from "../components/Input"
 import { useAuth } from "../context/auth-context"
+import { useNavigate } from "react-router-dom"
 
 
 // background:${colors.pink.shallow};
@@ -245,8 +246,9 @@ margin-top:-40px;
 
 
 function SignupForm(){
-   const [error,setError] = useState(null);
-   const {userType, setUserType} = useAuth();
+    const navigate = useNavigate();
+    const [error,setError] = useState(null);
+    const {userType, setUserType} = useAuth();
     const [formdata, setFormdata] = useState({
         name:"",
         email:"",
@@ -270,6 +272,7 @@ function SignupForm(){
         
         createUser(formdata).then(console.log).catch(console.log)
         console.log(formdata)
+        navigate("/properties");
       }
     else{
 
@@ -290,7 +293,6 @@ function SignupForm(){
             onChange={handleChange}
             placeholder="John Doe" />
           <Input
-
           label={"PASSWORD"}
           id="password"
           name="password" 
