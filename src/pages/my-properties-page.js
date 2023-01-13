@@ -14,7 +14,7 @@ import EmptyCard from "../components/empty-card";
 const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
-align-items: flex-start;
+align-items: center;
 margin-left:120px;
 margin-right:120px;
 
