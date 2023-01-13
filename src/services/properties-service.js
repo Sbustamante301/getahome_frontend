@@ -25,8 +25,6 @@ export async function deleteProperty(id) {
 }
 
 export async function updateProperty(id, data) {
-  console.log('ID EN SERVICE', id)
-  console.log('CUERPO en SERVICE', data)
   await apiFetch(`properties/${id}`, { method: "PATCH", body: data })
 }
 
