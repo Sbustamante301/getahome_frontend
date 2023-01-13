@@ -5,7 +5,7 @@ import {
     RiSearchLine, RiReactjsLine, RiArrowLeftSLine, RiNavigationLine, RiUploadLine, RiPauseCircleLine, RiMailCheckLine, RiChatCheckLine,
     RiDownloadLine, RiArrowUpSLine, RiCloseCircleLine, RiMailOpenLine, RiPhoneLine, RiLinkedinBoxLine, RiFileAddLine, RiUserAddLine,
     RiUserReceivedLine, RiLinkedinLine, RiArrowRightSLine, RiHotelBedLine, RiCoinsLine, RiBuilding3Line, RiHome8Line, RiDeleteBin6Line,
-
+    RiPhoneFill
 
 } from "react-icons/ri";
 
@@ -63,6 +63,7 @@ export const Icons = {
     closeCircle: <RiCloseCircleLine style={{ color: `${colors.gray.light}`, scale: 2 }} />,
     mailOpen: <RiMailOpenLine />,
     phone: <RiPhoneLine />,
+    phoneCheck:<RiPhoneFill style={{ width: "20px", height: "18.48px", color:"#616161" }}/>,
     linkedinBox: <RiLinkedinBoxLine />,
     addFile: <RiFileAddLine />,
     userAdd: <RiUserAddLine />,

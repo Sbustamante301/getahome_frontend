@@ -25,6 +25,7 @@ const ButtonContainer = styled.div`
   position:relative;
 `
 const Button = styled.div`
+  accent-color:pink;
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
@@ -32,10 +33,10 @@ const Button = styled.div`
   color:${colors.white};
   display:flex;
   justify-content:center;
-  border-radius: 16px;
-  height: 40px;
+  border-radius: 8px;
+  height: 32px;
   align-items:center;
-  gap:13px;
+  gap:8px;
   padding: 8px 16px;
 `
 const StyledInput = styled.input`
@@ -66,9 +67,9 @@ const MoreDiv = styled.div`
   // bottom:-120px;
 `
 const Text = styled.h1`
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 12px;
+ color:${colors.gray.medium};
+  ${typography.text.xxs};
+  
 `
 const PriceInputDiv = styled.div`
   display:flex;
@@ -109,10 +110,11 @@ const NumberDivLast = styled.div`
   padding:8px 12px;
 `
 const StyledCheckbox = styled.input`
+  accent-color:${colors.pink.medium};
   width:20px;
   height:20px;
-  border-color: 1px solid ${colors.pink.medium};
-  background:red;
+  border:1px solid ${colors.pink.medium};
+  background: ${colors.white};
 `
 const Container = styled.div`
   display:flex;
@@ -222,7 +224,7 @@ export default function Filter(){
               <Text>PRICE RANGE</Text>
               <PriceInputDiv>
                 <StyledInput2 onChange={handleChangeInput} placeholder={"min"} name={"minprice"} id={"minPrice"} value={prices.min}/>
-                <h1> - </h1>
+                <h1 style={{border: "2px solid #8E8E8E",width:"13px",height:"0px",borderRadius:"8px"}} ></h1>
                 <StyledInput2 onChange={handleChangeInput} placeholder={"max"} name={"maxprice"} id={"maxPrice"} value={prices.max}/>
               </PriceInputDiv>
               <div style={{display:"flex", justifyContent:"flex-end", marginTop:4}}>
@@ -238,9 +240,9 @@ export default function Filter(){
               <Text>PROPERTY TYPE</Text>
               <PriceInputDiv>
                 <StyledCheckbox onChange={(event)=>setHouse(event.target.checked)} checked={house} type="checkbox" name={"houses"} id={"house"} />
-                <label htmlFor="house">Houses</label>
+                <label style={{fontFamily: 'Inter',fontStyle:"normal",fontWeight: "400",fontSize: "14px",lineHeight: "20px",letterSpacing: "0.25px",color: "#616161"}} htmlFor="house">Houses</label>
                 <StyledCheckbox onChange={(event)=>setApartment(event.target.checked)} checked={apartment} type="checkbox" name={"apartments"} id={"apartment"} />
-                <label htmlFor="apartment">Apartments</label>
+                <label style={{fontFamily: 'Inter',fontStyle:"normal",fontWeight: "400",fontSize: "14px",lineHeight: "20px",letterSpacing: "0.25px",color: "#616161"}} htmlFor="apartment">Apartments</label>
               </PriceInputDiv>
               <div style={{display:"flex", justifyContent:"flex-end", marginTop:4}}>
                 <Button onClick={handleDone} style={{padding:8, width:60}} id="types" >DONE</Button>
@@ -304,13 +306,13 @@ export default function Filter(){
             <MoreDiv style={{display:"flex", flexDirection:"column", gap:16}}>
               <div style={{display:"flex", alignItems:"center"}}>
                 <StyledCheckbox onChange={(event)=>setPetAllowed(event.target.checked)} checked={petAllowed} type={"checkbox"} id={"petAllowed"}/>
-                <label htmlFor="petAllowed">Pets Allowed</label>
+                <label style={{fontFamily: 'Inter',fontStyle:"normal",fontWeight: "400",fontSize: "14px",lineHeight: "20px",letterSpacing: "0.25px",color: "#616161"}} htmlFor="petAllowed">Pets Allowed</label>
               </div>
               <div>
                 <Text>AREA IN M2</Text>
                 <PriceInputDiv>
                 <StyledInput2 onChange={handleChangeInput} value={areas.min} placeholder={"min"} name={"minarea"} id={"minArea"}/>
-                <h1> - </h1>
+                <h1 style={{border: "2px solid #8E8E8E",width:"13px",height:"0px",borderRadius:"8px"}}></h1>
                 <StyledInput2 onChange={handleChangeInput} value={areas.max} placeholder={"max"} name={"maxarea"} id={"maxArea"}/>
               </PriceInputDiv>
               </div>
@@ -325,24 +327,24 @@ export default function Filter(){
         <Select>
           <ButtonContainer>
             <Button onClick={()=> setShowFilter({mode: !showFilter.mode})}
-                    style={{color:`${colors.gray.dark}` , background:`${colors.white}`, width:"100%"}}>
-              TEXT {Icons.arrowDown}
+                    style={{height:"20px",color:`${colors.gray.dark}` , background:`${colors.white}`, width:"100%",display:"flex",flexDirection:"row"}}>
+            <TextContainer>Buying & Renting </TextContainer>{Icons.arrowDown}
             </Button>
             {showFilter.mode ? 
-              <div style={{zIndex:1}} >
+              <ChoiceDiv style={{zIndex:1}} >
                 <div>
-                  <input onChange={handleMode} type={"checkbox"} id={"both"} checked={buy && rent}/> 
-                  <label>Both</label> 
+                  <input style={{accentColor:"pink"}} onChange={handleMode} type={"checkbox"} id={"both"} checked={buy && rent}/> 
+                  <label style={{fontFamily:"Inter",fontStyle:"normal",fontWeight:"400px",fontSize:"14px",lineHeight:"20px",letterSpacing:"0.25px",color:"#616161"}} >Both</label> 
+                </div>
+                <div style={{background:colors.pink.shallow}}>
+                  <input style={{accentColor:"pink",}} onChange={handleMode} type={"checkbox"} id={"buy"} checked={buy}/> 
+                  <label style={{fontFamily:"Inter",fontStyle:"normal",fontWeight:"400px",fontSize:"14px",lineHeight:"20px",letterSpacing:"0.25px",color:"#616161"}}>Buying</label> 
                 </div>
                 <div>
-                  <input onChange={handleMode} type={"checkbox"} id={"buy"} checked={buy}/> 
-                  <label>Buying</label> 
+                  <input style={{accentColor:"pink"}} onChange={handleMode} type={"checkbox"} id={"rent"} checked={rent}/> 
+                  <label style={{fontFamily:"Inter",fontStyle:"normal",fontWeight:"400px",fontSize:"14px",lineHeight:"20px",letterSpacing:"0.25px",color:"#616161"}}>Renting</label> 
                 </div>
-                <div>
-                  <input onChange={handleMode} type={"checkbox"} id={"rent"} checked={rent}/> 
-                  <label>Renting</label> 
-                </div>
-              </div> :
+              </ChoiceDiv> :
             null}
           </ButtonContainer>
         </Select>
@@ -350,3 +352,22 @@ export default function Filter(){
     </Wrapper>
   )
 }
+
+
+const TextContainer=styled.div`
+width:115px;
+height:24px;
+
+`;
+
+const ChoiceDiv= styled.div`
+left:-7px;
+width: 187px;
+height: 98px;
+position:absolute;
+margin-top:15px;
+box-sizing:border-box;
+border: 1px solid #BF5F82;
+border-radius: 0px 0px 8px 8px;
+
+`;

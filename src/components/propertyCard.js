@@ -154,10 +154,11 @@ const Features = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  align-content:center;
   padding: 0px;
-  gap: 18px;
+  gap: 14px;
   margin-top: 16px;
-  width: 355px;
+  width: 300px;
   height: 18px;
   
 `;
@@ -207,7 +208,10 @@ const Heart = styled.div`
   display: flex;
   align-items: center;
 `;
-
+const Phone = styled.div`
+  display: flex;
+  align-items: center;
+`;
 export function PropertyCard({ property, showProperty, id }) {
   const { user, savedProperty, setMyProperty, myProperty, setCurrentProperty } = useAuth();
 
@@ -291,6 +295,7 @@ export function PropertyCard({ property, showProperty, id }) {
               <Area>{Icons.area} {property.property.area} m2</Area>
               <Pet>{property.property.pet_allowed ? Icons.paw : null}</Pet>
               <Heart>{index_favorites.includes(property.property.id) ? Icons.heartDark : null}</Heart>
+              <Phone> {Icons.phoneCheck}</Phone>
             </Features>
           </InformationContainer>
           </Link>
