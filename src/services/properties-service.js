@@ -28,6 +28,8 @@ export async function updateProperty(id, data) {
   await apiFetch(`properties/${id}`, { method: "PATCH", body: data })
 }
 
+
+
 // INVOLVED_PROPERTIES
 
 
@@ -41,6 +43,10 @@ export async function getMyProperties() {
   return myProperties;
 }
 
+export async function getLandlordUser(id) {
+  const landlord = await apiFetch(`properties/${id}/user`);
+  return landlord;
+}
 // export async function updateFavorites(id, data) {
 //   console.log('ID API', id)
 //   console.log('BODY API', data)
@@ -48,10 +54,15 @@ export async function getMyProperties() {
 // }
 
 export async function createFavorite(newFavorite) {
-  console.log('CUERPO', newFavorite)
   const favorites = await apiFetch("involved_properties", {
     body: newFavorite
   })
   return favorites;
 }
 
+export async function createContacted(newContacted) {
+  const contacted = await apiFetch("involved_properties", {
+    body: newContacted
+  })
+  return contacted;
+}

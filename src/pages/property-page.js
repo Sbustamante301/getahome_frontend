@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
-import { BiBath, BiArea, BiBed } from "react-icons/bi"
-import { FaPaw } from "react-icons/fa"
+import { BiBath, BiArea, BiBed } from "react-icons/bi";
+import { FaPaw } from "react-icons/fa";
+import { RiHeartFill } from "react-icons/ri"
 import { useState, useEffect } from "react";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils";
@@ -9,7 +10,7 @@ import { useAuth } from "../context/auth-context";
 import { LoginCardButton, ContactAdvertiserButton, EditPropertyButton } from "../components/Button";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
 import Mapa from "../components/mapa";
-import { createFavorite } from "../services/properties-service"
+import { createFavorite, createContacted, getLandlordUser } from "../services/properties-service"
 
 const BigWraper = styled.div`
   display: flex;
@@ -105,6 +106,10 @@ const FavoriteDiv = styled.button`
 
   width: 100px;
   height: 60px;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 `;
 
 const TextCard1 = styled.p`
@@ -329,6 +334,12 @@ const Map = styled.div`
 const BigAddress = styled.h1`
   ${typography.head.md}
 `;
+const SmallAddress = styled.h6`
+  ${typography.head.xxs};
+  letter-spacing: 0.15px;
+  color:${colors.gray.medium};
+  margin:0;
+`;
 const PriceText = styled.h4`
   ${typography.head.sm}
   color: ${colors.gray.dark}
@@ -354,6 +365,18 @@ export default function PropertyPage() {
   const { currentProperty, setIsOpenModal, user, savedProperty, setSavedProperty } = useAuth();
   const [showContact, setShoreContact] = useState(false);
   const navigate = useNavigate();
+  const [favorite, setFavorite] = useState(false);
+  const [contact, setContact] = useState(false);
+  const [landlord, setLandlord] = useState(null);
+
+
+  useEffect(() => {
+    if (currentProperty) {
+      getLandlordUser(currentProperty.property.user_id).then(response => {
+        setLandlord(response)
+      }).catch(error => { console.log(error) })
+    }
+  }, []);
 
   function handleLogin(event) {
     event.preventDefault();
@@ -362,8 +385,14 @@ export default function PropertyPage() {
 
   function handleContactAdd(event) {
     event.preventDefault();
-
+    createContacted({
+      id: currentProperty.property.id,
+      contacts: true,
+    })
+      .then((data) => console.log(data))
+      .catch(console.log)
     setShoreContact(true)
+    setContact(true)
   }
 
   function handleAddFavorites(event) {
@@ -374,6 +403,7 @@ export default function PropertyPage() {
     })
       .then((data) => console.log(data))
       .catch(console.log)
+    setFavorite(true)
   }
 
   function handleEditProperty(event) {
@@ -399,6 +429,7 @@ export default function PropertyPage() {
             <Category>
               <Address>
                 <BigAddress>{currentProperty.property.address}</BigAddress>
+                <SmallAddress>Miraflores, Lima</SmallAddress>
               </Address>
               <TotalCost>
                 <Price><PriceText>{Icons.dollarCircle} {currentProperty.property.price}</PriceText></Price>
@@ -469,19 +500,26 @@ export default function PropertyPage() {
                       <TitleSeeker>Contact information</TitleSeeker>
                       <SeekerEmail>
                         <SeekerSubtitle>Email</SeekerSubtitle>
-                        <SeekerInfo>xxxxx@mail.com</SeekerInfo>
+                        <SeekerInfo>{landlord.email}</SeekerInfo>
                       </SeekerEmail>
                       <SeekerEmail>
                         <SeekerSubtitle>Phone</SeekerSubtitle>
-                        <SeekerInfo>92392445</SeekerInfo>
+                        <SeekerInfo>{landlord.phone}</SeekerInfo>
                       </SeekerEmail>
                     </LogedCard>)
                     : (<LogedCard>
                       <ContactAdvertiserButton onClick={handleContactAdd}>CONTACT ADVERTISER</ContactAdvertiserButton>
-                      <FavoriteDiv onClick={handleAddFavorites}>
-                        {Icons.heart}
-                        <TextCard2>Add to favorites</TextCard2>
-                      </FavoriteDiv>
+                      {favorite ?
+                        (<FavoriteDiv onClick={handleAddFavorites} disabled>
+                          <RiHeartFill style={{ color: colors.pink.medium }} />
+                          <TextCard2>Add to favorites</TextCard2>
+                        </FavoriteDiv>)
+                        : (<FavoriteDiv onClick={handleAddFavorites}>
+                          {Icons.heart}
+                          <TextCard2>Add to favorites</TextCard2>
+                        </FavoriteDiv>)
+                      }
+
                     </LogedCard>)
 
 
