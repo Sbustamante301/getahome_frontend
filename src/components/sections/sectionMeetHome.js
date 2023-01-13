@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import buildings from "../../assets/picture.svg";
+import { useAuth } from "../../context/auth-context";
 import { colors, typography } from "../../styles";
 
 import { SearchButton } from "../Button";
@@ -86,34 +89,58 @@ const Select = styled.select`
   border: none;
 `;
 export default function SectionMeetHome (){
-    return(
-        <Section1 style={{ backgroundImage: `url(${buildings})`, backgroundPosition: 'center' }}>
-            <TitleContainer>
-                <Section1Title> Meet your new home</Section1Title>
-                <Section1Subtitle>The easiest way to find where you belong</Section1Subtitle>
-            </TitleContainer>
-            <FiltersContainer>
-            <InputContainer>
-                <InputLabel htmlFor="lookType">I'M LOOKING FOR</InputLabel>
+  const { propertyFilter, setPropertyFilters } = useAuth();
+  const [firstFilter, setFirstFilter] = useState({
+    types:[false, true],
+    mode:[false, true],
+    search:""
+  })
+  const navigate = useNavigate();
+  function handleChange(event){
+    const {name, value} = event.target
+    
+    setFirstFilter({...firstFilter, [name]:value})
+  }
 
-                <Select name="types" id="lookType">
-                <option value="apartment">An Apartment</option>
-                <option value="house">A House</option>
-                </Select>
-            </InputContainer>
-            <InputContainer>
-                <InputLabel htmlFor="wantType">I WANT TO</InputLabel>
-
-                <Select name="types2" id="wantType">
-                <option value="rent">Rent</option>
-                <option value="sale">Sale</option>
-                </Select>
-            </InputContainer>
-            <InputContainer2>
-                <input value={} onChange={handleChange}/>
-            </InputContainer2>
-            <SearchButton>SEARCH</SearchButton>
-            </FiltersContainer>
-      </Section1>
+  function handleSubmit(event){
+    event.preventDefault();
+    setPropertyFilters({...propertyFilter, 
+            "types":[firstFilter.types==="house", firstFilter.types==="apartment"],
+            "mode":[firstFilter.mode==="sale", firstFilter.mode==="rent"],
+            "search":firstFilter.search})
+    navigate("/properties")
+    console.log({...propertyFilter, 
+      "types":[firstFilter.types==="house", firstFilter.types==="apartment"],
+      "mode":[firstFilter.mode==="sale", firstFilter.mode==="rent"],
+      "search":firstFilter.search})
+  }
+  return(
+    <Section1 style={{ backgroundImage: `url(${buildings})`, backgroundPosition: 'center' }}>
+      <TitleContainer>
+          <Section1Title> Meet your new home</Section1Title>
+          <Section1Subtitle>The easiest way to find where you belong</Section1Subtitle>
+      </TitleContainer>
+      <FiltersContainer>
+        <InputContainer>
+          <InputLabel htmlFor="types">I'M LOOKING FOR</InputLabel>
+          <Select onChange={handleChange} name="types" id="types">
+            <option value="apartment">An Apartment</option>
+            <option value="house">A House</option>
+          </Select>
+        </InputContainer>
+        <InputContainer>
+          <InputLabel htmlFor="mode">I WANT TO</InputLabel>
+          <Select onChange={handleChange} name="mode" id="mode">
+            <option value="rent">Rent</option>
+            <option value="sale">Sale</option>
+          </Select>
+        </InputContainer>
+        <InputContainer2>
+          <label>WHERE</label>
+          <input name="search" value={firstFilter.search} onChange={handleChange}/>
+        </InputContainer2>
+        <SearchButton onClick={handleSubmit}>SEARCH</SearchButton>
+      </FiltersContainer>
+    </Section1>
     )
 }

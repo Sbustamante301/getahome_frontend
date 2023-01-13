@@ -314,9 +314,9 @@ export function LoginCardButton({ children, handleLogin }) {
     )
 };
 
-export function SearchButton({ children }) {
+export function SearchButton({ children, onClick }) {
     return (
-        <Button6>
+        <Button6 onClick={onClick}>
             <Text3>{children}</Text3>
         </Button6>
     )

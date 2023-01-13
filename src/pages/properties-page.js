@@ -81,7 +81,6 @@ export default function PropertiesPage() {
     if (propertyFilter.mode[0]) return property.property.mode === "sale"
     if (propertyFilter.mode[1]) return property.property.mode === "rent"
   })
-  console.log(filterProperties)
 
   return (
     <>

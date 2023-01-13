@@ -188,7 +188,7 @@ margin-top:-40px;
 function SignupForm(){
     const navigate = useNavigate();
     const [error,setError] = useState(null);
-    const {userType, setUserType} = useAuth();
+    const {userType, setUserType, setUser} = useAuth();
     const [formdata, setFormdata] = useState({
         name:"",
         email:"",
@@ -210,7 +210,7 @@ function SignupForm(){
           setError(null);
         const {passwordConfirmation,...newForm} = formdata;
         
-        createUser(formdata).then(console.log).catch(console.log)
+        createUser(formdata).then(setUser).catch(console.log)
         console.log(formdata)
         navigate("/properties");
       }

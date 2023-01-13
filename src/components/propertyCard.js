@@ -240,7 +240,7 @@ export function PropertyCard({ property, showProperty }) {
               </Price>
               <HomeType>
                 {Icons.building}
-                {property.property.property_type === 'landlord' ? "Apartment" : "House"}
+                {property.property.property_type === 'apartment' ? "Apartment" : "House"}
               </HomeType>
             </Category>
             <Address>
