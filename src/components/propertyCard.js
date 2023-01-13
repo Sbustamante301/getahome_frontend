@@ -208,9 +208,11 @@ export function PropertyCard({ property, showProperty }) {
   const { user, savedProperty } = useAuth();
   
   let index_favorites = [];
-  let localSavedProperty = [...savedProperty.favorites];
+  let localSavedProperty = [];
+  if (savedProperty.favorites) localSavedProperty = [...savedProperty.favorites]
   localSavedProperty.map(property=>{
     index_favorites.push(property.property.id)
+  
   })
 
 

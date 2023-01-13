@@ -30,7 +30,10 @@ export default function PropertiesPage() {
   const { properties, setCurrentProperty, propertyFilter } = useAuth();
   
   console.log(propertyFilter)
-  let filterProperties = [...properties].filter(property => property.property.status);
+  console.log(properties)
+  let filterProperties = [...properties].filter(property =>{
+    if(property.property) return property.property.status
+  });
 
   // Filter by address
   filterProperties = filterProperties.filter(property => {
@@ -71,8 +74,8 @@ export default function PropertiesPage() {
   filterProperties = filterProperties.filter(property => {
     if (!(propertyFilter.types[0] || propertyFilter.types[1])) return true;
     if (propertyFilter.types[0] && propertyFilter.types[1]) return true;
-    if (propertyFilter.types[0]) return property.property.property_type === "apartment"
-    if (propertyFilter.types[1]) return property.property.property_type === "house"
+    if (propertyFilter.types[1]) return property.property.property_type === "apartment"
+    if (propertyFilter.types[0]) return property.property.property_type === "house"
   })
   // Filter for type (sale or rent)
   filterProperties = filterProperties.filter(property => {

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { CreateAccountButton } from "../components/Button";
 import { Icons } from "../utils";
 import { createProperty } from "../services/properties-service";
+import { useAuth } from "../context/auth-context";
 const Div = styled.div`
 width:100%;
 
@@ -199,10 +200,10 @@ export default function PropertyFormPage(){
 }
 
 export function PropertyForm(){
-    
+  const {properties, setProperties} = useAuth()
   const [formdata, setFormdata] = useState({
-      bedrooms:"",
-      bathrooms:"",
+      bedrooms:1,
+      bathrooms:1,
       area:"",
       pet_allowed:false,
       price:"",
@@ -240,10 +241,7 @@ export function PropertyForm(){
       console.log(imgsPrev)
       
     }
-    function handleSubmit(event){
-      event.preventDefault();
-      createProperty(formdata).then(console.log).catch(console.log)
-    }
+
     function handleSubmit2(event){
       event.preventDefault();
       console.log(event.target.bedrooms.value)
@@ -262,7 +260,11 @@ export function PropertyForm(){
       data.append("property[maintenance]", formdata.maintenance);
       data.append("property[image]", event.target.image.files[0]);
       console.dir(data)
-      createProperty(data).then(console.log).catch(console.log);
+      createProperty(data).then(response=>{
+        setProperties([...properties, response])
+        console.log(response)
+      }).catch(console.log);
+
     }
 
     function handleType(event){
