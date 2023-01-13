@@ -4,9 +4,8 @@ import { useNavigate } from "react-router-dom";
 import buildings from "../../assets/picture.svg";
 import { useAuth } from "../../context/auth-context";
 import { colors, typography } from "../../styles";
-
+import MediaQuery from "react-responsive";
 import { SearchButton } from "../Button";
-import Input from "../Input";
 
 const Section1 = styled.div`
     display: flex;
@@ -42,16 +41,12 @@ const FiltersContainer = styled.div`
   justify-content: center;
   padding: 8px 16px;
   gap: 8px;
+
   margin-top:64px;
   boder: 1px solid black;
-
-  width: 800px;
+  // max-width: 800px;
   height: 72px;
-  left: 320px;
-  top: 252px;
-
   background: ${colors.white};
-
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
 `;
@@ -120,27 +115,29 @@ export default function SectionMeetHome (){
           <Section1Title> Meet your new home</Section1Title>
           <Section1Subtitle>The easiest way to find where you belong</Section1Subtitle>
       </TitleContainer>
-      <FiltersContainer>
-        <InputContainer>
-          <InputLabel htmlFor="types">I'M LOOKING FOR</InputLabel>
-          <Select onChange={handleChange} name="types" id="types">
-            <option value="apartment">An Apartment</option>
-            <option value="house">A House</option>
-          </Select>
-        </InputContainer>
-        <InputContainer>
-          <InputLabel htmlFor="mode">I WANT TO</InputLabel>
-          <Select onChange={handleChange} name="mode" id="mode">
-            <option value="rent">Rent</option>
-            <option value="sale">Sale</option>
-          </Select>
-        </InputContainer>
-        <InputContainer2>
-          <label>WHERE</label>
-          <input name="search" value={firstFilter.search} onChange={handleChange}/>
-        </InputContainer2>
-        <SearchButton onClick={handleSubmit}>SEARCH</SearchButton>
-      </FiltersContainer>
+      <MediaQuery minWidth={960}>
+        <FiltersContainer>
+          <InputContainer>
+            <InputLabel htmlFor="types">I'M LOOKING FOR</InputLabel>
+            <Select onChange={handleChange} name="types" id="types">
+              <option value="apartment">An Apartment</option>
+              <option value="house">A House</option>
+            </Select>
+          </InputContainer>
+          <InputContainer>
+            <InputLabel htmlFor="mode">I WANT TO</InputLabel>
+            <Select onChange={handleChange} name="mode" id="mode">
+              <option value="rent">Rent</option>
+              <option value="sale">Sale</option>
+            </Select>
+          </InputContainer>
+          <InputContainer2>
+            <label>WHERE</label>
+            <input name="search" value={firstFilter.search} onChange={handleChange}/>
+          </InputContainer2>
+          <SearchButton onClick={handleSubmit}>SEARCH</SearchButton>
+        </FiltersContainer>
+      </MediaQuery>
     </Section1>
     )
 }

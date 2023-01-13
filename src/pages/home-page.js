@@ -15,7 +15,7 @@ const Section2 = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 600px;
+  padding:64px;
 `
 const TextContainer = styled.div`
   display:flex;
@@ -38,6 +38,7 @@ const Title = styled.h1`
 `;
 const PropertyContainer = styled.div`
   display:flex;
+  flex-wrap: wrap;
   justify-content:center;
   gap:3rem;
   margin-top:2rem;

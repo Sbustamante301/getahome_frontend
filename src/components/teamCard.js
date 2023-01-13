@@ -10,7 +10,8 @@ const TeamCardContainer = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 0px;
-    gap: 16px;
+    gap: 20px;
+    margin-top:20px;
     
   
 

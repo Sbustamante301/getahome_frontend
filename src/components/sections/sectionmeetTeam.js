@@ -8,12 +8,14 @@ import styled from "@emotion/styled";
 import { colors, typography } from "../../styles";
 
 const Div = styled.div`
-width:1056px;
-display:flex;
-flex-direction:row;
-flex-wrap: wrap;
-justify-content: space-between;
-align-items:center;
+  width:100%;
+  display:flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items:center;
+  gap:30px;;
+ 
 `;
 const Section4 = styled.div`
   display: flex;
@@ -21,9 +23,7 @@ const Section4 = styled.div`
   align-items: center;
   gap: 26px;
   width: 100%;
-  height: 486px;
-  left: 0px;
-  top: 1588px;
+  padding:64px;
   background: ${colors.white}
 `;
 
