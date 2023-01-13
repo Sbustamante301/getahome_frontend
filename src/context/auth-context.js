@@ -13,7 +13,7 @@ function AuthProvider({ children }) {
   const [myProperty, setMyProperty] = useState(null);
 
   const [userType, setUserType] = useState(JSON.parse(sessionStorage.getItem("userType")))
-  const [currentProperty, setCurrentProperty] = useState(null);
+  const [currentProperty, setCurrentProperty] = useState(JSON.parse(sessionStorage.getItem("currentProperty")));
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [error, setError] = useState(null);
   const [propertyFilter, setPropertyFilters] = useState({

@@ -82,6 +82,10 @@ export default function PropertiesPage() {
     if (propertyFilter.mode[1]) return property.property.mode === "rent"
   })
 
+  function handleCurrentProperty(e,property){
+    setCurrentProperty(property)
+    sessionStorage.setItem("currentProperty", JSON.stringify(property))
+  }
   return (
     <>
       <Wrapper>
@@ -90,7 +94,7 @@ export default function PropertiesPage() {
           {filterProperties.map((property, index) => {
             return (
               <Link key={`p${index}`} style={{ textDecoration: "none" }} to={`/properties/${property.property.id}`}>
-                <PropertyCard showProperty={() => setCurrentProperty(property)} property={property} />
+                <PropertyCard showProperty={(e) => handleCurrentProperty(e,property)} property={property} />
               </Link>
             )
           })}
