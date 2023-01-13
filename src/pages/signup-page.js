@@ -14,7 +14,6 @@ import { useAuth } from "../context/auth-context"
 import { useNavigate } from "react-router-dom"
 
 
-// background:${colors.pink.shallow};
 const Section1 = styled.div`
     display: flex;
     flex-direction: column;
@@ -24,8 +23,6 @@ const Section1 = styled.div`
     padding:100px;
     
 `;
-
-// background:${colors.white};
 const Section2 = styled.div`
     display: flex;
     flex-direction: row;
@@ -35,7 +32,6 @@ const Section2 = styled.div`
     height: 352px;
     
 `;
-
 const Div = styled.div`
 background: rgb(255,255,255);
 background: linear-gradient(360deg, rgba(255,255,255,1) 50%, rgba(244, 143, 177, 0.15) 50%);
@@ -50,14 +46,11 @@ height:704px;
 display:flex;
 align-items:center;
 flex-direction:column;
-
 `;
 
 const Title = styled.div`
 ${typography.head.sm};
 color:#1D4044;
-
-
 width: 520px;
 height: 196px;
 text-align: center;
@@ -75,7 +68,6 @@ height:88px;
 
 const Img = styled.img`
 `;
-
 const ImgDiv = styled.div`
 width:280px;
 height:274px;
@@ -96,7 +88,6 @@ padding:0px;
 const ImgTitle = styled.div`
 ${typography.head.xs}
 ${colors.gray.dark}
-
 `;
 
 const ImgSubtitle = styled.div`
@@ -156,14 +147,11 @@ align-items:center;
 text-align:center;
 padding:70px;
 -right:20px;
-
-
 `;
 
 
 const DivForm = styled.div`
 background:white;
-
 border-width:thin;
 box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 border-radius: 8px;
@@ -176,65 +164,17 @@ text-align:left;
 padding:70px;
 margin:100px;
 gap:16px;
-
-
 `;
 
 const FormTitle = styled.div`
 
 
 `;
-
 const Label = styled.label`
 ${colors.pink.dark};
 ${typography.text.xxs};
 `;
 
-
-// const H1=styled.div`
-
-// function SignupForm(){
-//     return(
-//         // <form>
-//         //     <label for="name">Name</label>
-//         //     <input type="name" placeholder="John Doe" id=""></input>
-
-
-
-
-//         // </form>
-//         <Div2>
-//         <Form>
-//           <DivForm className="form-body">
-//               <DivForm className="username">
-//                   <Label className="form__label" for="firstName">NAME</Label>
-//                   <input className="form__input" type="text" id="firstName" placeholder="John Doe"/>
-//               </DivForm>
-//               <DivForm className="email">
-//                   <Label className="form__label" for="email">EMAIL </Label>
-//                   <input  type="email" id="email" className="form__input" placeholder="user@mail.com"/>
-//               </DivForm>
-//               <DivForm className="phone">
-//                   <Label className="form__label" for="phone">PHONE</Label>
-//                   <input  type="text" id="phone" className="form__input" placeholder="999-999-999"/>
-//               </DivForm>
-//               <DivForm className="password">
-//                   <Label className="form__label" for="password">PASSWORD </Label>
-//                   <input className="form__input" type="password"  id="password" placeholder="Password"/>
-//               </DivForm>
-//               <DivForm className="confirm-password">
-//                   <Label className="form__label" for="confirmPassword">PASSWORD CONFIRMATION</Label>
-//                   <input className="form__input" type="password" id="confirmPassword" placeholder="Confirm Password"/>
-//               </DivForm>
-//           </DivForm>
-//           {/* <div class="footer">
-//               <button type="submit" class="btn">Register</button>
-//           </div> */}
-//           <CreateAccountButton>Create Account</CreateAccountButton>
-//       </Form>
-//       </Div2>    
-//     )
-// }`
 const H1 = styled.h1`
 ${typography.head.sm};
 width:246px;
@@ -293,14 +233,6 @@ function SignupForm(){
             onChange={handleChange}
             placeholder="John Doe" />
           <Input
-          label={"PASSWORD"}
-          id="password"
-          name="password" 
-          type="password" 
-          value={formdata.password}
-          onChange={handleChange}
-          placeholder="******"/>
-          <Input
             label={"EMAIL"}
             id="email"
             name="email"
@@ -316,7 +248,14 @@ function SignupForm(){
             value={formdata.phone}
             onChange={handleChange}
             placeholder="999-999-999  " />
-
+          <Input
+          label={"PASSWORD"}
+          id="password"
+          name="password" 
+          type="password" 
+          value={formdata.password}
+          onChange={handleChange}
+          placeholder="******"/>
           <P>At least 6 characters</P>
           <Input
             label={"PASSWORD CONFIRMATION"}
@@ -331,22 +270,13 @@ function SignupForm(){
         </form>
       </DivForm>
     </Div2>
-
   )
 }
-
-
-
-
-
 
 const P = styled.p`
 ${typography.text.xs};
 color:${colors.gray.light};
-
 `;
-
-
 
 export default function SignupPage() {
   const { userType, setUserType } = useAuth();
@@ -354,12 +284,6 @@ export default function SignupPage() {
   function HandleComponent() {
     setOpen(!open)
   }
-  return (
-
-    <>
-      {open === true ? <SignupForm /> : <Hidden HandleComponent={HandleComponent} />}
-
-    </>
-  )
+  return open ? <SignupForm /> : <Hidden HandleComponent={HandleComponent} />
 
 }

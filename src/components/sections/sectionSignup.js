@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Navigate, useNavigate } from "react-router-dom";
 import { colors,typography } from "../../styles";
 import { CreateAccountButton } from "../Button";
 
@@ -31,10 +32,15 @@ flex-direction:column;
 `
 export default function SectionSignup(){
 
+  const navigate = useNavigate();
+  function handleSubmit(event){
+    event.preventDefault();
+    navigate("/signup");
+  }
   return (
     <Section3>
         <Section3Title>Getting someone to rent your apartment has never been this easy
-          <CreateAccountButton>Create An Account Now</CreateAccountButton>
+          <CreateAccountButton onClick={handleSubmit}>Create An Account Now</CreateAccountButton>
         </Section3Title>
     </Section3>
   )

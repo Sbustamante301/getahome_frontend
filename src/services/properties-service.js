@@ -19,9 +19,7 @@ export async function createProperty(newProperty) {
     method: 'POST',
     body: newProperty,
     headers: {
-      // 'Content-Type': 'multipart/form-data',
       'Authorization': `Token token=${token}`
-      // 'Authorization': `Bearer ${token}`
     }
   });
   const property = await response.json();

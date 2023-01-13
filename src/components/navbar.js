@@ -132,6 +132,10 @@ export function NavbarAuthenticated() {
     event.preventDefault();
     navigate("/properties");
   }
+  function handleProfile(event){
+    event.preventDefault();
+    navigate("/profile");
+  }
 
   return (
     <NavbarContainer>
@@ -152,7 +156,7 @@ export function NavbarAuthenticated() {
         {userType === "landlord" ? <MyPropertyButton onClick={handleMyProperties}>MY PROPERTIES</MyPropertyButton> 
                         : <SaveButton onClick={handleSavedProperties}>SAVED PROPERTIES</SaveButton>}
         
-        <ProfileButton>PROFILE</ProfileButton>
+        <ProfileButton onClick={handleProfile}>PROFILE</ProfileButton>
 
       </FormWrapp>
     </NavbarContainer>

@@ -220,7 +220,6 @@ export function PropertyForm(){
     function handleChange(event){
       const {name, value} = event.target
       setFormdata({...formdata, [name]:value})
-      console.log(formdata)
     }
       
     function handleFileSelect(event){

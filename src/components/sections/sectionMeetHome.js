@@ -3,6 +3,7 @@ import buildings from "../../assets/picture.svg";
 import { colors, typography } from "../../styles";
 
 import { SearchButton } from "../Button";
+import Input from "../Input";
 
 const Section1 = styled.div`
     display: flex;
@@ -109,13 +110,7 @@ export default function SectionMeetHome (){
                 </Select>
             </InputContainer>
             <InputContainer2>
-                <InputLabel htmlFor="where">I WANT TO</InputLabel>
-
-                <Select name="place" id="where">
-                <option value="mount-sinai">Mount Sinai</option>
-                <option value="mount-beautiful-valley">Mount Beautiful Valley</option>
-                <option value="mount-okinawa">Okinawa</option>
-                </Select>
+                <input value={} onChange={handleChange}/>
             </InputContainer2>
             <SearchButton>SEARCH</SearchButton>
             </FiltersContainer>
