@@ -13,7 +13,12 @@ import HomePage from "./pages/home-page";
 import LoginModal from "./components/login-modal";
 import MyPropertiesPage from "./pages/my-properties-page";
 import SavedPropertiesPage from "./pages/saved_properties-page";
+
+import PropertyFormPage from "./pages/property-form-page";
+
+
 import EditPropertyPage from "./pages/edit-property-page";
+
 
 
 
@@ -36,18 +41,20 @@ function App() {
     <Wrapper>
       {!user ? <NavbarUnAuthenticated /> : <NavbarAuthenticated />}
       {
-        isOpenModal ? <LoginModal /> :
-          <Routes>
-            <Route index element={<Navigate to="home" />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/properties" element={<PropertiesPage />} />
-            <Route path="/properties/:id" element={<PropertyPage />} />
-            <Route path="/properties/edit/:id" element={<EditPropertyPage />} />
-            <Route path="/my_properties" element={<MyPropertiesPage />} />
-            <Route path="/saved_properties" element={<SavedPropertiesPage />} />
 
-          </Routes>
+        isOpenModal ? <LoginModal/> :
+        <Routes>
+          <Route index element={<Navigate to="home" />} />
+          <Route path="/home" element= {<HomePage />}/>
+          <Route path="/signup" element= {<SignupPage />}/>
+          <Route path="/propertyform" element= {<PropertyFormPage/>}/>
+          <Route path="/properties" element= {<PropertiesPage />}/>
+          <Route path="/properties/:id" element= {<PropertyPage />}/>
+          <Route path="/my_properties" element= {<MyPropertiesPage />}/>
+          <Route path="/saved_properties" element= {<SavedPropertiesPage />}/>
+
+        </Routes>
+
       }
     </Wrapper>
 
