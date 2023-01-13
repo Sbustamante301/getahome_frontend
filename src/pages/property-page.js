@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiBath, BiArea, BiBed } from "react-icons/bi";
 import { FaPaw } from "react-icons/fa";
 import { RiHeartFill } from "react-icons/ri"
@@ -10,7 +10,7 @@ import { useAuth } from "../context/auth-context";
 import { LoginCardButton, ContactAdvertiserButton, EditPropertyButton } from "../components/Button";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
 import Mapa from "../components/mapa";
-import { getSaved, createFavorite, createContacted, getLandlordUser } from "../services/properties-service"
+import { getSaved, createFavorite, createContacted, getLandlordUser, getProperties } from "../services/properties-service"
 
 const BigWraper = styled.div`
   display: flex;
@@ -362,17 +362,25 @@ const RightIcon = styled.div`
 `;
 
 export default function PropertyPage() {
-  const { currentProperty, setIsOpenModal, user, savedProperty, setSavedProperty } = useAuth();
+  const { currentProperty, setIsOpenModal, user, savedProperty, setSavedProperty, properties, setProperties } = useAuth();
   const [showContact, setShoreContact] = useState(false);
   const navigate = useNavigate();
   const [contact, setContact] = useState(false);
   const [landlord, setLandlord] = useState(null);
   let index_favorites = [];
-  let localSavedProperty = [...savedProperty.favorites];
+  let localSavedProperty = []
+  if(savedProperty.length !== 0 ){
+    console.log(savedProperty)
+    localSavedProperty = [...savedProperty.favorites];
+  }
+  
   localSavedProperty.map(property=>{
     index_favorites.push(property.property.id)
   })
-  const [favorite, setFavorite] = useState(index_favorites.includes(currentProperty.property.id));
+
+  const index = currentProperty.length !==0 ? currentProperty.property.id : "";
+  console.log("index",index)
+  const [favorite, setFavorite] = useState(index_favorites.includes(index));
 
   useEffect(() => {
     if (currentProperty) {
@@ -390,11 +398,9 @@ export default function PropertyPage() {
   function handleContactAdd(event) {
     event.preventDefault();
     createContacted({
-      id: currentProperty.property.id,
+      property_id: currentProperty.property.id,
       contacts: true,
-    })
-      .then((data) => console.log(data))
-      .catch(console.log)
+    }).then((data) => console.log(data)).catch(console.log)
     setShoreContact(true)
     setContact(true)
   }
@@ -402,13 +408,23 @@ export default function PropertyPage() {
   function handleAddFavorites(event) {
     event.preventDefault();
     createFavorite({
-      id: currentProperty.property.id,
+      property_id: currentProperty.property.id,
       favorite: true,
     })
       .then((data) => console.log(data))
       .catch(console.log)
     setFavorite(true)
-    
+  }
+
+  function handleRemoveFavorite(event) {
+    event.preventDefault();
+    createFavorite({
+      property_id: currentProperty.property.id,
+      favorite: false,
+    })
+      .then((data) => console.log(data))
+      .catch(console.log)
+    setFavorite(false)
   }
 
   useEffect(()=>{
@@ -417,11 +433,6 @@ export default function PropertyPage() {
       sessionStorage.setItem("savedProperty", JSON.stringify(response))
     })
   },[favorite])
-
-  function handleEditProperty(event) {
-    event.preventDefault();
-    navigate("/edit");
-  }
 
   return (
     <BigWraper>
@@ -503,7 +514,9 @@ export default function PropertyPage() {
             </UnlogedDiv>
           ) : currentProperty.property.user_id === user.id ? (
             <LogedDiv>
-              <EditPropertyButton onClick={handleEditProperty}> EDIT PROPERTY </EditPropertyButton>
+              <Link style={{textDecoration:"none"}} to={`/properties/edit/${currentProperty.property.id}`}>
+                <EditPropertyButton> EDIT PROPERTY </EditPropertyButton>
+              </Link>
             </LogedDiv>
           ) : (
                 <LogedDiv>
@@ -522,9 +535,9 @@ export default function PropertyPage() {
                     : (<LogedCard>
                       <ContactAdvertiserButton onClick={handleContactAdd}>CONTACT ADVERTISER</ContactAdvertiserButton>
                       {favorite ?
-                        (<FavoriteDiv onClick={handleAddFavorites} disabled>
-                          <RiHeartFill style={{ color: colors.pink.medium }} />
-                          <TextCard2>Add to favorites</TextCard2>
+                        (<FavoriteDiv onClick={handleRemoveFavorite}>
+                          {Icons.heartDark}
+                          <TextCard2>Remove from favorites</TextCard2>
                         </FavoriteDiv>)
                         : (<FavoriteDiv onClick={handleAddFavorites}>
                           {Icons.heart}

@@ -154,10 +154,11 @@ const Features = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  align-content:center;
   padding: 0px;
-  gap: 18px;
+  gap: 14px;
   margin-top: 16px;
-  width: 235px;
+  width: 300px;
   height: 18px;
   
 `;
@@ -203,9 +204,16 @@ const Pet = styled.div`
   display: flex;
   align-items: center;
 `;
-
-export function PropertyCard({ property, showProperty }) {
-  const { user, savedProperty } = useAuth();
+const Heart = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const Phone = styled.div`
+  display: flex;
+  align-items: center;
+`;
+export function PropertyCard({ property, showProperty, id }) {
+  const { user, savedProperty, setMyProperty, myProperty, setCurrentProperty } = useAuth();
 
   let index_favorites = [];
   let localSavedProperty = [];
@@ -218,25 +226,35 @@ export function PropertyCard({ property, showProperty }) {
 
   function handleClose(event) {
     event.preventDefault();
+    let updatedProperty = {"active":myProperty.active.filter(prop=> prop.property.id !== property.property.id),
+                          "closed":[...myProperty.closed, property]}
     updateProperty(property.property.id, { status: false })
       .then(response => { console.log('CARD CERRADA', response) })
       .catch(console.log)
+    setMyProperty(updatedProperty)
   }
 
   function handleRestore(event) {
     event.preventDefault();
-    console.log('ENTRE AL RESTORE')
+    let updatedProperty = {"active":[...myProperty.active, property],
+                          "closed":myProperty.closed.filter(prop=> prop.property.id !== property.property.id)}
     updateProperty(property.property.id, { status: true })
       .then(response => { console.log('CARD RESTAURADA', response) })
       .catch(console.log)
+    setMyProperty(updatedProperty)
   }
 
   function handleTrash(event) {
     event.preventDefault();
-    console.log('ENTRE AL DELETE')
+    console.log('LA PROPIEDAD', property.property.id)
+    let updateMyProperty = { ...myProperty, closed: myProperty.closed.filter((prop) => prop.property.id !== property.property.id) };
+    console.log('PROPIEDAD BORRADA', updateMyProperty)
+
     deleteProperty(property.property.id)
-      .then((data) => console.log('CardBORRADA', data))
+      .then(console.log)
       .catch(console.log)
+    
+    setMyProperty(updateMyProperty)
   }
 
   return (
@@ -246,17 +264,18 @@ export function PropertyCard({ property, showProperty }) {
       <Container height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
 
         <CardContainer height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
-
-          <ImgContainer>
+        <Link style={{textDecoration:"none"}} to={`/properties/${id}`}>
+          <ImgContainer onClick={()=>setCurrentProperty(property)}>
             <Property src={property.url} />
             <Tag>
               {Icons.coins}
 
-              {property.property.mode === 'sale' ? "For Sale" : "For Rent"}
+              {property.property.mode === 'landlord' ? "For Sale" : "For Rent"}
 
             </Tag>
           </ImgContainer>
-          <InformationContainer >
+          
+          <InformationContainer onClick={()=>setCurrentProperty(property)}>
             <Category>
               <Price >
                 {Icons.dollarCircle}
@@ -275,9 +294,11 @@ export function PropertyCard({ property, showProperty }) {
               <Bath>{Icons.bath} {property.property.bathrooms}</Bath>
               <Area>{Icons.area} {property.property.area} m2</Area>
               <Pet>{property.property.pet_allowed ? Icons.paw : null}</Pet>
-              {index_favorites.includes(property.property.id) ? Icons.heart : null}
+              <Heart>{index_favorites.includes(property.property.id) ? Icons.heartDark : null}</Heart>
+              <Phone> {Icons.phoneCheck}</Phone>
             </Features>
           </InformationContainer>
+          </Link>
           {(user?.user_type === 'landlord' && property.property.user_id === user.id) ?
             property.property.status ?
               (<LowFrame>

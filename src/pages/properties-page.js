@@ -89,9 +89,8 @@ export default function PropertiesPage() {
         <ContainerList>
           {filterProperties.map((property, index) => {
             return (
-              <Link key={`p${index}`} style={{ textDecoration: "none" }} to={`/properties/${property.property.id}`}>
-                <PropertyCard showProperty={(e) => handleCurrentProperty(e,property)} property={property} />
-              </Link>
+                <PropertyCard showProperty={(e) => handleCurrentProperty(e,property)} property={property} id={property.property.id} />
+
             )
           })}
         </ContainerList>

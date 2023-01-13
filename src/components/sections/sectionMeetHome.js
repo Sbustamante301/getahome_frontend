@@ -65,11 +65,22 @@ const InputContainer2 = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  gap: 8px;
+  border:none;
+  color: ${colors.gray.medium};
 
   width: 304px;
   height: 56px;
 `;
+const InputText = styled.input`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px;
+  gap: 8px;
+  ${typography.text.md};
+  border: none;
+`;
+
 const InputLabel = styled.label`
   ${typography.text.xxs};
   color: ${colors.gray.medium}
@@ -132,8 +143,14 @@ export default function SectionMeetHome (){
             </Select>
           </InputContainer>
           <InputContainer2>
-            <label>WHERE</label>
-            <input name="search" value={firstFilter.search} onChange={handleChange}/>
+          <InputLabel htmlFor="search">WHERE</InputLabel>
+            <InputText
+              id="search"
+              name="search"
+              value={firstFilter.search}
+              onChange={handleChange}
+              placeholder="Favorite Districst"
+            />
           </InputContainer2>
           <SearchButton onClick={handleSubmit}>SEARCH</SearchButton>
         </FiltersContainer>
