@@ -210,7 +210,11 @@ function SignupForm(){
           setError(null);
         const {passwordConfirmation,...newForm} = formdata;
         
-        createUser(formdata).then(setUser).catch(console.log)
+        createUser(formdata).then(response=>{
+          setUser(response);
+          sessionStorage.setItem("user", JSON.stringify(response))
+          sessionStorage.setItem("userType", JSON.stringify(response.user_type))
+        }).catch(console.log)
         console.log(formdata)
         navigate("/properties");
       }

@@ -252,7 +252,7 @@ export function PropertyCard({ property, showProperty }) {
             <Tag>
               {Icons.coins}
 
-              {property.property.mode === 'landlord' ? "For Sale" : "For Rent"}
+              {property.property.mode === 'sale' ? "For Sale" : "For Rent"}
 
             </Tag>
           </ImgContainer>

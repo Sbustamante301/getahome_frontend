@@ -50,10 +50,9 @@ font-weight: 500;
 
 
 export default function MyPropertiesPage(){
-
-  const { MyProperty}= useAuth();
+  const { myProperty }= useAuth();
+  console.log("myprops", myProperty)
   const [ myStatus, setMyStatus ] = useState("active");
-  
 
   return(
     <Wrapper>
@@ -62,21 +61,21 @@ export default function MyPropertiesPage(){
           <H1 onClick={()=>setMyStatus("active")} style={{borderBottom:`${myStatus==="active" ? "3px solid #F48FB1" : "0px"}`}}>ACTIVE</H1>
           <H1 onClick={()=>setMyStatus("close")} style={{borderBottom:`${myStatus==="close" ? "3px solid #F48FB1" : "0px"}`}}>CLOSED</H1>
         </ViewOptions>
-        {MyProperty ? myStatus==="active" ? 
-           <P1> {MyProperty.active.length} Properties found</P1>: 
-           <P1> {MyProperty.close.length} Properties found</P1> :
-            "0"
+        {myProperty ? myStatus==="active" ? 
+           <P1> {myProperty.active.length} Properties found</P1>: 
+           <P1> {myProperty.closed.length} Properties found</P1> :
+            null
           
           }
       </div>
       
       <ContainerList>
-        {MyProperty ? myStatus === "active" ? MyProperty.active.map((status, index)=>{
+        {myProperty ? myStatus === "active" ? myProperty.active.map((status, index)=>{
           return( 
             <PropertyCard key={index} property={status}/>         
           )
         }) :
-        MyProperty.close.map((status)=>{
+        myProperty.closed.map((status)=>{
           return( 
             <PropertyCard property={status}/>         
           )

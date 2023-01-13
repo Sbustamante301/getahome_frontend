@@ -71,6 +71,10 @@ const Input2 = styled.input`
   border: none;
   justify-content: center;
 `;
+const DivNav = styled.div`
+  display:flex;
+  gap: 16px;
+`
 
 export function NavbarUnAuthenticated() {
   const {setIsOpenModal} = useAuth();
@@ -96,18 +100,13 @@ export function NavbarUnAuthenticated() {
         <Link to="/home">
           <img src={logo} alt="image1"/>
         </Link>
-        <Form>
-          <Input
-            name="query"
-          // value={query}
-          // onChange={(event) => setQuery(event.target.value)}
-          />
+        <DivNav>
           <FindButton onClick={handleShowProperties}>
             Find a Home
           </FindButton>
-        </Form>
-        <JoinButton onClick={handleSignUp}>Join</JoinButton>
-        <LoginButton handleLogin={handleLogin}>Login</LoginButton>
+          <JoinButton onClick={handleSignUp}>Join</JoinButton>
+          <LoginButton handleLogin={handleLogin}>Login</LoginButton>
+        </DivNav>
 
       </FormWrapp>
     </NavbarContainer>
