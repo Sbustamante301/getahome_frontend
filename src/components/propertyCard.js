@@ -220,8 +220,15 @@ export function PropertyCard({ property, showProperty, id }) {
   if (savedProperty.favorites) localSavedProperty = [...savedProperty.favorites]
   localSavedProperty.map(property => {
     index_favorites.push(property.property.id)
-
   })
+
+  let index_contacts = [];
+  let localSavedPropertyContacts = [];
+  if (savedProperty.contacts) localSavedPropertyContacts = [...savedProperty.contacts]
+  localSavedPropertyContacts.map(property => {
+    index_contacts.push(property.property.id)
+  })
+  
 
 
   function handleClose(event) {
@@ -295,7 +302,7 @@ export function PropertyCard({ property, showProperty, id }) {
               <Area>{Icons.area} {property.property.area} m2</Area>
               <Pet>{property.property.pet_allowed ? Icons.paw : null}</Pet>
               <Heart>{index_favorites.includes(property.property.id) ? Icons.heartDark : null}</Heart>
-              <Phone> {Icons.phoneCheck}</Phone>
+              <Phone> {index_contacts.inlIcons.phoneCheck}</Phone>
             </Features>
           </InformationContainer>
           </Link>

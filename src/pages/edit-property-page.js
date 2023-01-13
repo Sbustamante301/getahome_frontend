@@ -7,7 +7,7 @@ import SectionMeetHome from "../components/sections/sectionMeetHome";
 import { useState } from "react";
 import { CreateAccountButton } from "../components/Button";
 import { Icons } from "../utils";
-import { createProperty } from "../services/properties-service";
+import { createProperty , updateProperty} from "../services/properties-service";
 
 const Div = styled.div`
 width:100%;
@@ -313,7 +313,7 @@ export function PropertyForm(){
       data.append("property[maintenance]", formdata.maintenance);
       data.append("property[image]", event.target.image.files[0]);
       console.dir(data)
-      createProperty(data).then(response=>{
+      updateProperty(currentProperty.property.id, data).then(response=>{
         setProperties([...properties, response])
         console.log(response)
       }).catch(console.log);
