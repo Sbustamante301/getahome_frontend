@@ -1,18 +1,28 @@
 import styled from "@emotion/styled";
+
 import { getMyProperties, getProperties } from "./services/properties-service";
 import { NavbarUnAuthenticated, NavbarAuthenticated } from "./components/navbar";
 import { getSaved } from "./services/properties-service";
 import { Routes, Route, Navigate } from "react-router-dom";
+
+import { useEffect } from "react";
+import { useAuth } from "./context/auth-context";
+
+
+
+
 import SignupPage from "./pages/signup-page";
 import PropertiesPage from "./pages/properties-page";
 import PropertyPage from "./pages/property-page";
 import HomePage from "./pages/home-page";
-
-import { useEffect } from "react";
-import { useAuth } from "./context/auth-context";
 import LoginModal from "./components/login-modal";
 import MyPropertiesPage from "./pages/my-properties-page";
 import SavedPropertiesPage from "./pages/saved_properties-page";
+
+import PropertyFormPage from "./pages/property-form-page";
+
+
+import EditPropertyPage from "./pages/edit-property-page";
 
 
 
@@ -21,13 +31,15 @@ const Wrapper = styled.div``;
 function App() {
 
   const {setProperties,user, isOpenModal, userType,setSavedProperty,setMyProperty} = useAuth()
+
+
   useEffect(() => {
-    getProperties().then(response=>{
-    setProperties(response)
-  
-    }).catch(error=>{console.log(error)})
-    
-  },[]);
+    getProperties().then(response => {
+      setProperties(response)
+
+    }).catch(error => { console.log(error) })
+
+  }, []);
 
   useEffect(() => {
     getSaved().then(response=>{
@@ -48,19 +60,22 @@ function App() {
 
   return (
     <Wrapper>
-      { !user ? <NavbarUnAuthenticated /> : <NavbarAuthenticated /> }
+      {!user ? <NavbarUnAuthenticated /> : <NavbarAuthenticated />}
       {
+
         isOpenModal ? <LoginModal/> :
         <Routes>
           <Route index element={<Navigate to="home" />} />
           <Route path="/home" element= {<HomePage />}/>
           <Route path="/signup" element= {<SignupPage />}/>
+          <Route path="/propertyform" element= {<PropertyFormPage/>}/>
           <Route path="/properties" element= {<PropertiesPage />}/>
           <Route path="/properties/:id" element= {<PropertyPage />}/>
           <Route path="/my_properties" element= {<MyPropertiesPage />}/>
           <Route path="/saved_properties" element= {<SavedPropertiesPage />}/>
 
         </Routes>
+
       }
     </Wrapper>
 

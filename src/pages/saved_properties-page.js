@@ -1,3 +1,4 @@
+
 import { getSaved } from "../services/properties-service";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/auth-context";
@@ -83,5 +84,6 @@ export default function SavedPropertiesPage(){
       : null}
       </ContainerList>
     </Wrapper>
+
   )
 }

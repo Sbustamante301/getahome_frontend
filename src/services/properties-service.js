@@ -15,7 +15,6 @@ export async function createProperty(newProperty) {
 }
 
 export async function showProperty(id) {
-  console.log('ID', id)
   const showProperty = await apiFetch(`properties/${id}`);
 
   return showProperty;
@@ -25,6 +24,11 @@ export async function deleteProperty(id) {
   await apiFetch("properties", { method: "DELETE" });
 }
 
+export async function updateProperty(id, data) {
+  console.log('ID EN SERVICE', id)
+  console.log('CUERPO en SERVICE', data)
+  await apiFetch(`properties/${id}`, { method: "PATCH", body: data })
+}
 
 
 

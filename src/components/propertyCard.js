@@ -1,6 +1,11 @@
 import styled from "@emotion/styled";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth-context"
 import { colors, typography } from "../styles";
 import { Icons } from "../utils"
+import { EditCardButton, CloseCardButton } from "../components/Button"
+import { updateProperty } from "../services/properties-service";
 
 const Wrapp = styled.div`
   display: flex;
@@ -8,10 +13,6 @@ const Wrapp = styled.div`
   align-items: center;
   justify-content:space-between;
   gap: 10px;
-
-  // height: 604px;
-  // left: calc(50% - 1440px/2);
-  // top: 672px;
 `;
 
 const Container = styled.div`
@@ -21,7 +22,7 @@ const Container = styled.div`
   align-items: center;
   padding: 0px;
   gap: 32px;
-  height: 476px;
+  height: ${(props) => props.height};
 `;
 const TextContainer = styled.div`
   display:flex;
@@ -46,12 +47,12 @@ const Title = styled.h1`
 const CardContainer = styled.div`
   position:relative;
   width: 300px;
-  height: 360px;
+  height: ${(props) => props.height};
 
 
   display: flex;
   flex-direction: column;
-  // justify-content:space-between;
+  justify-content:space-between;
   
   background: ${colors.white}
 
@@ -99,6 +100,7 @@ const InformationContainer = styled.div`
   justify-content: center;
   color:${colors.gray.medium};
   padding:8px;
+  height: ${(props) => props.height};
 `;
 
 const Category = styled.div`
@@ -107,7 +109,6 @@ const Category = styled.div`
   align-items: center;
   padding: 0px;
   gap: 12px;
-  width: 300px;
   height: 32px;
   
 `;
@@ -161,6 +162,28 @@ const Features = styled.div`
   
 `;
 
+const LowFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+
+  width: 300px;
+  height: 48px;
+  background: ${colors.pink.dark};
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 32px;
+`;
+
 const Bed = styled.div`
   display: flex;
   align-items: center;
@@ -181,30 +204,35 @@ const Pet = styled.div`
   align-items: center;
 `;
 
-export function PropertyCard({ property, showProperty}) {
+export function PropertyCard({ property, showProperty }) {
+  const { user } = useAuth();
 
+
+  function handleClose(event) {
+    event.preventDefault();
+    updateProperty(property.property.id, { status: false })
+      .then((data) => console.log(data))
+      .catch(console.log)
+  }
 
   return (
-
-    
-    
-
     <Wrapp onClick={showProperty}>
-      {/* <Container> */}
 
-        {/* <TextContainer>
-          <PrepTitle>Find an Appartment you Love</PrepTitle>
-          <Title>Homes for rent at the best prices</Title>
-        </TextContainer> */}
-        <CardContainer>
+
+      <Container height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
+
+        <CardContainer height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
+
           <ImgContainer>
             <Property src={property.url} />
             <Tag>
               {Icons.coins}
-              {property.property.mode === 1 ? "For Sale" : "For Rental" }
+
+              {property.property.mode === 'landlord' ? "For Sale" : "For Rent"}
+
             </Tag>
           </ImgContainer>
-          <InformationContainer>
+          <InformationContainer >
             <Category>
               <Price >
                 {Icons.dollarCircle}
@@ -212,23 +240,32 @@ export function PropertyCard({ property, showProperty}) {
               </Price>
               <HomeType>
                 {Icons.building}
-                {property.property.property_type === 1 ? "Apartment" : "House"}
+                {property.property.property_type === 'landlord' ? "Apartment" : "House"}
               </HomeType>
             </Category>
             <Address>
-                {property.property.address} 
+              {property.property.address}
             </Address>
             <Features>
               <Bed>{Icons.bed} {property.property.bedrooms}</Bed>
               <Bath>{Icons.bath} {property.property.bathrooms}</Bath>
               <Area>{Icons.area} {property.property.area} m2</Area>
-               <Pet>{property.property.pet_allowed ? Icons.paw : null }</Pet>
+              <Pet>{property.property.pet_allowed ? Icons.paw : null}</Pet>
             </Features>
-
           </InformationContainer>
+          {(user?.user_type === 'landlord' && property.property.user_id === user.id) ?
 
+            (<LowFrame>
+              <ButtonContainer>
+                <Link style={{ textDecoration: "none" }} to={`/properties/edit/${property.property.id}`}>
+                  <EditCardButton>EDIT</EditCardButton>
+                </Link>
+                <CloseCardButton onClick={handleClose}>CLOSE</CloseCardButton>
+              </ButtonContainer>
+            </LowFrame>)
+            : ""}
         </CardContainer>
-      {/* </Container> */}
+      </Container>
     </Wrapp>
 
   )

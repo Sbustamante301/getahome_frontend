@@ -6,30 +6,33 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
+
   const [properties, setProperties]= useState([]);
   const [savedProperty, setSavedProperty]= useState(null);
   const [myProperty, setMyProperty]= useState(null);
+
   const [userType, setUserType] = useState(null);
   const [currentProperty, setCurrentProperty] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [error, setError] = useState(null);
   const [propertyFilter, setPropertyFilters] = useState({
-    prices: null,
-    areas:null,
-    types: null,
+    prices: { min: null, max: null },
+    areas: { min: null, max: null },
+    types: [false, false], //house, apartment
     petAllowed: null,
-    beds: null,
-    baths:null,
-
+    beds: 0,
+    baths: 0,
+    mode: [false, false], //buy, rent
+    search: ""
   })
 
 
   // const navigate = useNavigate();
 
   useEffect(() => {
-   
+
     getUser()
-      .then(response =>{
+      .then(response => {
         setUser(response);
 
       })
@@ -41,8 +44,8 @@ function AuthProvider({ children }) {
       setUser(user);
       setUserType(user.user_type);
       setIsOpenModal(false);
-      sessionStorage.setItem("user",JSON.stringify(user))
-    }).catch(error=>{
+      sessionStorage.setItem("user", JSON.stringify(user))
+    }).catch(error => {
       setError(error.message)
     });
   }
@@ -68,13 +71,14 @@ function AuthProvider({ children }) {
         isOpenModal,
         currentProperty,
         userType,
+        setUserType,
         error,
         propertyFilter,
         setPropertyFilters,
         setProperties,
         setError,
-        login:handleLogin,
-        logout:handleLogout,
+        login: handleLogin,
+        logout: handleLogout,
         signup: handleSignup,
         setUser,
         setIsOpenModal,
