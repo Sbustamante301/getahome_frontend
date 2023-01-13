@@ -5,7 +5,11 @@ import { useAuth } from "../context/auth-context";
 import { PropertyCard } from "../components/propertyCard";
 import styled from "@emotion/styled";
 import { colors, typography } from "../styles";
+
 import { SectionFooter2 } from "../components/sections/sectionFooter";
+
+import { Link } from "react-router-dom";
+
 
 
 const Wrapper = styled.div`
@@ -71,8 +75,9 @@ export default function MyPropertiesPage(){
       
       <ContainerList>
         {myProperty ? myStatus === "active" ? myProperty.active.map((status, index)=>{
-          return( 
-            <PropertyCard key={index} property={status}/>         
+          return(
+            
+              <PropertyCard key={index} property={status}/>         
           )
         }) :
         myProperty.closed.map((status)=>{
