@@ -8,6 +8,7 @@ import { Icons } from "../utils";
 const Wrapper=styled.div`
   display:flex;
   justify-content:space-between;
+  flex-wrap:wrap;
 `
 const Select = styled.div`
   display: flex;
@@ -17,6 +18,7 @@ const Select = styled.div`
   color: ${colors.gray.dark};
   border: 1px solid ${colors.pink.medium};
   border-radius: 8px;
+  margin-top:20px;
   padding:8px;
 `;
 const ButtonContainer = styled.div`
@@ -42,6 +44,7 @@ const StyledInput = styled.input`
   border: 1px solid ${colors.pink.medium};
   border-radius: 8px;
   padding:8px;
+  margin-top:20px; 
 `
 const StyledInput2 = styled.input`
   width:102px;
@@ -113,6 +116,7 @@ const StyledCheckbox = styled.input`
 `
 const Container = styled.div`
   display:flex;
+  margin-top:20px;
   gap:8px;
 `
 export default function Filter(){

@@ -10,9 +10,8 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-padding:64px, 10px, 64px, 10px;
+padding:64px;
 gap: 10px;
-height: 312px;
 width:100%;
 background: ${colors.pink.shallow}
 
