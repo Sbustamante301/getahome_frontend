@@ -9,6 +9,7 @@ import { colors, typography } from "../styles";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
 
 import { Link } from "react-router-dom";
+import EmptyCard from "../components/empty-card";
 
 
 
@@ -74,6 +75,7 @@ export default function MyPropertiesPage(){
       </div>
       
       <ContainerList>
+        <EmptyCard/>
         {myProperty ? myStatus === "active" ? myProperty.active.map((status, index)=>{
           return(
             

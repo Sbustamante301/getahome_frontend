@@ -208,7 +208,7 @@ const Heart = styled.div`
   align-items: center;
 `;
 
-export function PropertyCard({ property, showProperty }) {
+export function PropertyCard({ property, showProperty, id }) {
   const { user, savedProperty, setMyProperty, myProperty, setCurrentProperty } = useAuth();
 
   let index_favorites = [];
@@ -260,7 +260,7 @@ export function PropertyCard({ property, showProperty }) {
       <Container height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
 
         <CardContainer height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
-        <Link style={{textDecoration:"none"}} to={`/properties/${property.property.id}`}>
+        <Link style={{textDecoration:"none"}} to={`/properties/${id}`}>
           <ImgContainer onClick={()=>setCurrentProperty(property)}>
             <Property src={property.url} />
             <Tag>

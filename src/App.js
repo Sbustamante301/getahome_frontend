@@ -1,16 +1,12 @@
 import styled from "@emotion/styled";
 
-import { getMyProperties, getProperties } from "./services/properties-service";
+import { getMyProperties, getProperties, showProperty } from "./services/properties-service";
 import { NavbarUnAuthenticated, NavbarAuthenticated } from "./components/navbar";
 import { getSaved } from "./services/properties-service";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useParams } from "react-router-dom";
 
 import { useEffect } from "react";
 import { useAuth } from "./context/auth-context";
-
-
-
-
 import SignupPage from "./pages/signup-page";
 import PropertiesPage from "./pages/properties-page";
 import PropertyPage from "./pages/property-page";
@@ -32,8 +28,8 @@ const Wrapper = styled.div``;
 
 function App() {
 
-  const { setProperties, user, isOpenModal, userType, setSavedProperty, setMyProperty } = useAuth()
-
+  const { setProperties, user, isOpenModal, userType, setSavedProperty, setMyProperty, setCurrentProperty } = useAuth()
+  const {id} = useParams();
 
   useEffect(() => {
     getProperties().then(response => {
@@ -42,6 +38,15 @@ function App() {
     }).catch(error => { console.log(error) })
 
   }, []);
+
+  useEffect(()=>{
+    showProperty(id).then(response=>{
+        setCurrentProperty(response)
+      }
+    
+    )
+  },[id])
+
 
   useEffect(() => {
     getSaved().then(response => {
@@ -73,7 +78,7 @@ function App() {
             <Route index element={<Navigate to="home" />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/signup" element={<SignupPage />} />
-            <Route path="/propertyform" element={<PropertyFormPage />} />
+            <Route path="/property/new" element={<PropertyFormPage />} />
             <Route path="/properties" element={<PropertiesPage />} />
             <Route path="/properties/:id" element={<PropertyPage />} />
             <Route path="/my_properties" element={<MyPropertiesPage />} />
