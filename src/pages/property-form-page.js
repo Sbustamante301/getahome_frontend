@@ -129,7 +129,7 @@ const OperationTypeDiv = styled.div`
   align-items:flex-start;
   padding:0px;
   margin-left:0px;
-  margin-top:20px;
+  margin-top:-10px;
 `;
 const OperationTitle = styled.div`
   color:${colors.gray.medium};
@@ -369,6 +369,7 @@ export function PropertyForm(){
                 placeholder="100"/>
             </InputDiv>
             </SelectContainer>
+
             { formdata.mode==="rent" ?<>
               
               <PetsDiv>
@@ -384,10 +385,11 @@ export function PropertyForm(){
             <div style={{display:'flex',flexDirection:'column'}}>
               <label htmlFor="about">ABOUT THIS PROPERTY</label>
               <textarea onChange={handleChange} value={formdata.description} id="description" name="description" placeholder="My apartment is great because..." type=""></textarea>
+
               <p>Renters will read this first, so highlight any features or important information the apartment has.</p>
             </div>
             <div style={{display:'flex',flexDirection:'column'}}>
-              <h1>Photos</h1>
+              <PhotosH1>Photos</PhotosH1>
               <label htmlFor="file">UPLOAD AS MANY PHOTOS AS YOU WISH</label>
               <input id="file" name="file"  type="file" multiple onChange={handleFileSelect}></input>
               <ImageWrapper>
@@ -409,6 +411,14 @@ export function PropertyForm(){
         </Form>
     )
 }
+
+
+const PhotosH1 = styled.h1`
+${typography.head.xs};
+color:${colors.gray.dark}
+
+
+`;
 const IconContainer = styled.div`
   width:100%;
   height:20px;
@@ -419,7 +429,7 @@ const ImageWrapper = styled.div`
   padding:8px;
   display:flex;
   gap:12px;
-  background: ${colors.pink.shallow};
+  background: ${colors.background};
   min-width:600px;
   min-height:140px;
 `
