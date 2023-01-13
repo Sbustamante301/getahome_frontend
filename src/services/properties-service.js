@@ -30,8 +30,6 @@ export async function updateProperty(id, data) {
   await apiFetch(`properties/${id}`, { method: "PATCH", body: data })
 }
 
-
-
 // INVOLVED_PROPERTIES
 
 // export async function createProperty() {

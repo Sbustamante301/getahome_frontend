@@ -69,15 +69,15 @@ export default function PropertiesPage() {
   filterProperties = filterProperties.filter(property => {
     if (!(propertyFilter.types[0] || propertyFilter.types[1])) return true;
     if (propertyFilter.types[0] && propertyFilter.types[1]) return true;
-    if (propertyFilter.types[0]) return property.property.property_type === 2
-    if (propertyFilter.types[1]) return property.property.property_type === 1
+    if (propertyFilter.types[0]) return property.property.property_type === "apartment"
+    if (propertyFilter.types[1]) return property.property.property_type === "house"
   })
-  // Filter for type (house or apartment)
+  // Filter for type (sale or rent)
   filterProperties = filterProperties.filter(property => {
     if (!(propertyFilter.mode[0] || propertyFilter.mode[1])) return true;
     if (propertyFilter.mode[0] && propertyFilter.mode[1]) return true;
-    if (propertyFilter.mode[0]) return property.property.mode === 1
-    if (propertyFilter.mode[1]) return property.property.mode === 2
+    if (propertyFilter.mode[0]) return property.property.mode === "sale"
+    if (propertyFilter.mode[1]) return property.property.mode === "rent"
   })
   console.log(filterProperties)
 
