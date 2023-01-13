@@ -51,7 +51,7 @@ font-weight: 500;
 
 export default function SavedPropertiesPage() {
 
-  const { savedProperty } = useAuth();
+  const { savedProperty, userType, setSavedProperty } = useAuth();
   const [saved, setSaved] = useState("favorites");
 
   useEffect(() => {

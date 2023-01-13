@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
-import { BiBath, BiArea, BiBed } from "react-icons/bi"
-import { FaPaw } from "react-icons/fa"
+import { BiBath, BiArea, BiBed } from "react-icons/bi";
+import { FaPaw } from "react-icons/fa";
+import { RiHeartFill } from "react-icons/ri"
 import { useState, useEffect } from "react";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils";
@@ -105,6 +106,10 @@ const FavoriteDiv = styled.button`
 
   width: 100px;
   height: 60px;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 `;
 
 const TextCard1 = styled.p`
@@ -354,6 +359,8 @@ export default function PropertyPage() {
   const { currentProperty, setIsOpenModal, user, savedProperty, setSavedProperty } = useAuth();
   const [showContact, setShoreContact] = useState(false);
   const navigate = useNavigate();
+  const [favorite, setFavorite] = useState(false)
+  const [contact, setContact] = useState(false)
 
   function handleLogin(event) {
     event.preventDefault();
@@ -368,8 +375,8 @@ export default function PropertyPage() {
     })
       .then((data) => console.log(data))
       .catch(console.log)
-
     setShoreContact(true)
+    setContact(true)
   }
 
   function handleAddFavorites(event) {
@@ -380,6 +387,7 @@ export default function PropertyPage() {
     })
       .then((data) => console.log(data))
       .catch(console.log)
+    setFavorite(true)
   }
 
   function handleEditProperty(event) {
@@ -484,10 +492,17 @@ export default function PropertyPage() {
                     </LogedCard>)
                     : (<LogedCard>
                       <ContactAdvertiserButton onClick={handleContactAdd}>CONTACT ADVERTISER</ContactAdvertiserButton>
-                      <FavoriteDiv onClick={handleAddFavorites}>
-                        {Icons.heart}
-                        <TextCard2>Add to favorites</TextCard2>
-                      </FavoriteDiv>
+                      {favorite ?
+                        (<FavoriteDiv onClick={handleAddFavorites} disabled>
+                          <RiHeartFill style={{ color: colors.pink.medium }} />
+                          <TextCard2>Add to favorites</TextCard2>
+                        </FavoriteDiv>)
+                        : (<FavoriteDiv onClick={handleAddFavorites}>
+                          {Icons.heart}
+                          <TextCard2>Add to favorites</TextCard2>
+                        </FavoriteDiv>)
+                      }
+
                     </LogedCard>)
 
 
