@@ -156,9 +156,9 @@ export function SectionFooter() {
   return (
     <Footer>
       <Div1>
-        <FooterTitle>© 202X-Find that Home</FooterTitle>
+        <FooterTitle>© 2023-Find that Home</FooterTitle>
         <FooterTitle>Source Code</FooterTitle>
-        <FooterTitle>Codeable-Cohort X Final Project</FooterTitle>
+        <FooterTitle>Codeable-Cohort VIII Final Project</FooterTitle>
       </Div1>
       <Div2>
         <FooterContainer>

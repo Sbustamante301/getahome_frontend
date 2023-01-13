@@ -10,7 +10,7 @@ import { useAuth } from "../context/auth-context";
 import { LoginCardButton, ContactAdvertiserButton, EditPropertyButton } from "../components/Button";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
 import Mapa from "../components/mapa";
-import { createFavorite, createContacted, getLandlordUser } from "../services/properties-service"
+import { getSaved, createFavorite, createContacted, getLandlordUser } from "../services/properties-service"
 
 const BigWraper = styled.div`
   display: flex;
@@ -365,10 +365,14 @@ export default function PropertyPage() {
   const { currentProperty, setIsOpenModal, user, savedProperty, setSavedProperty } = useAuth();
   const [showContact, setShoreContact] = useState(false);
   const navigate = useNavigate();
-  const [favorite, setFavorite] = useState(false);
   const [contact, setContact] = useState(false);
   const [landlord, setLandlord] = useState(null);
-
+  let index_favorites = [];
+  let localSavedProperty = [...savedProperty.favorites];
+  localSavedProperty.map(property=>{
+    index_favorites.push(property.property.id)
+  })
+  const [favorite, setFavorite] = useState(index_favorites.includes(currentProperty.property.id));
 
   useEffect(() => {
     if (currentProperty) {
@@ -404,7 +408,15 @@ export default function PropertyPage() {
       .then((data) => console.log(data))
       .catch(console.log)
     setFavorite(true)
+    
   }
+
+  useEffect(()=>{
+    getSaved().then(response=>{
+      setSavedProperty(response)
+      sessionStorage.setItem("savedProperty", JSON.stringify(response))
+    })
+  },[favorite])
 
   function handleEditProperty(event) {
     event.preventDefault();

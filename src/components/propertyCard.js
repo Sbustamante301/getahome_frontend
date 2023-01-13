@@ -205,7 +205,13 @@ const Pet = styled.div`
 `;
 
 export function PropertyCard({ property, showProperty }) {
-  const { user } = useAuth();
+  const { user, savedProperty } = useAuth();
+  
+  let index_favorites = [];
+  let localSavedProperty = [...savedProperty.favorites];
+  localSavedProperty.map(property=>{
+    index_favorites.push(property.property.id)
+  })
 
 
   function handleClose(event) {
@@ -251,6 +257,7 @@ export function PropertyCard({ property, showProperty }) {
               <Bath>{Icons.bath} {property.property.bathrooms}</Bath>
               <Area>{Icons.area} {property.property.area} m2</Area>
               <Pet>{property.property.pet_allowed ? Icons.paw : null}</Pet>
+              {index_favorites.includes( property.property.id) ? Icons.heart : null}
             </Features>
           </InformationContainer>
           {(user?.user_type === 'landlord' && property.property.user_id === user.id) ?
