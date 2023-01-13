@@ -413,3 +413,25 @@ export function CloseCardButton({ children, onClick }) {
         </Button13>
     )
 }
+
+export function RestoreCardButton({ children, onClick }) {
+    return (
+        <Button13 onClick={onClick}>
+            <LeftIcon style={{ color: `${colors.white} ` }}>
+                {Icons.upload}
+            </LeftIcon>
+            <Text3>{children}</Text3>
+        </Button13>
+    )
+}
+
+export function DeleteCardButton({ children, onClick }) {
+    return (
+        <Button13 onClick={onClick}>
+            <LeftIcon style={{ color: `${colors.white} ` }}>
+                {Icons.trash}
+            </LeftIcon>
+            <Text3>{children}</Text3>
+        </Button13>
+    )
+}

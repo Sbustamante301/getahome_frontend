@@ -14,7 +14,8 @@ import { BiBath, BiArea, BiBed } from "react-icons/bi"
 import { FaRegEdit } from "react-icons/fa";
 import { FaPaw } from "react-icons/fa"
 import { GiPositionMarker } from "react-icons/gi";
-import {BSCheckSquare,BsSquare} from "react-icons/bs"
+import { CgTrash } from "react-icons/cg";
+import { BSCheckSquare, BsSquare } from "react-icons/bs"
 import { colors } from "./styles"
 import styled from "@emotion/styled";
 
@@ -59,7 +60,7 @@ export const Icons = {
     download: <RiDownloadLine />,
     closed: <RiCloseFill style={{ width: "20px", height: "20px" }} />,
     arrowUp: <RiArrowUpSLine />,
-    closeCircle: <RiCloseCircleLine  style={{ color:`${colors.gray.light}`, scale:2 }} />,
+    closeCircle: <RiCloseCircleLine style={{ color: `${colors.gray.light}`, scale: 2 }} />,
     mailOpen: <RiMailOpenLine />,
     phone: <RiPhoneLine />,
     linkedinBox: <RiLinkedinBoxLine />,
@@ -78,9 +79,10 @@ export const Icons = {
     home: <RiHome8Line />,
     bin: <RiDeleteBin6Line />,
     edit: <FaRegEdit />,
+    trash: <CgTrash />,
 
     positioner: <GiPositionMarker />,
-    
+
 
 
 
