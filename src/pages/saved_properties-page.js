@@ -24,6 +24,7 @@ row-gap: 32px;
 column-gap: 86px;
 justify-items:center;
 justify-content:center;
+margin-bottom:20px;
 `
 
 const ViewOptions = styled.div`

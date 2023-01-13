@@ -398,11 +398,9 @@ export default function PropertyPage() {
   function handleContactAdd(event) {
     event.preventDefault();
     createContacted({
-      id: currentProperty.property.id,
+      property_id: currentProperty.property.id,
       contacts: true,
-    })
-      .then((data) => console.log(data))
-      .catch(console.log)
+    }).then((data) => console.log(data)).catch(console.log)
     setShoreContact(true)
     setContact(true)
   }
@@ -416,7 +414,17 @@ export default function PropertyPage() {
       .then((data) => console.log(data))
       .catch(console.log)
     setFavorite(true)
-    
+  }
+
+  function handleRemoveFavorite(event) {
+    event.preventDefault();
+    createFavorite({
+      property_id: currentProperty.property.id,
+      favorite: false,
+    })
+      .then((data) => console.log(data))
+      .catch(console.log)
+    setFavorite(false)
   }
 
   useEffect(()=>{
@@ -527,9 +535,9 @@ export default function PropertyPage() {
                     : (<LogedCard>
                       <ContactAdvertiserButton onClick={handleContactAdd}>CONTACT ADVERTISER</ContactAdvertiserButton>
                       {favorite ?
-                        (<FavoriteDiv onClick={handleAddFavorites} disabled>
+                        (<FavoriteDiv onClick={handleRemoveFavorite}>
                           {Icons.heartDark}
-                          <TextCard2>Add to favorites</TextCard2>
+                          <TextCard2>Remove from favorites</TextCard2>
                         </FavoriteDiv>)
                         : (<FavoriteDiv onClick={handleAddFavorites}>
                           {Icons.heart}

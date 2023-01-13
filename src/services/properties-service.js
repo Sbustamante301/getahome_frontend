@@ -70,7 +70,14 @@ export async function createFavorite(newFavorite) {
     body: newFavorite
   })
   return favorites;
-}
+};
+
+export async function updateFavorite(id, data) {
+  const newFavorites = await apiFetch(`involved_properties/${id}`, {
+    body: data
+  })
+  return newFavorites;
+};
 
 export async function createContacted(newContacted) {
   const contacted = await apiFetch("involved_properties", {

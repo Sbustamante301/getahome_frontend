@@ -11,8 +11,6 @@ import { SectionFooter2 } from "../components/sections/sectionFooter";
 import { Link } from "react-router-dom";
 import EmptyCard from "../components/empty-card";
 
-
-
 const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
@@ -29,6 +27,7 @@ row-gap: 32px;
 column-gap: 86px;
 justify-items:center;
 justify-content:center;
+margin-bottom:20px;
 `
 
 const ViewOptions = styled.div`
