@@ -11,7 +11,7 @@ import { LoginCardButton, ContactAdvertiserButton, EditPropertyButton } from "..
 import { SectionFooter2 } from "../components/sections/sectionFooter";
 import Mapa from "../components/mapa";
 import { getSaved, createFavorite, createContacted, getLandlordUser, getProperties } from "../services/properties-service"
-
+import ImageDefault from "../assets/image-default.jpg"
 const BigWraper = styled.div`
   display: flex;
   flex-direction:column;
@@ -457,7 +457,8 @@ export default function PropertyPage() {
             <LeftIcon>
               {Icons.arrowLeft}
             </LeftIcon>
-            <Image src={currentProperty.url}></Image>
+            {currentProperty.url ==="sin imagen" ? <img src={ImageDefault}/> : <Image src={currentProperty.url}></Image>}
+            
             <RightIcon>
               {Icons.arrowRight}
             </RightIcon>

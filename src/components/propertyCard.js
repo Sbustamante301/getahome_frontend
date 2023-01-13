@@ -6,6 +6,7 @@ import { colors, typography } from "../styles";
 import { Icons } from "../utils"
 import { EditCardButton, CloseCardButton, RestoreCardButton, DeleteCardButton } from "../components/Button"
 import { updateProperty, deleteProperty } from "../services/properties-service";
+import ImageDefault from "../assets/image-default.jpg"
 
 const Wrapp = styled.div`
   display: flex;
@@ -273,7 +274,7 @@ export function PropertyCard({ property, showProperty, id }) {
         <CardContainer height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
         <Link style={{textDecoration:"none"}} to={`/properties/${id}`}>
           <ImgContainer onClick={()=>setCurrentProperty(property)}>
-            <Property src={property.url} />
+            {property.url ==="sin imagen" ? <img src={ImageDefault}/> : <Property src={property.url}/>}
             <Tag>
               {Icons.coins}
 
