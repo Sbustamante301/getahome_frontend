@@ -1,8 +1,8 @@
 import { SectionFooter2 } from "../components/sections/sectionFooter"
-export default function SavedPropertiesPage() {
+export default function EditPropertyPage() {
   return (
     <>
-      <h1>Saved Properties</h1>
+      <h1>Create a property listing</h1>
       <SectionFooter2 />
     </>
   )

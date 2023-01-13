@@ -1,19 +1,23 @@
 import styled from "@emotion/styled";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useAuth } from "./context/auth-context";
+
 import { getProperties } from "./services/properties-service";
 import { NavbarUnAuthenticated, NavbarAuthenticated } from "./components/navbar";
 
-import { Routes, Route, Navigate } from "react-router-dom";
 import SignupPage from "./pages/signup-page";
 import PropertiesPage from "./pages/properties-page";
 import PropertyPage from "./pages/property-page";
 import HomePage from "./pages/home-page";
-
-import { useEffect } from "react";
-import { useAuth } from "./context/auth-context";
 import LoginModal from "./components/login-modal";
 import MyPropertiesPage from "./pages/my-properties-page";
 import SavedPropertiesPage from "./pages/saved_properties-page";
+
 import PropertyFormPage from "./pages/property-form-page";
+
+
+import EditPropertyPage from "./pages/edit-property-page";
 
 
 
@@ -22,21 +26,22 @@ const Wrapper = styled.div``;
 
 function App() {
 
-  const {setProperties,user, isOpenModal, userType} = useAuth()
+  const { setProperties, user, isOpenModal, userType } = useAuth()
   useEffect(() => {
-    getProperties().then(response=>{
-    setProperties(response)
-  
-    }).catch(error=>{console.log(error)})
-    
-  },[]);
+    getProperties().then(response => {
+      setProperties(response)
+
+    }).catch(error => { console.log(error) })
+
+  }, []);
 
 
 
   return (
     <Wrapper>
-      { !user ? <NavbarUnAuthenticated /> : <NavbarAuthenticated /> }
+      {!user ? <NavbarUnAuthenticated /> : <NavbarAuthenticated />}
       {
+
         isOpenModal ? <LoginModal/> :
         <Routes>
           <Route index element={<Navigate to="home" />} />
@@ -49,6 +54,7 @@ function App() {
           <Route path="/saved_properties" element= {<SavedPropertiesPage />}/>
 
         </Routes>
+
       }
     </Wrapper>
 
