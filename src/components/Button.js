@@ -314,16 +314,16 @@ export function LoginCardButton({ children, handleLogin }) {
     )
 };
 
-export function SearchButton({ children }) {
+export function SearchButton({ children, onClick }) {
     return (
-        <Button6>
+        <Button6 onClick={onClick}>
             <Text3>{children}</Text3>
         </Button6>
     )
 };
-export function CreateAccountButton({ children }) {
+export function CreateAccountButton({ children, onClick }) {
     return (
-        <Button2 type="submit">
+        <Button2 onClick={onClick}>
             <Text>{children}</Text>
         </Button2>
     )
@@ -351,9 +351,9 @@ export function SaveButton({ children, onClick }) {
     )
 };
 
-export function ProfileButton({ children }) {
+export function ProfileButton({ children, onClick }) {
     return (
-        <Button9>
+        <Button9 onClick={onClick}>
             <LeftIcon style={{ color: `${colors.white} ` }}>
                 {Icons.user}
             </LeftIcon>

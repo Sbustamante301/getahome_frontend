@@ -8,6 +8,7 @@ import { useAuth } from "../context/auth-context";
 import { useEffect, useState } from "react";
 import { colors, typography } from "../styles";
 import { getSaved } from "../services/properties-service";
+import { getUser } from "../services/users-service";
 
 const Section2 = styled.div`
   display: flex;
@@ -43,7 +44,7 @@ const PropertyContainer = styled.div`
 `
 
 function HomePage() {
-  const { userType, properties, setSavedProperty } = useAuth();
+  const { userType, properties, setSavedProperty, setUser } = useAuth();
   const randomProperties = properties.filter((_property, index) => index < 3)
   useEffect(() => {
     if(userType==="seeker"){
@@ -52,6 +53,12 @@ function HomePage() {
       sessionStorage.setItem("savedProperty", JSON.stringify(response))
       }).catch(error=>{console.log(error)})
     }
+    getUser()
+      .then(response => {
+        setUser(response);
+
+      })
+      .catch((error) => console.log(error));
     
   },[]);
   return (
