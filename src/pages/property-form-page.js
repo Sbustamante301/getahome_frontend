@@ -11,10 +11,16 @@ height:940px;
 
 
 `;
-const H1=styled.div`
+const H1Div=styled.div`
 ${typography.head.md};
 width:440px;
-height:48px;`;
+height:48px;
+letter-spacing: 0.25px;
+margin-left:32px;
+
+
+
+`;
 
 
 const Label = styled.label`
@@ -62,7 +68,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 40px;
+  gap: 20px;
   width:600px;
 `;
 
@@ -130,8 +136,13 @@ const TextArea = styled.input`
 const OperationTypeDiv = styled.div`
 width:105px;
 height:56px;
+gap:4px;
 display:flex;
-align-items:center;
+flex-direction:column;
+align-items:flex-start;
+padding:0px;
+margin-left:32px;
+margin-top:20px;
 
 `;
 const OperationTitle = styled.div`
@@ -141,12 +152,23 @@ height:16px;
 ${typography.text.xxs};
 
 `;
+const PropertyTitle = styled.div`
+color:${colors.gray.medium};
+width:99px;
+height:12px;
+${typography.text.xxs};
+display:flex;
+align-items:center;
+margin-left:5px;
+
+`;
 const InputDiv = styled.div`
 width:356px;
 height:40px;
 gap:8px;
 margin-top:0px;
 `;
+
 
 function Input({
   id,
@@ -201,10 +223,11 @@ export default function PropertyFormPage(){
     return(
         <>
         <Div>
-        <H1>Create a property listing</H1>
+        <H1Div>Create a property listing</H1Div>
+        
         <OperationTypeDiv>
             <OperationTitle>OPERATION TYPE</OperationTitle>
-            {/* <CreateAccountButton/> */}
+             {/* <CreateAccountButton>Rent Sale</CreateAccountButton> */}
         </OperationTypeDiv>
         <PropertyForm/>
         
@@ -308,9 +331,8 @@ export  function PropertyForm({}){
     return(
         <Form>
           <Container>
-            <InputDiv>
-          
-          <Input
+            <InputDiv style={{width:"600px"}}>
+            <Input
             label={"ADDRESS"}
             id="address"
             name="address" 
@@ -341,7 +363,9 @@ export  function PropertyForm({}){
             onChange={handleChange}
             placeholder="100"/>
         </InputDiv>
-            <InputDiv>
+            
+            <InputDiv >
+            <PropertyTitle>PROPERTY TYPE</PropertyTitle>
             <input id="apartment" name="apartment"type="checkbox"/>
             <label htmlFor="apartment">Apartment</label>
             <input id="house" name="house"type="checkbox"/>
@@ -382,7 +406,9 @@ export  function PropertyForm({}){
                 <input id="pets" name="pets"type="checkbox"/>
                 <Label htmlFor="pets">Pets Allowed</Label>
             </PetsDiv>
-
+            <PetsTextDiv>Allowing pets increases the likehood of renters liking the property by 9001%.
+            It also makes you a better person
+            </PetsTextDiv>
             <div style={{display:'flex',flexDirection:'column'}}>
             <label htmlFor="about">ABOUT THIS PROPERTY</label>
             <textarea id="about" name="about" placeholder="My apartment is great because..." type=""></textarea>
@@ -405,7 +431,15 @@ height:36px;
 
 `;
 
+const PetsTextDiv= styled.div`
+color:${colors.gray.medium};
+${typography.text.xs};
+width:468px;
+height:32px;
+display:flex;
+flex
 
+`;
 
 
 
