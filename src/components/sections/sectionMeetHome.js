@@ -143,14 +143,14 @@ export default function SectionMeetHome (){
             </Select>
           </InputContainer>
           <InputContainer2>
-          <InputLabel htmlFor="search">WHERE</InputLabel>
-            <InputText
-              id="search"
-              name="search"
-              value={firstFilter.search}
-              onChange={handleChange}
-              placeholder="Favorite Districst"
-            />
+            <InputLabel htmlFor="search">WHERE</InputLabel>
+              <InputText
+                id="search"
+                name="search"
+                value={firstFilter.search}
+                onChange={handleChange}
+                placeholder="Favorite Districst"
+              />
           </InputContainer2>
           <SearchButton onClick={handleSubmit}>SEARCH</SearchButton>
         </FiltersContainer>

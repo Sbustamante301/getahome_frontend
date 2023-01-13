@@ -111,7 +111,7 @@ function Hidden({ HandleComponent }) {
       <Section2>
         <ImgDiv onClick={() => {
           HandleComponent();
-          AssignUser(1)
+          AssignUser("landlord")
         }}>
           <Img src={landlord} />
           <ImgTitle>Landlord</ImgTitle>
@@ -119,7 +119,7 @@ function Hidden({ HandleComponent }) {
         </ImgDiv>
         <ImgDiv onClick={() => {
           HandleComponent()
-          AssignUser(2)
+          AssignUser("seeker")
         }}>
           <Img src={homeseeker} />
           <ImgTitle>Homeseeker</ImgTitle>
