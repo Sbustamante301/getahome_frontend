@@ -30,14 +30,15 @@ export async function deleteProperty(id) {
 
 // INVOLVED_PROPERTIES
 
+
+export async function getSaved() {
+  const savedProperties = await apiFetch (`involved_properties`);
+  return savedProperties;
+}
+
+
 // export async function createProperty() {
 //   const { ...property } = await apiFetch("/involved_properties", { 
 //   body: newProperty,
 
 //   })}
-
-// export async function getFavorites(id) {
-//   const favorites = await apiFetch (`/involved_properties`);
-//   return favorites;
-// }
-
