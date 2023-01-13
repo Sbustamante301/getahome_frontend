@@ -63,7 +63,20 @@ function AuthProvider({ children }) {
       sessionStorage.removeItem("userType")
       sessionStorage.removeItem("savedProperty")
       setUser(null)
+      setSavedProperty([])
       setUserType(null)
+      setMyProperty(null)
+      setCurrentProperty([])
+      setPropertyFilters({
+        prices: { min: null, max: null },
+        areas: { min: null, max: null },
+        types: [false, false], //house, apartment
+        petAllowed: null,
+        beds: 0,
+        baths: 0,
+        mode: [false, false], //buy, rent
+        search: ""
+      })
       navigate("/home");
     });
   }
