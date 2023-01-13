@@ -302,7 +302,7 @@ export function PropertyCard({ property, showProperty, id }) {
               <Area>{Icons.area} {property.property.area} m2</Area>
               <Pet>{property.property.pet_allowed ? Icons.paw : null}</Pet>
               <Heart>{index_favorites.includes(property.property.id) ? Icons.heartDark : null}</Heart>
-              <Phone> {index_contacts.inlIcons.phoneCheck}</Phone>
+              <Phone> {index_contacts.includes(property.property.id) ? Icons.phoneCheck : null }</Phone>
             </Features>
           </InformationContainer>
           </Link>

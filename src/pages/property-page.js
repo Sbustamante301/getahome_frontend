@@ -365,8 +365,22 @@ export default function PropertyPage() {
   const { currentProperty, setIsOpenModal, user, savedProperty, setSavedProperty, properties, setProperties } = useAuth();
   const [showContact, setShoreContact] = useState(false);
   const navigate = useNavigate();
-  const [contact, setContact] = useState(false);
   const [landlord, setLandlord] = useState(null);
+
+  let index_contacts = [];
+  let localSavedPropertyContacts = []
+  if(savedProperty.length !== 0 ){
+    localSavedPropertyContacts = [...savedProperty.contacts];
+  }
+  
+  localSavedPropertyContacts.map(property=>{
+    index_contacts.push(property.property.id)
+  })
+
+  const index2 = currentProperty.length !==0 ? currentProperty.property.id : "";
+
+  const [contact, setContact] = useState(index_contacts.includes(index2));
+
   let index_favorites = [];
   let localSavedProperty = []
   if(savedProperty.length !== 0 ){
@@ -379,9 +393,9 @@ export default function PropertyPage() {
   })
 
   const index = currentProperty.length !==0 ? currentProperty.property.id : "";
-  console.log("index",index)
   const [favorite, setFavorite] = useState(index_favorites.includes(index));
 
+  
   useEffect(() => {
     if (currentProperty) {
       getLandlordUser(currentProperty.property.user_id).then(response => {
@@ -389,6 +403,7 @@ export default function PropertyPage() {
       }).catch(error => { console.log(error) })
     }
   }, []);
+
 
   function handleLogin(event) {
     event.preventDefault();
@@ -432,7 +447,7 @@ export default function PropertyPage() {
       setSavedProperty(response)
       sessionStorage.setItem("savedProperty", JSON.stringify(response))
     })
-  },[favorite])
+  },[favorite, contact])
 
   return (
     <BigWraper>
