@@ -74,7 +74,7 @@ export default function MyPropertiesPage(){
       </div>
       
       <ContainerList>
-        <EmptyCard/>
+        { myStatus==="active" ? <EmptyCard/> : null}
         {myProperty ? myStatus === "active" ? myProperty.active.map((status, index)=>{
           return(
             
