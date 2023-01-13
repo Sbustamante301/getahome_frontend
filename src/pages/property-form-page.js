@@ -386,7 +386,7 @@ export function PropertyForm(){
 
             <div style={{display:'flex',flexDirection:'column'}}>
               <label htmlFor="about">ABOUT THIS PROPERTY</label>
-              <textarea onChange={handleChange} value={formdata.description} id="description" name="description" placeholder="My apartment is great because..." type=""></textarea>
+              <textarea style={{resize:'none'}} onChange={handleChange} value={formdata.description} id="description" name="description" placeholder="My apartment is great because..." type=""></textarea>
 
               <p>Renters will read this first, so highlight any features or important information the apartment has.</p>
             </div>
