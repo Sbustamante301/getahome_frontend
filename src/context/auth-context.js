@@ -6,7 +6,11 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
-  const [properties, setProperties] = useState([]);
+
+  const [properties, setProperties]= useState([]);
+  const [savedProperty, setSavedProperty]= useState(null);
+  const [myProperty, setMyProperty]= useState(null);
+
   const [userType, setUserType] = useState(null);
   const [currentProperty, setCurrentProperty] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -78,7 +82,11 @@ function AuthProvider({ children }) {
         signup: handleSignup,
         setUser,
         setIsOpenModal,
-        setCurrentProperty
+        setCurrentProperty,
+        setSavedProperty,
+        savedProperty,
+        myProperty,
+        setMyProperty
 
       }}
     >

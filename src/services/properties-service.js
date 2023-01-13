@@ -25,8 +25,6 @@ export async function deleteProperty(id) {
 }
 
 export async function updateProperty(id, data) {
-  console.log('ID EN SERVICE', id)
-  console.log('CUERPO en SERVICE', data)
   await apiFetch(`properties/${id}`, { method: "PATCH", body: data })
 }
 
@@ -34,14 +32,15 @@ export async function updateProperty(id, data) {
 
 // INVOLVED_PROPERTIES
 
-// export async function createProperty() {
-//   const { ...property } = await apiFetch("/involved_properties", { 
-//   body: newProperty,
 
-//   })}
+export async function getSaved() {
+  const savedProperties = await apiFetch (`involved_properties`);
+  return savedProperties;
+}
 
-// export async function getFavorites(id) {
-//   const favorites = await apiFetch (`/involved_properties`);
-//   return favorites;
-// }
+export async function getMyProperties() {
+  const myProperties = await apiFetch (`my_properties`);
+  return myProperties;
+}
+
 
