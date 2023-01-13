@@ -218,9 +218,11 @@ export function PropertyCard({ property, showProperty }) {
   return (
     <Wrapp onClick={showProperty}>
 
+
       <Container height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
 
         <CardContainer height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
+
           <ImgContainer>
             <Property src={property.url} />
             <Tag>
@@ -252,6 +254,7 @@ export function PropertyCard({ property, showProperty }) {
             </Features>
           </InformationContainer>
           {(user?.user_type === 'landlord' && property.property.user_id === user.id) ?
+
             (<LowFrame>
               <ButtonContainer>
                 <Link style={{ textDecoration: "none" }} to={`/properties/edit/${property.property.id}`}>

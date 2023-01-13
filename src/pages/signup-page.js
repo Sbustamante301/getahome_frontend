@@ -12,6 +12,7 @@ import { createUser } from "../services/users-service"
 import Input from "../components/Input"
 import { useAuth } from "../context/auth-context"
 
+
 // background:${colors.pink.shallow};
 const Section1 = styled.div`
     display: flex;
@@ -108,6 +109,7 @@ function Hidden({ HandleComponent }) {
     setUserType(typeNumber)
 
   }
+
   return (
     <Div>
       <Section1>
@@ -136,6 +138,7 @@ function Hidden({ HandleComponent }) {
     </Div>
 
   )
+
 
 }
 
@@ -171,6 +174,7 @@ align-items:left;
 text-align:left;
 padding:70px;
 margin:100px;
+gap:16px;
 
 
 `;
@@ -184,6 +188,9 @@ const Label = styled.label`
 ${colors.pink.dark};
 ${typography.text.xxs};
 `;
+
+
+// const H1=styled.div`
 
 // function SignupForm(){
 //     return(
@@ -226,42 +233,46 @@ ${typography.text.xxs};
 //       </Form>
 //       </Div2>    
 //     )
-// }
+// }`
 const H1 = styled.h1`
 ${typography.head.sm};
+width:246px;
+height:32px;
+margin-top:-40px;
 
 
 `;
 
 
-function SignupForm() {
-  const [error, setError] = useState(null);
-  const { userType, setUserType } = useAuth();
-  const [formdata, setFormdata] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    password_digest: "",
-    passwordConfirmation: "",
-    user_type: userType,
-  })
+function SignupForm(){
+   const [error,setError] = useState(null);
+   const {userType, setUserType} = useAuth();
+    const [formdata, setFormdata] = useState({
+        name:"",
+        email:"",
+        phone:"",
+        password:"",
+        passwordConfirmation:"",
+        user_type:userType,
+      })
 
 
-  function handleChange(event) {
-    const { name, value } = event.target
-    setFormdata({ ...formdata, [name]: value })
-  }
+      function handleChange(event){
+        const {name, value} = event.target
+        setFormdata({...formdata, [name]:value})
+      }
+      
+      function handleSubmit(event){
+        event.preventDefault();
+        if(formdata.passwordConfirmation===formdata.password){
+          setError(null);
+        const {passwordConfirmation,...newForm} = formdata;
+        
+        createUser(formdata).then(console.log).catch(console.log)
+        console.log(formdata)
+      }
+    else{
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    if (formdata.passwordConfirmation === formdata.password_digest) {
-      setError(null);
-      const { passwordConfirmation, ...newForm } = formdata;
-
-      createUser(formdata).then(console.log).catch(console.log)
-      console.log(formdata)
-    }
-    else {
       setError("Passwords must coincide");
     }
   }
@@ -279,6 +290,15 @@ function SignupForm() {
             onChange={handleChange}
             placeholder="John Doe" />
           <Input
+
+          label={"PASSWORD"}
+          id="password"
+          name="password" 
+          type="password" 
+          value={formdata.password}
+          onChange={handleChange}
+          placeholder="******"/>
+          <Input
             label={"EMAIL"}
             id="email"
             name="email"
@@ -294,14 +314,7 @@ function SignupForm() {
             value={formdata.phone}
             onChange={handleChange}
             placeholder="999-999-999  " />
-          <Input
-            label={"PASSWORD"}
-            id="password_digest"
-            name="password_digest"
-            type="password"
-            value={formdata.password_digest}
-            onChange={handleChange}
-            placeholder="******" />
+
           <P>At least 6 characters</P>
           <Input
             label={"PASSWORD CONFIRMATION"}
