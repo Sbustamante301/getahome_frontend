@@ -205,7 +205,6 @@ const Pet = styled.div`
 `;
 
 export function PropertyCard({ property, showProperty }) {
-
   const { user, savedProperty, setMyProperty, myProperty, setCurrentProperty } = useAuth();
 
   let index_favorites = [];
@@ -239,9 +238,12 @@ export function PropertyCard({ property, showProperty }) {
 
   function handleTrash(event) {
     event.preventDefault();
-    console.log('ENTRE AL DELETE')
+    console.log('LA PROPIEDAD', property.property.id)
+    let updateMyProperty = { ...myProperty, closed: myProperty.closed.filter((prop) => prop.property.id !== property.property.id) };
+    console.log('PROPIEDAD BORRADA', updateMyProperty)
+
     deleteProperty(property.property.id)
-      .then((data) => console.log(data))
+      .then(setMyProperty(updateMyProperty))
       .catch(console.log)
     
     setMyProperty({...myProperty,"active": myProperty.active.filter(myProp=>myProp.id !== property.property.id)})
@@ -260,7 +262,7 @@ export function PropertyCard({ property, showProperty }) {
             <Tag>
               {Icons.coins}
 
-              {property.property.mode === 'sale' ? "For Sale" : "For Rent"}
+              {property.property.mode === 'landlord' ? "For Sale" : "For Rent"}
 
             </Tag>
           </ImgContainer>
