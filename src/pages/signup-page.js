@@ -10,6 +10,7 @@ import { createUser } from "../services/users-service"
 import Input from "../components/Input"
 import { useAuth } from "../context/auth-context"
 
+
 // background:${colors.pink.shallow};
 const Section1 = styled.div`
     display: flex;
@@ -114,13 +115,13 @@ ${colors.gray.dark}
         </Section1>
         <Section2>
             <ImgDiv onClick={()=>{HandleComponent();
-            AssignUser(1)}}>
+            AssignUser("landlord")}}>
                 <Img src={landlord}/>
                 <ImgTitle>Landlord</ImgTitle>
                 <ImgSubtitle>You want to rent or sell a home</ImgSubtitle>
             </ImgDiv>
             <ImgDiv onClick={()=>{HandleComponent()
-            AssignUser(2)
+            AssignUser("seeker")
             }}>
                 <Img src={homeseeker}/>
                 <ImgTitle>Homeseeker</ImgTitle>
@@ -163,6 +164,7 @@ align-items:left;
 text-align:left;
 padding:70px;
 margin:100px;
+gap:16px;
 
 
 `;
@@ -177,50 +179,11 @@ ${colors.pink.dark};
 ${typography.text.xxs};
 `;
 
-// function SignupForm(){
-//     return(
-//         // <form>
-//         //     <label for="name">Name</label>
-//         //     <input type="name" placeholder="John Doe" id=""></input>
-
-
-
-
-//         // </form>
-//         <Div2>
-//         <Form>
-//           <DivForm className="form-body">
-//               <DivForm className="username">
-//                   <Label className="form__label" for="firstName">NAME</Label>
-//                   <input className="form__input" type="text" id="firstName" placeholder="John Doe"/>
-//               </DivForm>
-//               <DivForm className="email">
-//                   <Label className="form__label" for="email">EMAIL </Label>
-//                   <input  type="email" id="email" className="form__input" placeholder="user@mail.com"/>
-//               </DivForm>
-//               <DivForm className="phone">
-//                   <Label className="form__label" for="phone">PHONE</Label>
-//                   <input  type="text" id="phone" className="form__input" placeholder="999-999-999"/>
-//               </DivForm>
-//               <DivForm className="password">
-//                   <Label className="form__label" for="password">PASSWORD </Label>
-//                   <input className="form__input" type="password"  id="password" placeholder="Password"/>
-//               </DivForm>
-//               <DivForm className="confirm-password">
-//                   <Label className="form__label" for="confirmPassword">PASSWORD CONFIRMATION</Label>
-//                   <input className="form__input" type="password" id="confirmPassword" placeholder="Confirm Password"/>
-//               </DivForm>
-//           </DivForm>
-//           {/* <div class="footer">
-//               <button type="submit" class="btn">Register</button>
-//           </div> */}
-//           <CreateAccountButton>Create Account</CreateAccountButton>
-//       </Form>
-//       </Div2>    
-//     )
-// }
-const H1=styled.h1`
+const H1=styled.div`
 ${typography.head.sm};
+width:246px;
+height:32px;
+margin-top:-40px;
 
 
 `;
@@ -232,7 +195,7 @@ function SignupForm(){
         name:"",
         email:"",
         phone:"",
-        password_digest:"",
+        password:"",
         passwordConfirmation:"",
         user_type:userType,
       })
@@ -245,7 +208,7 @@ function SignupForm(){
       
       function handleSubmit(event){
         event.preventDefault();
-        if(formdata.passwordConfirmation===formdata.password_digest){
+        if(formdata.passwordConfirmation===formdata.password){
           setError(null);
         const {passwordConfirmation,...newForm} = formdata;
         
@@ -287,10 +250,10 @@ function SignupForm(){
           placeholder="999-999-999  "/>
           <Input
           label={"PASSWORD"}
-          id="password_digest"
-          name="password_digest" 
+          id="password"
+          name="password" 
           type="password" 
-          value={formdata.password_digest}
+          value={formdata.password}
           onChange={handleChange}
           placeholder="******"/>
           <P>At least 6 characters</P>

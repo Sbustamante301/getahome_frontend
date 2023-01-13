@@ -25,6 +25,7 @@ height:19.51px;
 display:flex;
 flex-direction:row;
 justify-content:center;
+padding:2px;
 
 
 
@@ -34,6 +35,7 @@ const RightIcon=styled.div`
 color:${colors.gray.medium};
 width:18px;
 height:18px;
+
 `;
 const Text = styled.div`
 ${typography.head.sm};
@@ -59,6 +61,7 @@ width:180px;
 `;
 
 
+
 export function TeamCard({miembro}){
     return(
         
@@ -66,12 +69,14 @@ export function TeamCard({miembro}){
             <Img src={miembro.img}/>
             <Text>{miembro.name}</Text>
             <Div>
+                
             <LeftIcon>
                 {Icons.github}
             </LeftIcon>
             <RightIcon>
                 {Icons.linkedinBox}
             </RightIcon>
+            
             </Div>
          </TeamCardContainer>
 

@@ -13,6 +13,7 @@ import { useAuth } from "./context/auth-context";
 import LoginModal from "./components/login-modal";
 import MyPropertiesPage from "./pages/my-properties-page";
 import SavedPropertiesPage from "./pages/saved_properties-page";
+import PropertyFormPage from "./pages/property-form-page";
 
 
 
@@ -41,6 +42,7 @@ function App() {
           <Route index element={<Navigate to="home" />} />
           <Route path="/home" element= {<HomePage />}/>
           <Route path="/signup" element= {<SignupPage />}/>
+          <Route path="/propertyform" element= {<PropertyFormPage/>}/>
           <Route path="/properties" element= {<PropertiesPage />}/>
           <Route path="/properties/:id" element= {<PropertyPage />}/>
           <Route path="/my_properties" element= {<MyPropertiesPage />}/>
