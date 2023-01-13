@@ -205,7 +205,7 @@ const Pet = styled.div`
 `;
 
 export function PropertyCard({ property, showProperty }) {
-  const { user, savedProperty } = useAuth();
+  const { user, savedProperty, setMyProperty, myProperty } = useAuth();
   
   let index_favorites = [];
   let localSavedProperty = [];
@@ -221,6 +221,8 @@ export function PropertyCard({ property, showProperty }) {
     updateProperty(property.property.id, { status: false })
       .then((data) => console.log(data))
       .catch(console.log)
+    
+    setMyProperty({...myProperty,"active": myProperty.active.filter(myProp=>myProp.id !== property.property.id)})
   }
 
   return (

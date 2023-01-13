@@ -51,7 +51,6 @@ font-weight: 500;
 
 export default function MyPropertiesPage(){
   const { myProperty }= useAuth();
-  console.log("myprops", myProperty)
   const [ myStatus, setMyStatus ] = useState("active");
 
   return(
