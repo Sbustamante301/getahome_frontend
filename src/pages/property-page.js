@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 import { BiBath, BiArea, BiBed } from "react-icons/bi"
 import { FaPaw } from "react-icons/fa"
 import { useState, useEffect } from "react";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils";
 import { useAuth } from "../context/auth-context";
-import { LoginCardButton, ContactAdvertiserButton } from "../components/Button";
+import { LoginCardButton, ContactAdvertiserButton, EditPropertyButton } from "../components/Button";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
 import Mapa from "../components/mapa";
 
@@ -91,13 +92,15 @@ const LogedCard = styled.div`
   border-radius: 8px;
 `;
 
-const FavoriteDiv = styled.div`
+const FavoriteDiv = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 0px;
   gap: 4px;
+  background-color:${colors.white};
+  border: none;
 
   width: 100px;
   height: 60px;
@@ -349,6 +352,7 @@ const RightIcon = styled.div`
 export default function PropertyPage() {
   const { currentProperty, setIsOpenModal, user } = useAuth();
   const [showContact, setShoreContact] = useState(false);
+  const navigate = useNavigate();
 
   function handleLogin(event) {
     event.preventDefault();
@@ -359,6 +363,17 @@ export default function PropertyPage() {
     event.preventDefault();
 
     setShoreContact(true)
+  }
+
+  function handleAddFavorites(event) {
+    event.preventDefault();
+
+    console.log('ENTREEE')
+  }
+
+  function handleEditProperty(event) {
+    event.preventDefault();
+    navigate("/edit");
   }
 
   return (
@@ -438,30 +453,37 @@ export default function PropertyPage() {
                 <LoginCardButton handleLogin={handleLogin}>LOGIN</LoginCardButton>
               </UnloginCard>
             </UnlogedDiv>
+          ) : currentProperty.property.user_id === user.id ? (
+            <LogedDiv>
+              <EditPropertyButton onClick={handleEditProperty}> EDIT PROPERTY </EditPropertyButton>
+            </LogedDiv>
           ) : (
-              <LogedDiv>
-                {showContact ?
-                  (<LogedCard>
-                    <TitleSeeker>Contact information</TitleSeeker>
-                    <SeekerEmail>
-                      <SeekerSubtitle>Email</SeekerSubtitle>
-                      <SeekerInfo>xxxxx@mail.com</SeekerInfo>
-                    </SeekerEmail>
-                    <SeekerEmail>
-                      <SeekerSubtitle>Phone</SeekerSubtitle>
-                      <SeekerInfo>92392445</SeekerInfo>
-                    </SeekerEmail>
-                  </LogedCard>)
-                  : (<LogedCard>
-                    <ContactAdvertiserButton onClick={handleContactAdd}>CONTACT ADVERTISER</ContactAdvertiserButton>
-                    <FavoriteDiv>
-                      {Icons.heart}
-                      <TextCard2>Add to favorites</TextCard2>
-                    </FavoriteDiv>
-                  </LogedCard>)}
+                <LogedDiv>
+                  {showContact ?
+                    (<LogedCard>
+                      <TitleSeeker>Contact information</TitleSeeker>
+                      <SeekerEmail>
+                        <SeekerSubtitle>Email</SeekerSubtitle>
+                        <SeekerInfo>xxxxx@mail.com</SeekerInfo>
+                      </SeekerEmail>
+                      <SeekerEmail>
+                        <SeekerSubtitle>Phone</SeekerSubtitle>
+                        <SeekerInfo>92392445</SeekerInfo>
+                      </SeekerEmail>
+                    </LogedCard>)
+                    : (<LogedCard>
+                      <ContactAdvertiserButton onClick={handleContactAdd}>CONTACT ADVERTISER</ContactAdvertiserButton>
+                      <FavoriteDiv onClick={handleAddFavorites}>
+                        {Icons.heart}
+                        <TextCard2>Add to favorites</TextCard2>
+                      </FavoriteDiv>
+                    </LogedCard>)
 
-              </LogedDiv>
-            )
+
+                  }
+
+                </LogedDiv>
+              )
           }
         </RightContainer>
       </Wrapper>

@@ -42,18 +42,19 @@ function App() {
       {!user ? <NavbarUnAuthenticated /> : <NavbarAuthenticated />}
       {
 
-        isOpenModal ? <LoginModal/> :
-        <Routes>
-          <Route index element={<Navigate to="home" />} />
-          <Route path="/home" element= {<HomePage />}/>
-          <Route path="/signup" element= {<SignupPage />}/>
-          <Route path="/propertyform" element= {<PropertyFormPage/>}/>
-          <Route path="/properties" element= {<PropertiesPage />}/>
-          <Route path="/properties/:id" element= {<PropertyPage />}/>
-          <Route path="/my_properties" element= {<MyPropertiesPage />}/>
-          <Route path="/saved_properties" element= {<SavedPropertiesPage />}/>
+        isOpenModal ? <LoginModal /> :
+          <Routes>
+            <Route index element={<Navigate to="home" />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/propertyform" element={<PropertyFormPage />} />
+            <Route path="/properties" element={<PropertiesPage />} />
+            <Route path="/properties/:id" element={<PropertyPage />} />
+            <Route path="/my_properties" element={<MyPropertiesPage />} />
+            <Route path="/saved_properties" element={<SavedPropertiesPage />} />
+            <Route path="/edit" element={<EditPropertyPage />} />
 
-        </Routes>
+          </Routes>
 
       }
     </Wrapper>
