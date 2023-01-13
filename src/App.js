@@ -23,6 +23,7 @@ import PropertyFormPage from "./pages/property-form-page";
 
 
 import EditPropertyPage from "./pages/edit-property-page";
+import CheckboxF from "./components/sections/checkbox";
 
 
 
@@ -63,6 +64,7 @@ function App() {
       {!user ? <NavbarUnAuthenticated /> : <NavbarAuthenticated />}
       {
 
+
         isOpenModal ? <LoginModal /> :
           <Routes>
             <Route index element={<Navigate to="home" />} />
@@ -76,6 +78,7 @@ function App() {
             <Route path="/edit" element={<EditPropertyPage />} />
 
           </Routes>
+
 
       }
     </Wrapper>
