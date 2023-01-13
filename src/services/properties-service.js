@@ -1,4 +1,4 @@
-import { tokenKey } from "../config";
+import { BASE_URI, tokenKey } from "../config";
 import apiFetch from "./api-fetch";
 
 export async function getProperties() {
@@ -7,10 +7,24 @@ export async function getProperties() {
   return properties;
 }
 
+// export async function createProperty(newProperty) {
+//   const property = await apiFetch("properties", {
+//     body: newProperty
+//   })
+//   return property;
+// }
 export async function createProperty(newProperty) {
-  const property = await apiFetch("properties", {
-    body: newProperty
-  })
+  const token = sessionStorage.getItem(tokenKey);
+  const response = await fetch(`${BASE_URI}/properties`, {
+    method: 'POST',
+    body: newProperty,
+    headers: {
+      // 'Content-Type': 'multipart/form-data',
+      'Authorization': `Token token=${token}`
+      // 'Authorization': `Bearer ${token}`
+    }
+  });
+  const property = await response.json();
   return property;
 }
 

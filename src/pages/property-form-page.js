@@ -247,22 +247,23 @@ export function PropertyForm(){
     }
     function handleSubmit2(event){
       event.preventDefault();
-      console.dir(event.target.bathrooms)
-      console.log(event.target.description)
-      // const data = new FormData();
-      // data.append("post[bedrooms]", )
-      // data.append("post[bathrooms]")
-      // data.append("post[area]")
-      // data.append("post[pet_allowed]")
-      // data.append("post[description]")
-      // data.append("post[price]")
-      // data.append("post[mode]")
-      // data.append("post[address]")
-      // data.append("post[property_type]")
-      // data.append("post[status]")
-      // data.append("post[maintenance]")
-      // data.append("post[image]")
-
+      console.log(event.target.bedrooms.value)
+      console.log(formdata.mode)
+      const data = new FormData();
+      data.append("property[bedrooms]", formdata.bedrooms);
+      data.append("property[bathrooms]", formdata.bathrooms);
+      data.append("property[area]",formdata.area);
+      data.append("property[pet_allowed]", formdata.pet_allowed);
+      data.append("property[description]", formdata.description);
+      data.append("property[price]", formdata.price);
+      data.append("property[mode]", formdata.mode);
+      data.append("property[address]", formdata.address);
+      data.append("property[property_type]", formdata.property_type);
+      data.append("property[status]", formdata.status);
+      data.append("property[maintenance]", formdata.maintenance);
+      data.append("property[image]", event.target.image.files[0]);
+      console.dir(data)
+      createProperty(data).then(console.log).catch(console.log);
     }
 
     function handleType(event){
@@ -373,8 +374,8 @@ export function PropertyForm(){
             { formdata.mode==="rent" ?<>
               
               <PetsDiv>
-                <input id="pets" name="pets"type="checkbox" checked={formdata.pet_allowed} onChange={(e)=>setFormdata({...formdata, "pet_allowed":!formdata.pet_allowed})}/>
-                <Label htmlFor="pets">Pets Allowed</Label>
+                <input id="pet_allowed" name="pet_allowed"type="checkbox" checked={formdata.pet_allowed} onChange={(e)=>setFormdata({...formdata, "pet_allowed":!formdata.pet_allowed})}/>
+                <Label htmlFor="pet_allowed">Pets Allowed</Label>
               </PetsDiv>
               <PetsTextDiv>Allowing pets increases the likehood of renters liking the property by 9001%.
                 It also makes you a better person
@@ -390,8 +391,8 @@ export function PropertyForm(){
             </div>
             <div style={{display:'flex',flexDirection:'column'}}>
               <PhotosH1>Photos</PhotosH1>
-              <label htmlFor="file">UPLOAD AS MANY PHOTOS AS YOU WISH</label>
-              <input id="file" name="file"  type="file" multiple onChange={handleFileSelect}></input>
+              <label htmlFor="image">UPLOAD AS MANY PHOTOS AS YOU WISH</label>
+              <input id="image" name="image"  type="file" multiple onChange={handleFileSelect}></input>
               <ImageWrapper>
                 {imagesPreview.map((imagePreview, index) => {
                   console.log(imagesPreview)
