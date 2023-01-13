@@ -9,6 +9,7 @@ import { useAuth } from "../context/auth-context";
 import { LoginCardButton, ContactAdvertiserButton, EditPropertyButton } from "../components/Button";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
 import Mapa from "../components/mapa";
+import { createFavorite } from "../services/properties-service"
 
 const BigWraper = styled.div`
   display: flex;
@@ -350,7 +351,7 @@ const RightIcon = styled.div`
 `;
 
 export default function PropertyPage() {
-  const { currentProperty, setIsOpenModal, user } = useAuth();
+  const { currentProperty, setIsOpenModal, user, savedProperty, setSavedProperty } = useAuth();
   const [showContact, setShoreContact] = useState(false);
   const navigate = useNavigate();
 
@@ -367,8 +368,12 @@ export default function PropertyPage() {
 
   function handleAddFavorites(event) {
     event.preventDefault();
-
-    console.log('ENTREEE')
+    createFavorite({
+      id: currentProperty.property.id,
+      favorite: true,
+    })
+      .then((data) => console.log(data))
+      .catch(console.log)
   }
 
   function handleEditProperty(event) {

@@ -7,9 +7,9 @@ const AuthContext = createContext();
 function AuthProvider({ children }) {
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
 
-  const [properties, setProperties]= useState([]);
-  const [savedProperty, setSavedProperty]= useState(null);
-  const [myProperty, setMyProperty]= useState(null);
+  const [properties, setProperties] = useState([]);
+  const [savedProperty, setSavedProperty] = useState([]);
+  const [myProperty, setMyProperty] = useState(null);
 
   const [userType, setUserType] = useState(null);
   const [currentProperty, setCurrentProperty] = useState(null);
