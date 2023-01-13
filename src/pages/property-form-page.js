@@ -1,14 +1,12 @@
 import styled from "@emotion/styled"
 import { colors,typography } from "../styles"
-import SectionFooter from "../components/sections/sectionFooter"
+import {SectionFooter} from "../components/sections/sectionFooter"
 import SectionMeetHome from "../components/sections/sectionMeetHome";
 import { useState } from "react";
 import { CreateAccountButton } from "../components/Button";
 import { Icons } from "../utils";
 const Div = styled.div`
 width:100%;
-height:940px;
-
 
 `;
 const H1Div=styled.div`
@@ -134,6 +132,7 @@ const TextArea = styled.input`
   flex-grow: 0;
 `;
 const OperationTypeDiv = styled.div`
+
 width:105px;
 height:56px;
 gap:4px;
@@ -144,13 +143,13 @@ padding:0px;
 margin-left:32px;
 margin-top:20px;
 
+
 `;
 const OperationTitle = styled.div`
 color:${colors.gray.medium};
 width:105px;
 height:16px;
 ${typography.text.xxs};
-
 `;
 const PropertyTitle = styled.div`
 color:${colors.gray.medium};
@@ -167,6 +166,11 @@ width:356px;
 height:40px;
 gap:8px;
 margin-top:0px;
+`;
+const PetsDiv = styled.div`
+width:113px;
+height:36px;
+
 `;
 
 
@@ -274,14 +278,7 @@ export default function PropertyFormPage(){
 
         </AboutDiv>
         </Form> */}
-        <PhotosDiv>
-            {/* <UploadText>Upload as many photos as you wish</UploadText>
-            <ChooseFileInput/> */}
-            <SizeText>Only images, max 5MB</SizeText>
-        </PhotosDiv>
-        <UploadedImg>
-            No photos yet
-        </UploadedImg>
+        
         <CreateAccountButton>Publish Property Listing</CreateAccountButton>
         </Div>
         <SectionFooter/>
@@ -309,7 +306,7 @@ export  function PropertyForm({}){
         status:"",
         maintenance:"",
       })
-      const [imagePreview, setImagePreview] = useState(null)
+      const [imagesPreview, setImagesPreview] = useState([])
       const [image, setImage] = useState(null)
      
       function handleChange(event){
@@ -318,15 +315,19 @@ export  function PropertyForm({}){
       }
       
       function handleFileSelect(event){
-        const file = event.target.files[0];
-        setImage(event.target.files[0]);
-        const reader = new FileReader();
-  
-        reader.onloadend = () => {
-          setImagePreview(reader.result);
+        const files = event.target.files;
+        const imgsPrev = [];
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const reader = new FileReader();
+      
+          reader.onloadend = () => {
+            imgsPrev.push(reader.result);
+            setImagesPreview(imgsPrev);
+          }
+      
+          reader.readAsDataURL(file);
         }
-        reader.readAsDataURL(file);
-  
       }
     return(
         <Form>
@@ -341,6 +342,7 @@ export  function PropertyForm({}){
             onChange={handleChange}
             placeholder="start typing to autocomplete"/>
             </InputDiv>
+
         <InputDiv>
           <Input
             label={"MONTHLY RENT"}
@@ -366,12 +368,12 @@ export  function PropertyForm({}){
             
             <InputDiv >
             <PropertyTitle>PROPERTY TYPE</PropertyTitle>
+
             <input id="apartment" name="apartment"type="checkbox"/>
             <label htmlFor="apartment">Apartment</label>
             <input id="house" name="house"type="checkbox"/>
             <label htmlFor="house">House</label>
             </InputDiv>
-            
             <SelectContainer>
               <SelectDiv>
                 
@@ -406,30 +408,66 @@ export  function PropertyForm({}){
                 <input id="pets" name="pets"type="checkbox"/>
                 <Label htmlFor="pets">Pets Allowed</Label>
             </PetsDiv>
+
             <PetsTextDiv>Allowing pets increases the likehood of renters liking the property by 9001%.
             It also makes you a better person
             </PetsTextDiv>
+
             <div style={{display:'flex',flexDirection:'column'}}>
-            <label htmlFor="about">ABOUT THIS PROPERTY</label>
-            <textarea id="about" name="about" placeholder="My apartment is great because..." type=""></textarea>
-            <p>Renters will read this first, so highlight any features or important information the apartment has.</p>
+              <label htmlFor="about">ABOUT THIS PROPERTY</label>
+              <textarea id="about" name="about" placeholder="My apartment is great because..." type=""></textarea>
+              <p>Renters will read this first, so highlight any features or important information the apartment has.</p>
             </div>
             <div style={{display:'flex',flexDirection:'column'}}>
-            <label htmlFor="file">UPLOAD AS MANY PHOTOS AS YOU WISH</label>
-            <input id="file" name="file"  type="file" onChange={handleFileSelect}></input>
-            <img src={imagePreview} alt="Preview" />
+              <h1>Photos</h1>
+              <label htmlFor="file">UPLOAD AS MANY PHOTOS AS YOU WISH</label>
+              <input id="file" name="file"  type="file" multiple onChange={handleFileSelect}></input>
+              <ImageWrapper>
+                {imagesPreview.map((imagePreview, index) => {
+                  console.log(imagesPreview)
+                  return (
+                      <ImgContainer>
+                        <IconContainer>
+                          {Icons.closed}
+                        </IconContainer>
+                        <PrevImg key={index} src={imagePreview} alt="Preview" />
+                      </ImgContainer>
+                  )
+                })}
+              </ImageWrapper>
             </div>
           </Container>
         </Form>
     )
-
 }
+const IconContainer = styled.div`
+  width:100%;
+  height:20px;
+  display:flex;
+  justify-content:flex-end;
+`
+const ImageWrapper = styled.div`
+  padding:8px;
+  display:flex;
+  gap:12px;
+  background: ${colors.pink.shallow};
+  min-width:600px;
+`
+const ImgContainer = styled.div`
 
-const PetsDiv = styled.div`
-width:113px;
-height:36px;
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+  width:120px;
+  height:120px;
+  background:${colors.gray.light};
+  border-radius:8px;
+  
+`
+const PrevImg = styled.img`
+  width:100%;
+`
 
-`;
 
 const PetsTextDiv= styled.div`
 color:${colors.gray.medium};

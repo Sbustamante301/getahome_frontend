@@ -190,7 +190,7 @@ ${typography.text.xxs};
 `;
 
 
-const H1=styled.div`
+// const H1=styled.div`
 
 // function SignupForm(){
 //     return(
@@ -233,9 +233,8 @@ const H1=styled.div`
 //       </Form>
 //       </Div2>    
 //     )
-// }
+// }`
 const H1 = styled.h1`
-
 ${typography.head.sm};
 width:246px;
 height:32px;
@@ -299,7 +298,7 @@ function SignupForm(){
           value={formdata.password}
           onChange={handleChange}
           placeholder="******"/>
-
+          <Input
             label={"EMAIL"}
             id="email"
             name="email"
