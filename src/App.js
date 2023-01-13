@@ -1,10 +1,15 @@
 import styled from "@emotion/styled";
+
+import { getMyProperties, getProperties } from "./services/properties-service";
+import { NavbarUnAuthenticated, NavbarAuthenticated } from "./components/navbar";
+import { getSaved } from "./services/properties-service";
 import { Routes, Route, Navigate } from "react-router-dom";
+
 import { useEffect } from "react";
 import { useAuth } from "./context/auth-context";
 
-import { getProperties } from "./services/properties-service";
-import { NavbarUnAuthenticated, NavbarAuthenticated } from "./components/navbar";
+
+
 
 import SignupPage from "./pages/signup-page";
 import PropertiesPage from "./pages/properties-page";
@@ -21,12 +26,13 @@ import EditPropertyPage from "./pages/edit-property-page";
 
 
 
-
 const Wrapper = styled.div``;
 
 function App() {
 
-  const { setProperties, user, isOpenModal, userType } = useAuth()
+  const {setProperties,user, isOpenModal, userType,setSavedProperty,setMyProperty} = useAuth()
+
+
   useEffect(() => {
     getProperties().then(response => {
       setProperties(response)
@@ -35,6 +41,21 @@ function App() {
 
   }, []);
 
+  useEffect(() => {
+    getSaved().then(response=>{
+    setSavedProperty(response)
+  
+    }).catch(error=>{console.log(error)})
+    
+  },[]);
+
+  useEffect(() => {
+    getMyProperties().then(response=>{
+    setMyProperty(response)
+  
+    }).catch(error=>{console.log(error)})
+    
+  },[]);
 
 
   return (
