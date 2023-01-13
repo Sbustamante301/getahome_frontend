@@ -63,8 +63,8 @@ const Form = styled.form`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
+  
+  gap: 30px;
   width:600px;
 `;
 const SelectContainer = styled.div`
@@ -189,14 +189,11 @@ export default function PropertyFormPage(){
     
     return(
         <>
-        <Div>
-          <H1Div>Create a property listing</H1Div>
-          
-          
-          <PropertyForm/>        
-          
-        </Div>
-        <SectionFooter/>
+          <Div>
+            <H1Div>Create a property listing</H1Div>
+            <PropertyForm/>        
+          </Div>
+          <SectionFooter/>
         </>
     )
 }
@@ -212,8 +209,10 @@ export function PropertyForm(){
       mode:"rent",
       address:"",
       description:"",
-      property_type:"house",
-      maintanance:"",
+      property_type:"apartment",
+      maintenance:"",
+      status:true, 
+      image:null
     })
     const [imagesPreview, setImagesPreview] = useState([])
     const [image, setImage] = useState(null)
@@ -226,6 +225,7 @@ export function PropertyForm(){
       
     function handleFileSelect(event){
       const files = event.target.files;
+      setFormdata({...formdata, "image":files[0]});
       const imgsPrev = [];
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
@@ -234,25 +234,50 @@ export function PropertyForm(){
         reader.onloadend = () => {
           imgsPrev.push(reader.result);
           setImagesPreview(imgsPrev);
+          
         }
         reader.readAsDataURL(file);
       }
+      console.log(imgsPrev)
+      
     }
     function handleSubmit(event){
       event.preventDefault();
-      createProperty(formdata)
+      createProperty(formdata).then(console.log).catch(console.log)
     }
+    function handleSubmit2(event){
+      event.preventDefault();
+      console.dir(event.target.bathrooms)
+      console.log(event.target.description)
+      // const data = new FormData();
+      // data.append("post[bedrooms]", )
+      // data.append("post[bathrooms]")
+      // data.append("post[area]")
+      // data.append("post[pet_allowed]")
+      // data.append("post[description]")
+      // data.append("post[price]")
+      // data.append("post[mode]")
+      // data.append("post[address]")
+      // data.append("post[property_type]")
+      // data.append("post[status]")
+      // data.append("post[maintenance]")
+      // data.append("post[image]")
+
+    }
+
     function handleType(event){
       if (event.target.id === "sale"){
         setFormdata({...formdata, "mode": event.target.id, "maintanance":"","pet_allowed":false});
       }else{
         setFormdata({...formdata, "mode": event.target.id});
-
       }
+    }
+    function deleteImage(event,index){
+      setImagesPreview(imagesPreview.filter((_img, i)=>i !== index))
     }
 
     return(
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit2}>
           <Container>
             <OperationTypeDiv>
               <OperationTitle>OPERATION TYPE</OperationTitle>
@@ -272,8 +297,6 @@ export function PropertyForm(){
                   Sale
                 </SaleDiv>
               </ModeDiv>
-            
-              
             </OperationTypeDiv>
             <InputDiv style={{width:"600px"}}>
             <Input
@@ -285,41 +308,38 @@ export function PropertyForm(){
             onChange={handleChange}
             placeholder="start typing to autocomplete"/>
             </InputDiv>
-
             <InputDiv>
               <Input
                 label={"MONTHLY RENT"}
                 id="price"
                 name="price" 
-                type="text" 
+                type="number" 
                 value={formdata.price}
                 onChange={handleChange}
                 placeholder="2000"/>    
             </InputDiv>
-        
-            <InputDiv>
+            {formdata.mode === "rent" ? <InputDiv>
               <Input
                 label={"MAINTANANCE"}
-                id="maintanance"
-                name="maintanance" 
-                type="text" 
-                value={formdata.maintanance}
+                id="maintenance"
+                name="maintenance" 
+                type="number" 
+                value={formdata.maintenance}
                 onChange={handleChange}
                 placeholder="100"/>
-            </InputDiv>
-            
+            </InputDiv> : null}
             <InputDiv >
               <PropertyTitle>PROPERTY TYPE</PropertyTitle>
 
-              <input onChange={()=>setFormdata()} id="apartment" name="apartment"type="checkbox" checked={formdata.property_type==="apartment"}/>
+              <input onChange={()=>setFormdata({...formdata, "property_type":"apartment"})} id="apartment" name="apartment"type="checkbox" checked={formdata.property_type==="apartment"}/>
               <label htmlFor="apartment">Apartment</label>
-              <input onChange={()=>setFormdata()} id="house" name="house"type="checkbox" checked={formdata.property_type==="house"}/>
+              <input onChange={()=>setFormdata({...formdata, "property_type":"house"})} id="house" name="house"type="checkbox" checked={formdata.property_type==="house"}/>
               <label htmlFor="house">House</label>
             </InputDiv>
             <SelectContainer>
               <SelectDiv>
                 <Label htmlFor="bedrooms">BEDROOMS</Label>
-                <Select id="bedrooms" name="bedrooms">
+                <Select onChange={handleChange} id="bedrooms" name="bedrooms">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -330,30 +350,42 @@ export function PropertyForm(){
               </SelectDiv>
               <SelectDiv>
                 <Label htmlFor="bathroom">BATHROOMS</Label>
-                <Select id="bathrooms" name="bathrooms">
+                <Select onChange={handleChange} id="bathrooms" name="bathrooms">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
                 </Select>
               </SelectDiv>
-              <SelectDiv>
-                <Label htmlFor="area">AREA IN M2</Label>
-                <TextArea id="area" name="area" placeholder="##"type="number"></TextArea>
-              </SelectDiv>
+              <InputDiv>
+              <Input
+                style={{width:140, height:35}}
+                label={"AREA IN M2"}
+                id="area"
+                name="area" 
+                type="number" 
+                value={formdata.area}
+                onChange={handleChange}
+                placeholder="100"/>
+            </InputDiv>
             </SelectContainer>
-            <PetsDiv>
-                <input  id="pets" name="pets"type="checkbox" checked={formdata.pet_allowed} onChange={(e)=>setFormdata({...formdata, "pet_allowed":!formdata.pet_allowed})}/>
+
+            { formdata.mode==="rent" ?<>
+              
+              <PetsDiv>
+                <input id="pets" name="pets"type="checkbox" checked={formdata.pet_allowed} onChange={(e)=>setFormdata({...formdata, "pet_allowed":!formdata.pet_allowed})}/>
                 <Label htmlFor="pets">Pets Allowed</Label>
-            </PetsDiv>
-   
-            <PetsTextDiv>Allowing pets increases the likehood of renters liking the property by 9001%.
-              It also makes you a better person
-            </PetsTextDiv>
+              </PetsDiv>
+              <PetsTextDiv>Allowing pets increases the likehood of renters liking the property by 9001%.
+                It also makes you a better person
+              </PetsTextDiv> 
+              
+              </>: null}
 
             <div style={{display:'flex',flexDirection:'column'}}>
               <label htmlFor="about">ABOUT THIS PROPERTY</label>
-              <textarea style={{resize:'none',width:'600px',height:'76px',border:'1px solid #F48FB1',borderRadius:'8px'}} id="about" name="about" placeholder="My apartment is great because..." type=""></textarea>
+              <textarea onChange={handleChange} value={formdata.description} id="description" name="description" placeholder="My apartment is great because..." type=""></textarea>
+
               <p>Renters will read this first, so highlight any features or important information the apartment has.</p>
             </div>
             <div style={{display:'flex',flexDirection:'column'}}>
@@ -365,7 +397,7 @@ export function PropertyForm(){
                   console.log(imagesPreview)
                   return (
                       <ImgContainer>
-                        <IconContainer>
+                        <IconContainer onClick={(e)=>deleteImage(e, index)}>
                           {Icons.closed}
                         </IconContainer>
                         <PrevImg key={index} src={imagePreview} alt="Preview" />
@@ -421,8 +453,6 @@ ${typography.text.xs};
 width:468px;
 height:32px;
 display:flex;
-flex
-
 `;
 
 const SaleDiv = styled.div`
