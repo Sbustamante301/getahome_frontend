@@ -1,13 +1,9 @@
-
 import { useAuth } from "../context/auth-context";
 import { PropertyCard } from "../components/propertyCard";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import Filter from "../components/filter";
-import { useEffect } from "react";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
-import { getSaved } from "../services/properties-service";
-
 
 
 const ContainerList = styled.div`
