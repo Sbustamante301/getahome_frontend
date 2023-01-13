@@ -89,7 +89,7 @@ export default function PropertiesPage() {
         <ContainerList>
           {filterProperties.map((property, index) => {
             return (
-                <PropertyCard showProperty={(e) => handleCurrentProperty(e,property)} property={property} />
+                <PropertyCard showProperty={(e) => handleCurrentProperty(e,property)} property={property} id={property.property.id} />
 
             )
           })}

@@ -6,6 +6,7 @@ import { PropertyCard } from "../components/propertyCard";
 import styled from "@emotion/styled";
 import { colors, typography } from "../styles";
 import { Link } from "react-router-dom";
+import EmptyCard from "../components/empty-card";
 
 
 const Wrapper = styled.div`
@@ -70,6 +71,7 @@ export default function MyPropertiesPage(){
       </div>
       
       <ContainerList>
+        <EmptyCard/>
         {myProperty ? myStatus === "active" ? myProperty.active.map((status, index)=>{
           return(
             
