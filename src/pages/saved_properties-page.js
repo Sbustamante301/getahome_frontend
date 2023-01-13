@@ -30,7 +30,6 @@ flex-direction: row;
 align-items: center;
 padding: 0px;
 gap: 16px;
-margin-left:20px;
 margin-bottom:16px;
 margin-top: 32px;
 `
@@ -38,13 +37,12 @@ const H1 = styled.h1`
 ${typography.text.md};
 color: ${colors.gray.medium};
 Padding: 0px 4px 0px 4px;
-
+cursor: pointer;
 
 `
 const P1 = styled.p`
 ${typography.text.xl};
 color: ${colors.gray.medium};
-margin-left:20px;
 letter-spacing: 0.15px;
 font-weight: 500;
 `
@@ -54,24 +52,27 @@ export default function SavedPropertiesPage(){
 
   const {savedProperty}= useAuth();
   const [ saved, setSaved ] = useState("favorites");
-  // const[]
-  
-  console.log(savedProperty)
   
 
   return(
     <Wrapper>
-      <div style={{height:"124px",display:"flex",flexDirection:"column"}}>
+      <div style={{height:"124px",display:"flex",flexDirection:"column",marginLeft:"15px"}}>
         <ViewOptions>
-          <H1 onClick={()=>setSaved("favorites")} style={{borderBottomColor:`${setSaved==="FAVORITES" ? "3px solid #F48FB1" : ""}`}}>FAVORITES</H1>
-          <H1 onClick={()=>setSaved("contacts")} style={{borderBottom:`${setSaved==="CONTACTED" ? "3px solid #F48FB1" : ""}`}}>CONTACTED</H1>
+          <H1 onClick={()=>setSaved("favorites")} style={{borderBottom:`${saved==="favorites" ? "3px solid #F48FB1" : "0px"}`}}>FAVORITES</H1>
+          <H1 onClick={()=>setSaved("contacts")} style={{borderBottom:`${saved==="contacts" ? "3px solid #F48FB1" : "0px"}`}}>CONTACTED</H1>
         </ViewOptions>
-        <P1># Properties found</P1>
+        {savedProperty ? saved==="favorites" ? 
+           <P1> {savedProperty.favorites.length} Properties found</P1>: 
+           <P1> {savedProperty.contacts.length} Properties found</P1> :
+            null
+          
+          }
       </div>
+      
       <ContainerList>
-        {savedProperty ? saved === "favorites" ? savedProperty.favorites.map((saved)=>{
+        {savedProperty ? saved === "favorites" ? savedProperty.favorites.map((saved, index)=>{
           return( 
-            <PropertyCard property={saved}/>         
+            <PropertyCard key={index} property={saved}/>         
           )
         }) :
         savedProperty.contacts.map((saved)=>{

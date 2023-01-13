@@ -36,9 +36,9 @@ export async function getSaved() {
   return savedProperties;
 }
 
+export async function getMyProperties() {
+  const myProperties = await apiFetch (`my_properties`);
+  return myProperties;
+}
 
-// export async function createProperty() {
-//   const { ...property } = await apiFetch("/involved_properties", { 
-//   body: newProperty,
 
-//   })}

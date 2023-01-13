@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { getProperties } from "./services/properties-service";
+import { getMyProperties, getProperties } from "./services/properties-service";
 import { NavbarUnAuthenticated, NavbarAuthenticated } from "./components/navbar";
 import { getSaved } from "./services/properties-service";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -16,12 +16,11 @@ import SavedPropertiesPage from "./pages/saved_properties-page";
 
 
 
-
 const Wrapper = styled.div``;
 
 function App() {
 
-  const {setProperties,user, isOpenModal, userType,setSavedProperty} = useAuth()
+  const {setProperties,user, isOpenModal, userType,setSavedProperty,setMyProperty} = useAuth()
   useEffect(() => {
     getProperties().then(response=>{
     setProperties(response)
@@ -33,6 +32,14 @@ function App() {
   useEffect(() => {
     getSaved().then(response=>{
     setSavedProperty(response)
+  
+    }).catch(error=>{console.log(error)})
+    
+  },[]);
+
+  useEffect(() => {
+    getMyProperties().then(response=>{
+    setMyProperty(response)
   
     }).catch(error=>{console.log(error)})
     
