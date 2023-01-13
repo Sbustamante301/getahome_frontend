@@ -402,7 +402,7 @@ export default function PropertyPage() {
   function handleAddFavorites(event) {
     event.preventDefault();
     createFavorite({
-      id: currentProperty.property.id,
+      property_id: currentProperty.property.id,
       favorite: true,
     })
       .then((data) => console.log(data))

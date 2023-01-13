@@ -205,7 +205,8 @@ const Pet = styled.div`
 `;
 
 export function PropertyCard({ property, showProperty }) {
-  const { user, savedProperty } = useAuth();
+
+  const { user, savedProperty, setMyProperty, myProperty } = useAuth();
 
   let index_favorites = [];
   let localSavedProperty = [];
@@ -237,6 +238,8 @@ export function PropertyCard({ property, showProperty }) {
     deleteProperty(property.property.id)
       .then((data) => console.log('CardBORRADA', data))
       .catch(console.log)
+    
+    setMyProperty({...myProperty,"active": myProperty.active.filter(myProp=>myProp.id !== property.property.id)})
   }
 
   return (
