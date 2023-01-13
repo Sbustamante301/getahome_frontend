@@ -149,7 +149,7 @@ export function NavbarAuthenticated() {
           </FindButton>
         </Form2>
         <LogoutButton onClick={handleLogout}>LOGOUT</LogoutButton>
-        {userType === 1 ? <MyPropertyButton onClick={handleMyProperties}>MY PROPERTIES</MyPropertyButton> 
+        {userType === "landlord" ? <MyPropertyButton onClick={handleMyProperties}>MY PROPERTIES</MyPropertyButton> 
                         : <SaveButton onClick={handleSavedProperties}>SAVED PROPERTIES</SaveButton>}
         
         <ProfileButton>PROFILE</ProfileButton>

@@ -54,7 +54,6 @@ export default function SavedPropertiesPage(){
   const {savedProperty}= useAuth();
   const [ saved, setSaved ] = useState("favorites");
   
-
   return(
     <Wrapper>
       <div style={{height:"124px",display:"flex",flexDirection:"column",marginLeft:"15px"}}>

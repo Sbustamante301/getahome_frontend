@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { login, logout } from "../services/session-service";
 import { createUser, getUser } from "../services/users-service";
 
@@ -8,10 +9,10 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
 
   const [properties, setProperties] = useState([]);
-  const [savedProperty, setSavedProperty] = useState([]);
+  const [savedProperty, setSavedProperty] = useState(JSON.parse(sessionStorage.getItem("savedProperty")) || []);
   const [myProperty, setMyProperty] = useState(null);
 
-  const [userType, setUserType] = useState(null);
+  const [userType, setUserType] = useState(JSON.parse(sessionStorage.getItem("userType")))
   const [currentProperty, setCurrentProperty] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [error, setError] = useState(null);
@@ -27,7 +28,7 @@ function AuthProvider({ children }) {
   })
 
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -45,6 +46,7 @@ function AuthProvider({ children }) {
       setUserType(user.user_type);
       setIsOpenModal(false);
       sessionStorage.setItem("user", JSON.stringify(user))
+      sessionStorage.setItem("userType", JSON.stringify(user.user_type))
     }).catch(error => {
       setError(error.message)
     });
@@ -58,8 +60,12 @@ function AuthProvider({ children }) {
 
   function handleLogout() {
     return logout().finally(() => {
-      setUser(null);
-      // navigate("/");
+      sessionStorage.removeItem("user")
+      sessionStorage.removeItem("userType")
+      sessionStorage.removeItem("savedProperty")
+      setUser(null)
+      setUserType(null)
+      navigate("/home");
     });
   }
 

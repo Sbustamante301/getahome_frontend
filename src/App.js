@@ -45,6 +45,7 @@ function App() {
   useEffect(() => {
     getSaved().then(response=>{
     setSavedProperty(response)
+    sessionStorage.setItem("savedProperty", JSON.stringify(response))
   
     }).catch(error=>{console.log(error)})
     

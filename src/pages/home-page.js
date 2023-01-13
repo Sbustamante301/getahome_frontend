@@ -7,6 +7,7 @@ import SectionSignup from "../components/sections/sectionSignup";
 import { useAuth } from "../context/auth-context";
 import { useEffect, useState } from "react";
 import { colors, typography } from "../styles";
+import { getSaved } from "../services/properties-service";
 
 const Section2 = styled.div`
   display: flex;
@@ -42,9 +43,17 @@ const PropertyContainer = styled.div`
 `
 
 function HomePage() {
-  const { properties } = useAuth();
+  const { userType, properties, setSavedProperty } = useAuth();
   const randomProperties = properties.filter((_property, index) => index < 3)
-
+  useEffect(() => {
+    if(userType==="seeker"){
+      getSaved().then(response=>{
+      setSavedProperty(response)
+      sessionStorage.setItem("savedProperty", JSON.stringify(response))
+      }).catch(error=>{console.log(error)})
+    }
+    
+  },[]);
   return (
     <>
       <SectionMeetHome />

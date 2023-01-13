@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Filter from "../components/filter";
 import { useEffect } from "react";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
+import { getSaved } from "../services/properties-service";
 
 
 
@@ -27,6 +28,7 @@ padding: 32px 152px;
 
 export default function PropertiesPage() {
   const { properties, setCurrentProperty, propertyFilter } = useAuth();
+  
   console.log(propertyFilter)
   let filterProperties = [...properties].filter(property => property.property.status);
 
