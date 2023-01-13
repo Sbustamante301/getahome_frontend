@@ -45,6 +45,7 @@ const PropertyContainer = styled.div`
 
 function HomePage() {
   const { userType, properties, setSavedProperty, setUser } = useAuth();
+  console.log(properties)
   const randomProperties = properties.filter((_property, index) => index < 3)
   useEffect(() => {
     if(userType==="seeker"){
