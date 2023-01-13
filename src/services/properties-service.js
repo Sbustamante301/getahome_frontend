@@ -43,6 +43,10 @@ export async function getMyProperties() {
   return myProperties;
 }
 
+export async function getLandlordUser(id) {
+  const landlord = await apiFetch(`properties/${id}/user`);
+  return landlord;
+}
 // export async function updateFavorites(id, data) {
 //   console.log('ID API', id)
 //   console.log('BODY API', data)
@@ -50,7 +54,6 @@ export async function getMyProperties() {
 // }
 
 export async function createFavorite(newFavorite) {
-  console.log('CUERPOFAV', newFavorite)
   const favorites = await apiFetch("involved_properties", {
     body: newFavorite
   })
@@ -58,7 +61,6 @@ export async function createFavorite(newFavorite) {
 }
 
 export async function createContacted(newContacted) {
-  console.log('CUERPOCONC', newContacted)
   const contacted = await apiFetch("involved_properties", {
     body: newContacted
   })

@@ -10,7 +10,7 @@ import { useAuth } from "../context/auth-context";
 import { LoginCardButton, ContactAdvertiserButton, EditPropertyButton } from "../components/Button";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
 import Mapa from "../components/mapa";
-import { createFavorite, createContacted } from "../services/properties-service"
+import { createFavorite, createContacted, getLandlordUser } from "../services/properties-service"
 
 const BigWraper = styled.div`
   display: flex;
@@ -359,8 +359,18 @@ export default function PropertyPage() {
   const { currentProperty, setIsOpenModal, user, savedProperty, setSavedProperty } = useAuth();
   const [showContact, setShoreContact] = useState(false);
   const navigate = useNavigate();
-  const [favorite, setFavorite] = useState(false)
-  const [contact, setContact] = useState(false)
+  const [favorite, setFavorite] = useState(false);
+  const [contact, setContact] = useState(false);
+  const [landlord, setLandlord] = useState(null);
+
+
+  useEffect(() => {
+    if (currentProperty) {
+      getLandlordUser(currentProperty.property.user_id).then(response => {
+        setLandlord(response)
+      }).catch(error => { console.log(error) })
+    }
+  }, []);
 
   function handleLogin(event) {
     event.preventDefault();
@@ -483,11 +493,11 @@ export default function PropertyPage() {
                       <TitleSeeker>Contact information</TitleSeeker>
                       <SeekerEmail>
                         <SeekerSubtitle>Email</SeekerSubtitle>
-                        <SeekerInfo>xxxxx@mail.com</SeekerInfo>
+                        <SeekerInfo>{landlord.email}</SeekerInfo>
                       </SeekerEmail>
                       <SeekerEmail>
                         <SeekerSubtitle>Phone</SeekerSubtitle>
-                        <SeekerInfo>92392445</SeekerInfo>
+                        <SeekerInfo>{landlord.phone}</SeekerInfo>
                       </SeekerEmail>
                     </LogedCard>)
                     : (<LogedCard>
