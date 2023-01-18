@@ -3,7 +3,7 @@ import { GoogleMap, useLoadScript, MarkerF, Marker } from "@react-google-maps/ap
 import { useAuth } from '../context/auth-context';
 import { API_KEY } from '../config';
 
-export default function Home() {
+export default function StaticMap() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: API_KEY,
   });
@@ -11,23 +11,19 @@ export default function Home() {
     return <div>Loading...</div>;
   } 
   
-  return <Map />;
+  return <Map/>;
 }
 
 function Map() {
-    const {coordinates, setCoordinates} = useAuth();
+    const {currentProperty} = useAuth();
     const options = {
       zoom: 8,
-      center:coordinates
+      center:{lat: parseFloat(currentProperty.property.latitud), lng: parseFloat(currentProperty.property.longitud)}
     };
     const onMapLoad = (map) => {
       console.log("Map Loaded!");
     }
   
-    const handleClick = (event) => {
-      setCoordinates({ lat: event.latLng.lat(), lng: event.latLng.lng() });
-      console.log(coordinates);
-    }
     const onMapUnmount = (map) => {
         console.log("Map Unmount!");
       }
@@ -40,13 +36,12 @@ function Map() {
         width: "100%"
       }}
       zoom={12}
-      center={coordinates}
+      center={options.center}
       options={{ streetViewControl: false }}
       onLoad={onMapLoad}
       onUnmount={onMapUnmount}
-      onClick={handleClick}
     >
-      <MarkerF position={coordinates} />
+      <MarkerF position={options.center} />
     </GoogleMap>
     );
   }

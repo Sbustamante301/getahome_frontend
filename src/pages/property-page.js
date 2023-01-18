@@ -8,11 +8,11 @@ import { Icons } from "../utils";
 import { useAuth } from "../context/auth-context";
 import { LoginCardButton, ContactAdvertiserButton, EditPropertyButton } from "../components/Button";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
-import Mapa from "../components/mapa";
+import StaticMap from "../components/mapa_static";
 import { getSaved, createFavorite, createContacted, getLandlordUser } from "../services/properties-service"
 import ImageDefault from "../assets/image-default.jpg"
-import MyApp from "../components/mapa2";
-import Home from "../components/mapa3";
+
+
 const BigWraper = styled.div`
   display: flex;
   flex-direction:column;
@@ -363,7 +363,7 @@ const RightIcon = styled.div`
 `;
 
 export default function PropertyPage() {
-  const { currentProperty, setIsOpenModal, user, savedProperty, setSavedProperty, properties, setProperties } = useAuth();
+  const { currentProperty, setIsOpenModal, user, savedProperty, setSavedProperty, properties, setProperties, address } = useAuth();
   const [showContact, setShoreContact] = useState(false);
   const navigate = useNavigate();
   const [landlord, setLandlord] = useState(null);
@@ -468,7 +468,16 @@ export default function PropertyPage() {
           <InformationContainer>
             <Category>
               <Address>
-                <BigAddress>{currentProperty.property.address}</BigAddress>
+                
+                {address?.map((add,index)=>{
+                // console.log('ID DE ADDRESS',add.id);
+                // console.log("id de propiedad",property.property.id)
+                if (add.id === currentProperty.property.id) {
+                  console.log("entro", add)
+                  return(<BigAddress>{add.address}</BigAddress>)
+                }
+                }) } 
+              
                 <SmallAddress>Miraflores, Lima</SmallAddress>
               </Address>
               <TotalCost>
@@ -517,10 +526,7 @@ export default function PropertyPage() {
               </AboutParragraph>
 
               <Map>
-                <Home/>
-                {/* <Mapa /> */}
-                {/* <MyApp/> */}
-                {/* <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=la%20cruceta&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe> */}
+                <StaticMap/>
               </Map>
               
             </Location>

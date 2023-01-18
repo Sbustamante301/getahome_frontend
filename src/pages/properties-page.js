@@ -30,9 +30,9 @@ export default function PropertiesPage() {
   });
 
   // Filter by address
-  filterProperties = filterProperties.filter(property => {
-    return property.property.address.includes(propertyFilter.search)
-  })
+  // filterProperties = filterProperties.filter(property => {
+  //   return property.property.address.includes(propertyFilter.search)
+  // })
   // Filter for max and min prices
   filterProperties = filterProperties.filter(property => {
     if (!(propertyFilter.prices.max)) return true;

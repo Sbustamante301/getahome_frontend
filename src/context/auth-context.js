@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { FaAddressBook } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { getAddressFromCoordinates } from "../services/google-service";
 import { login, logout } from "../services/session-service";
 import { createUser, getUser } from "../services/users-service";
 
@@ -8,6 +10,8 @@ const AuthContext = createContext();
 function AuthProvider({ children }) {
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
 
+  const [coordinates, setCoordinates] = useState({ lat: -12.2, lng: -77.02 });
+  const [address, setAddress] = useState(null)
   const [properties, setProperties] = useState([]);
   const [savedProperty, setSavedProperty] = useState(JSON.parse(sessionStorage.getItem("savedProperty")) || []);
   const [myProperty, setMyProperty] = useState(null);
@@ -39,6 +43,20 @@ function AuthProvider({ children }) {
       .catch((error) => console.log(error));
   }, []);
 
+  useEffect(()=>{
+    const addresArray = []
+    properties.map(property=>{
+      getAddressFromCoordinates(property.property.latitud, property.property.longitud)
+      .then(data =>{
+        addresArray?.push({id:property.property.id , address: data.results[0].formatted_address});
+        console.log("data",data)
+        
+      })
+    })
+    setAddress(addresArray)
+  },[properties])
+
+  console.log("ADDRESS",address)
   function handleLogin(credentials) {
     return login(credentials).then((user) => {
       setUser(user);
@@ -91,6 +109,7 @@ function AuthProvider({ children }) {
         userType,
         setUserType,
         error,
+        address,
         propertyFilter,
         setPropertyFilters,
         setProperties,
@@ -104,8 +123,9 @@ function AuthProvider({ children }) {
         setSavedProperty,
         savedProperty,
         myProperty,
-        setMyProperty
-
+        setMyProperty,
+        coordinates, 
+        setCoordinates,
       }}
     >
       {children}

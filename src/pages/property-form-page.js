@@ -8,6 +8,7 @@ import { Icons } from "../utils";
 import { createProperty } from "../services/properties-service";
 import { useAuth } from "../context/auth-context";
 import Mapa from "../components/mapa";
+import Home from "../components/mapa";
 const Div = styled.div`
 width:100%;
 
@@ -165,6 +166,13 @@ const Map = styled.div`
   margin-bottom: 32px;
   border: 1px solid ${colors.pink.dark}
 `;
+const textMap = styled.p`
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 1.5px;
+  color: ${colors.gray.dark};
+`;
 
 function Input({
   id,
@@ -208,7 +216,7 @@ export default function PropertyFormPage(){
 }
 
 export function PropertyForm(){
-  const {properties, setProperties} = useAuth()
+  const {properties, setProperties, coordinates, setCoordinates} = useAuth()
   const [formdata, setFormdata] = useState({
       bedrooms:1,
       bathrooms:1,
@@ -216,7 +224,7 @@ export function PropertyForm(){
       pet_allowed:false,
       price:"",
       mode:"rent",
-      address:"",
+      // address:"",
       description:"",
       property_type:"apartment",
       maintenance:"",
@@ -231,6 +239,7 @@ export function PropertyForm(){
     function handleChange(event){
       const {name, value} = event.target
       setFormdata({...formdata, [name]:value})
+      console.log(formdata)
     }
       
     function handleFileSelect(event){
@@ -253,6 +262,7 @@ export function PropertyForm(){
     }
 
     function handleSubmit2(event){
+      
       event.preventDefault();
       console.log(event.target.bedrooms.value)
       console.log(formdata.mode)
@@ -264,14 +274,16 @@ export function PropertyForm(){
       data.append("property[description]", formdata.description);
       data.append("property[price]", formdata.price);
       data.append("property[mode]", formdata.mode);
-      data.append("property[address]", formdata.address);
+      // data.append("property[address]", formdata.address);
       data.append("property[property_type]", formdata.property_type);
       data.append("property[status]", formdata.status);
+      data.append("property[latitud]", coordinates.lat);
+      data.append("property[longitud]", coordinates.lng);
       data.append("property[district]", formdata.district);
       data.append("property[province]", formdata.province);
       data.append("property[maintenance]", formdata.maintenance);
       data.append("property[image]", event.target.image.files[0]);
-      console.dir(data)
+      console.log(data)
       createProperty(data).then(response=>{
         setProperties([...properties, response])
         console.log(response)
@@ -312,16 +324,6 @@ export function PropertyForm(){
                 </SaleDiv>
               </ModeDiv>
             </OperationTypeDiv>
-            <InputDiv style={{width:"600px"}}>
-              <Input
-              label={"ADDRESS"}
-              id="address"
-              name="address" 
-              type="text" 
-              value={formdata.address}
-              onChange={handleChange}
-              placeholder="start typing to autocomplete"/>
-            </InputDiv>
             <InputDiv>
               <Input
                 label={"MONTHLY RENT"}
@@ -342,9 +344,6 @@ export function PropertyForm(){
                 onChange={handleChange}
                 placeholder="Lima"/>    
             </InputDiv>
-            <Map>
-              
-            </Map>
             <InputDiv>
               <Input
                 label={"DISTRICT"}
@@ -355,6 +354,11 @@ export function PropertyForm(){
                 onChange={handleChange}
                 placeholder="Miraflores"/>    
             </InputDiv>
+ 
+            <textMap>CHOOSE YOUR LOCATION</textMap>
+            <Map>
+              <Home/>
+            </Map>
             
             {formdata.mode === "rent" ? <InputDiv>
               <Input
@@ -406,7 +410,6 @@ export function PropertyForm(){
                   onChange={handleChange}
                   placeholder="100"/>
             </InputDiv>
-            <Mapa/>
             </SelectContainer>
             
             { formdata.mode==="rent" ?<>

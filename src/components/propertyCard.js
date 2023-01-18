@@ -7,6 +7,7 @@ import { Icons } from "../utils"
 import { EditCardButton, CloseCardButton, RestoreCardButton, DeleteCardButton } from "../components/Button"
 import { updateProperty, deleteProperty } from "../services/properties-service";
 import ImageDefault from "../assets/image-default.jpg"
+import { getAddressFromCoordinates } from "../services/google-service";
 
 const Wrapp = styled.div`
   display: flex;
@@ -214,7 +215,8 @@ const Phone = styled.div`
   align-items: center;
 `;
 export function PropertyCard({ property, showProperty, id }) {
-  const { user, savedProperty, setMyProperty, myProperty, setCurrentProperty } = useAuth();
+  const { user, savedProperty, setMyProperty, myProperty, setCurrentProperty, address } = useAuth();
+  const [showAddress, setShowAddress]= useState(null)
 
   let index_favorites = [];
   let localSavedProperty = [];
@@ -230,7 +232,9 @@ export function PropertyCard({ property, showProperty, id }) {
     index_contacts.push(property.property.id)
   })
   
-
+  useEffect(()=>{
+    setShowAddress(true)
+    },[address])
 
   function handleClose(event) {
     event.preventDefault();
@@ -295,7 +299,17 @@ export function PropertyCard({ property, showProperty, id }) {
               </HomeType>
             </Category>
             <Address>
-              {property.property.address}
+              {console.log("holaaaaa", address)}
+              {showAddress ? address?.map((add,index)=>{
+                if (add.id === property.property.id) {
+                  console.log("entro", add)
+                  return(<p>{add.address}</p>)
+                }
+              }) : (<p>Loading...</p>)
+              } 
+             
+              
+              {/* {address ? address[0].address : "hey"} */}
             </Address>
             <Features>
               <Bed>{Icons.bed} {property.property.bedrooms}</Bed>
