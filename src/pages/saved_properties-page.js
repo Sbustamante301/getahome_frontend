@@ -6,6 +6,7 @@ import { PropertyCard } from "../components/propertyCard";
 import styled from "@emotion/styled";
 import { colors, typography } from "../styles";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
+import Paginated from "../components/pagination";
 
 
 const Wrapper = styled.div`
@@ -89,15 +90,19 @@ export default function SavedPropertiesPage() {
             <PropertyCard key={index} property={saved} />
           )
         }) :
-          savedProperty.contacts.map((saved) => {
+          savedProperty.contacts.map((saved,index) => {
             return (
-              <PropertyCard property={saved} />
+              <PropertyCard key={index} property={saved} />
             )
           })
           : null}
       </ContainerList>
+      <Paginated/>
+      <SectionFooter2 />
+      
+
     </Wrapper>
-    <SectionFooter2 />
+
     </>
 
   )

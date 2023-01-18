@@ -4,17 +4,8 @@ import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import Filter from "../components/filter";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
+import Paginated from "../components/pagination";
 
-
-const ContainerList = styled.div`
-display: grid;
-grid-template-columns: 1fr 1fr 1fr;
-padding: 100px 184px;
-row-gap: 32px;
-column-gap: 86px;
-justify-items:center;
-justify-content:center;
-`
 const Wrapper = styled.div`
 padding: 32px 152px;
 `
@@ -78,23 +69,14 @@ export default function PropertiesPage() {
     if (propertyFilter.mode[1]) return property.property.mode === "rent"
   })
 
-  function handleCurrentProperty(e,property){
-    setCurrentProperty(property)
-    sessionStorage.setItem("currentProperty", JSON.stringify(property))
-  }
+
   return (
     <>
       <Wrapper>
         <Filter />
-        <ContainerList>
-          {filterProperties.map((property, index) => {
-            return (
-                <PropertyCard showProperty={(e) => handleCurrentProperty(e,property)} property={property} id={property.property.id} />
 
-            )
-          })}
-        </ContainerList>
-        {/* PaginatedPage */}
+        <Paginated itemsPerPage={9} filterProperties={filterProperties}/>,
+
       </Wrapper>
       <SectionFooter2 />
     </>
