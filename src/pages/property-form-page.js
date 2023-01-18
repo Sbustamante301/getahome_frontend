@@ -7,6 +7,7 @@ import { CreateAccountButton } from "../components/Button";
 import { Icons } from "../utils";
 import { createProperty } from "../services/properties-service";
 import { useAuth } from "../context/auth-context";
+import Mapa from "../components/mapa";
 const Div = styled.div`
 width:100%;
 
@@ -158,6 +159,13 @@ const PetsDiv = styled.div`
   height:36px;
 `;
 
+const Map = styled.div`
+  width: 760px;
+  height: 760px;
+  margin-bottom: 32px;
+  border: 1px solid ${colors.pink.dark}
+`;
+
 function Input({
   id,
   name,
@@ -212,7 +220,9 @@ export function PropertyForm(){
       description:"",
       property_type:"apartment",
       maintenance:"",
-      status:true, 
+      status:true,
+      district: "",
+      province:"", 
       image:null
     })
     const [imagesPreview, setImagesPreview] = useState([])
@@ -257,6 +267,8 @@ export function PropertyForm(){
       data.append("property[address]", formdata.address);
       data.append("property[property_type]", formdata.property_type);
       data.append("property[status]", formdata.status);
+      data.append("property[district]", formdata.district);
+      data.append("property[province]", formdata.province);
       data.append("property[maintenance]", formdata.maintenance);
       data.append("property[image]", event.target.image.files[0]);
       console.dir(data)
@@ -301,14 +313,14 @@ export function PropertyForm(){
               </ModeDiv>
             </OperationTypeDiv>
             <InputDiv style={{width:"600px"}}>
-            <Input
-            label={"ADDRESS"}
-            id="address"
-            name="address" 
-            type="text" 
-            value={formdata.address}
-            onChange={handleChange}
-            placeholder="start typing to autocomplete"/>
+              <Input
+              label={"ADDRESS"}
+              id="address"
+              name="address" 
+              type="text" 
+              value={formdata.address}
+              onChange={handleChange}
+              placeholder="start typing to autocomplete"/>
             </InputDiv>
             <InputDiv>
               <Input
@@ -320,6 +332,30 @@ export function PropertyForm(){
                 onChange={handleChange}
                 placeholder="2000"/>    
             </InputDiv>
+            <InputDiv>
+              <Input
+                label={"PROVINCE"}
+                id="province"
+                name="province" 
+                type="text" 
+                value={formdata.province}
+                onChange={handleChange}
+                placeholder="Lima"/>    
+            </InputDiv>
+            <Map>
+              
+            </Map>
+            <InputDiv>
+              <Input
+                label={"DISTRICT"}
+                id="district"
+                name="district" 
+                type="text" 
+                value={formdata.district}
+                onChange={handleChange}
+                placeholder="Miraflores"/>    
+            </InputDiv>
+            
             {formdata.mode === "rent" ? <InputDiv>
               <Input
                 label={"MAINTANANCE"}
@@ -360,18 +396,19 @@ export function PropertyForm(){
                 </Select>
               </SelectDiv>
               <InputDiv>
-              <Input
-                style={{width:140, height:35}}
-                label={"AREA IN M2"}
-                id="area"
-                name="area" 
-                type="number" 
-                value={formdata.area}
-                onChange={handleChange}
-                placeholder="100"/>
+                <Input
+                  style={{width:140, height:35}}
+                  label={"AREA IN M2"}
+                  id="area"
+                  name="area" 
+                  type="number" 
+                  value={formdata.area}
+                  onChange={handleChange}
+                  placeholder="100"/>
             </InputDiv>
+            <Mapa/>
             </SelectContainer>
-
+            
             { formdata.mode==="rent" ?<>
               
               <PetsDiv>

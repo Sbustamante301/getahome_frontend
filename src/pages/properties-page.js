@@ -21,6 +21,7 @@ padding: 32px 152px;
 
 export default function PropertiesPage() {
   const { properties, setCurrentProperty, propertyFilter } = useAuth();
+  const itemsPerPage = 9;
   
   console.log(propertyFilter)
   console.log(properties)
@@ -94,6 +95,7 @@ export default function PropertiesPage() {
             )
           })}
         </ContainerList>
+        {/* PaginatedPage */}
       </Wrapper>
       <SectionFooter2 />
     </>
