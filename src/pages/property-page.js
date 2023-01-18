@@ -2,16 +2,17 @@ import styled from "@emotion/styled";
 import { Link, useNavigate } from "react-router-dom";
 import { BiBath, BiArea, BiBed } from "react-icons/bi";
 import { FaPaw } from "react-icons/fa";
-import { RiHeartFill } from "react-icons/ri"
 import { useState, useEffect } from "react";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils";
 import { useAuth } from "../context/auth-context";
 import { LoginCardButton, ContactAdvertiserButton, EditPropertyButton } from "../components/Button";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
-import Mapa from "../components/mapa";
-import { getSaved, createFavorite, createContacted, getLandlordUser, getProperties } from "../services/properties-service"
+import StaticMap from "../components/mapa_static";
+import { getSaved, createFavorite, createContacted, getLandlordUser } from "../services/properties-service"
 import ImageDefault from "../assets/image-default.jpg"
+
+
 const BigWraper = styled.div`
   display: flex;
   flex-direction:column;
@@ -362,7 +363,7 @@ const RightIcon = styled.div`
 `;
 
 export default function PropertyPage() {
-  const { currentProperty, setIsOpenModal, user, savedProperty, setSavedProperty, properties, setProperties } = useAuth();
+  const { currentProperty, setIsOpenModal, user, savedProperty, setSavedProperty, properties, setProperties, address } = useAuth();
   const [showContact, setShoreContact] = useState(false);
   const navigate = useNavigate();
   const [landlord, setLandlord] = useState(null);
@@ -467,7 +468,16 @@ export default function PropertyPage() {
           <InformationContainer>
             <Category>
               <Address>
-                <BigAddress>{currentProperty.property.address}</BigAddress>
+                
+                {address?.map((add,index)=>{
+                // console.log('ID DE ADDRESS',add.id);
+                // console.log("id de propiedad",property.property.id)
+                if (add.id === currentProperty.property.id) {
+                  console.log("entro", add)
+                  return(<BigAddress>{add.address}</BigAddress>)
+                }
+                }) } 
+              
                 <SmallAddress>Miraflores, Lima</SmallAddress>
               </Address>
               <TotalCost>
@@ -514,9 +524,11 @@ export default function PropertyPage() {
               <AboutParragraph>
                 {currentProperty.property.address}
               </AboutParragraph>
+
               <Map>
-                <Mapa />
+                <StaticMap/>
               </Map>
+              
             </Location>
           </InformationContainer>
         </InfoContainer>

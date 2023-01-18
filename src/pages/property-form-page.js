@@ -7,6 +7,8 @@ import { CreateAccountButton } from "../components/Button";
 import { Icons } from "../utils";
 import { createProperty } from "../services/properties-service";
 import { useAuth } from "../context/auth-context";
+import Mapa from "../components/mapa";
+import Home from "../components/mapa";
 const Div = styled.div`
 width:100%;
 
@@ -158,6 +160,20 @@ const PetsDiv = styled.div`
   height:36px;
 `;
 
+const Map = styled.div`
+  width: 760px;
+  height: 760px;
+  margin-bottom: 32px;
+  border: 1px solid ${colors.pink.dark}
+`;
+const textMap = styled.p`
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 1.5px;
+  color: ${colors.gray.dark};
+`;
+
 function Input({
   id,
   name,
@@ -200,7 +216,7 @@ export default function PropertyFormPage(){
 }
 
 export function PropertyForm(){
-  const {properties, setProperties} = useAuth()
+  const {properties, setProperties, coordinates, setCoordinates} = useAuth()
   const [formdata, setFormdata] = useState({
       bedrooms:1,
       bathrooms:1,
@@ -208,11 +224,13 @@ export function PropertyForm(){
       pet_allowed:false,
       price:"",
       mode:"rent",
-      address:"",
+      // address:"",
       description:"",
       property_type:"apartment",
       maintenance:"",
-      status:true, 
+      status:true,
+      district: "",
+      province:"", 
       image:null
     })
     const [imagesPreview, setImagesPreview] = useState([])
@@ -221,6 +239,7 @@ export function PropertyForm(){
     function handleChange(event){
       const {name, value} = event.target
       setFormdata({...formdata, [name]:value})
+      console.log(formdata)
     }
       
     function handleFileSelect(event){
@@ -243,6 +262,7 @@ export function PropertyForm(){
     }
 
     function handleSubmit2(event){
+      
       event.preventDefault();
       console.log(event.target.bedrooms.value)
       console.log(formdata.mode)
@@ -254,12 +274,16 @@ export function PropertyForm(){
       data.append("property[description]", formdata.description);
       data.append("property[price]", formdata.price);
       data.append("property[mode]", formdata.mode);
-      data.append("property[address]", formdata.address);
+      // data.append("property[address]", formdata.address);
       data.append("property[property_type]", formdata.property_type);
       data.append("property[status]", formdata.status);
+      data.append("property[latitud]", coordinates.lat);
+      data.append("property[longitud]", coordinates.lng);
+      data.append("property[district]", formdata.district);
+      data.append("property[province]", formdata.province);
       data.append("property[maintenance]", formdata.maintenance);
       data.append("property[image]", event.target.image.files[0]);
-      console.dir(data)
+      console.log(data)
       createProperty(data).then(response=>{
         setProperties([...properties, response])
         console.log(response)
@@ -300,16 +324,6 @@ export function PropertyForm(){
                 </SaleDiv>
               </ModeDiv>
             </OperationTypeDiv>
-            <InputDiv style={{width:"600px"}}>
-            <Input
-            label={"ADDRESS"}
-            id="address"
-            name="address" 
-            type="text" 
-            value={formdata.address}
-            onChange={handleChange}
-            placeholder="start typing to autocomplete"/>
-            </InputDiv>
             <InputDiv>
               <Input
                 label={"MONTHLY RENT"}
@@ -320,6 +334,32 @@ export function PropertyForm(){
                 onChange={handleChange}
                 placeholder="2000"/>    
             </InputDiv>
+            <InputDiv>
+              <Input
+                label={"PROVINCE"}
+                id="province"
+                name="province" 
+                type="text" 
+                value={formdata.province}
+                onChange={handleChange}
+                placeholder="Lima"/>    
+            </InputDiv>
+            <InputDiv>
+              <Input
+                label={"DISTRICT"}
+                id="district"
+                name="district" 
+                type="text" 
+                value={formdata.district}
+                onChange={handleChange}
+                placeholder="Miraflores"/>    
+            </InputDiv>
+ 
+            <textMap>CHOOSE YOUR LOCATION</textMap>
+            <Map>
+              <Home/>
+            </Map>
+            
             {formdata.mode === "rent" ? <InputDiv>
               <Input
                 label={"MAINTANANCE"}
@@ -360,18 +400,18 @@ export function PropertyForm(){
                 </Select>
               </SelectDiv>
               <InputDiv>
-              <Input
-                style={{width:140, height:35}}
-                label={"AREA IN M2"}
-                id="area"
-                name="area" 
-                type="number" 
-                value={formdata.area}
-                onChange={handleChange}
-                placeholder="100"/>
+                <Input
+                  style={{width:140, height:35}}
+                  label={"AREA IN M2"}
+                  id="area"
+                  name="area" 
+                  type="number" 
+                  value={formdata.area}
+                  onChange={handleChange}
+                  placeholder="100"/>
             </InputDiv>
             </SelectContainer>
-
+            
             { formdata.mode==="rent" ?<>
               
               <PetsDiv>
