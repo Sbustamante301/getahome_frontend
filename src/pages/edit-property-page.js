@@ -2,7 +2,6 @@ import { SectionFooter2 } from "../components/sections/sectionFooter"
 import { useAuth } from "../context/auth-context"
 import styled from "@emotion/styled"
 import { colors,typography } from "../styles"
-// import {SectionFooter2} from "../components/sections/sectionFooter"
 import SectionMeetHome from "../components/sections/sectionMeetHome";
 import { useState } from "react";
 import { CreateAccountButton } from "../components/Button";
