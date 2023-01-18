@@ -274,7 +274,6 @@ export function PropertyForm(){
       data.append("property[description]", formdata.description);
       data.append("property[price]", formdata.price);
       data.append("property[mode]", formdata.mode);
-      // data.append("property[address]", formdata.address);
       data.append("property[property_type]", formdata.property_type);
       data.append("property[status]", formdata.status);
       data.append("property[latitud]", coordinates.lat);

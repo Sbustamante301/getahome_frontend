@@ -15,9 +15,22 @@ export async function getProperties() {
 // }
 export async function createProperty(newProperty) {
   const token = sessionStorage.getItem(tokenKey);
-  const response = await fetch(`${BASE_URI}/properties`, {
+  const response = await fetch(`${BASE_URI}properties`, {
     method: 'POST',
     body: newProperty,
+    headers: {
+      'Authorization': `Token token=${token}`
+    }
+  });
+  const property = await response.json();
+  return property;
+}
+
+export async function updateTotalProperty(id, data) {
+  const token = sessionStorage.getItem(tokenKey);
+  const response = await fetch(`${BASE_URI}properties/${id}`, {
+    method: 'PATCH',
+    body: data,
     headers: {
       'Authorization': `Token token=${token}`
     }

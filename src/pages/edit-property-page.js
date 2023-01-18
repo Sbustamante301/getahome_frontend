@@ -7,7 +7,8 @@ import SectionMeetHome from "../components/sections/sectionMeetHome";
 import { useState } from "react";
 import { CreateAccountButton } from "../components/Button";
 import { Icons } from "../utils";
-import { createProperty , updateProperty} from "../services/properties-service";
+import { createProperty , updateProperty, updateTotalProperty} from "../services/properties-service";
+import Home from "../components/mapa"
 
 const Div = styled.div`
 width:100%;
@@ -212,6 +213,12 @@ display:flex;
 border-color:${colors.gray.medium};
 align-items:center;
 `;
+const Map = styled.div`
+  width: 760px;
+  height: 760px;
+  margin-bottom: 32px;
+  border: 1px solid ${colors.pink.dark}
+`;
 function Input({
   id,
   name,
@@ -254,7 +261,7 @@ export default function PropertyFormPage(){
 }
 
 export function PropertyForm(){
-  const {properties, setProperties, currentProperty, setCurrentProperty} = useAuth()
+  const {properties, setProperties, currentProperty, setCurrentProperty, coordinates, setCoordinates} = useAuth()
   const [formdata, setFormdata] = useState({
       bedrooms:currentProperty.property.bedrooms || "",
       bathrooms:currentProperty.property.bathrooms || "",
@@ -262,9 +269,10 @@ export function PropertyForm(){
       pet_allowed:currentProperty.property.pet_allowed || "",
       price:currentProperty.property.price || "",
       mode:currentProperty.property.mode || "",
-      address:currentProperty.property.address || "",
       description:currentProperty.property.description || "",
       property_type:currentProperty.property.property_type || "",
+      province:currentProperty.property.province || "",
+      district:currentProperty.property.district || "",
       maintenance:currentProperty.property.maintenance || "",
       status:currentProperty.property.status || "", 
       image:null
@@ -307,13 +315,15 @@ export function PropertyForm(){
       data.append("property[description]", formdata.description);
       data.append("property[price]", formdata.price);
       data.append("property[mode]", formdata.mode);
-      data.append("property[address]", formdata.address);
+      data.append("property[latitud]", coordinates.lat);
+      data.append("property[longitud]", coordinates.lng);
       data.append("property[property_type]", formdata.property_type);
       data.append("property[status]", formdata.status);
       data.append("property[maintenance]", formdata.maintenance);
       data.append("property[image]", event.target.image.files[0]);
       console.dir(data)
-      updateProperty(currentProperty.property.id, data).then(response=>{
+      
+      updateTotalProperty(currentProperty.property.id, data).then(response=>{
         setProperties([...properties, response])
         console.log(response)
       }).catch(console.log);
@@ -353,16 +363,7 @@ export function PropertyForm(){
                 </SaleDiv>
               </ModeDiv>
             </OperationTypeDiv>
-            <InputDiv style={{width:"600px"}}>
-            <Input
-            label={"ADDRESS"}
-            id="address"
-            name="address" 
-            type="text" 
-            value={formdata.address}
-            onChange={handleChange}
-            placeholder="start typing to autocomplete"/>
-            </InputDiv>
+            
             <InputDiv>
               <Input
                 label={"MONTHLY RENT"}
@@ -373,6 +374,30 @@ export function PropertyForm(){
                 onChange={handleChange}
                 placeholder="2000"/>    
             </InputDiv>
+            <InputDiv>
+              <Input
+                label={"PROVINCE"}
+                id="province"
+                name="province" 
+                type="text" 
+                value={formdata.province}
+                onChange={handleChange}
+                placeholder="Lima"/>    
+            </InputDiv>
+            <InputDiv>
+              <Input
+                label={"DISTRICT"}
+                id="district"
+                name="district" 
+                type="text" 
+                value={formdata.district}
+                onChange={handleChange}
+                placeholder="Miraflores"/>    
+            </InputDiv>
+            <textMap>CHOOSE YOUR LOCATION</textMap>
+            <Map>
+              <Home edit={"edit"}/>
+            </Map>
             {formdata.mode === "rent" ? <InputDiv>
               <Input
                 label={"MAINTANANCE"}
