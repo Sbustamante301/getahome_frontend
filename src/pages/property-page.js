@@ -24,6 +24,8 @@ const Wrapper = styled.div`
   justify-content: flex-start;
 
   width: 90%;
+  min-height:800px;
+  
 `;
 
 const InfoContainer = styled.div`
@@ -385,7 +387,6 @@ export default function PropertyPage() {
   let index_favorites = [];
   let localSavedProperty = []
   if(savedProperty.length !== 0 ){
-    console.log(savedProperty)
     localSavedProperty = [...savedProperty.favorites];
   }
   
@@ -427,8 +428,8 @@ export default function PropertyPage() {
       property_id: currentProperty.property.id,
       favorite: true,
     })
-      .then((data) => console.log(data))
-      .catch(console.log)
+      .then()
+      .catch()
     setFavorite(true)
   }
 
@@ -438,7 +439,7 @@ export default function PropertyPage() {
       property_id: currentProperty.property.id,
       favorite: false,
     })
-      .then((data) => console.log(data))
+      .then()
       .catch(console.log)
     setFavorite(false)
   }
@@ -470,10 +471,8 @@ export default function PropertyPage() {
               <Address>
                 
                 {address?.map((add,index)=>{
-                // console.log('ID DE ADDRESS',add.id);
-                // console.log("id de propiedad",property.property.id)
+
                 if (add.id === currentProperty.property.id) {
-                  console.log("entro", add)
                   return(<BigAddress>{add.address}</BigAddress>)
                 }
                 }) } 

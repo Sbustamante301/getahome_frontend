@@ -239,34 +239,33 @@ export function PropertyCard({ property, showProperty, id }) {
   function handleClose(event) {
     event.preventDefault();
     let updatedProperty = {"active":myProperty.active.filter(prop=> prop.property.id !== property.property.id),
-                          "closed":[...myProperty.closed, property]}
+                          "closed":[...myProperty.closed, {property:{...property.property, "status": false}, url: property.url}]}
     updateProperty(property.property.id, { status: false })
-      .then(response => { console.log('CARD CERRADA', response) })
-      .catch(console.log)
+      .then()
+      .catch()
     setMyProperty(updatedProperty)
+    sessionStorage.setItem("myProperty", JSON.stringify(updatedProperty))
   }
 
   function handleRestore(event) {
     event.preventDefault();
-    let updatedProperty = {"active":[...myProperty.active, property],
+    let updatedProperty = {"active":[...myProperty.active, {property:{...property.property, "status": true}, url: property.url}],
                           "closed":myProperty.closed.filter(prop=> prop.property.id !== property.property.id)}
     updateProperty(property.property.id, { status: true })
-      .then(response => { console.log('CARD RESTAURADA', response) })
-      .catch(console.log)
+    .then()
+    .catch()
     setMyProperty(updatedProperty)
+    sessionStorage.setItem("myProperty", JSON.stringify(updatedProperty))
   }
 
   function handleTrash(event) {
     event.preventDefault();
-    console.log('LA PROPIEDAD', property.property.id)
     let updateMyProperty = { ...myProperty, closed: myProperty.closed.filter((prop) => prop.property.id !== property.property.id) };
-    console.log('PROPIEDAD BORRADA', updateMyProperty)
-
     deleteProperty(property.property.id)
       .then(console.log)
       .catch(console.log)
-    
     setMyProperty(updateMyProperty)
+    sessionStorage.setItem("myProperty", JSON.stringify(updateMyProperty))
   }
 
   return (
@@ -299,17 +298,13 @@ export function PropertyCard({ property, showProperty, id }) {
               </HomeType>
             </Category>
             <Address>
-              {console.log("holaaaaa", address)}
               {showAddress ? address?.map((add,index)=>{
                 if (add.id === property.property.id) {
-                  console.log("entro", add)
                   return(<p>{add.address}</p>)
                 }
               }) : (<p>Loading...</p>)
               } 
-             
-              
-              {/* {address ? address[0].address : "hey"} */}
+
             </Address>
             <Features>
               <Bed>{Icons.bed} {property.property.bedrooms}</Bed>
@@ -321,6 +316,7 @@ export function PropertyCard({ property, showProperty, id }) {
             </Features>
           </InformationContainer>
           </Link>
+      
           {(user?.user_type === 'landlord' && property.property.user_id === user.id) ?
             property.property.status ?
               (<LowFrame>

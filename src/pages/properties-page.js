@@ -20,19 +20,18 @@ padding: 32px 152px;
 `
 
 export default function PropertiesPage() {
-  const { properties, setCurrentProperty, propertyFilter } = useAuth();
+  const { properties, setCurrentProperty, propertyFilter, address } = useAuth();
   const itemsPerPage = 9;
   
-  console.log(propertyFilter)
-  console.log(properties)
   let filterProperties = [...properties].filter(property =>{
     if(property.property) return property.property.status
   });
 
   // Filter by address
-  // filterProperties = filterProperties.filter(property => {
-  //   return property.property.address.includes(propertyFilter.search)
-  // })
+  filterProperties = filterProperties.filter((property, index) => {
+    const addressFilter = address.filter(add => add.id === property.property.id)
+    return addressFilter[0].address.includes(propertyFilter.search)
+  })
   // Filter for max and min prices
   filterProperties = filterProperties.filter(property => {
     if (!(propertyFilter.prices.max)) return true;

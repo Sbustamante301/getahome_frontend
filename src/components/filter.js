@@ -192,8 +192,6 @@ export default function Filter(){
   }
 
   function handleMode(event){
-    console.log("buy", buy)
-    console.log("rent", rent)
     event.preventDefault();
     const id = event.target.id;
     if(id==="both"){

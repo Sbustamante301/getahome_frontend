@@ -149,7 +149,7 @@ export default function SectionMeetHome (){
                 name="search"
                 value={firstFilter.search}
                 onChange={handleChange}
-                placeholder="Favorite Districst"
+                placeholder="Favorite District"
               />
           </InputContainer2>
           <SearchButton onClick={handleSubmit}>SEARCH</SearchButton>

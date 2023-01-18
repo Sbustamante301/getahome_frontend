@@ -15,9 +15,22 @@ export async function getProperties() {
 // }
 export async function createProperty(newProperty) {
   const token = sessionStorage.getItem(tokenKey);
-  const response = await fetch(`${BASE_URI}/properties`, {
+  const response = await fetch(`${BASE_URI}properties`, {
     method: 'POST',
     body: newProperty,
+    headers: {
+      'Authorization': `Token token=${token}`
+    }
+  });
+  const property = await response.json();
+  return property;
+}
+
+export async function updateTotalProperty(id, data) {
+  const token = sessionStorage.getItem(tokenKey);
+  const response = await fetch(`${BASE_URI}properties/${id}`, {
+    method: 'PATCH',
+    body: data,
     headers: {
       'Authorization': `Token token=${token}`
     }
@@ -59,11 +72,6 @@ export async function getLandlordUser(id) {
   const landlord = await apiFetch(`properties/${id}/user`);
   return landlord;
 }
-// export async function updateFavorites(id, data) {
-//   console.log('ID API', id)
-//   console.log('BODY API', data)
-//   await apiFetch(`involved_properties/${id}`, { method: "PATCH", body: data })
-// }
 
 export async function createFavorite(newFavorite) {
   const favorites = await apiFetch("involved_properties", {

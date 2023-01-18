@@ -9,8 +9,12 @@ import { createProperty } from "../services/properties-service";
 import { useAuth } from "../context/auth-context";
 import Mapa from "../components/mapa";
 import Home from "../components/mapa";
+import { SectionFooter2 } from "../components/sections/sectionFooter";
+import { useNavigate } from "react-router-dom";
+
 const Div = styled.div`
 width:100%;
+min-height:800px;
 
 `;
 const H1Div=styled.div`
@@ -216,7 +220,7 @@ export default function PropertyFormPage(){
 }
 
 export function PropertyForm(){
-  const {properties, setProperties, coordinates, setCoordinates} = useAuth()
+  const {properties, setProperties, coordinates, setCoordinates, userType} = useAuth()
   const [formdata, setFormdata] = useState({
       bedrooms:1,
       bathrooms:1,
@@ -233,39 +237,38 @@ export function PropertyForm(){
       province:"", 
       image:null
     })
-    const [imagesPreview, setImagesPreview] = useState([])
-    const [image, setImage] = useState(null)
-    
-    function handleChange(event){
-      const {name, value} = event.target
-      setFormdata({...formdata, [name]:value})
-      console.log(formdata)
-    }
+  const [imagesPreview, setImagesPreview] = useState([])
+  const [image, setImage] = useState(null)
+  const navigate = useNavigate()
+  
+  function handleChange(event){
+    const {name, value} = event.target
+    setFormdata({...formdata, [name]:value})
+    console.log(formdata)
+  }
       
-    function handleFileSelect(event){
-      const files = event.target.files;
-      setFormdata({...formdata, "image":files[0]});
-      const imgsPrev = [];
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-    
-        reader.onloadend = () => {
-          imgsPrev.push(reader.result);
-          setImagesPreview(imgsPrev);
-          
-        }
-        reader.readAsDataURL(file);
+  function handleFileSelect(event){
+    const files = event.target.files;
+    setFormdata({...formdata, "image":files[0]});
+    const imgsPrev = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+  
+      reader.onloadend = () => {
+        imgsPrev.push(reader.result);
+        setImagesPreview(imgsPrev);
+        
       }
-      console.log(imgsPrev)
-      
+      reader.readAsDataURL(file);
     }
+    console.log(imgsPrev)
+    
+  }
 
     function handleSubmit2(event){
       
       event.preventDefault();
-      console.log(event.target.bedrooms.value)
-      console.log(formdata.mode)
       const data = new FormData();
       data.append("property[bedrooms]", formdata.bedrooms);
       data.append("property[bathrooms]", formdata.bathrooms);
@@ -274,7 +277,6 @@ export function PropertyForm(){
       data.append("property[description]", formdata.description);
       data.append("property[price]", formdata.price);
       data.append("property[mode]", formdata.mode);
-      // data.append("property[address]", formdata.address);
       data.append("property[property_type]", formdata.property_type);
       data.append("property[status]", formdata.status);
       data.append("property[latitud]", coordinates.lat);
@@ -283,12 +285,12 @@ export function PropertyForm(){
       data.append("property[province]", formdata.province);
       data.append("property[maintenance]", formdata.maintenance);
       data.append("property[image]", event.target.image.files[0]);
-      console.log(data)
+
       createProperty(data).then(response=>{
         setProperties([...properties, response])
-        console.log(response)
-      }).catch(console.log);
 
+      }).catch();
+      navigate("/home")
     }
 
     function handleType(event){
@@ -303,6 +305,8 @@ export function PropertyForm(){
     }
 
     return(
+      (userType === "landlord") ? 
+   
         <Form onSubmit={handleSubmit2}>
           <Container>
             <OperationTypeDiv>
@@ -436,7 +440,6 @@ export function PropertyForm(){
               <input id="image" name="image"  type="file" multiple onChange={handleFileSelect}></input>
               <ImageWrapper>
                 {imagesPreview.map((imagePreview, index) => {
-                  console.log(imagesPreview)
                   return (
                       <ImgContainer>
                         <IconContainer onClick={(e)=>deleteImage(e, index)}>
@@ -450,8 +453,13 @@ export function PropertyForm(){
             </div>
           </Container>
           <CreateAccountButton>Publish Property Listing</CreateAccountButton>
-        </Form>
-    )
+        </Form> 
+        : <h1>You must register as Landlord to create a new Property</h1>)
+      
+
+    
+     
+    
 }
 
 
