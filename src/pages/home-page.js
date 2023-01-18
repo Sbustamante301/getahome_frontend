@@ -7,7 +7,7 @@ import SectionSignup from "../components/sections/sectionSignup";
 import { useAuth } from "../context/auth-context";
 import { useEffect, useState } from "react";
 import { colors, typography } from "../styles";
-import { getSaved } from "../services/properties-service";
+import { getMyProperties, getSaved } from "../services/properties-service";
 import { getUser } from "../services/users-service";
 
 const Section2 = styled.div`
@@ -17,6 +17,11 @@ const Section2 = styled.div`
   width: 100%;
   padding:64px;
 `
+const Div = styled.div`
+width:100%;
+min-height:800px;
+
+`;
 const TextContainer = styled.div`
   display:flex;
   flex-direction: column;
@@ -45,7 +50,7 @@ const PropertyContainer = styled.div`
 `
 
 function HomePage() {
-  const { userType, properties, setSavedProperty, setUser } = useAuth();
+  const { userType, properties, setSavedProperty, setUser, setMyProperty } = useAuth();
   const randomProperties = properties.filter((_property, index) => index < 3)
   useEffect(() => {
     if(userType==="seeker"){
@@ -53,6 +58,11 @@ function HomePage() {
       setSavedProperty(response)
       sessionStorage.setItem("savedProperty", JSON.stringify(response))
       }).catch(error=>{console.log(error)})
+    }else if(userType === "landlord"){
+      getMyProperties().then(response=>{
+        setMyProperty(response)
+        sessionStorage.setItem("myProperty", JSON.stringify(response))
+        }).catch(error=>{console.log(error)})
     }
     getUser()
       .then(response => {
@@ -64,6 +74,7 @@ function HomePage() {
   },[]);
   return (
     <>
+      <Div>
       <SectionMeetHome />
       <Section2>
         <TextContainer>
@@ -80,6 +91,7 @@ function HomePage() {
       <SectionSignup />
 
       <SectionMeetTeam />
+      </Div>
       <SectionFooter />
     </>
   )

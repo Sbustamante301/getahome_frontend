@@ -6,6 +6,13 @@ import Input from "../components/Input";
 import { useAuth } from "../context/auth-context";
 import { updateUser } from "../services/users-service";
 import { colors } from "../styles";
+import { SectionFooter2 } from "../components/sections/sectionFooter";
+
+const Div = styled.div`
+width:100%;
+min-height:800px;
+
+`;
 
 const Form = styled.form`
   display: flex;
@@ -43,19 +50,22 @@ export default function ProfilePage(){
 
   function handleSubmit(event){
     event.preventDefault();
-    updateUser(newUser).then(console.log).catch(console.log)
+    updateUser(newUser).then().catch(console.log)
     navigate("/home")
   }
   return(
-    <Wrapper>
-      <Form onSubmit={handleSubmit}>
-        <Text>Profile</Text>
-        <Input value={newUser.name} onChange={handleChange} label={"NAME"} id={"name"} placeholder={"Set your name"} name={"name"}/>
-        <Input value={newUser.email} onChange={handleChange} label={"EMAIL"} id={"email"} placeholder={"Set your email"} name={"email"}/>
-        <Input value={newUser.phone} onChange={handleChange} label={"PHONE"} id={"phone"} placeholder={"Set your phone"} name={"phone"}/>
-        {/* <Input label={"EMAIL"} id={"email"} placeholder={"Set your email"} name={"email"}/> */}
-        <Button>Update</Button>
-      </Form>
-    </Wrapper>
+    <Div>
+      <Wrapper>
+        <Form onSubmit={handleSubmit}>
+          <Text>Profile</Text>
+          <Input value={newUser.name} onChange={handleChange} label={"NAME"} id={"name"} placeholder={"Set your name"} name={"name"}/>
+          <Input value={newUser.email} onChange={handleChange} label={"EMAIL"} id={"email"} placeholder={"Set your email"} name={"email"}/>
+          <Input value={newUser.phone} onChange={handleChange} label={"PHONE"} id={"phone"} placeholder={"Set your phone"} name={"phone"}/>
+          {/* <Input label={"EMAIL"} id={"email"} placeholder={"Set your email"} name={"email"}/> */}
+          <Button>Update</Button>
+        </Form>
+      </Wrapper>
+      <SectionFooter2/>
+    </Div>
   )
 }

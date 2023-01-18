@@ -24,7 +24,9 @@ import ProfilePage from "./pages/profile-page";
 
 
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  min-height:800px;
+`;
 
 function App() {
 
@@ -49,11 +51,19 @@ function App() {
 
 
   useEffect(() => {
-    getSaved().then(response => {
-      setSavedProperty(response)
-      sessionStorage.setItem("savedProperty", JSON.stringify(response))
-
-    }).catch(error => { console.log(error) })
+    if(userType === "landlord"){
+      getMyProperties().then(response => {
+        setMyProperty(response)
+        sessionStorage.setItem("myProperty", JSON.stringify(response))
+  
+      }).catch(error => { console.log(error) })
+    }else if (userType === "seeker"){
+      getSaved().then(response => {
+        setSavedProperty(response)
+        sessionStorage.setItem("savedProperty", JSON.stringify(response))
+  
+      }).catch(error => { console.log(error) })
+    }
 
   }, []);
 
@@ -61,7 +71,6 @@ function App() {
 
     getMyProperties().then(response=>{
     setMyProperty(response)
-    console.log(response)
     }).catch(error=>{console.log(error)})
     
   },[]);

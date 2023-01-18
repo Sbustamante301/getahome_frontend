@@ -13,6 +13,7 @@ const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
 align-items: flex-start;
+min-height:740px;
 margin-left:120px;
 margin-right:120px;
 
@@ -68,13 +69,14 @@ export default function SavedPropertiesPage() {
   }, []);
 
   return (
+    <>
     <Wrapper>
       <div style={{ height: "124px", display: "flex", flexDirection: "column", marginLeft: "15px" }}>
         <ViewOptions>
           <H1 onClick={() => setSaved("favorites")} style={{ borderBottom: `${saved === "favorites" ? "3px solid #F48FB1" : "0px"}` }}>FAVORITES</H1>
           <H1 onClick={() => setSaved("contacts")} style={{ borderBottom: `${saved === "contacts" ? "3px solid #F48FB1" : "0px"}` }}>CONTACTED</H1>
         </ViewOptions>
-        {savedProperty ? saved === "favorites" ?
+        {savedProperty.length !== 0 ? saved === "favorites" ?
           <P1> {savedProperty.favorites.length} Properties found</P1> :
           <P1> {savedProperty.contacts.length} Properties found</P1> :
           null
@@ -83,7 +85,7 @@ export default function SavedPropertiesPage() {
       </div>
 
       <ContainerList>
-        {savedProperty ? saved === "favorites" ? savedProperty.favorites.map((saved, index) => {
+        {savedProperty.length !== 0  ? saved === "favorites" ? savedProperty.favorites.map((saved, index) => {
           return (
             <PropertyCard key={index} property={saved} />
           )
@@ -95,9 +97,13 @@ export default function SavedPropertiesPage() {
           })
           : null}
       </ContainerList>
-      <SectionFooter2 />
       <Paginated/>
+      <SectionFooter2 />
+      
+
     </Wrapper>
+
+    </>
 
   )
 }

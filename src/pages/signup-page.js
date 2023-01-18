@@ -215,7 +215,6 @@ function SignupForm(){
           sessionStorage.setItem("user", JSON.stringify(response))
           sessionStorage.setItem("userType", JSON.stringify(response.user_type))
         }).catch(console.log)
-        console.log(formdata)
         navigate("/properties");
       }
     else{

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { RiHeartFill } from "react-icons/ri";
 import { useAuth } from "../context/auth-context";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils";
@@ -74,6 +75,10 @@ export const Button5 = styled.button`
     align-items: center;
     padding:8px 16px;
     gap: 8px;
+    cursor:pointer;
+    &:hover{
+        border: 2px solid ${colors.gray.light}
+    }
 
     color ${colors.gray.medium};
     background: ${colors.white};
@@ -343,8 +348,8 @@ export function LogoutButton({ children, onClick }) {
 export function SaveButton({ children, onClick }) {
     return (
         <Button8 onClick={onClick}>
-            <LeftIcon style={{ color: `${colors.white} ` }}>
-                {Icons.heartDark}
+            <LeftIcon >
+                <RiHeartFill style={{ color:`${colors.white} ` }}/>
             </LeftIcon>
             <Text3>{children}</Text3>
         </Button8>
