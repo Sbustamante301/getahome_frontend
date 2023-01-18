@@ -14,7 +14,7 @@ function AuthProvider({ children }) {
   const [address, setAddress] = useState(null)
   const [properties, setProperties] = useState([]);
   const [savedProperty, setSavedProperty] = useState(JSON.parse(sessionStorage.getItem("savedProperty")) || []);
-  const [myProperty, setMyProperty] = useState(null);
+  const [myProperty, setMyProperty] = useState(JSON.parse(sessionStorage.getItem("myProperty")) || []);
   const [userType, setUserType] = useState(JSON.parse(sessionStorage.getItem("userType")))
   const [currentProperty, setCurrentProperty] = useState(JSON.parse(sessionStorage.getItem("currentProperty")) || []);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -49,14 +49,12 @@ function AuthProvider({ children }) {
       getAddressFromCoordinates(property.property.latitud, property.property.longitud)
       .then(data =>{
         addresArray?.push({id:property.property.id , address: data.results[0].formatted_address});
-        console.log("data",data)
         
       })
     })
     setAddress(addresArray)
   },[properties])
 
-  console.log("ADDRESS",address)
   function handleLogin(credentials) {
     return login(credentials).then((user) => {
       setUser(user);
@@ -83,7 +81,7 @@ function AuthProvider({ children }) {
       setUser(null)
       setSavedProperty([])
       setUserType(null)
-      setMyProperty(null)
+      setMyProperty([])
       setCurrentProperty([])
       setPropertyFilters({
         prices: { min: null, max: null },

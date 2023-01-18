@@ -244,6 +244,7 @@ export function PropertyCard({ property, showProperty, id }) {
       .then()
       .catch()
     setMyProperty(updatedProperty)
+    sessionStorage.setItem("myProperty", JSON.stringify(updatedProperty))
   }
 
   function handleRestore(event) {
@@ -254,6 +255,7 @@ export function PropertyCard({ property, showProperty, id }) {
     .then()
     .catch()
     setMyProperty(updatedProperty)
+    sessionStorage.setItem("myProperty", JSON.stringify(updatedProperty))
   }
 
   function handleTrash(event) {
@@ -263,6 +265,7 @@ export function PropertyCard({ property, showProperty, id }) {
       .then(console.log)
       .catch(console.log)
     setMyProperty(updateMyProperty)
+    sessionStorage.setItem("myProperty", JSON.stringify(updateMyProperty))
   }
 
   return (
@@ -297,7 +300,6 @@ export function PropertyCard({ property, showProperty, id }) {
             <Address>
               {showAddress ? address?.map((add,index)=>{
                 if (add.id === property.property.id) {
-                  console.log("entro", add)
                   return(<p>{add.address}</p>)
                 }
               }) : (<p>Loading...</p>)

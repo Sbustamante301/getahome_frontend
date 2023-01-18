@@ -17,8 +17,13 @@ flex-direction: column;
 align-items: center;
 margin-left:120px;
 margin-right:120px;
+`;
 
-`
+const Div = styled.div`
+width:100%;
+min-height:800px;
+
+`;
 const ContainerList = styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
@@ -55,17 +60,26 @@ font-weight: 500;
 
 
 export default function MyPropertiesPage(){
-  const { myProperty }= useAuth();
+  const { myProperty, userType, setMyProperty }= useAuth();
   const [ myStatus, setMyStatus ] = useState("active");
+  useEffect(() => {
+    if (userType === "landlord") {
+      getMyProperties().then(response => {
+        setMyProperty(response)
+        sessionStorage.setItem("myProperty", JSON.stringify(response))
+      }).catch(error => { console.log(error) })
+    }
 
+  }, []);
   return(
+    <Div>
     <Wrapper>
       <div style={{height:"124px",display:"flex",flexDirection:"column",marginLeft:"15px"}}>
         <ViewOptions>
           <H1 onClick={()=>setMyStatus("active")} style={{borderBottom:`${myStatus==="active" ? "3px solid #F48FB1" : "0px"}`}}>ACTIVE</H1>
           <H1 onClick={()=>setMyStatus("close")} style={{borderBottom:`${myStatus==="close" ? "3px solid #F48FB1" : "0px"}`}}>CLOSED</H1>
         </ViewOptions>
-        {myProperty ? myStatus==="active" ? 
+        {myProperty.length !== 0 ? myStatus==="active" ? 
            <P1> {myProperty.active.length} Properties found</P1>: 
            <P1> {myProperty.closed.length} Properties found</P1> :
             null
@@ -75,7 +89,7 @@ export default function MyPropertiesPage(){
       
       <ContainerList>
         { myStatus==="active" ? <EmptyCard/> : null}
-        {myProperty ? myStatus === "active" ? myProperty.active.map((status, index)=>{
+        {myProperty.length !== 0 ? myStatus === "active" ? myProperty.active.map((status, index)=>{
           return(
             
               <PropertyCard key={index} property={status}/>         
@@ -88,8 +102,9 @@ export default function MyPropertiesPage(){
         }) 
       : null}
       </ContainerList>
-      <SectionFooter2 />
     </Wrapper>
+    <SectionFooter2 />
+  </Div>
 
   )
 }

@@ -2,7 +2,7 @@ import { SectionFooter2 } from "../components/sections/sectionFooter"
 import { useAuth } from "../context/auth-context"
 import styled from "@emotion/styled"
 import { colors,typography } from "../styles"
-import {SectionFooter} from "../components/sections/sectionFooter"
+import {SectionFooter2} from "../components/sections/sectionFooter"
 import SectionMeetHome from "../components/sections/sectionMeetHome";
 import { useState } from "react";
 import { CreateAccountButton } from "../components/Button";
@@ -12,6 +12,7 @@ import Home from "../components/mapa"
 
 const Div = styled.div`
 width:100%;
+min-height:800px;
 `;
 const H1Div=styled.div`
 ${typography.head.md};
@@ -255,7 +256,7 @@ export default function PropertyFormPage(){
             <H1Div>Edit your property</H1Div>
             <PropertyForm/>        
           </Div>
-          <SectionFooter/>
+          <SectionFooter2/>
         </>
     )
 }

@@ -75,6 +75,10 @@ export const Button5 = styled.button`
     align-items: center;
     padding:8px 16px;
     gap: 8px;
+    cursor:pointer;
+    &:hover{
+        border: 2px solid ${colors.gray.light}
+    }
 
     color ${colors.gray.medium};
     background: ${colors.white};

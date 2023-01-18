@@ -72,11 +72,6 @@ export async function getLandlordUser(id) {
   const landlord = await apiFetch(`properties/${id}/user`);
   return landlord;
 }
-// export async function updateFavorites(id, data) {
-//   console.log('ID API', id)
-//   console.log('BODY API', data)
-//   await apiFetch(`involved_properties/${id}`, { method: "PATCH", body: data })
-// }
 
 export async function createFavorite(newFavorite) {
   const favorites = await apiFetch("involved_properties", {
