@@ -7,9 +7,7 @@ import landlord from "../assets/landlord.svg"
 import homeseeker from "../assets/homeseeker.svg"
 import { Icons } from "../utils"
 import { useState } from "react"
-import { CreateAccountButton } from "../components/Button"
 import { createUser } from "../services/users-service"
-import Input from "../components/Input"
 import { useAuth } from "../context/auth-context"
 import { useNavigate } from "react-router-dom"
 
@@ -141,12 +139,13 @@ box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 border-radius: 8px;
 width:388px;
 height:468px;
-display:flex;
-flex-direction:column;
-align-items:center;
-text-align:center;
+
+
+
+
+
 padding:70px;
--right:20px;
+
 `;
 
 
@@ -166,20 +165,14 @@ margin:100px;
 gap:16px;
 `;
 
-const FormTitle = styled.div`
 
 
-`;
-const Label = styled.label`
-${colors.pink.dark};
-${typography.text.xxs};
-`;
 
 const H1 = styled.h1`
 ${typography.head.sm};
 width:246px;
 height:32px;
-margin-top:-40px;
+margin-top:-55px;
 
 
 `;
@@ -279,6 +272,8 @@ function SignupForm(){
 const P = styled.p`
 ${typography.text.xs};
 color:${colors.gray.light};
+margin-left:-60px;
+margin-top:5px;
 `;
 
 export default function SignupPage() {
@@ -289,4 +284,110 @@ export default function SignupPage() {
   }
   return open ? <SignupForm /> : <Hidden HandleComponent={HandleComponent} />
 
+}
+
+
+
+ function CreateAccountButton({ children, onClick }) {
+  return (
+      <Button2 onClick={onClick}>
+          <Text>{children}</Text>
+      </Button2>
+  )
+};
+
+
+const Text = styled.div`
+   
+   
+    margin-bottom:4px;
+    color:${colors.white};
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+`;
+
+const Button2 = styled.button`
+
+display:flex;
+flex-direction:row;
+justify-content: center;
+align-items: center;
+gap: 8px;
+
+border:none;
+width: 177px;
+height: 40px;
+
+
+background: ${colors.pink.medium};
+border-radius: 16px;
+padding:8px, 16px, 8px, 16px;
+margin-top:25px;
+margin-left:35px;
+
+`;
+
+
+const Label = styled.label`
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 1.5px;
+`;
+
+const StyledInput = styled.input`
+  padding: 0.5rem;
+  style:none;
+  background-color: white;
+  color: ${colors.gray.dark};
+  -webkit-appearance: none;
+  border: 1px solid ${colors.pink.medium};
+  border-radius: 8px;
+  width:356px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  
+  width: 100%;
+  margin-left:-60px;
+  margin-top:12px;
+`;
+
+const Error = styled.p`
+  color: red;
+  padding-left: 1rem;
+`;
+
+function Input({
+  id,
+  name,
+  type = "text",
+  placeholder,
+  label,
+  onChange,
+  error,
+  ...rest
+}) {
+  name ||= id;
+
+  return (
+    <InputContainer>
+      {label && <Label htmlFor={id}>{label}</Label>}
+      <StyledInput
+        id={id}
+        name={name}
+        type={type}
+        onChange={onChange}
+        placeholder={placeholder}
+        {...rest}
+      />
+      {error && <Error size="sm">{error}</Error>}
+    </InputContainer>
+  );
 }
