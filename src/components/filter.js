@@ -411,14 +411,13 @@ height: 24px;
 const ChoiceDiv = styled.div`
 position: absolute;
 background: ${ colors.white};
-
 width: 187px;
 left: -7px;
 box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 border-radius: 8px;
-
 height: 98px;
-margin-top: 10px;
+margin-top:15px; 
+
 box-sizing: border-box;
 
 `;
