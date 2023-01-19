@@ -82,10 +82,7 @@ export default function SavedPropertiesPage() {
         <Paginated itemsPerPage={9} filterProperties={savedProperty.contacts}/>
         : null}
       </div>
-    <SectionFooter2 />
-
-      
-
+    
     </Wrapper>
     <SectionFooter2 />
 

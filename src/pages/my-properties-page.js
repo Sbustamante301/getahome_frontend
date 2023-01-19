@@ -15,32 +15,23 @@ import Paginated from "../components/pagination";
 const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
-align-items: center;
+align-items: flex-start;
 margin-left:120px;
 margin-right:120px;
 width:100%;
 min-height:800px;
 `;
 
-// const ContainerList = styled.div`
-// display: grid;
-// grid-template-columns: 1fr 1fr 1fr;
-// padding: 0px 32px 0px 32px;
-// row-gap: 32px;
-// column-gap: 86px;
-// justify-items:center;
-// justify-content:center;
-// margin-bottom:20px;
-// `
-
 const ViewOptions = styled.div`
 display: flex;
 flex-direction: row;
 align-items: center;
+width:100%;
 padding: 0px;
 gap: 16px;
 margin-bottom:16px;
 margin-top: 32px;
+justify-content: space-between;
 `
 const H1 = styled.h1`
 ${typography.text.md};
@@ -72,10 +63,15 @@ export default function MyPropertiesPage(){
   return(
     <>
     <Wrapper>
-      <div style={{height:"124px",display:"flex",flexDirection:"column",marginLeft:"15px", justifyContent:"flex-start", alignContentitems:"flex-start"}}>
+      <div >
         <ViewOptions>
+        {/* <div style={{display:"flex",flexDirection:"row"}}> */}
           <H1 onClick={()=>setMyStatus("active")} style={{borderBottom:`${myStatus==="active" ? "3px solid #F48FB1" : "0px"}`}}>ACTIVE</H1>
           <H1 onClick={()=>setMyStatus("close")} style={{borderBottom:`${myStatus==="close" ? "3px solid #F48FB1" : "0px"}`}}>CLOSED</H1>
+        {/* </div> */}
+        {/* <div> */}
+          <EmptyCard />
+        {/* </div> */}
         </ViewOptions>
         {myProperty.length !== 0 ? myStatus==="active" ? 
            <P1> {myProperty.active.length} Properties found</P1>: 
@@ -86,12 +82,13 @@ export default function MyPropertiesPage(){
       </div>
       
       <div style={{display:"flex",alignItems:"center",flexDirection:"column"}}>
-        { myStatus==="active" ? <EmptyCard/> : null}
+        {/* { myStatus==="active" ? <EmptyCard/> : null} */}
         {myProperty.length !== 0 ? myStatus === "active" ? 
-        <Paginated itemsPerPage={9} filterProperties={myProperty.active} />
+        <Paginated itemsPerPage={6} filterProperties={myProperty.active} />
         :
-        <Paginated itemsPerPage={9} filterProperties={myProperty.closed} />
+        <Paginated itemsPerPage={6} filterProperties={myProperty.closed} />
       : null}
+       
       </div>
     </Wrapper>
     <SectionFooter2 />
