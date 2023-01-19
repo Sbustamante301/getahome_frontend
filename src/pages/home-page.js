@@ -83,7 +83,7 @@ function HomePage() {
         </TextContainer>
         <PropertyContainer>
           {randomProperties.map((property, index) => {
-            return <PropertyCard key={`r${index}`} property={property} />
+            return <PropertyCard key={`r${index}`} property={property} id={property.property.id}/>
           })}
         </PropertyContainer>
 

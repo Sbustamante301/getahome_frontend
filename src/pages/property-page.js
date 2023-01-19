@@ -285,9 +285,7 @@ const About = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 8px;
-
   width: 760px;
-  height: 204px;
 `;
 
 const AboutTitle = styled.div`
@@ -295,9 +293,9 @@ const AboutTitle = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 8px;
+  margin-top:20px;
 
   width: 760px;
-  height: 36px;
   ${typography.head.xs}
   color:${colors.pink.dark}
 `;
@@ -309,7 +307,6 @@ const AboutParragraph = styled.div`
   gap: 8px;
 
   width: 760px;
-  height: 168px;
   ${typography.head.sm}
   color:${colors.gray.dark}
 `;

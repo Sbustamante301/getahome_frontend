@@ -7,6 +7,10 @@ import { useEffect, useState } from "react";
 
 const Wrapper = styled.div`
 padding: 32px 152px;
+min-height:900px;
+display: flex;
+justify-content:space-between;
+flex-direction:column;
 `
 
 export default function PropertiesPage() {
@@ -79,9 +83,7 @@ export default function PropertiesPage() {
     <>
       <Wrapper>
         <Filter />
-
-        <Paginated itemsPerPage={9} filterProperties={filterAllproperties} />,
-
+        <Paginated itemsPerPage={9} filterProperties={filterAllproperties} />
       </Wrapper>
       <SectionFooter2 />
     </>
