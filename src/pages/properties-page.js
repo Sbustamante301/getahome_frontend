@@ -12,19 +12,19 @@ padding: 32px 152px;
 export default function PropertiesPage() {
   const { properties, setCurrentProperty, setProperties, propertyFilter, address } = useAuth();
   const itemsPerPage = 9;
-  const [filterAllproperties, setFilterAllproperties] = useState([...properties].filter(property =>{
-    if(property.property) return property.property.status
+  const [filterAllproperties, setFilterAllproperties] = useState([...properties].filter(property => {
+    if (property.property) return property.property.status
   }))
   console.log("squi")
-  useEffect(()=>{
+  useEffect(() => {
     console.log("squi tmb")
-    let filterProperties = [...properties].filter(property =>{
-      if(property.property) return property.property.status
+    let filterProperties = [...properties].filter(property => {
+      if (property.property) return property.property.status
     });
     // Filter by address
     filterProperties = filterProperties.filter((property, index) => {
       const addressFilter = address?.filter(add => add.id === property.property.id)
-      if (addressFilter) return addressFilter[0]?.address.includes(propertyFilter.search)
+      if (addressFilter) return addressFilter[0]?.address?.includes(propertyFilter?.search)
       return true
     })
     // Filter for max and min prices
@@ -74,13 +74,13 @@ export default function PropertiesPage() {
     })
     setFilterAllproperties(filterProperties)
   }, [propertyFilter])
-  
+
   return (
     <>
       <Wrapper>
         <Filter />
 
-        <Paginated itemsPerPage={9} filterProperties={filterAllproperties}/>,
+        <Paginated itemsPerPage={9} filterProperties={filterAllproperties} />,
 
       </Wrapper>
       <SectionFooter2 />

@@ -70,8 +70,9 @@ function Items({ currentItems }) {
 export default function Paginated({itemsPerPage, filterProperties}){
   
   const [itemOffset, setItemOffset] = useState(0);
-
+  //itemOffset = 0
   const endOffset = itemOffset + itemsPerPage;
+  //endOffset = 3
   const currentItems = filterProperties.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(filterProperties.length / itemsPerPage);
   

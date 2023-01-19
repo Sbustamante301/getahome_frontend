@@ -131,6 +131,7 @@ const SelectOptions = styled.div`
     color: ${colors.pink.dark}
   };
 `;
+
 export default function Filter() {
   const { propertyFilter, setPropertyFilters } = useAuth();
   const [showFilter, setShowFilter] = useState({
@@ -155,11 +156,14 @@ export default function Filter() {
   const [beds, setBeds] = useState(0);
   const [baths, setBaths] = useState(0);
   const [petAllowed, setPetAllowed] = useState(false);
-  const [house, setHouse] = useState(false);
-  const [apartment, setApartment] = useState(false);
-  const [buy, setBuy] = useState(false)
-  const [rent, setRent] = useState(false)
-  const [search, setSearch] = useState("")
+
+  const [house, setHouse] = useState(propertyFilter.types[0]);
+  const [apartment, setApartment] = useState(propertyFilter.types[1]);
+  const [buy, setBuy] = useState(propertyFilter.mode[0])
+  const [rent, setRent] = useState(propertyFilter.mode[1])
+  const [both, setBoth] = useState(false)
+  const [search, setSearch] = useState(propertyFilter.search)
+
 
 
   function handleDone(event) {
@@ -192,12 +196,14 @@ export default function Filter() {
       if (propertyFilter.types[1]) return "APARTMENTS"
     } else if (filter === "bedbath") {
       if (propertyFilter.beds === 0 && propertyFilter.baths === 0) return "BEDS & BATH"
-      return `${propertyFilter.beds} + BD, ${propertyFilter.baths} + BA`
+
+      return `${propertyFilter.beds}+ BD, ${propertyFilter.baths}+ BA`
     } else if (filter === "price") {
       if (!(propertyFilter.prices.min || propertyFilter.prices.max)) return "PRICE";
-      if (propertyFilter.prices.min && propertyFilter.prices.max) return `$${(propertyFilter.prices.min / 1000).toFixed(1)} K - $${(propertyFilter.prices.max / 1000).toFixed(1)} K`;
-      if (propertyFilter.prices.min) return `>= $${(propertyFilter.prices.min / 1000).toFixed(1)} K`
-      if (propertyFilter.prices.max) return `<= $${(propertyFilter.prices.max / 1000).toFixed(1)} K`
+      if (propertyFilter.prices.min && propertyFilter.prices.max) return `$${(propertyFilter.prices.min / 1000).toFixed(1)}K - $${(propertyFilter.prices.max / 1000).toFixed(1)}K`;
+      if (propertyFilter.prices.min) return `>= $${(propertyFilter.prices.min / 1000).toFixed(1)}K`
+      if (propertyFilter.prices.max) return `<= $${(propertyFilter.prices.max / 1000).toFixed(1)}K`
+
     }
   }
 
@@ -205,8 +211,12 @@ export default function Filter() {
     event.preventDefault();
     const id = event.target.id;
     if (id === "both") {
-      setRent(!rent)
-      setBuy(!buy)
+
+
+      setBoth(!both)
+      setRent(!both)
+      setBuy(!both)
+
     }
     if (id === "rent") setRent(!rent)
     if (id === "buy") setBuy(!buy)
@@ -215,7 +225,11 @@ export default function Filter() {
 
   useEffect(() => {
     setPropertyFilters({ ...propertyFilter, "mode": [buy, rent] })
-  }, [buy, rent])
+
+
+  }, [buy, rent, both])
+
+
 
   useEffect(() => {
     setPropertyFilters({ ...propertyFilter, "search": search })
@@ -267,28 +281,30 @@ export default function Filter() {
                 <NumberChoseDiv>
                   <NumberDivFirst onClick={() => setBeds(0)}
                     style={{
-                      background: `${beds === 0 ? colors.pink.medium : colors.white} `,
-                      color: `${beds === 0 ? colors.white : colors.gray.medium} `
+
+                      background: `${beds === 0 ? colors.pink.medium : colors.white}`,
+                      color: `${beds === 0 ? colors.white : colors.gray.medium}`
                     }}>Any</NumberDivFirst>
                   <NumberDiv onClick={() => setBeds(1)}
                     style={{
-                      background: `${beds === 1 ? colors.pink.medium : colors.white} `,
-                      color: `${beds === 1 ? colors.white : colors.gray.medium} `
+                      background: `${beds === 1 ? colors.pink.medium : colors.white}`,
+                      color: `${beds === 1 ? colors.white : colors.gray.medium}`
                     }}>1+</NumberDiv>
                   <NumberDiv onClick={() => setBeds(2)}
                     style={{
-                      background: `${beds === 2 ? colors.pink.medium : colors.white} `,
-                      color: `${beds === 2 ? colors.white : colors.gray.medium} `
+                      background: `${beds === 2 ? colors.pink.medium : colors.white}`,
+                      color: `${beds === 2 ? colors.white : colors.gray.medium}`
                     }}>2+</NumberDiv>
                   <NumberDiv onClick={() => setBeds(3)}
                     style={{
-                      background: `${beds === 3 ? colors.pink.medium : colors.white} `,
-                      color: `${beds === 3 ? colors.white : colors.gray.medium} `
+                      background: `${beds === 3 ? colors.pink.medium : colors.white}`,
+                      color: `${beds === 3 ? colors.white : colors.gray.medium}`
                     }}>3+</NumberDiv>
                   <NumberDivLast onClick={() => setBeds(4)}
                     style={{
-                      background: `${beds === 4 ? colors.pink.medium : colors.white} `,
-                      color: `${beds === 4 ? colors.white : colors.gray.medium} `
+                      background: `${beds === 4 ? colors.pink.medium : colors.white}`,
+                      color: `${beds === 4 ? colors.white : colors.gray.medium}`
+
                     }}>4+</NumberDivLast>
                 </NumberChoseDiv>
               </div>
@@ -297,28 +313,30 @@ export default function Filter() {
                 <NumberChoseDiv>
                   <NumberDivFirst onClick={() => setBaths(0)}
                     style={{
-                      background: `${baths === 0 ? colors.pink.medium : colors.white} `,
-                      color: `${baths === 0 ? colors.white : colors.gray.medium} `
+
+                      background: `${baths === 0 ? colors.pink.medium : colors.white}`,
+                      color: `${baths === 0 ? colors.white : colors.gray.medium}`
                     }}>Any</NumberDivFirst>
                   <NumberDiv onClick={() => setBaths(1)}
                     style={{
-                      background: `${baths === 1 ? colors.pink.medium : colors.white} `,
-                      color: `${baths === 1 ? colors.white : colors.gray.medium} `
+                      background: `${baths === 1 ? colors.pink.medium : colors.white}`,
+                      color: `${baths === 1 ? colors.white : colors.gray.medium}`
                     }}>1+</NumberDiv>
                   <NumberDiv onClick={() => setBaths(2)}
                     style={{
-                      background: `${baths === 2 ? colors.pink.medium : colors.white} `,
-                      color: `${baths === 2 ? colors.white : colors.gray.medium} `
+                      background: `${baths === 2 ? colors.pink.medium : colors.white}`,
+                      color: `${baths === 2 ? colors.white : colors.gray.medium}`
                     }}>2+</NumberDiv>
                   <NumberDiv onClick={() => setBaths(3)}
                     style={{
-                      background: `${baths === 3 ? colors.pink.medium : colors.white} `,
-                      color: `${baths === 3 ? colors.white : colors.gray.medium} `
+                      background: `${baths === 3 ? colors.pink.medium : colors.white}`,
+                      color: `${baths === 3 ? colors.white : colors.gray.medium}`
                     }}>3+</NumberDiv>
                   <NumberDivLast onClick={() => setBaths(4)}
                     style={{
-                      background: `${baths === 4 ? colors.pink.medium : colors.white} `,
-                      color: `${baths === 4 ? colors.white : colors.gray.medium} `
+                      background: `${baths === 4 ? colors.pink.medium : colors.white}`,
+                      color: `${baths === 4 ? colors.white : colors.gray.medium}`
+
                     }}>4+</NumberDivLast>
                 </NumberChoseDiv>
               </div>
@@ -355,11 +373,14 @@ export default function Filter() {
       <Select>
         <ButtonContainer>
           <Button onClick={() => setShowFilter({ mode: !showFilter.mode })}
-            style={{ height: "20px", color: `${colors.gray.dark} `, background: `${colors.white} `, width: "100%", display: "flex", flexDirection: "row" }}>
+
+            style={{ height: "20px", color: `${colors.gray.dark}`, background: `${colors.white}`, width: "100%", display: "flex", flexDirection: "row" }}>
+
             <TextContainer>Buying & Renting </TextContainer>{Icons.arrowDown}
           </Button>
           {showFilter.mode ?
             <ChoiceDiv style={{ zIndex: 1 }} >
+
               <SelectOptions>
                 <input style={{ accentColor: "pink" }} onChange={handleMode} type={"checkbox"} id={"both"} checked={buy && rent} />
                 <label style={{ fontFamily: "Inter", fontStyle: "normal", fontWeight: "400px", fontSize: "14px", lineHeight: "20px", letterSpacing: "0.25px", color: "#616161" }} >Both</label>
@@ -372,6 +393,7 @@ export default function Filter() {
                 <input style={{ accentColor: "pink" }} onChange={handleMode} type={"checkbox"} id={"rent"} checked={rent} />
                 <label style={{ fontFamily: "Inter", fontStyle: "normal", fontWeight: "400px", fontSize: "14px", lineHeight: "20px", letterSpacing: "0.25px", color: "#616161" }}>Renting</label>
               </SelectOptions>
+
             </ChoiceDiv> :
             null}
         </ButtonContainer>
@@ -381,28 +403,15 @@ export default function Filter() {
   )
 }
 
-
 const TextContainer = styled.div`
 width: 115px;
 height: 24px;
-
 `;
-// const MoreDiv = styled.div`
-//   position:absolute;
-//   background:${colors.white};
-//   width: 247px;
-
-//   z-index:1;
-//   left:-70px;
-//   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-//   border-radius: 8px;
-//   padding:8px;
-//   // bottom:-120px;
-// `
 
 const ChoiceDiv = styled.div`
 position: absolute;
 background: ${ colors.white};
+
 width: 187px;
 left: -7px;
 box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
