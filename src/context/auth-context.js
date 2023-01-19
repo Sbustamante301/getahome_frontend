@@ -9,7 +9,7 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("user")));
-
+  const [open, setOpen] = useState(false);
   const [coordinates, setCoordinates] = useState({ lat: -12.2, lng: -77.02 });
   const [address, setAddress] = useState(null)
   const [properties, setProperties] = useState([]);
@@ -123,6 +123,8 @@ function AuthProvider({ children }) {
         setMyProperty,
         coordinates, 
         setCoordinates,
+        open,
+        setOpen
       }}
     >
       {children}
