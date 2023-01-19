@@ -15,7 +15,7 @@ export default function PropertiesPage() {
   const [filterAllproperties, setFilterAllproperties] = useState([...properties].filter(property => {
     if (property.property) return property.property.status
   }))
-  console.log("squi")
+
   useEffect(() => {
     console.log("squi tmb")
     let filterProperties = [...properties].filter(property => {
@@ -73,7 +73,7 @@ export default function PropertiesPage() {
       if (propertyFilter.mode[1]) return property.property.mode === "rent"
     })
     setFilterAllproperties(filterProperties)
-  }, [propertyFilter])
+  }, [propertyFilter, properties])
 
   return (
     <>

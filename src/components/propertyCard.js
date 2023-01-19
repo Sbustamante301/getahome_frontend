@@ -247,6 +247,9 @@ export function PropertyCard({ property, showProperty, id }) {
       .catch()
     setMyProperty(updatedProperty)
     sessionStorage.setItem("myProperty", JSON.stringify(updatedProperty))
+
+    setProperties([...properties.filter(prop => prop.property.id !== property.property.id), { property: { ...property.property, "status": false }, url: property.url }])
+    // sessionStorage.setItem("properties", JSON.stringify([...properties.filter(prop => prop.property.id !== property.property.id), { property: { ...property.property, "status": false }, url: property.url }]))
   }
 
   function handleRestore(event) {
@@ -259,6 +262,8 @@ export function PropertyCard({ property, showProperty, id }) {
       .then()
       .catch()
     setMyProperty(updatedProperty)
+    setProperties([...properties.filter(prop => prop.property.id !== property.property.id), { property: { ...property.property, "status": true }, url: property.url }])
+    // sessionStorage.setItem("properties", JSON.stringify(properties.filter(property => property.property.status)))
     sessionStorage.setItem("myProperty", JSON.stringify(updatedProperty))
   }
 
