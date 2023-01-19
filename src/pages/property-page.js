@@ -454,29 +454,16 @@ export default function PropertyPage() {
       <Wrapper>
         <InfoContainer>
           <SliderContainer>
-            {/* <LeftIcon>
-              {Icons.arrowLeft}
-            </LeftIcon> */}
-            {/* {currentProperty.url ==="sin imagen" ? <img src={ImageDefault}/> : <Image src={currentProperty.url[0]}></Image>} */}
             {currentProperty.url ==="sin imagen" ? <img src={ImageDefault}/> : <SimpleSlider images={currentProperty.url}/>}
-            
-            {/* <RightIcon>
-              {Icons.arrowRight}
-            </RightIcon> */}
           </SliderContainer>
-
           <InformationContainer>
             <Category>
               <Address>
-                
                 {address?.map((add,index)=>{
-
-                if (add.id === currentProperty.property.id) {
-                  return(<BigAddress>{add.address}</BigAddress>)
-                }
+                  if (add.id === currentProperty.property.id) return(<BigAddress>{add.address}</BigAddress>)  
                 }) } 
               
-                <SmallAddress>Miraflores, Lima</SmallAddress>
+                <SmallAddress>{`${currentProperty.property.district}, ${currentProperty.property.province}`}</SmallAddress>
               </Address>
               <TotalCost>
                 <Price><PriceText>{Icons.dollarCircle} {currentProperty.property.price}</PriceText></Price>

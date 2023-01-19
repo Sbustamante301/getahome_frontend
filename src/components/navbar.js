@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 const NavbarContainer = styled("div")`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 16px 32px;
   gap: 10px;
@@ -15,17 +15,7 @@ const NavbarContainer = styled("div")`
   height: 72px;
 `;
 
-const FormWrapp = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0px;
-  gap: 10px;
 
-  width: 100%;
-  height: 40px;
-`;
 
 const Form = styled.form`
   display: flex;
@@ -34,7 +24,6 @@ const Form = styled.form`
   width:756px;
   height: 40px;
 `;
-
 const Input = styled.input`
   display: flex;
   flex-direction: row;
@@ -52,11 +41,11 @@ const Input = styled.input`
 const Form2 = styled.form`
   display: flex;
   flex-direction: row;
+  justify-content:space-between;
   align-items: center;
-  width:476px;
+  min-width:700px;
   height: 40px;
 `;
-
 const Input2 = styled.input`
   display: flex;
   flex-direction: row;
@@ -96,7 +85,6 @@ export function NavbarUnAuthenticated() {
 
   return (
     <NavbarContainer>
-      <FormWrapp>
         <Link to="/home">
           <img src={logo} alt="image1"/>
         </Link>
@@ -107,8 +95,6 @@ export function NavbarUnAuthenticated() {
           <JoinButton onClick={handleSignUp}>Join</JoinButton>
           <LoginButton handleLogin={handleLogin}>Login</LoginButton>
         </DivNav>
-
-      </FormWrapp>
     </NavbarContainer>
   );
 }
@@ -138,26 +124,19 @@ export function NavbarAuthenticated() {
 
   return (
     <NavbarContainer>
-      <FormWrapp>
-        <Link to="/home">
-          <img src={logo} alt={"image2"}/>
-        </Link>
-        <Form2>
-          <Input2
-            name="query"
-      
-          />
-          <FindButton onClick={handleShowProperties}>
-            Find a Home
-          </FindButton>
-        </Form2>
+      <Link to="/home">
+        <img src={logo} alt={"image2"}/>
+      </Link>
+      <Form2>
+        <FindButton onClick={handleShowProperties}>
+          Find a Home
+        </FindButton>
         <LogoutButton onClick={handleLogout}>LOGOUT</LogoutButton>
         {userType === "landlord" ? <MyPropertyButton onClick={handleMyProperties}>MY PROPERTIES</MyPropertyButton> 
                         : <SaveButton onClick={handleSavedProperties}> SAVED PROPERTIES</SaveButton>}
         
         <ProfileButton onClick={handleProfile}>PROFILE</ProfileButton>
-
-      </FormWrapp>
+      </Form2>
     </NavbarContainer>
   );
 };
