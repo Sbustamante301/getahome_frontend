@@ -81,6 +81,8 @@ const ImgDiv = styled.div`
   padding: 0px;
 `;
 
+const Img = styled.img``;
+
 const ImgTitle = styled.div`
   ${typography.head.xs}
   ${colors.gray.dark}
