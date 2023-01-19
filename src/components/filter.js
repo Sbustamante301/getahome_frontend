@@ -145,10 +145,12 @@ export default function Filter() {
   const [beds, setBeds] = useState(0);
   const [baths, setBaths] = useState(0);
   const [petAllowed, setPetAllowed] = useState(false);
+
   const [house, setHouse] = useState(propertyFilter.types[0]);
   const [apartment, setApartment] = useState(propertyFilter.types[1]);
   const [buy, setBuy] = useState(propertyFilter.mode[0])
   const [rent, setRent] = useState(propertyFilter.mode[1])
+  const [both, setBoth] = useState(false)
   const [search, setSearch] = useState(propertyFilter.search)
 
 
@@ -195,8 +197,11 @@ export default function Filter() {
     event.preventDefault();
     const id = event.target.id;
     if (id === "both") {
-      setRent(!rent)
-      setBuy(!buy)
+
+      setBoth(!both)
+      setRent(!both)
+      setBuy(!both)
+
     }
     if (id === "rent") setRent(!rent)
     if (id === "buy") setBuy(!buy)
@@ -205,7 +210,10 @@ export default function Filter() {
 
   useEffect(() => {
     setPropertyFilters({ ...propertyFilter, "mode": [buy, rent] })
-  }, [buy, rent])
+
+  }, [buy, rent, both])
+
+
 
   useEffect(() => {
     setPropertyFilters({ ...propertyFilter, "search": search })
