@@ -149,7 +149,7 @@ const DivForm = styled.div`
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   width: 388px;
-  height: 468px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   align-items: left;
@@ -256,7 +256,7 @@ function SignupForm() {
             onChange={handleChange}
             placeholder="******"
           />
-          <p>{error ? error : null}</p>
+          <p style={{height:"0px"}} >{error ? error : null}</p>
           <CreateAccountButton>Create Account</CreateAccountButton>
         </form>
       </DivForm>
@@ -313,7 +313,7 @@ const Button2 = styled.button`
   background: ${colors.pink.medium};
   border-radius: 16px;
   padding: 8px, 16px, 8px, 16px;
-  margin-top: 25px;
+  margin-top: 30px;
   margin-left: 35px;
 `;
 
@@ -322,6 +322,7 @@ const Label = styled.label`
   font-size: 10px;
   line-height: 12px;
   letter-spacing: 1.5px;
+  
 `;
 
 const StyledInput = styled.input`
