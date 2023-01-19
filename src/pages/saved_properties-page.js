@@ -18,16 +18,6 @@ margin-left:120px;
 margin-right:120px;
 
 `
-const ContainerList = styled.div`
-display: grid;
-grid-template-columns: 1fr 1fr 1fr;
-padding: 0px 32px 0px 32px;
-row-gap: 32px;
-column-gap: 86px;
-justify-items:center;
-justify-content:center;
-margin-bottom:20px;
-`
 
 const ViewOptions = styled.div`
 display: flex;
@@ -84,20 +74,16 @@ export default function SavedPropertiesPage() {
         }
       </div>
 
-      <ContainerList>
-        {savedProperty.length !== 0  ? saved === "favorites" ? savedProperty.favorites.map((saved, index) => {
-          return (
-            <PropertyCard key={index} property={saved} />
-          )
-        }) :
-          savedProperty.contacts.map((saved,index) => {
-            return (
-              <PropertyCard key={index} property={saved} />
-            )
-          })
-          : null}
-      </ContainerList>
-      {/* <Paginated/> */}
+
+      <div style={{display:"flex",alignItems:"center",flexDirection:"column"}}>
+        {savedProperty.length !== 0  ? saved === "favorites" ? 
+        <Paginated itemsPerPage={9} filterProperties={savedProperty.favorites} />
+        :
+        <Paginated itemsPerPage={9} filterProperties={savedProperty.contacts}/>
+        : null}
+      </div>
+    <SectionFooter2 />
+
       
 
     </Wrapper>
