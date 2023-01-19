@@ -235,7 +235,7 @@ export function PropertyForm(){
       status:true,
       district: "",
       province:"", 
-      image:null
+      images:null
     })
   const [imagesPreview, setImagesPreview] = useState([])
   const [image, setImage] = useState(null)
@@ -249,7 +249,7 @@ export function PropertyForm(){
       
   function handleFileSelect(event){
     const files = event.target.files;
-    setFormdata({...formdata, "image":files[0]});
+    setFormdata({...formdata, "images":files});
     const imgsPrev = [];
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
@@ -284,7 +284,11 @@ export function PropertyForm(){
       data.append("property[district]", formdata.district);
       data.append("property[province]", formdata.province);
       data.append("property[maintenance]", formdata.maintenance);
-      data.append("property[image]", event.target.image.files[0]);
+      for (const image of Array.from(event.target.images.files)) {
+        data.append("property[images][]", image);
+      }
+      // data.append("property[images]", Array.from(event.target.images.files));
+      // data.append("property[image]", event.target.images.files);
 
       createProperty(data).then(response=>{
         setProperties([...properties, response])
@@ -436,8 +440,8 @@ export function PropertyForm(){
             </div>
             <div style={{display:'flex',flexDirection:'column'}}>
               <PhotosH1>Photos</PhotosH1>
-              <label htmlFor="image">UPLOAD AS MANY PHOTOS AS YOU WISH</label>
-              <input id="image" name="image"  type="file" multiple onChange={handleFileSelect}></input>
+              <label htmlFor="images">UPLOAD AS MANY PHOTOS AS YOU WISH</label>
+              <input id="images" name="images"  type="file" multiple onChange={handleFileSelect}></input>
               <ImageWrapper>
                 {imagesPreview.map((imagePreview, index) => {
                   return (

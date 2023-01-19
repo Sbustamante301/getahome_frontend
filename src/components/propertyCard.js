@@ -277,7 +277,7 @@ export function PropertyCard({ property, showProperty, id }) {
         <CardContainer height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
         <Link style={{textDecoration:"none"}} to={`/properties/${id}`}>
           <ImgContainer onClick={()=>setCurrentProperty(property)}>
-            {property.url ==="sin imagen" ? <img src={ImageDefault} height={200}/> : <Property src={property.url}/>}
+            {property.url ==="sin imagen" ? <img src={ImageDefault} height={200}/> : <Property src={property.url[0]}/>}
             <Tag>
               {Icons.coins}
 

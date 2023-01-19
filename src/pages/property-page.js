@@ -11,6 +11,7 @@ import { SectionFooter2 } from "../components/sections/sectionFooter";
 import StaticMap from "../components/mapa_static";
 import { getSaved, createFavorite, createContacted, getLandlordUser } from "../services/properties-service"
 import ImageDefault from "../assets/image-default.jpg"
+import SimpleSlider from "../components/sections/image-carousel";
 
 
 const BigWraper = styled.div`
@@ -176,7 +177,7 @@ const SliderContainer = styled.div`
   gap: 10px;
 
   width: 830px;
-  height: 384px;
+  height: 600px;
 `;
 
 const Image = styled.img`
@@ -199,9 +200,7 @@ const Category = styled.div`
   align-items: flex-start;
   padding: 0px;
   gap: 10px;
-
   width: 766px;
-  height: 76px;
 `;
 
 const Address = styled.div`
@@ -211,17 +210,16 @@ const Address = styled.div`
   padding: 0px;
 
   width: 600px;
-  height: 76px;
 `;
 
 const TotalCost = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: center;
   padding: 0px;
-
+  justify-content:center;
   width: 166px;
-  height: 76px;
+  
 `;
 
 const Price = styled.div`
@@ -238,7 +236,7 @@ const Price = styled.div`
 const Maintenance = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 0px;
 
   width: 166px;
@@ -456,14 +454,15 @@ export default function PropertyPage() {
       <Wrapper>
         <InfoContainer>
           <SliderContainer>
-            <LeftIcon>
+            {/* <LeftIcon>
               {Icons.arrowLeft}
-            </LeftIcon>
-            {currentProperty.url ==="sin imagen" ? <img src={ImageDefault}/> : <Image src={currentProperty.url}></Image>}
+            </LeftIcon> */}
+            {/* {currentProperty.url ==="sin imagen" ? <img src={ImageDefault}/> : <Image src={currentProperty.url[0]}></Image>} */}
+            {currentProperty.url ==="sin imagen" ? <img src={ImageDefault}/> : <SimpleSlider images={currentProperty.url}/>}
             
-            <RightIcon>
+            {/* <RightIcon>
               {Icons.arrowRight}
-            </RightIcon>
+            </RightIcon> */}
           </SliderContainer>
 
           <InformationContainer>
