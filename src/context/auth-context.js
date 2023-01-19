@@ -30,11 +30,10 @@ function AuthProvider({ children }) {
     search: ""
   })
 
-
+  
   const navigate = useNavigate();
 
   useEffect(() => {
-
     getUser()
       .then(response => {
         setUser(response);
