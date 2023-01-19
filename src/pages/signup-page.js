@@ -1,10 +1,8 @@
 import { colors, typography } from "../styles";
-
 import styled from "@emotion/styled";
 import { SectionFooter2 } from "../components/sections/sectionFooter";
 import landlord from "../assets/landlord.svg";
 import homeseeker from "../assets/homeseeker.svg";
-import { Icons } from "../utils";
 import { useState } from "react";
 import { createUser } from "../services/users-service";
 import { useAuth } from "../context/auth-context";
