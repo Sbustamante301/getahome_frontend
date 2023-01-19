@@ -33,49 +33,51 @@ const Wrapper = styled.div`
 function App() {
 
   const { setProperties, user, isOpenModal, userType, setSavedProperty, setMyProperty, setCurrentProperty } = useAuth()
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     getProperties().then(response => {
+      // setProperties(response)
       setProperties(response)
+      // sessionStorage.setItem("properties", JSON.stringify(response))
 
     }).catch(error => { console.log(error) })
 
   }, []);
 
-  useEffect(()=>{
-    showProperty(id).then(response=>{
-        setCurrentProperty(response)
-      }
-    
+  useEffect(() => {
+    showProperty(id).then(response => {
+      setCurrentProperty(response)
+    }
+
     )
-  },[id])
+  }, [id])
 
 
   useEffect(() => {
-    if(userType === "landlord"){
+    if (userType === "landlord") {
       getMyProperties().then(response => {
         setMyProperty(response)
         sessionStorage.setItem("myProperty", JSON.stringify(response))
-  
+
       }).catch(error => { console.log(error) })
-    }else if (userType === "seeker"){
+    } else if (userType === "seeker") {
       getSaved().then(response => {
         setSavedProperty(response)
         sessionStorage.setItem("savedProperty", JSON.stringify(response))
-  
+
       }).catch(error => { console.log(error) })
     }
 
   }, []);
 
   useEffect(() => {
-    
-    getMyProperties().then(response=>{
-    setMyProperty(response)
-    }).catch(error=>{console.log(error)})
-    
-  },[]);
+
+    getMyProperties().then(response => {
+      setMyProperty(response)
+    }).catch(error => { console.log(error) })
+
+  }, []);
 
 
   return (
@@ -97,7 +99,7 @@ function App() {
             <Route path="/properties/edit/:id" element={<EditPropertyPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/slider" element={<SimpleSlider />} />
-            
+
           </Routes>
 
 

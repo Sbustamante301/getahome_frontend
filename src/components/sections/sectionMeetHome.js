@@ -157,7 +157,7 @@ export default function SectionMeetHome() {
   let arrOptions = districts?.filter((district) => district?.toLowerCase().includes(queryOptions?.toLowerCase()))
 
 
-
+  console.log('PROPIEDADES', properties)
   function handleChange(event) {
     const { name, value } = event.target
 

@@ -12,6 +12,7 @@ function AuthProvider({ children }) {
 
   const [coordinates, setCoordinates] = useState({ lat: -12.2, lng: -77.02 });
   const [address, setAddress] = useState(null)
+  // const [properties, setProperties] = useState(JSON.parse(sessionStorage.getItem("properties")) || []);
   const [properties, setProperties] = useState([]);
   const [savedProperty, setSavedProperty] = useState(JSON.parse(sessionStorage.getItem("savedProperty")) || []);
   const [myProperty, setMyProperty] = useState(JSON.parse(sessionStorage.getItem("myProperty")) || []);
@@ -30,7 +31,7 @@ function AuthProvider({ children }) {
     search: ""
   })
 
-  
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,17 +43,17 @@ function AuthProvider({ children }) {
       .catch((error) => console.log(error));
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     const addresArray = []
-    properties.map(property=>{
+    properties.map(property => {
       getAddressFromCoordinates(property.property.latitud, property.property.longitud)
-      .then(data =>{
-        addresArray?.push({id:property.property.id , address: data.results[0].formatted_address});
-        
-      })
+        .then(data => {
+          addresArray?.push({ id: property.property.id, address: data.results[0].formatted_address });
+
+        })
     })
     setAddress(addresArray)
-  },[properties])
+  }, [properties])
 
   function handleLogin(credentials) {
     return login(credentials).then((user) => {
@@ -121,7 +122,7 @@ function AuthProvider({ children }) {
         savedProperty,
         myProperty,
         setMyProperty,
-        coordinates, 
+        coordinates,
         setCoordinates,
       }}
     >
