@@ -215,7 +215,7 @@ const Phone = styled.div`
   align-items: center;
 `;
 export function PropertyCard({ property, showProperty, id }) {
-  const { user, savedProperty, setMyProperty, myProperty, setCurrentProperty, address } = useAuth();
+  const { user, savedProperty, setMyProperty, myProperty, setCurrentProperty, address, setProperties, properties } = useAuth();
   const [showAddress, setShowAddress]= useState(null)
 
   let index_favorites = [];
@@ -265,6 +265,8 @@ export function PropertyCard({ property, showProperty, id }) {
       .then(console.log)
       .catch(console.log)
     setMyProperty(updateMyProperty)
+    setProperties(properties.filter(prop=> prop.property.id !== property.property.id))
+    sessionStorage.setItem("properties", JSON.stringify(properties.filter(prop=> prop.property.id !== property.property.id)))
     sessionStorage.setItem("myProperty", JSON.stringify(updateMyProperty))
   }
 
@@ -277,7 +279,7 @@ export function PropertyCard({ property, showProperty, id }) {
         <CardContainer height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
         <Link style={{textDecoration:"none"}} to={`/properties/${id}`}>
           <ImgContainer onClick={()=>setCurrentProperty(property)}>
-            {property.url ==="sin imagen" ? <img src={ImageDefault} height={200}/> : <Property src={property.url}/>}
+            {property.url ==="sin imagen" ? <img src={ImageDefault} height={200}/> : <Property src={property.url[0]}/>}
             <Tag>
               {Icons.coins}
 

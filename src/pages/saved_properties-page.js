@@ -74,6 +74,7 @@ export default function SavedPropertiesPage() {
         }
       </div>
 
+
       <div style={{display:"flex",alignItems:"center",flexDirection:"column"}}>
         {savedProperty.length !== 0  ? saved === "favorites" ? 
         <Paginated itemsPerPage={9} filterProperties={savedProperty.favorites} />
@@ -82,9 +83,11 @@ export default function SavedPropertiesPage() {
         : null}
       </div>
     <SectionFooter2 />
+
       
 
     </Wrapper>
+    <SectionFooter2 />
 
     </>
 

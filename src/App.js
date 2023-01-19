@@ -21,6 +21,8 @@ import PropertyFormPage from "./pages/property-form-page";
 import EditPropertyPage from "./pages/edit-property-page";
 import CheckboxF from "./components/sections/checkbox";
 import ProfilePage from "./pages/profile-page";
+import SimpleSlider from "./components/sections/image-carousel";
+
 
 
 
@@ -68,7 +70,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-
+    
     getMyProperties().then(response=>{
     setMyProperty(response)
     }).catch(error=>{console.log(error)})
@@ -94,7 +96,8 @@ function App() {
             <Route path="/saved_properties" element={<SavedPropertiesPage />} />
             <Route path="/properties/edit/:id" element={<EditPropertyPage />} />
             <Route path="/profile" element={<ProfilePage />} />
-
+            <Route path="/slider" element={<SimpleSlider />} />
+            
           </Routes>
 
 
