@@ -148,7 +148,7 @@ export default function Filter() {
   const [house, setHouse] = useState(propertyFilter.types[0]);
   const [apartment, setApartment] = useState(propertyFilter.types[1]);
   const [buy, setBuy] = useState(propertyFilter.mode[0])
-  const [rent, setRent] = useState(propertyFilter.types[1])
+  const [rent, setRent] = useState(propertyFilter.mode[1])
   const [search, setSearch] = useState(propertyFilter.search)
 
 

@@ -154,7 +154,7 @@ export default function SectionMeetHome() {
     if (property.property) return property.property.status
   });
   filterProperties?.filter((property) => districts.push(property.property.district))
-  let arrOptions = districts?.filter((district) => district.toLowerCase().includes(queryOptions?.toLowerCase()))
+  let arrOptions = districts?.filter((district) => district?.toLowerCase().includes(queryOptions?.toLowerCase()))
 
 
 
