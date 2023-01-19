@@ -276,8 +276,7 @@ const P = styled.p`
 `;
 
 export default function SignupPage() {
-  const { userType, setUserType } = useAuth();
-  const [open, setOpen] = useState(false);
+  const { userType, setUserType,open,setOpen } = useAuth();
   function HandleComponent() {
     setOpen(!open);
   }
