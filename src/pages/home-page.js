@@ -6,6 +6,7 @@ import { SectionFooter } from "../components/sections/sectionFooter";
 import SectionSignup from "../components/sections/sectionSignup";
 import { useAuth } from "../context/auth-context";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { colors, typography } from "../styles";
 import { getMyProperties, getSaved } from "../services/properties-service";
 import { getUser } from "../services/users-service";
@@ -53,16 +54,16 @@ function HomePage() {
   const { userType, properties, setSavedProperty, setUser, setMyProperty } = useAuth();
   const randomProperties = properties.filter((_property, index) => index < 3)
   useEffect(() => {
-    if(userType==="seeker"){
-      getSaved().then(response=>{
-      setSavedProperty(response)
-      sessionStorage.setItem("savedProperty", JSON.stringify(response))
-      }).catch(error=>{console.log(error)})
-    }else if(userType === "landlord"){
-      getMyProperties().then(response=>{
+    if (userType === "seeker") {
+      getSaved().then(response => {
+        setSavedProperty(response)
+        sessionStorage.setItem("savedProperty", JSON.stringify(response))
+      }).catch(error => { console.log(error) })
+    } else if (userType === "landlord") {
+      getMyProperties().then(response => {
         setMyProperty(response)
         sessionStorage.setItem("myProperty", JSON.stringify(response))
-        }).catch(error=>{console.log(error)})
+      }).catch(error => { console.log(error) })
     }
     getUser()
       .then(response => {
@@ -70,27 +71,26 @@ function HomePage() {
 
       })
       .catch((error) => console.log(error));
-    
-  },[]);
+
+  }, []);
   return (
     <>
       <Div>
-      <SectionMeetHome />
-      <Section2>
-        <TextContainer>
-          <PrepTitle>Find an Appartment you Love</PrepTitle>
-          <Title>Homes for rent at the best prices</Title>
-        </TextContainer>
-        <PropertyContainer>
-          {randomProperties.map((property, index) => {
-            return <PropertyCard key={`r${index}`} property={property} />
-          })}
-        </PropertyContainer>
+        <SectionMeetHome />
+        <Section2>
+          <TextContainer>
+            <PrepTitle>Find an Appartment you Love</PrepTitle>
+            <Title>Homes for rent at the best prices</Title>
+          </TextContainer>
+          <PropertyContainer>
+            {randomProperties.map((property, index) => {
+              return <PropertyCard key={`r${index}`} property={property} id={property.property.id} />
+            })}
+          </PropertyContainer>
+        </Section2>
+        <SectionSignup />
 
-      </Section2>
-      <SectionSignup />
-
-      <SectionMeetTeam />
+        <SectionMeetTeam />
       </Div>
       <SectionFooter />
     </>

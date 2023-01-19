@@ -56,9 +56,9 @@ font-weight: 500;
 `
 
 
-export default function MyPropertiesPage(){
-  const { myProperty, userType, setMyProperty }= useAuth();
-  const [ myStatus, setMyStatus ] = useState("active");
+export default function MyPropertiesPage() {
+  const { myProperty, userType, setMyProperty } = useAuth();
+  const [myStatus, setMyStatus] = useState("active");
   useEffect(() => {
     if (userType === "landlord") {
       getMyProperties().then(response => {
@@ -68,40 +68,40 @@ export default function MyPropertiesPage(){
     }
 
   }, []);
-  return(
+  return (
     <>
-    <Wrapper>
-      <div style={{height:"124px",display:"flex",flexDirection:"column",marginLeft:"15px", justifyContent:"flex-start", alignContentitems:"flex-start"}}>
-        <ViewOptions>
-          <H1 onClick={()=>setMyStatus("active")} style={{borderBottom:`${myStatus==="active" ? "3px solid #F48FB1" : "0px"}`}}>ACTIVE</H1>
-          <H1 onClick={()=>setMyStatus("close")} style={{borderBottom:`${myStatus==="close" ? "3px solid #F48FB1" : "0px"}`}}>CLOSED</H1>
-        </ViewOptions>
-        {myProperty.length !== 0 ? myStatus==="active" ? 
-           <P1> {myProperty.active.length} Properties found</P1>: 
-           <P1> {myProperty.closed.length} Properties found</P1> :
+      <Wrapper>
+        <div style={{ height: "124px", display: "flex", flexDirection: "column", marginLeft: "15px", justifyContent: "flex-start", alignContentitems: "flex-start" }}>
+          <ViewOptions>
+            <H1 onClick={() => setMyStatus("active")} style={{ borderBottom: `${myStatus === "active" ? "3px solid #F48FB1" : "0px"}` }}>ACTIVE</H1>
+            <H1 onClick={() => setMyStatus("close")} style={{ borderBottom: `${myStatus === "close" ? "3px solid #F48FB1" : "0px"}` }}>CLOSED</H1>
+          </ViewOptions>
+          {myProperty.length !== 0 ? myStatus === "active" ?
+            <P1> {myProperty.active.length} Properties found</P1> :
+            <P1> {myProperty.closed.length} Properties found</P1> :
             null
-          
+
           }
-      </div>
-      
-      <ContainerList>
-        { myStatus==="active" ? <EmptyCard/> : null}
-        {myProperty.length !== 0 ? myStatus === "active" ? myProperty.active.map((status, index)=>{
-          return(
-            
-              <PropertyCard key={index} property={status}/>         
-          )
-        }) :
-        myProperty.closed.map((status)=>{
-          return( 
-            <PropertyCard property={status}/>         
-          )
-        }) 
-      : null}
-      </ContainerList>
-    </Wrapper>
-    <SectionFooter2 />
-  </>
+        </div>
+
+        <ContainerList>
+          {myStatus === "active" ? <EmptyCard /> : null}
+          {myProperty.length !== 0 ? myStatus === "active" ? myProperty.active.map((status, index) => {
+            return (
+
+              <PropertyCard key={index} property={status} id={status.property.id} />
+            )
+          }) :
+            myProperty.closed.map((status) => {
+              return (
+                <PropertyCard property={status} id={status.property.id} />
+              )
+            })
+            : null}
+        </ContainerList>
+      </Wrapper>
+      <SectionFooter2 />
+    </>
 
   )
 }

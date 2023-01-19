@@ -70,38 +70,38 @@ export default function SavedPropertiesPage() {
 
   return (
     <>
-    <Wrapper>
-      <div style={{ height: "124px", display: "flex", flexDirection: "column", marginLeft: "15px" }}>
-        <ViewOptions>
-          <H1 onClick={() => setSaved("favorites")} style={{ borderBottom: `${saved === "favorites" ? "3px solid #F48FB1" : "0px"}` }}>FAVORITES</H1>
-          <H1 onClick={() => setSaved("contacts")} style={{ borderBottom: `${saved === "contacts" ? "3px solid #F48FB1" : "0px"}` }}>CONTACTED</H1>
-        </ViewOptions>
-        {savedProperty.length !== 0 ? saved === "favorites" ?
-          <P1> {savedProperty.favorites.length} Properties found</P1> :
-          <P1> {savedProperty.contacts.length} Properties found</P1> :
-          null
+      <Wrapper>
+        <div style={{ height: "124px", display: "flex", flexDirection: "column", marginLeft: "15px" }}>
+          <ViewOptions>
+            <H1 onClick={() => setSaved("favorites")} style={{ borderBottom: `${saved === "favorites" ? "3px solid #F48FB1" : "0px"}` }}>FAVORITES</H1>
+            <H1 onClick={() => setSaved("contacts")} style={{ borderBottom: `${saved === "contacts" ? "3px solid #F48FB1" : "0px"}` }}>CONTACTED</H1>
+          </ViewOptions>
+          {savedProperty.length !== 0 ? saved === "favorites" ?
+            <P1> {savedProperty.favorites.length} Properties found</P1> :
+            <P1> {savedProperty.contacts.length} Properties found</P1> :
+            null
 
-        }
-      </div>
+          }
+        </div>
 
-      <ContainerList>
-        {savedProperty.length !== 0  ? saved === "favorites" ? savedProperty.favorites.map((saved, index) => {
-          return (
-            <PropertyCard key={index} property={saved} />
-          )
-        }) :
-          savedProperty.contacts.map((saved,index) => {
+        <ContainerList>
+          {savedProperty.length !== 0 ? saved === "favorites" ? savedProperty.favorites.map((saved, index) => {
             return (
-              <PropertyCard key={index} property={saved} />
+              <PropertyCard key={index} property={saved} id={saved.property.id} />
             )
-          })
-          : null}
-      </ContainerList>
-      <Paginated/>
-      <SectionFooter2 />
-      
+          }) :
+            savedProperty.contacts.map((saved, index) => {
+              return (
+                <PropertyCard key={index} property={saved} id={saved.property.id} />
+              )
+            })
+            : null}
+        </ContainerList>
+        <Paginated />
+        <SectionFooter2 />
 
-    </Wrapper>
+
+      </Wrapper>
 
     </>
 
