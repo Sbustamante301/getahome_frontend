@@ -67,6 +67,7 @@ const DivNav = styled.div`
 
 export function NavbarUnAuthenticated() {
   const {setIsOpenModal} = useAuth();
+  const { userType, setUserType,open,setOpen } = useAuth();
   const navigate = useNavigate(); 
   function handleLogin(event){
     event.preventDefault();
@@ -75,13 +76,22 @@ export function NavbarUnAuthenticated() {
 
   function handleSignUp(event){
     event.preventDefault();
-    navigate("/signup");    
+    navigate("/signup");
+    setUserType(null);
+    setOpen(false)
   }
 
   function handleShowProperties(event){
     event.preventDefault();
     navigate("/properties");
   }
+
+  // function handleFunctions(event){
+    
+  //    handleSignUp(event);
+  //     setUserType(null);
+    
+  // }
 
   return (
     <NavbarContainer>
