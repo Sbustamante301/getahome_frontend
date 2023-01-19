@@ -459,7 +459,7 @@ export default function PropertyPage() {
             <LeftIcon>
               {Icons.arrowLeft}
             </LeftIcon>
-            {currentProperty.url ==="sin imagen" ? <img src={ImageDefault}/> : <Image src={currentProperty.url}></Image>}
+            {currentProperty.url ==="sin imagen" ? <img src={ImageDefault}/> : <Image src={currentProperty.url[0]}></Image>}
             
             <RightIcon>
               {Icons.arrowRight}
