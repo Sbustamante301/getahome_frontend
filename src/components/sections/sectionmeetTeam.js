@@ -53,14 +53,15 @@ export default function SectionMeetTeam(){
     name:'Tita Ruiz',
     img:`${Tita}`,
   }];
-
+  const github=[`https://github.com/JesusBarboza1994`, `https://github.com/Sbustamante301`, `https://github.com/Olesa0896`, `https://github.com/titaRuiz1`];
+  const linkedin = [`https://www.linkedin.com/in/jesus-barboza/`, "https://www.linkedin.com/in/sebastian-bustamante-82423a25b/" , `https://www.linkedin.com/in/olenka-sanchez-aguilar/`, `https://www.linkedin.com/in/asuntita-ruiz/`];
   return(
     <Section4>
         <Section4Title>Meet the Team</Section4Title>
         <Div>
           {Miembros.map((miembro, index) => {
             return (
-              <TeamCard miembro={miembro} key={index} />)
+              <TeamCard miembro={miembro} key={index} github={github[index]} linkedin={linkedin[index]}/>)
           })}
         </Div>
 
