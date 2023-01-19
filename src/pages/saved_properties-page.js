@@ -97,11 +97,11 @@ export default function SavedPropertiesPage() {
           })
           : null}
       </ContainerList>
-      <Paginated/>
-      <SectionFooter2 />
+      {/* <Paginated/> */}
       
 
     </Wrapper>
+    <SectionFooter2 />
 
     </>
 
