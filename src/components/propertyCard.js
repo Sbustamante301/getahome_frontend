@@ -216,7 +216,7 @@ const Phone = styled.div`
 `;
 export function PropertyCard({ property, showProperty, id }) {
   const { user, savedProperty, setMyProperty, myProperty, setCurrentProperty, address, setProperties, properties } = useAuth();
-  const [showAddress, setShowAddress]= useState(null)
+  const [showAddress, setShowAddress] = useState(null)
 
   let index_favorites = [];
   let localSavedProperty = [];
@@ -231,15 +231,17 @@ export function PropertyCard({ property, showProperty, id }) {
   localSavedPropertyContacts.map(property => {
     index_contacts.push(property.property.id)
   })
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     setShowAddress(true)
-    },[address])
+  }, [address])
 
   function handleClose(event) {
     event.preventDefault();
-    let updatedProperty = {"active":myProperty.active.filter(prop=> prop.property.id !== property.property.id),
-                          "closed":[...myProperty.closed, {property:{...property.property, "status": false}, url: property.url}]}
+    let updatedProperty = {
+      "active": myProperty.active.filter(prop => prop.property.id !== property.property.id),
+      "closed": [...myProperty.closed, { property: { ...property.property, "status": false }, url: property.url }]
+    }
     updateProperty(property.property.id, { status: false })
       .then()
       .catch()
@@ -249,11 +251,13 @@ export function PropertyCard({ property, showProperty, id }) {
 
   function handleRestore(event) {
     event.preventDefault();
-    let updatedProperty = {"active":[...myProperty.active, {property:{...property.property, "status": true}, url: property.url}],
-                          "closed":myProperty.closed.filter(prop=> prop.property.id !== property.property.id)}
+    let updatedProperty = {
+      "active": [...myProperty.active, { property: { ...property.property, "status": true }, url: property.url }],
+      "closed": myProperty.closed.filter(prop => prop.property.id !== property.property.id)
+    }
     updateProperty(property.property.id, { status: true })
-    .then()
-    .catch()
+      .then()
+      .catch()
     setMyProperty(updatedProperty)
     sessionStorage.setItem("myProperty", JSON.stringify(updatedProperty))
   }
@@ -265,8 +269,8 @@ export function PropertyCard({ property, showProperty, id }) {
       .then(console.log)
       .catch(console.log)
     setMyProperty(updateMyProperty)
-    setProperties(properties.filter(prop=> prop.property.id !== property.property.id))
-    sessionStorage.setItem("properties", JSON.stringify(properties.filter(prop=> prop.property.id !== property.property.id)))
+    setProperties(properties.filter(prop => prop.property.id !== property.property.id))
+    sessionStorage.setItem("properties", JSON.stringify(properties.filter(prop => prop.property.id !== property.property.id)))
     sessionStorage.setItem("myProperty", JSON.stringify(updateMyProperty))
   }
 
@@ -277,48 +281,48 @@ export function PropertyCard({ property, showProperty, id }) {
       <Container height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
 
         <CardContainer height={(user?.user_type === 'landlord' && property.property.user_id === user.id) ? '400px' : '360px'}>
-        <Link style={{textDecoration:"none"}} to={`/properties/${id}`}>
-          <ImgContainer onClick={()=>setCurrentProperty(property)}>
-            {property.url ==="sin imagen" ? <img src={ImageDefault} height={200}/> : <Property src={property.url[0]}/>}
-            <Tag>
-              {Icons.coins}
+          <Link style={{ textDecoration: "none" }} to={`/properties/${id}`}>
+            <ImgContainer onClick={() => setCurrentProperty(property)}>
+              {property.url === "sin imagen" ? <img src={ImageDefault} height={200} /> : <Property src={property.url[0]} />}
+              <Tag>
+                {Icons.coins}
 
-              {property.property.mode === 'sale' ? "For Sale" : "For Rent"}
+                {property.property.mode === 'sale' ? "For Sale" : "For Rent"}
 
-            </Tag>
-          </ImgContainer>
-          
-          <InformationContainer onClick={()=>setCurrentProperty(property)}>
-            <Category>
-              <Price >
-                {Icons.dollarCircle}
-                {property.property.price}
-              </Price>
-              <HomeType>
-                {Icons.building}
-                {property.property.property_type === 'apartment' ? "Apartment" : "House"}
-              </HomeType>
-            </Category>
-            <Address>
-              {showAddress ? address?.map((add,index)=>{
-                if (add.id === property.property.id) {
-                  return(<p>{add.address}</p>)
+              </Tag>
+            </ImgContainer>
+
+            <InformationContainer onClick={() => setCurrentProperty(property)}>
+              <Category>
+                <Price >
+                  {Icons.dollarCircle}
+                  {property.property.price}
+                </Price>
+                <HomeType>
+                  {Icons.building}
+                  {property.property.property_type === 'apartment' ? "Apartment" : "House"}
+                </HomeType>
+              </Category>
+              <Address>
+                {showAddress ? address?.map((add, index) => {
+                  if (add.id === property.property.id) {
+                    return (<p>{add.address}</p>)
+                  }
+                }) : (<p>Loading...</p>)
                 }
-              }) : (<p>Loading...</p>)
-              } 
 
-            </Address>
-            <Features>
-              <Bed>{Icons.bed} {property.property.bedrooms}</Bed>
-              <Bath>{Icons.bath} {property.property.bathrooms}</Bath>
-              <Area>{Icons.area} {property.property.area} m2</Area>
-              <Pet>{property.property.pet_allowed ? Icons.paw : null}</Pet>
-              <Heart>{index_favorites.includes(property.property.id) ? Icons.heartDark : null}</Heart>
-              <Phone> {index_contacts.includes(property.property.id) ? Icons.phoneCheck : null }</Phone>
-            </Features>
-          </InformationContainer>
+              </Address>
+              <Features>
+                <Bed>{Icons.bed} {property.property.bedrooms}</Bed>
+                <Bath>{Icons.bath} {property.property.bathrooms}</Bath>
+                <Area>{Icons.area} {property.property.area} m2</Area>
+                <Pet>{property.property.pet_allowed ? Icons.paw : null}</Pet>
+                <Heart>{index_favorites.includes(property.property.id) ? Icons.heartDark : null}</Heart>
+                <Phone> {index_contacts.includes(property.property.id) ? Icons.phoneCheck : null}</Phone>
+              </Features>
+            </InformationContainer>
           </Link>
-      
+
           {(user?.user_type === 'landlord' && property.property.user_id === user.id) ?
             property.property.status ?
               (<LowFrame>
@@ -332,7 +336,7 @@ export function PropertyCard({ property, showProperty, id }) {
               : (<LowFrame>
                 <ButtonContainer>
                   <RestoreCardButton onClick={handleRestore}>RESTORE</RestoreCardButton>
-                  <DeleteCardButton onClick={handleTrash}>DELETE</DeleteCardButton>
+                  <DeleteCardButton onClick={handleTrash}  >DELETE</DeleteCardButton>
                 </ButtonContainer>
               </LowFrame>
               ) : null}

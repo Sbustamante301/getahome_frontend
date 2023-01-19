@@ -5,37 +5,39 @@ import { colors, typography } from "../styles";
 import { Icons } from "../utils";
 
 export const Button = styled.button`
-display:flex;
-flex-direction:row;
-justify-content: center;
-align-items: center;
-gap: 12px;
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
 
-border:none;
-width: 177px;
-height: 56px;
-left: 8px;
-top: 263px;
-background: ${colors.pink.medium};
-border-radius: 16px;
-padding:16px;
+    border:none;
+    width: 177px;
+    height: 56px;
+    left: 8px;
+    top: 263px;
+    background: ${colors.pink.medium};
+    border-radius: 16px;
+    padding:16px;
+    cursor:pointer
 `;
+
 export const Button2 = styled.button`
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 
-display:flex;
-flex-direction:row;
-justify-content: center;
-align-items: center;
-gap: 8px;
-
-border:none;
-width: 264px;
-height: 56px;
-left: 279.5px;
-top: 128px;
-background: ${colors.pink.medium};
-border-radius: 16px;
-padding:16px, 24px, 16px, 24px;
+    border:none;
+    width: 264px;
+    height: 56px;
+    left: 279.5px;
+    top: 128px;
+    background: ${colors.pink.medium};
+    border-radius: 16px;
+    padding:16px, 24px, 16px, 24px;
+    cursor:pointer
 
 `;
 export const Button3 = styled.button`
@@ -52,6 +54,7 @@ export const Button3 = styled.button`
     height: 40px;
     background: ${colors.white};
     border-radius: 16px;
+    cursor:pointer
 `;
 export const Button4 = styled.button`
     display:flex;
@@ -67,6 +70,7 @@ export const Button4 = styled.button`
     height: 40px;
     border: none;
     border-radius: 16px;
+    cursor:pointer
 `;
 export const Button5 = styled.button`
     display:flex;
@@ -102,6 +106,7 @@ export const Button6 = styled.button`
     border: none;
     border-radius: 16px;
     margin:16px;
+    cursor:pointer
 `;
 export const Button7 = styled.button`
     display:flex;
@@ -117,6 +122,7 @@ export const Button7 = styled.button`
     height: 40px;
     background: ${colors.white};
     border-radius: 16px;
+    cursor:pointer
 `;
 export const Button8 = styled.button`
     display:flex;
@@ -132,6 +138,7 @@ export const Button8 = styled.button`
     height: 40px;
     border: none;
     border-radius: 16px;
+    cursor:pointer
 `;
 export const Button9 = styled.button`
     display:flex;
@@ -147,6 +154,7 @@ export const Button9 = styled.button`
     height: 40px;
     border: none;
     border-radius: 16px;
+    cursor:pointer
 `;
 export const Button10 = styled.button`
     display:flex;
@@ -162,6 +170,7 @@ export const Button10 = styled.button`
     height: 40px;
     border: none;
     border-radius: 16px;
+    cursor:pointer
 `;
 export const Button11 = styled.button`
     display:flex;
@@ -178,6 +187,7 @@ export const Button11 = styled.button`
     height: 40px;
     border: none;
     border-radius: 16px;
+    cursor:pointer
 `;
 
 export const Button12 = styled.button`
@@ -194,6 +204,7 @@ export const Button12 = styled.button`
     height: 48px;
     border: none;
     border-radius: 16px;
+    cursor:pointer
 `;
 
 export const Button13 = styled.button`
@@ -209,6 +220,7 @@ export const Button13 = styled.button`
     width: 84px;
     height: 32px;
     border: none;
+    cursor:pointer
 `;
 
 export const Button14 = styled.button`
@@ -224,6 +236,7 @@ export const Button14 = styled.button`
     width: 100px;
     height: 32px;
     border: none;
+    cursor:pointer
 `;
 const LeftIcon = styled.div`
 color:${colors.white};
@@ -349,7 +362,7 @@ export function SaveButton({ children, onClick }) {
     return (
         <Button8 onClick={onClick}>
             <LeftIcon >
-                <RiHeartFill style={{ color:`${colors.white} ` }}/>
+                <RiHeartFill style={{ color: `${colors.white} ` }} />
             </LeftIcon>
             <Text3>{children}</Text3>
         </Button8>
