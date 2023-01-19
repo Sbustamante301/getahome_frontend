@@ -183,7 +183,7 @@ export function SectionFooter2() {
       <FooterInfoContainer>
         <LeftContainer>
           <img src={logo} alt="image1" />
-          <FooterText>© 202X-Find that Home</FooterText>
+          <FooterText>© 2023-Find that Home</FooterText>
           <FooterText>Codeable - Cohort8 Final Project</FooterText>
         </LeftContainer>
 

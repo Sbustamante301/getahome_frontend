@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 import { colors,typography } from "../styles";
 import { Icons } from "../utils";
 
@@ -63,20 +64,23 @@ width:180px;
 
 
 
-export function TeamCard({miembro}){
+export function TeamCard({miembro ,github, linkedin}){
     return(
         
         <TeamCardContainer>
             <Img src={miembro.img}/>
             <Text>{miembro.name}</Text>
             <Div>
-                
-            <LeftIcon>
-                {Icons.github}
-            </LeftIcon>
-            <RightIcon>
-                {Icons.linkedinBox}
-            </RightIcon>
+                <a href={github}>
+                    <LeftIcon>
+                        {Icons.github}
+                    </LeftIcon>
+                </a>  
+            <a href={linkedin}>
+                <RightIcon>
+                    {Icons.linkedinBox}
+                </RightIcon>
+            </a>
             
             </Div>
          </TeamCardContainer>
