@@ -68,7 +68,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-
+    
     getMyProperties().then(response=>{
     setMyProperty(response)
     }).catch(error=>{console.log(error)})
