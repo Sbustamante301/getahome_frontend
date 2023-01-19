@@ -95,8 +95,8 @@ const ImgSubtitle = styled.div`
 
 function Hidden({ HandleComponent }) {
   const { userType, setUserType } = useAuth();
-  function AssignUser(typeNumber) {
-    setUserType(typeNumber);
+  function AssignUser(typeUser) {
+    setUserType(typeUser);
   }
 
   return (
@@ -161,9 +161,10 @@ const DivForm = styled.div`
 
 const H1 = styled.h1`
   ${typography.head.sm};
-  width: 246px;
+  width: 380px;
   height: 32px;
   margin-top: -55px;
+  margin-left:-50px;
 `;
 
 function SignupForm() {
@@ -177,8 +178,9 @@ function SignupForm() {
     password: "",
     passwordConfirmation: "",
     user_type: userType,
+    
   });
-
+  
   function handleChange(event) {
     const { name, value } = event.target;
     setFormdata({ ...formdata, [name]: value });
@@ -205,11 +207,13 @@ function SignupForm() {
       setError("Passwords must coincide");
     }
   }
+  console.log(userType)
   return (
     <Div2>
       <DivForm>
         <form onSubmit={handleSubmit}>
-          <H1>Create your Account</H1>
+         
+          <H1>{userType=== "landlord"?"Create your Landlord Account":"Create your Seeker Account"}</H1>
           <Input
             label={"NAME"}
             id="name"

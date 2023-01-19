@@ -411,10 +411,10 @@ export function PropertyForm(){
             <InputDiv >
               <PropertyTitle>PROPERTY TYPE</PropertyTitle>
 
-              <input onChange={()=>setFormdata({...formdata, "property_type":"apartment"})} id="apartment" name="apartment"type="checkbox" checked={formdata.property_type==="apartment"}/>
+              <input style={{accentColor:"#F48FB1"}} onChange={()=>setFormdata({...formdata, "property_type":"apartment"})} id="apartment" name="apartment"type="checkbox" checked={formdata.property_type==="apartment"}/>
               <label htmlFor="apartment">Apartment</label>
-              <input onChange={()=>setFormdata({...formdata, "property_type":"house"})} id="house" name="house"type="checkbox" checked={formdata.property_type==="house"}/>
-              <label htmlFor="house">House</label>
+              <input style={{accentColor:"#F48FB1"}} onChange={()=>setFormdata({...formdata, "property_type":"house"})} id="house" name="house"type="checkbox" checked={formdata.property_type==="house"}/>
+              <label  htmlFor="house">House</label>
             </InputDiv>
             <SelectContainer>
               <SelectDiv>
@@ -453,7 +453,7 @@ export function PropertyForm(){
             { formdata.mode==="rent" ?<>
               
               <PetsDiv>
-                <input id="pet_allowed" name="pet_allowed"type="checkbox" checked={formdata.pet_allowed} onChange={(e)=>setFormdata({...formdata, "pet_allowed":!formdata.pet_allowed})}/>
+                <input style={{accentColor:"#F48FB1"}} id="pet_allowed" name="pet_allowed"type="checkbox" checked={formdata.pet_allowed} onChange={(e)=>setFormdata({...formdata, "pet_allowed":!formdata.pet_allowed})}/>
                 <Label htmlFor="pet_allowed">Pets Allowed</Label>
               </PetsDiv>
               <PetsTextDiv>Allowing pets increases the likehood of renters liking the property by 9001%.
