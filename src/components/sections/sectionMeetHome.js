@@ -165,9 +165,6 @@ export default function SectionMeetHome() {
   }
 
   function handleCoincidence(event) {
-    console.log('el event', event)
-    console.log('el name', event.target.name)
-    console.log('el value', event.target.innerHTML)
     const value = event.target.innerHTML
 
     setFirstFilter({ ...firstFilter, "search": value })
