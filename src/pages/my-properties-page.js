@@ -10,6 +10,7 @@ import { SectionFooter2 } from "../components/sections/sectionFooter";
 
 import { Link } from "react-router-dom";
 import EmptyCard from "../components/empty-card";
+import Paginated from "../components/pagination";
 
 const Wrapper = styled.div`
 display: flex;
@@ -21,16 +22,16 @@ width:100%;
 min-height:800px;
 `;
 
-const ContainerList = styled.div`
-display: grid;
-grid-template-columns: 1fr 1fr 1fr;
-padding: 0px 32px 0px 32px;
-row-gap: 32px;
-column-gap: 86px;
-justify-items:center;
-justify-content:center;
-margin-bottom:20px;
-`
+// const ContainerList = styled.div`
+// display: grid;
+// grid-template-columns: 1fr 1fr 1fr;
+// padding: 0px 32px 0px 32px;
+// row-gap: 32px;
+// column-gap: 86px;
+// justify-items:center;
+// justify-content:center;
+// margin-bottom:20px;
+// `
 
 const ViewOptions = styled.div`
 display: flex;
@@ -102,6 +103,7 @@ export default function MyPropertiesPage() {
       </Wrapper>
       <SectionFooter2 />
     </>
+
 
   )
 }

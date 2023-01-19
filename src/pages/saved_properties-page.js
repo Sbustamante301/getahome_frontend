@@ -18,16 +18,6 @@ margin-left:120px;
 margin-right:120px;
 
 `
-const ContainerList = styled.div`
-display: grid;
-grid-template-columns: 1fr 1fr 1fr;
-padding: 0px 32px 0px 32px;
-row-gap: 32px;
-column-gap: 86px;
-justify-items:center;
-justify-content:center;
-margin-bottom:20px;
-`
 
 const ViewOptions = styled.div`
 display: flex;

@@ -24,7 +24,7 @@ export default function PropertiesPage() {
     // Filter by address
     filterProperties = filterProperties.filter((property, index) => {
       const addressFilter = address?.filter(add => add.id === property.property.id)
-      if (addressFilter) return addressFilter[0]?.address?.toLowerCase().includes(propertyFilter?.toLowerCase().search)
+      if (addressFilter) return addressFilter[0]?.address?.includes(propertyFilter?.search)
       return true
     })
     // Filter for max and min prices
