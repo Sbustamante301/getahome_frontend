@@ -19,9 +19,8 @@ export default function PropertiesPage() {
   const [filterAllproperties, setFilterAllproperties] = useState([...properties].filter(property => {
     if (property.property) return property.property.status
   }))
-
+  
   useEffect(() => {
-    console.log("squi tmb")
     let filterProperties = [...properties].filter(property => {
       if (property.property) return property.property.status
     });
@@ -78,7 +77,7 @@ export default function PropertiesPage() {
     })
     setFilterAllproperties(filterProperties)
   }, [propertyFilter, properties])
-
+  console.log("aqui llega filter properties", filterAllproperties)
   return (
     <>
       <Wrapper>

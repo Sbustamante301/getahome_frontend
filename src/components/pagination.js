@@ -5,10 +5,6 @@ import { PropertyCard } from "./propertyCard";
 import styled from "@emotion/styled";
 import { colors,typography } from "../styles";
 
-
-
-
-
 const ContainerList = styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
@@ -18,7 +14,6 @@ column-gap: 86px;
 justify-items:center;
 justify-content:center;
 `
-
 const StylesPagination= styled(ReactPaginate)`
 list-style:none;
 display: flex;
@@ -27,8 +22,6 @@ justify-content: center;
 align-items: center;
 padding: 0px;
 gap: 8px;
-
-
 li {
   border: 1px solid rgba(97, 97, 97, 0.15);
   border-radius: 4px;
@@ -40,7 +33,6 @@ li {
   background: #FFFFFF;
   color: ${colors.gray.medium};
   ${typography.text.sm};
-
   &:hover {
     background: rgba(244, 143, 177, 0.15);
     border: 1px solid #BF5F82;
@@ -81,7 +73,7 @@ export default function Paginated({itemsPerPage, filterProperties}){
 
     setItemOffset(newOffset);
   };
-
+  console.log("filterProperties",filterProperties)
   return (
     <>
       <Items currentItems={currentItems} />
