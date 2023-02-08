@@ -15,29 +15,6 @@ const NavbarContainer = styled("div")`
   height: 72px;
 `;
 
-
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width:756px;
-  height: 40px;
-`;
-const Input = styled.input`
-  display: flex;
-  flex-direction: row;
-  align-self: flex-start;
-  align-items: center;
-  padding: 4px 8px;
-  gap: 10px;
-
-  width: 586px;
-  height: 40px;
-
-  border: none;
-  justify-content: center;
-`;
 const Form2 = styled.form`
   display: flex;
   flex-direction: row;
@@ -46,20 +23,7 @@ const Form2 = styled.form`
   min-width:700px;
   height: 40px;
 `;
-const Input2 = styled.input`
-  display: flex;
-  flex-direction: row;
-  align-self: flex-start;
-  align-items: center;
-  padding: 4px 8px;
-  gap: 10px;
 
-  width: 306px;
-  height: 40px;
-
-  border: none;
-  justify-content: center;
-`;
 const DivNav = styled.div`
   display:flex;
   gap: 16px;

@@ -1,7 +1,6 @@
 import styled from "@emotion/styled"
 import { Link } from "react-router-dom"
 import { colors } from "../styles"
-import { Icons } from "../utils";
 import { IoAddOutline } from "react-icons/io5";
 
 

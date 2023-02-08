@@ -1,6 +1,5 @@
 import styled from "@emotion/styled"
 import { useEffect, useState } from "react";
-import { IconBase } from "react-icons";
 import { useAuth } from "../context/auth-context";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils";

@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { RiHeartFill } from "react-icons/ri";
-import { useAuth } from "../context/auth-context";
 import { colors, typography } from "../styles";
 import { Icons } from "../utils";
 

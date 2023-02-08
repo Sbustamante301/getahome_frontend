@@ -14,12 +14,8 @@ import HomePage from "./pages/home-page";
 import LoginModal from "./components/login-modal";
 import MyPropertiesPage from "./pages/my-properties-page";
 import SavedPropertiesPage from "./pages/saved_properties-page";
-
 import PropertyFormPage from "./pages/property-form-page";
-
-
 import EditPropertyPage from "./pages/edit-property-page";
-import CheckboxF from "./components/sections/checkbox";
 import ProfilePage from "./pages/profile-page";
 import SimpleSlider from "./components/sections/image-carousel";
 

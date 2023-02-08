@@ -1,5 +1,4 @@
-import  { useMemo, useState } from 'react';
-import { GoogleMap, useLoadScript, MarkerF, Marker } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import { useAuth } from '../context/auth-context';
 import { API_KEY } from '../config';
 
