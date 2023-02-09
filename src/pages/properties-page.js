@@ -21,8 +21,13 @@ export default function PropertiesPage() {
   }))
   
   useEffect(() => {
-    let filterProperties = [...properties].filter(property => {
-      if (property.property) return property.property.status
+    
+    let filterProperties = [...properties].filter((property, index) => {
+      if (property.property) {
+        console.log(`${index}`,property)
+        console.log("status", property.property.status)
+        return property.property.status
+      }
     });
     // Filter by address
     filterProperties = filterProperties.filter((property, index) => {
@@ -76,15 +81,20 @@ export default function PropertiesPage() {
       if (propertyFilter.mode[1]) return property.property.mode === "rent"
     })
     setFilterAllproperties(filterProperties)
-  }, [propertyFilter, properties])
+  }, [])
   console.log("aqui llega filter properties", filterAllproperties)
   return (
     <>
-      <Wrapper>
-        <Filter />
-        <Paginated itemsPerPage={9} filterProperties={filterAllproperties} />
-      </Wrapper>
-      <SectionFooter2 />
+      {filterAllproperties ? 
+        <>
+          <Wrapper>
+            <Filter />
+            <Paginated itemsPerPage={9} filterProperties={filterAllproperties} />
+          </Wrapper>
+          <SectionFooter2 />
+        </>
+        :
+      null}
     </>
 
 

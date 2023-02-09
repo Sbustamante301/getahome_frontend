@@ -45,13 +45,15 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     const addresArray = []
-    properties.map(property => {
+    properties.map((property, index) => {
       getAddressFromCoordinates(property.property.latitud, property.property.longitud)
-        .then(data => {
-          addresArray?.push({ id: property.property.id, address: data.results[0].formatted_address });
-
-        })
+      .then(data => {
+        addresArray?.push({ id: property.property.id, address: data.results[0].formatted_address });
+        console.log(`heyy ${index}`, data)
+        
+      }).catch(error=> console.log(error))
     })
+    console.log("primero address", addresArray)
     setAddress(addresArray)
   }, [properties])
 
